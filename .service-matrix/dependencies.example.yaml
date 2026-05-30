@@ -11,9 +11,21 @@ teams:
     idl_repo: "idl-repo"
 
 modules:
+  shared:
+    team: core
+    name: "公共能力"
+
   order:
     team: core
     name: "订单域"
+
+libraries:
+  money:
+    module: shared
+    repo_path: "{business-repo}/packages/money"
+    language: java
+    artifact: "com.spark.common:spark-money"
+    purpose: "统一金额、币种、舍入和最小货币单位转换"
 
 services:
   order-api:
@@ -36,3 +48,9 @@ dependencies:
     downstream:
       - "payment-api"
       - "inventory-api"
+    libraries:
+      - "money"
+
+  order-worker:
+    libraries:
+      - "money"

@@ -8,6 +8,7 @@
 - `git-workflow.md`：从需求到合并的 Git 工作流。
 - `error-codes.md`：错误码空间、分配规则和兼容性要求。
 - `logging.md`：日志与可观测性要求。
+- `money.md`：金额、币种、舍入和单位换算规范。
 - `tracing.md`：OpenTelemetry 分布式追踪规范。
 - `security.md`：安全与敏感信息要求。
 
