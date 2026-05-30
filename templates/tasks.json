@@ -1,0 +1,18 @@
+{
+  "requirement_id": "",
+  "status": "draft",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "",
+      "scope": "",
+      "trace": {
+        "requirement_items": [],
+        "design_decisions": []
+      },
+      "affected_services": [],
+      "acceptance": [],
+      "status": "todo"
+    }
+  ]
+}

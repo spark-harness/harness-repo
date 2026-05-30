@@ -1,0 +1,38 @@
+workspace: ".."
+business_repo: "business-repo"
+idl_repo: "idl-repo"
+idl_format: "protobuf"
+buf_config_version: "v2"
+default_team: "core"
+
+teams:
+  core:
+    business_repo: "business-repo"
+    idl_repo: "idl-repo"
+
+modules:
+  order:
+    team: core
+    name: "订单域"
+
+services:
+  order-api:
+    module: order
+    repo_path: "{business-repo}/services/order-api"
+    idl_required: true
+    idl_repo: "{idl-repo}"
+    proto_path: "{idl-repo}/proto/order/v1"
+    buf_module: "buf.build/example/order"
+
+  order-worker:
+    module: order
+    repo_path: "{business-repo}/services/order-worker"
+    idl_required: false
+
+dependencies:
+  order-api:
+    upstream:
+      - "web-gateway"
+    downstream:
+      - "payment-api"
+      - "inventory-api"
