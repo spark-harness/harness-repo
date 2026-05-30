@@ -10,6 +10,7 @@
 - `contract-compatibility.md`：protobuf、HTTP、事件和错误码的契约兼容性要求。
 - `error-codes.md`：错误码空间、分配规则和兼容性要求。
 - `logging.md`：日志与可观测性要求。
+- `metrics.md`：指标命名、标签、业务指标、告警和 SLO 要求。
 - `money.md`：金额、币种、舍入和单位换算规范。
 - `tracing.md`：OpenTelemetry 分布式追踪规范。
 - `security.md`：安全与敏感信息要求。
