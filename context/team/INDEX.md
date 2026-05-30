@@ -7,6 +7,7 @@
 - `git.md`：分支、提交和评审要求。
 - `git-workflow.md`：从需求到合并的 Git 工作流。
 - `testing.md`：单元测试、集成测试、端到端测试和测试门禁要求。
+- `contract-compatibility.md`：protobuf、HTTP、事件和错误码的契约兼容性要求。
 - `error-codes.md`：错误码空间、分配规则和兼容性要求。
 - `logging.md`：日志与可观测性要求。
 - `money.md`：金额、币种、舍入和单位换算规范。
