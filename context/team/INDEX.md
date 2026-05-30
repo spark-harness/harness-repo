@@ -6,6 +6,7 @@
 
 - `git.md`：分支、提交和评审要求。
 - `git-workflow.md`：从需求到合并的 Git 工作流。
+- `backend-clean-architecture.md`：后端干净架构分层、依赖方向、端口接口和评审要求。
 - `testing.md`：单元测试、集成测试、端到端测试和测试门禁要求。
 - `contract-compatibility.md`：protobuf、HTTP、事件和错误码的契约兼容性要求。
 - `error-codes.md`：错误码空间、分配规则和兼容性要求。
