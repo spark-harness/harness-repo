@@ -1,0 +1,10 @@
+prefix_rule(
+    pattern = ["janus"],
+    decision = "allow",
+    justification = "Allow Codex hooks and skills to call the cross-platform Janus binary on PATH.",
+    match = [
+        "janus version",
+        "janus hook gate-drift-check",
+        "janus gate validate requirements/T12345/gates/3.3-design-review.gate.json",
+    ],
+)

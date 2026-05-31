@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "janus hook gate-drift-check",
+            "statusMessage": "Checking Janus gate reports"
+          }
+        ]
+      }
+    ]
+  }
+}
