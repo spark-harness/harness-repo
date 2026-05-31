@@ -3,10 +3,15 @@
 ## Metadata
 
 - Requirement ID:
-- Gate:
+- Gate ID:
+- Gate Name:
+- Stage:
 - Checked By:
 - Checked At:
-- Result: PASS / BLOCKED / WARN
+- Result: PASS / BLOCKED / WARN / WAIVED
+- Blocks Next Stage: yes / no
+- Source Files:
+  -
 
 ## Scope
 
@@ -29,6 +34,15 @@
 | Warning | Follow-Up | Owner |
 |---|---|---|
 |  |  |  |
+
+## Waiver
+
+- Waiver Required: yes / no
+- Waiver Reason:
+- Approved By:
+- Approved At:
+- Expires At:
+- Follow-Up Issue:
 
 ## Decision
 

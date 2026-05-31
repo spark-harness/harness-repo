@@ -9,17 +9,19 @@
 | PASS | 可以进入下一阶段 |
 | BLOCKED | 存在阻塞问题，不能继续 |
 | WARN | 有风险但不阻塞，必须记录后续动作 |
+| WAIVED | 原本会阻塞，但已按豁免规则批准 |
 
 ## 报告位置
 
 门禁报告应写入：
 
 ```text
-requirements/{requirement-id}/gates/{stage}-{gate-name}.md
+requirements/{requirement-id}/gates/{gate-id}.md
 ```
 
 ## 最低内容
 
+- 固定字段。
 - 检查时间。
 - 检查对象。
 - 检查结论。
@@ -27,7 +29,10 @@ requirements/{requirement-id}/gates/{stage}-{gate-name}.md
 - 风险项。
 - 后续动作。
 - 证据链接。
+- 豁免信息。
 
 ## 判定原则
 
 门禁不追求多，优先设置在错误代价最低的位置：意图、方案、任务和环境。
+
+具体字段、命令阻塞、CI / MR 检查和豁免规则见 `gate-implementation.md`。

@@ -9,6 +9,7 @@ Use this skill when a user wants to create, continue, advance, review, or close 
 ## Source Of Truth
 
 - 流程阶段：`context/harness-framework/main-process-numbering.md`
+- 门禁实施：`context/harness-framework/gate-implementation.md`
 - 服务拓扑：`.service-matrix/dependencies.yaml`
 - 需求模板：`templates/requirement.md`
 - 影响面模板：`templates/impact-analysis.md`
@@ -21,7 +22,10 @@ Use this skill when a user wants to create, continue, advance, review, or close 
 3. 读取 `context/team/`、`context/harness-framework/` 和相关 `context/project/` 入口。
 4. 根据 `.service-matrix/dependencies.yaml` 补齐服务影响面。
 5. 在进入下一阶段前检查对应门禁报告。
-6. 如果用户纠正了模式性错误，建议沉淀到 `context/project/.../experience/` 或框架规范。
+6. 如果门禁报告缺失、格式不合法或 `Result: BLOCKED`，停止推进并列出阻塞项。
+7. 如果 `Result: WARN`，继续推进但记录风险和后续动作。
+8. 如果 `Result: WAIVED`，先校验豁免字段完整性。
+9. 如果用户纠正了模式性错误，建议沉淀到 `context/project/.../experience/` 或框架规范。
 
 ## Output
 
