@@ -1,6 +1,6 @@
 # Harness Repo Agent Instructions
 
-本仓库保存 Harness Engineering 治理资产。Agent 在本仓库工作时，应先读取本文件，再按任务读取 `context/`、`.agents/skills/` 和 `.codex/agents/`。
+本仓库保存 Harness Engineering 治理资产。Agent 在本仓库工作时，应先读取本文件，再按任务读取 `context/`、`.spark/skills/` 和 `.spark/agents/`。
 
 ## Boundaries
 

@@ -59,8 +59,9 @@ Markdown 门禁报告只作为审计视图，由 Janus 从 gate JSON 渲染。
 
 - `context/harness-framework/main-process-numbering.md`
 - `context/harness-framework/gate-implementation.md`
-- `.agents/skills/`
-- `.codebuddy/skills/`
+- `.spark/skills/`
+- `.spark/agents/`
+- `.spark/rules/`
 - Janus 校验逻辑或规则文件。
 
 ## 4. 新增模板规则

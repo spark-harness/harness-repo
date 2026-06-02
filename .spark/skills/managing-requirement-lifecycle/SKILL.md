@@ -5,7 +5,11 @@ description: Create, continue, review, gate-check, and advance Harness requireme
 
 # Managing Requirement Lifecycle
 
-Use this skill when the user wants to create, continue, review, gate-check, or advance a requirement in `harness-repo`.
+Use this skill when the user wants to create, continue, review, gate-check, advance, or close a requirement in `harness-repo`.
+
+## Goal
+
+把需求从自然语言输入推进为可评审、可追溯、可交付的工程产物。
 
 ## Source Of Truth
 
@@ -15,6 +19,9 @@ Use this skill when the user wants to create, continue, review, gate-check, or a
 - Context collection: `context/harness-framework/context-collection.md`
 - Service topology: `.service-matrix/dependencies.yaml`
 - Requirement templates: `templates/`
+- Requirement template: `templates/requirement.md`
+- Impact analysis template: `templates/impact-analysis.md`
+- Gate report template: `templates/gate-report.md`
 - Gate machine source: `requirements/{requirement-id}/gates/{gate-id}.gate.json`
 - Gate audit view: `requirements/{requirement-id}/gates/{gate-id}.md`
 - Gate CLI: `janus` on PATH.

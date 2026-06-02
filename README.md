@@ -15,8 +15,8 @@
 
 ```text
 harness-repo/
-├── .codebuddy/
 ├── .service-matrix/
+├── .spark/
 ├── context/
 ├── requirements/
 └── templates/
