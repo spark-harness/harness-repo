@@ -2,7 +2,7 @@
 
 本文定义 Harness 文档模板的框架级口径。
 
-它不负责保存每一份可复制模板文件。模板文件仍放在仓库根目录 `templates/`，便于命令、Skill 和人工复制。
+可复制的需求生命周期文档模板保存在本文档同级的 `templates/` 子目录。
 
 它负责说明哪些模板属于需求生命周期、何时使用、如何维护。
 
@@ -10,39 +10,33 @@
 
 | 模板 | 文件 | 使用阶段 | 生成位置 |
 | --- | --- | --- | --- |
-| 需求说明 | `templates/requirement.md` | 阶段 1、阶段 2 | `requirements/{requirement-id}/requirement.md` |
-| 影响面分析 | `templates/impact-analysis.md` | 阶段 2 | `requirements/{requirement-id}/impact-analysis.md` |
-| 设计说明 | `templates/design.md` | 阶段 3 | `requirements/{requirement-id}/design.md` |
-| 任务拆分 | `templates/tasks.json` | 阶段 4.1 | `requirements/{requirement-id}/tasks.json` |
-| 门禁审计视图 | `templates/gate-report.md` | 阶段 2.2、3.3、4.2、4.3 | `requirements/{requirement-id}/gates/{gate-id}.md` |
-| 项目现状 | `templates/current-state.md` | 阶段 5 或知识维护 | `context/project/{project}/{domain}/current-state.md` |
+| 需求说明 | `context/harness-framework/templates/requirement.md` | 阶段 1、阶段 2 | `requirements/{requirement-id}/requirement.md` |
+| 影响面分析 | `context/harness-framework/templates/impact-analysis.md` | 阶段 2 | `requirements/{requirement-id}/impact-analysis.md` |
+| 设计说明 | `context/harness-framework/templates/design.md` | 阶段 3 | `requirements/{requirement-id}/design.md` |
+| 任务拆分 | `context/harness-framework/templates/tasks.json` | 阶段 4.1 | `requirements/{requirement-id}/tasks.json` |
+| 门禁报告 | `context/harness-framework/templates/gate-report.md` | 阶段 2.2、3.3、4.2、4.3 | `requirements/{requirement-id}/gates/{gate-id}.md` |
+| 项目现状 | `context/harness-framework/templates/current-state.md` | 阶段 5 或知识维护 | `context/project/{project}/{domain}/current-state.md` |
 
-门禁机器事实源不使用 Markdown 模板。门禁机器事实源是：
-
-```text
-requirements/{requirement-id}/gates/{gate-id}.gate.json
-```
-
-Markdown 门禁报告只作为审计视图，由 Janus 从 gate JSON 渲染。
+门禁报告必须使用固定字段。阶段推进只能读取报告结论，不能读取聊天记录作为放行依据。
 
 ## 2. 使用规则
 
 创建需求目录时，至少复制：
 
-- `templates/requirement.md`
-- `templates/impact-analysis.md`
+- `context/harness-framework/templates/requirement.md`
+- `context/harness-framework/templates/impact-analysis.md`
 
 进入设计阶段前，应补齐：
 
-- `templates/design.md`
+- `context/harness-framework/templates/design.md`
 
 进入任务拆分前，应补齐：
 
-- `templates/tasks.json`
+- `context/harness-framework/templates/tasks.json`
 
-执行门禁时，应先生成或更新 gate JSON，再按需渲染 Markdown 审计视图。
+执行门禁时，应生成或更新固定格式门禁报告。
 
-维护项目现状知识时，应优先使用 `templates/current-state.md`，并放到对应项目上下文目录。
+维护项目现状知识时，应优先使用 `context/harness-framework/templates/current-state.md`，并放到对应项目上下文目录。
 
 ## 3. 模板内容边界
 

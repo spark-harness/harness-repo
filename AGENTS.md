@@ -13,19 +13,17 @@
 
 - 需求生命周期以 `context/harness-framework/main-process-numbering.md` 为阶段真相源。
 - 门禁协议以 `context/harness-framework/gate-implementation.md` 为事实源。
-- 文档模板口径以 `context/harness-framework/document-template-policy.md` 为事实源，模板文件保存在 `templates/`。
+- 文档模板口径以 `context/harness-framework/document-template-policy.md` 为事实源，模板文件保存在 `context/harness-framework/templates/`。
 - 上下文收集顺序以 `context/harness-framework/context-collection.md` 为事实源。
 - 团队级规则从 `context/team/INDEX.md` 进入。
 - 服务级知识从 `context/project/INDEX.md` 进入，并通过服务矩阵定位具体服务。
 
 ## Gate Reports
 
-- 门禁机器事实源使用 `requirements/{requirement-id}/gates/{gate-id}.gate.json`。
-- Markdown 门禁报告由 Janus 渲染，不作为机器判定事实源。
+- 门禁事实源使用固定格式报告：`requirements/{requirement-id}/gates/{gate-id}.md`。
+- 阶段推进只能读取门禁报告结论，不能读取聊天记录作为放行依据。
 - Harness 运行环境必须提供 PATH 中的 `janus` 命令；开始门禁工作前先运行 `janus version`。
-- Agent 可以生成或修正 gate JSON，但必须运行 `janus gate validate`。
-- 需要审计视图时，运行 `janus gate render` 生成对应 Markdown。
-- 阶段推进和 CI 放行必须以 `janus gate verify` 或 `janus requirement verify` 为准。
+- 如果 Janus 提供报告校验或阶段推进命令，应复用 `context/harness-framework/gate-implementation.md` 的同一套口径。
 
 ## Editing Rules
 

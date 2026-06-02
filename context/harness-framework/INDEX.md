@@ -15,6 +15,6 @@
 - 流程口径以 `main-process-numbering.md` 为准。
 - 门禁必须能落到文件，不接受只在对话中口头通过。
 - 门禁执行协议以 `gate-implementation.md` 为准。
-- 模板口径以 `document-template-policy.md` 为准，模板文件仍保存在 `templates/`。
+- 模板口径以 `document-template-policy.md` 为准，模板文件保存在 `templates/` 子目录。
 - 上下文收集口径以 `context-collection.md` 为准。
 - 修改流程、门禁、模板或上下文结构后，应同步检查 `learning-docs-repo/docs/harness/`、`.spark/skills/`、`.spark/agents/`、`.spark/rules/` 和 Janus 校验。

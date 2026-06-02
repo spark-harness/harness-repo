@@ -22,6 +22,8 @@ harness-repo/
 └── templates/
 ```
 
+`context/harness-framework/templates/` 保存需求生命周期文档模板。根目录 `templates/` 只保存服务脚手架等非文档模板。
+
 ## 关联仓库
 
 - 业务仓：`../business-repo`

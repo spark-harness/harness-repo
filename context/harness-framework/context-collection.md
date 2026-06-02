@@ -52,7 +52,7 @@ context/project/{project}/{domain}/{service}/INDEX.md
 
 ## 4. 证据记录
 
-执行门禁时，必须把影响结论的输入文件记录到 gate JSON 的 `inputs`。
+执行门禁时，必须把影响结论的输入文件记录到门禁报告的 `Source Files`。
 
 编写或修改需求、设计、任务时，应在对应文档中保留可追溯关系：
 

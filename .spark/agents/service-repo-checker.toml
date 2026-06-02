@@ -19,10 +19,8 @@ developer_instructions = """
 - 如果涉及 IDL，是否有 lint / generate / breaking 证据。
 
 输出：
-- 写入 requirements/{requirement-id}/gates/4.3-service-repo-check.gate.json。
-- 运行 janus gate validate。
-- 运行 janus gate render 生成 Markdown 审计视图。
-- 如果用户要求判断是否可推进，运行 janus gate verify。
+- 写入 requirements/{requirement-id}/gates/4.3-service-repo-check.md。
+- 如果本地 Janus 提供报告校验或阶段推进命令，运行对应命令。
 
 规则：
 - 涉及服务不在服务矩阵中必须 BLOCKED。

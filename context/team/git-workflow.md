@@ -59,7 +59,7 @@ idl-repo: feature/{workstream}/{ticket-id}
 ```text
 harness-repo/requirements/{requirement-id}/
 harness-repo/context/
-harness-repo/templates/
+harness-repo/context/harness-framework/templates/
 ```
 
 此阶段禁止提前修改业务代码，除非需求明确进入技术预研，并在需求目录中记录预研范围。
