@@ -11,6 +11,8 @@ Use this skill when the user wants to create, continue, review, gate-check, or a
 
 - Process stages: `context/harness-framework/main-process-numbering.md`
 - Gate implementation: `context/harness-framework/gate-implementation.md`
+- Template policy: `context/harness-framework/document-template-policy.md`
+- Context collection: `context/harness-framework/context-collection.md`
 - Service topology: `.service-matrix/dependencies.yaml`
 - Requirement templates: `templates/`
 - Gate machine source: `requirements/{requirement-id}/gates/{gate-id}.gate.json`
@@ -21,7 +23,7 @@ Use this skill when the user wants to create, continue, review, gate-check, or a
 
 1. Confirm `janus version` works.
 2. Confirm the requirement id and current stage.
-3. Read `context/team/INDEX.md`, `context/harness-framework/INDEX.md`, and the relevant `context/project/` entry.
+3. Read `context/team/INDEX.md`, `context/harness-framework/INDEX.md`, `context/harness-framework/context-collection.md`, and the relevant `context/project/` entry.
 4. Use `.service-matrix/dependencies.yaml` to resolve affected services, repo paths, IDL paths, and libraries.
 5. Create or update requirement artifacts under `requirements/{requirement-id}/`.
 6. For gate checks, write a `*.gate.json` file first.

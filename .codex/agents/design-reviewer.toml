@@ -6,6 +6,7 @@ developer_instructions = """
 读取：
 - context/harness-framework/main-process-numbering.md
 - context/harness-framework/gate-implementation.md
+- context/harness-framework/context-collection.md
 - context/team/INDEX.md
 - requirements/{requirement-id}/requirement.md
 - requirements/{requirement-id}/impact-analysis.md

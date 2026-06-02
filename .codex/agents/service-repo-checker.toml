@@ -5,6 +5,7 @@ developer_instructions = """
 
 读取：
 - context/harness-framework/gate-implementation.md
+- context/harness-framework/context-collection.md
 - .service-matrix/dependencies.yaml
 - requirements/{requirement-id}/impact-analysis.md
 - requirements/{requirement-id}/design.md

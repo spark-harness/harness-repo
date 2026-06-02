@@ -14,7 +14,7 @@ context/
 ```
 
 - `team/`：所有项目共享的团队规范。
-- `harness-framework/`：所有需求研发共享的 Harness 流程、门禁和模板口径。
+- `harness-framework/`：所有需求研发共享的 Harness 流程、门禁、模板口径和上下文收集规范。
 - `project/`：项目、领域、服务级知识。
 
 AI 工作时应先读团队级和框架级入口，再按服务矩阵缩小到项目级上下文。

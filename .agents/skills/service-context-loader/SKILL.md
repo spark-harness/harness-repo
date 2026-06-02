@@ -9,13 +9,14 @@ Use this skill when a task names a service, module, repo path, IDL path, or cros
 
 ## Workflow
 
-1. Read `.service-matrix/dependencies.yaml`.
-2. Resolve the active team, module, service, repo path, libraries, upstream, downstream, and IDL requirements.
-3. Read `context/team/INDEX.md`.
-4. Read `context/harness-framework/INDEX.md` when the task touches lifecycle, gates, templates, or process.
-5. Read `context/project/INDEX.md`.
-6. If a service-specific `context/project/{project}/{domain}/{service}/INDEX.md` exists, read it before modifying requirement or design artifacts.
-7. If the service context is missing, report it as a context gap and suggest the minimal files to add.
+1. Read `context/harness-framework/context-collection.md`.
+2. Read `.service-matrix/dependencies.yaml`.
+3. Resolve the active team, module, service, repo path, libraries, upstream, downstream, and IDL requirements.
+4. Read `context/team/INDEX.md`.
+5. Read `context/harness-framework/INDEX.md` when the task touches lifecycle, gates, templates, or process.
+6. Read `context/project/INDEX.md`.
+7. If a service-specific `context/project/{project}/{domain}/{service}/INDEX.md` exists, read it before modifying requirement or design artifacts.
+8. If the service context is missing, report it as a context gap and suggest the minimal files to add.
 
 ## Boundaries
 

@@ -10,6 +10,8 @@ Use this skill when a user wants to create, continue, advance, review, or close 
 
 - 流程阶段：`context/harness-framework/main-process-numbering.md`
 - 门禁实施：`context/harness-framework/gate-implementation.md`
+- 模板口径：`context/harness-framework/document-template-policy.md`
+- 上下文收集：`context/harness-framework/context-collection.md`
 - 服务拓扑：`.service-matrix/dependencies.yaml`
 - 需求模板：`templates/requirement.md`
 - 影响面模板：`templates/impact-analysis.md`
@@ -19,7 +21,7 @@ Use this skill when a user wants to create, continue, advance, review, or close 
 
 1. 确认需求目录是否存在于 `requirements/{requirement-id}/`。
 2. 如果不存在，按模板创建需求骨架。
-3. 读取 `context/team/`、`context/harness-framework/` 和相关 `context/project/` 入口。
+3. 读取 `context/team/`、`context/harness-framework/`、`context/harness-framework/context-collection.md` 和相关 `context/project/` 入口。
 4. 根据 `.service-matrix/dependencies.yaml` 补齐服务影响面。
 5. 在进入下一阶段前检查对应门禁报告。
 6. 如果门禁报告缺失、格式不合法或 `Result: BLOCKED`，停止推进并列出阻塞项。

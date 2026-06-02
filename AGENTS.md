@@ -13,6 +13,8 @@
 
 - 需求生命周期以 `context/harness-framework/main-process-numbering.md` 为阶段真相源。
 - 门禁协议以 `context/harness-framework/gate-implementation.md` 为事实源。
+- 文档模板口径以 `context/harness-framework/document-template-policy.md` 为事实源，模板文件保存在 `templates/`。
+- 上下文收集顺序以 `context/harness-framework/context-collection.md` 为事实源。
 - 团队级规则从 `context/team/INDEX.md` 进入。
 - 服务级知识从 `context/project/INDEX.md` 进入，并通过服务矩阵定位具体服务。
 
