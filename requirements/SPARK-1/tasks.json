@@ -1,0 +1,42 @@
+{
+  "requirement_id": "SPARK-1",
+  "status": "reviewed",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "Verify protobuf contract for PingService",
+      "scope": "Confirm ping.proto exists under vesta/spark/user/v1 and Buf v2 config is present.",
+      "trace": {
+        "requirement_items": ["R1", "R4"],
+        "design_decisions": ["D1", "D4"]
+      },
+      "affected_services": ["user-api"],
+      "acceptance": ["AC5"],
+      "status": "done"
+    },
+    {
+      "id": "T2",
+      "title": "Verify user-api Ping use case and gRPC adapter",
+      "scope": "Confirm PingUseCase and PingGrpcAdapter cover success and invalid argument behavior.",
+      "trace": {
+        "requirement_items": ["R2", "R3"],
+        "design_decisions": ["D2", "D3"]
+      },
+      "affected_services": ["user-api"],
+      "acceptance": ["AC1", "AC2", "AC3", "AC4"],
+      "status": "done"
+    },
+    {
+      "id": "T3",
+      "title": "Verify Harness lifecycle gates",
+      "scope": "Create Janus gate JSON for requirement, design, dev entry, and service repository checks.",
+      "trace": {
+        "requirement_items": ["R4"],
+        "design_decisions": ["D4"]
+      },
+      "affected_services": ["user-api"],
+      "acceptance": ["AC6"],
+      "status": "in_progress"
+    }
+  ]
+}

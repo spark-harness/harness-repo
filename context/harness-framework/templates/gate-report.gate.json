@@ -1,0 +1,19 @@
+{
+  "schema_version": "1",
+  "requirement_id": "",
+  "gate_id": "",
+  "gate_name": "",
+  "stage": "",
+  "checked_by": "",
+  "checked_at": "",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [],
+  "checklist": [],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "decision": ""
+}

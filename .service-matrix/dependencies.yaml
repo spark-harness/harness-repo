@@ -15,9 +15,13 @@ modules:
     team: core
     name: "公共能力"
 
-  order:
+  user:
     team: core
-    name: "订单域"
+    name: "用户域"
+
+  frontend:
+    team: core
+    name: "前端体验"
 
 libraries:
   money:
@@ -28,29 +32,22 @@ libraries:
     purpose: "统一金额、币种、舍入和最小货币单位转换"
 
 services:
-  order-api:
-    module: order
-    repo_path: "{business-repo}/services/order-api"
-    idl_required: true
-    idl_repo: "{idl-repo}"
-    proto_path: "{idl-repo}/proto/order/v1"
-    buf_module: "buf.build/example/order"
-
-  order-worker:
-    module: order
-    repo_path: "{business-repo}/services/order-worker"
+  aegis:
+    module: frontend
+    repo_path: "{business-repo}/services/frontend/aegis"
     idl_required: false
 
-dependencies:
-  order-api:
-    upstream:
-      - "web-gateway"
-    downstream:
-      - "payment-api"
-      - "inventory-api"
-    libraries:
-      - "money"
+  user-api:
+    module: user
+    repo_path: "{business-repo}/services/backend/user-api"
+    idl_required: true
+    idl_repo: "{idl-repo}"
+    proto_path: "{idl-repo}/vesta/spark/user/v1"
+    buf_module: "local/spark-user"
 
-  order-worker:
+dependencies:
+  user-api:
+    upstream:
+      - "aegis"
     libraries:
       - "money"

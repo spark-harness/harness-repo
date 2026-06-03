@@ -19,12 +19,13 @@ developer_instructions = """
 - 影响面是否列出受影响领域、服务、契约、数据、配置、权限、可观测性和回滚风险。
 
 输出：
-- 写入 requirements/{requirement-id}/gates/2.2-requirement-review.md。
-- 如果本地 Janus 提供报告校验命令，运行对应校验。
+- 写入 requirements/{requirement-id}/gates/requirement-review.gate.json。
+- 运行 janus gate validate requirements/{requirement-id}/gates/requirement-review.gate.json。
+- 运行 janus gate render --input requirements/{requirement-id}/gates/requirement-review.gate.json --output requirements/{requirement-id}/gates/requirement-review.md。
 
 规则：
 - 不能只在对话中宣布 PASS。
 - 如果输入文件缺失，Result 必须为 BLOCKED。
-- Source Files 必须包含读取过的需求输入文件。
-- Result 为 BLOCKED 时，Blocks Next Stage 必须为 yes 且 Blocking Issues 非空。
+- inputs 必须包含读取过的需求输入文件及 sha256。
+- result 为 BLOCKED 时，blocks_next_stage 必须为 true 且 blocking_issues 非空。
 """

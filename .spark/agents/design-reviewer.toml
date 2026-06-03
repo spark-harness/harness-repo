@@ -19,11 +19,12 @@ developer_instructions = """
 - 是否存在未解释的服务边界、兼容性、降级或回滚风险。
 
 输出：
-- 写入 requirements/{requirement-id}/gates/3.3-design-review.md。
-- 如果本地 Janus 提供报告校验命令，运行对应校验。
+- 写入 requirements/{requirement-id}/gates/design-review.gate.json。
+- 运行 janus gate validate requirements/{requirement-id}/gates/design-review.gate.json。
+- 运行 janus gate render --input requirements/{requirement-id}/gates/design-review.gate.json --output requirements/{requirement-id}/gates/design-review.md。
 
 规则：
 - 门禁结论必须落到固定格式报告，不能只在对话中宣布 PASS。
-- 如果设计声明涉及 IDL，Checklist 必须记录 IDL 影响和证据。
-- 如果不涉及 IDL，Checklist 必须记录理由。
+- 如果设计声明涉及 IDL，checklist 必须记录 IDL 影响和证据。
+- 如果不涉及 IDL，checklist 必须记录理由。
 """

@@ -1,0 +1,57 @@
+{
+  "schema_version": "1",
+  "requirement_id": "SPARK-1",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-03T00:00:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/SPARK-1/design.md",
+      "sha256": "84f0a198fde90416e02947de09c26665e5d55a3cc013d420fe6084f7c2a352e3"
+    },
+    {
+      "path": "requirements/SPARK-1/tasks.json",
+      "sha256": "1953ad6e202fb76bf58d8a2078453ba398825d400dbabf2483a7811ed9f00453"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "77862a05e23a539cdb42d8229099ac1624283dd887d8a8b25537fd14bef5627d"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json includes requirement_id, status, and three task objects."
+    },
+    {
+      "item": "每个任务有范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "T1-T3 include scope, acceptance, requirement_items, and design_decisions."
+    },
+    {
+      "item": "affected_services 来自服务矩阵",
+      "result": "PASS",
+      "evidence": "All tasks reference user-api, which exists in .service-matrix/dependencies.yaml."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/SPARK-1/evidence/buf-checks.md",
+      "sha256": "81f157579a5d560b0de0096aec07006262e9d6740136c762c359ea040ecc1bb7"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes"
+  },
+  "decision": "任务拆分具备进入服务仓库检查的最低要求。"
+}

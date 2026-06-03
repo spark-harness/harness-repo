@@ -18,3 +18,7 @@ context/project/{project-name}/{domain-name}/{service-name}/
 - 再读取对应 `INDEX.md`。
 - 只沉淀业务语义、架构约束、SOP 和历史经验。
 - 不复制业务代码实现。
+
+## 当前项目
+
+- `spark/user/`：Spark 用户域上下文。

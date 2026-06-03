@@ -29,59 +29,85 @@ Result 为 WAIVED = 按豁免规则放行
 
 ## 2. 门禁报告位置
 
-门禁报告写入：
+门禁机器事实源写入：
+
+```text
+requirements/{requirement-id}/gates/{gate-id}.gate.json
+```
+
+门禁审计视图由 Janus 渲染到：
 
 ```text
 requirements/{requirement-id}/gates/{gate-id}.md
 ```
 
-推荐 `gate-id`：
+推荐 `gate-id` 使用语义名称，不把阶段编号写进身份字段：
 
 | 阶段 | 门禁 | gate-id |
 | --- | --- | --- |
-| 2.2 | 需求评审门禁 | `2.2-requirement-review` |
-| 3.3 | 设计门禁 | `3.3-design-review` |
-| 4.2 | Dev 进入门禁 | `4.2-dev-entry` |
-| 4.3 | 服务仓库检查门禁 | `4.3-service-repo-check` |
+| 2.2 | 需求评审门禁 | `requirement-review` |
+| 3.3 | 设计门禁 | `design-review` |
+| 4.2 | Dev 进入门禁 | `dev-entry` |
+| 4.3 | 服务仓库检查门禁 | `service-repo-check` |
 
-## 3. 固定字段
+`stage` 字段保留阶段编号，用来表达流程位置。
 
-门禁报告必须保留下列字段名。字段名使用英文，字段值可以使用中文。
+## 3. JSON 固定字段
+
+门禁 JSON 必须保留下列字段名。字段名使用 snake_case，字段值可以使用中文。
 
 ```text
-Requirement ID
-Gate ID
-Gate Name
-Stage
-Checked By
-Checked At
-Result
-Blocks Next Stage
-Source Files
+schema_version
+requirement_id
+gate_id
+gate_name
+stage
+checked_by
+checked_at
+result
+blocks_next_stage
+inputs
+checklist
+blocking_issues
+warnings
+waiver
+repos
+evidence
+idl_impact
+decision
 ```
 
 字段含义：
 
 | 字段 | 必填 | 含义 |
 | --- | --- | --- |
-| Requirement ID | 是 | 需求 ID |
-| Gate ID | 是 | 机器读取的门禁 ID |
-| Gate Name | 是 | 人类可读的门禁名称 |
-| Stage | 是 | 当前阶段编号 |
-| Checked By | 是 | 执行检查的 Agent、Skill、Command 或人员 |
-| Checked At | 是 | 检查时间 |
-| Result | 是 | `PASS` / `BLOCKED` / `WARN` / `WAIVED` |
-| Blocks Next Stage | 是 | `yes` / `no` |
-| Source Files | 是 | 本次检查读取的关键文件 |
+| schema_version | 是 | 门禁 JSON schema 版本 |
+| requirement_id | 是 | 需求 ID |
+| gate_id | 是 | 机器读取的门禁 ID |
+| gate_name | 是 | 人类可读的门禁名称 |
+| stage | 是 | 当前阶段编号 |
+| checked_by | 是 | 执行检查的 Agent、Skill、Command 或人员 |
+| checked_at | 是 | RFC3339 检查时间 |
+| result | 是 | `PASS` / `BLOCKED` / `WARN` / `WAIVED` |
+| blocks_next_stage | 是 | 是否阻塞下一阶段 |
+| inputs | 是 | 本次检查读取的关键文件及 sha256 |
+| checklist | 是 | 检查项、结果和证据 |
+| blocking_issues | 是 | 阻塞项；无阻塞时为空数组 |
+| warnings | 是 | 非阻塞风险；无风险时为空数组 |
+| waiver | 是 | 豁免信息 |
+| repos | 否 | 需要校验分支策略的仓库快照 |
+| evidence | 否 | 测试、Buf、验收等外部证据 |
+| idl_impact | 否 | IDL 影响声明 |
+| decision | 是 | 是否允许继续及原因 |
 
-`Blocks Next Stage` 必须和 `Result` 保持一致：
+`blocks_next_stage` 必须和 `result` 保持一致：
 
-| Result | Blocks Next Stage |
+| result | blocks_next_stage |
 | --- | --- |
-| PASS | `no` |
-| WARN | `no` |
-| BLOCKED | `yes` |
-| WAIVED | `no` |
+| PASS | `false` |
+| WARN | `false` |
+| BLOCKED | `true` |
+| WAIVED | `false` |
 
 ## 4. 状态语义
 
@@ -184,26 +210,29 @@ Source Files
 
 Agent 执行门禁时，必须输出两类内容：
 
-- 写入门禁报告文件。
+- 写入 `*.gate.json`。
+- 运行 `janus gate validate <gate.json>`。
+- 运行 `janus gate render --input <gate.json> --output <gate.md>`。
 - 在对话中给出简短结论和文件路径。
 
 Agent 不能只在对话中说“通过”。
 
-Agent 输出报告时必须包含：
+Agent 输出 JSON 时必须包含：
 
-- `Metadata` 固定字段。
-- `Checklist` 检查项表格。
-- `Blocking Issues` 阻塞项表格。
-- `Warnings` 风险项表格。
-- `Waiver` 豁免信息。
-- `Decision` 是否允许进入下一阶段。
+- `inputs` 固定读取文件及 sha256。
+- `checklist` 检查项。
+- `blocking_issues` 阻塞项。
+- `warnings` 风险项。
+- `waiver` 豁免信息。
+- `decision` 是否允许进入下一阶段。
 
 对话结论格式：
 
 ```text
-Gate: 3.3-design-review
+Gate: design-review
 Result: BLOCKED
-Report: requirements/T12345/gates/3.3-design-review.md
+Source: requirements/T12345/gates/design-review.gate.json
+Report: requirements/T12345/gates/design-review.md
 Reason: 缺少回滚方案，不能进入 4.1。
 ```
 
@@ -216,11 +245,12 @@ Skill 执行门禁时按以下顺序：
 3. 校验输入文件是否存在。
 4. 执行门禁检查矩阵中的检查项。
 5. 收集证据路径。
-6. 生成门禁报告。
-7. 根据 `Result` 决定是否允许继续。
-8. 如果 `BLOCKED`，停止推进并列出阻塞项。
-9. 如果 `WARN`，继续推进但记录后续动作。
-10. 如果 `WAIVED`，检查豁免信息是否完整。
+6. 生成门禁 JSON。
+7. 运行 `janus gate validate` 和 `janus gate render`。
+8. 根据 `result` 决定是否允许继续。
+9. 如果 `BLOCKED`，停止推进并列出阻塞项。
+10. 如果 `WARN`，继续推进但记录后续动作。
+11. 如果 `WAIVED`，检查豁免信息是否完整。
 
 Skill 不应在缺少报告时继续推进阶段。
 
@@ -231,13 +261,13 @@ Skill 不应在缺少报告时继续推进阶段。
 ```text
 1. 读取当前需求状态。
 2. 计算进入下一阶段所需门禁。
-3. 读取对应门禁报告。
-4. 如果报告不存在，阻塞。
-5. 如果报告固定字段缺失，阻塞。
-6. 如果 Result = BLOCKED，阻塞。
-7. 如果 Result = PASS，推进阶段。
-8. 如果 Result = WARN，推进阶段并输出风险。
-9. 如果 Result = WAIVED，校验豁免字段，合法后推进阶段。
+3. 读取对应门禁 JSON。
+4. 如果 JSON 不存在，阻塞。
+5. 如果 JSON 固定字段缺失或 Janus 校验失败，阻塞。
+6. 如果 result = BLOCKED，阻塞。
+7. 如果 result = PASS，推进阶段。
+8. 如果 result = WARN，推进阶段并输出风险。
+9. 如果 result = WAIVED，校验豁免字段，合法后推进阶段。
 ```
 
 伪代码：

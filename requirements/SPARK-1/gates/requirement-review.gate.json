@@ -1,0 +1,58 @@
+{
+  "schema_version": "1",
+  "requirement_id": "SPARK-1",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-03T00:00:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/SPARK-1/requirement.md",
+      "sha256": "d0217876551d79955fcdaf4ac3928217b2b49545afb9aeba89e5d2a1ee82b82f"
+    },
+    {
+      "path": "requirements/SPARK-1/impact-analysis.md",
+      "sha256": "3fa8edfcdb5b523aa0361b64445959debfe5598c9ba1534785892b613eacb4f8"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "背景、目标、非目标明确",
+      "result": "PASS",
+      "evidence": "requirement.md includes Background, Goals, and Non-Goals."
+    },
+    {
+      "item": "场景、业务规则和验收标准可测试",
+      "result": "PASS",
+      "evidence": "requirement.md lists two Given/When/Then scenarios, BR1-BR4, and AC1-AC6."
+    },
+    {
+      "item": "待确认问题显式列出",
+      "result": "PASS",
+      "evidence": "Open Questions table records the HTTP exposure question as closed."
+    },
+    {
+      "item": "影响面覆盖服务、契约、数据、配置、权限、可观测性和回滚",
+      "result": "PASS",
+      "evidence": "impact-analysis.md covers user-api, aegis, protobuf, data, config, observability, rollout, and rollback."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/SPARK-1/evidence/buf-checks.md",
+      "sha256": "81f157579a5d560b0de0096aec07006262e9d6740136c762c359ea040ecc1bb7"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes"
+  },
+  "decision": "需求定义满足进入设计阶段的最低要求。"
+}

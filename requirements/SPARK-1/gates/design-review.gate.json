@@ -1,0 +1,57 @@
+{
+  "schema_version": "1",
+  "requirement_id": "SPARK-1",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-03T00:00:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/SPARK-1/requirement.md",
+      "sha256": "d0217876551d79955fcdaf4ac3928217b2b49545afb9aeba89e5d2a1ee82b82f"
+    },
+    {
+      "path": "requirements/SPARK-1/impact-analysis.md",
+      "sha256": "3fa8edfcdb5b523aa0361b64445959debfe5598c9ba1534785892b613eacb4f8"
+    },
+    {
+      "path": "requirements/SPARK-1/design.md",
+      "sha256": "84f0a198fde90416e02947de09c26665e5d55a3cc013d420fe6084f7c2a352e3"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖服务、接口、数据、配置、权限、可观测性、灰度和回滚",
+      "result": "PASS",
+      "evidence": "design.md includes Affected Services, API / Contract Design, Data / Config / Permission, Observability, and Rollout And Rollback."
+    },
+    {
+      "item": "protobuf IDL 或外部契约影响明确",
+      "result": "PASS",
+      "evidence": "design.md declares protobuf IDL required and points to vesta/spark/user/v1/ping.proto."
+    },
+    {
+      "item": "设计决策能追溯到需求条目",
+      "result": "PASS",
+      "evidence": "Requirement Traceability maps R1-R4 to D1-D4."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/SPARK-1/evidence/buf-checks.md",
+      "sha256": "81f157579a5d560b0de0096aec07006262e9d6740136c762c359ea040ecc1bb7"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes"
+  },
+  "decision": "设计覆盖最小 gRPC 样例的关键工程约束，可以进入任务拆分。"
+}

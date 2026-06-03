@@ -3,3 +3,6 @@
 !.codex/**
 !.agents/
 !.agents/**
+.claude/
+.gemini/
+.continue/

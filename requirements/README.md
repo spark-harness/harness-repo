@@ -12,6 +12,7 @@ requirements/{requirement-id}/
 ├── design.md
 ├── tasks.json
 ├── gates/
+├── evidence/
 └── reviews/
 ```
 
@@ -21,3 +22,4 @@ requirements/{requirement-id}/
 - 需求、设计、任务、门禁和评审记录必须能相互追溯。
 - 阶段推进以 `context/harness-framework/main-process-numbering.md` 为准。
 - 门禁报告写入 `gates/`，审查报告写入 `reviews/`。
+- 测试、Buf、验收日志等外部证据写入 `evidence/`，并由 gate JSON 的 `evidence` 引用。
