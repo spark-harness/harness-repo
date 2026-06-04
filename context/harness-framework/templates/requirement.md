@@ -1,12 +1,12 @@
+---
+requirement_id: ""
+owner: ""
+status: "Draft"
+created_at: ""
+related_branch: ""
+---
+
 # {Requirement Title}
-
-## Metadata
-
-- Requirement ID:
-- Owner:
-- Status: Draft
-- Created At:
-- Related Branch:
 
 ## Background
 

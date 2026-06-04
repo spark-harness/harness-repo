@@ -18,11 +18,13 @@
 
 阶段推进入口只能读取门禁报告结论，不能读取聊天记录作为放行依据。
 
+Agent 不能代表人工评审人批准门禁。Agent 自检通过只能说明门禁材料 `ready for approval`；在人工评审人明确批准前，门禁总结果必须保持 `BLOCKED`，阻塞项写明“等待人工批准”。
+
 ```text
 没有门禁报告 = 阻塞
 门禁报告格式不合法 = 阻塞
 Result 为 BLOCKED = 阻塞
-Result 为 PASS = 放行
+Result 为 PASS = 机器检查通过且人工批准完成后放行
 Result 为 WARN = 放行但必须记录风险和后续动作
 Result 为 WAIVED = 按豁免规则放行
 ```
@@ -113,12 +115,14 @@ decision
 
 | 状态 | 是否允许进入下一阶段 | 语义 |
 | --- | --- | --- |
-| PASS | 是 | 所有阻塞条件已满足 |
+| PASS | 是 | 机器检查通过，且人工批准完成 |
 | WARN | 是 | 存在风险，但不阻塞，必须记录后续动作 |
 | BLOCKED | 否 | 存在阻塞问题，不能继续 |
 | WAIVED | 是 | 原本会阻塞，但已按豁免规则批准 |
 
 `WARN` 不能用于掩盖阻塞问题。只要存在门禁定义中的阻塞条件，就必须使用 `BLOCKED`，除非有正式豁免记录。
+
+如果所有机器检查项都满足，但缺少人工批准记录，也必须使用 `BLOCKED`。这类阻塞项的 `required_action` 应指向对应人工评审人，而不是要求 Agent 自行继续推进。
 
 ## 5. 门禁检查矩阵
 
@@ -216,6 +220,8 @@ Agent 执行门禁时，必须输出两类内容：
 - 在对话中给出简短结论和文件路径。
 
 Agent 不能只在对话中说“通过”。
+
+Agent 也不能在没有人工批准记录时把门禁总结果写成 `PASS`。这种情况下 checklist 可以记录机器检查项为 `PASS`，但报告顶层 `result` 必须是 `BLOCKED`。
 
 Agent 输出 JSON 时必须包含：
 
@@ -347,22 +353,26 @@ Follow-Up Issue:
 ## 11. 最小可用门禁报告示例
 
 ```markdown
+---
+requirement_id: "T12345"
+gate_id: "design-review"
+gate_name: "设计门禁"
+stage: "3.3"
+checked_by: "detail-design-quality-reviewer"
+checked_at: "2026-05-31T10:00:00+08:00"
+result: "BLOCKED"
+blocks_next_stage: true
+---
+
 # Gate Report
 
-## Metadata
+## 输入快照
 
-- Requirement ID: T12345
-- Gate ID: 3.3-design-review
-- Gate Name: 设计门禁
-- Stage: 3.3
-- Checked By: detail-design-quality-reviewer
-- Checked At: 2026-05-31T10:00:00+08:00
-- Result: BLOCKED
-- Blocks Next Stage: yes
-- Source Files:
-  - requirements/T12345/requirement.md
-  - requirements/T12345/impact-analysis.md
-  - requirements/T12345/design.md
+| Path | SHA-256 |
+| --- | --- |
+| `requirements/T12345/requirement.md` | `...` |
+| `requirements/T12345/impact-analysis.md` | `...` |
+| `requirements/T12345/design.md` | `...` |
 
 ## Checklist
 

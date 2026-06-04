@@ -1,11 +1,11 @@
+---
+requirement_id: ""
+analyst: ""
+status: "Draft"
+updated_at: ""
+---
+
 # Impact Analysis
-
-## Metadata
-
-- Requirement ID:
-- Analyst:
-- Status: Draft
-- Updated At:
 
 ## Summary
 

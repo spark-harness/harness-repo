@@ -1,17 +1,15 @@
+---
+requirement_id: ""
+gate_id: ""
+gate_name: ""
+stage: ""
+checked_by: ""
+checked_at: ""
+result: "PASS / BLOCKED / WARN / WAIVED"
+blocks_next_stage: false
+---
+
 # Gate Report
-
-## Metadata
-
-- Requirement ID:
-- Gate ID:
-- Gate Name:
-- Stage:
-- Checked By:
-- Checked At:
-- Result: PASS / BLOCKED / WARN / WAIVED
-- Blocks Next Stage: yes / no
-- Source Files:
-  -
 
 ## Scope
 
