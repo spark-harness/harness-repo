@@ -119,7 +119,7 @@ learning-docs-repo: docs(harness): explain checkout workflow
 
 1. `idl-repo`：先合并契约变化。
 2. `business-repo`：再合并消费契约的业务实现。
-3. `harness-repo`：确认门禁、设计、任务和现状知识已更新。
+3. `harness-repo`：确认门禁、设计、任务和项目知识已更新。
 4. `learning-docs-repo`：最后合并学习材料。
 
 如果业务仓必须和 IDL 仓一起灰度，合并顺序应在设计文档中说明。
@@ -130,7 +130,7 @@ learning-docs-repo: docs(harness): explain checkout workflow
 
 - 需求状态已进入交付或完成。
 - 门禁报告和验收证据完整。
-- 相关 `context/project/` 现状或经验已更新。
+- 相关 `context/project/` 项目知识或经验已更新。
 - 多仓分支已删除或标记归档。
 
 ## Hotfix 流程

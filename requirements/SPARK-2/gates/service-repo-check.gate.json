@@ -11,7 +11,7 @@
   "inputs": [
     {
       "path": "requirements/SPARK-2/impact-analysis.md",
-      "sha256": "ed6338609b0482ede50a6029366a3577701e6b0ba2f4aa68a321eb5aa8769b9f"
+      "sha256": "3041ce80d08a8c87bc25b11e398b8e02247c0eb2a6b3fcedd0fbbfd68a7c5df4"
     },
     {
       "path": "requirements/SPARK-2/design.md",
@@ -24,10 +24,6 @@
     {
       "path": ".service-matrix/dependencies.yaml",
       "sha256": "77862a05e23a539cdb42d8229099ac1624283dd887d8a8b25537fd14bef5627d"
-    },
-    {
-      "path": "context/project/spark/user/current-state.md",
-      "sha256": "eafb882b61d68cb32cd41a4fba632e601e1398e98973f6d6aedbd198614a19e4"
     },
     {
       "path": "context/harness-framework/gate-policy.md",
@@ -58,11 +54,6 @@
       "item": "Harness 仓、业务仓、IDL 仓分支必须包含需求 ID",
       "result": "PASS",
       "evidence": "Current branch snapshot is feature/SPARK-2-mobile-code-register for all three repositories."
-    },
-    {
-      "item": "项目当前状态已同步",
-      "result": "PASS",
-      "evidence": "context/project/spark/user/current-state.md records AuthService, mobile code rules, and SPARK-2 decision."
     }
   ],
   "blocking_issues": [

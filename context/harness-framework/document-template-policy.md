@@ -16,7 +16,6 @@
 | 任务拆分 | `context/harness-framework/templates/tasks.json` | 阶段 4.1 | `requirements/{requirement-id}/tasks.json` |
 | 门禁 JSON | `context/harness-framework/templates/gate-report.gate.json` | 阶段 2.2、3.3、4.2、4.3 | `requirements/{requirement-id}/gates/{gate-id}.gate.json` |
 | 门禁审计视图 | Janus 渲染生成 | 阶段 2.2、3.3、4.2、4.3 | `requirements/{requirement-id}/gates/{gate-id}.md` |
-| 项目现状 | `context/harness-framework/templates/current-state.md` | 阶段 5 或知识维护 | `context/project/{project}/{domain}/current-state.md` |
 
 门禁 JSON 必须使用固定字段。阶段推进只能读取 JSON 结论，不能读取聊天记录或手写 Markdown 作为放行依据。
 
@@ -38,8 +37,6 @@ Markdown 文档的轻量元数据使用文件顶部 YAML front matter。正文�
 - `context/harness-framework/templates/tasks.json`
 
 执行门禁时，应生成或更新固定格式门禁 JSON，并用 Janus 渲染审计 Markdown。
-
-维护项目现状知识时，应优先使用 `context/harness-framework/templates/current-state.md`，并放到对应项目上下文目录。
 
 ## 3. 模板内容边界
 

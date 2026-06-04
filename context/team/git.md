@@ -85,7 +85,7 @@ chore(idl): initialize buf v2 config
 
 - 变更是否可追溯到需求。
 - 是否涉及 protobuf IDL 或外部契约。
-- 是否需要更新 `context/project/` 的现状或经验。
+- 是否需要更新 `context/project/` 的项目知识或经验。
 - 是否通过当前阶段要求的门禁。
 - 是否存在跨仓分支不一致。
 
@@ -96,4 +96,4 @@ chore(idl): initialize buf v2 config
 - 需求目录中存在对应需求、设计、任务或门禁产物。
 - 当前阶段门禁为 `PASS`。
 - 涉及 protobuf 时，`buf lint`、`buf generate`、`buf breaking` 有结果记录。
-- 涉及关键业务状态、错误码或日志字段时，已更新对应现状文档或说明不需要更新的原因。
+- 涉及关键业务状态、错误码或日志字段时，已更新对应项目知识文档或说明不需要更新的原因。

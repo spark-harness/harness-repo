@@ -64,7 +64,3 @@ updated_at: "2026-06-03"
 | 真实短信发送未接入导致误认为生产可用 | 产品和研发口径不一致 | 在 Non-Goals、设计和 evidence 中明确只使用验证码端口测试实现 | Harness Team |
 | 内存用户仓储不具备生产持久性 | 服务重启后用户数据丢失 | 本需求限定为最小流程验证，后续持久化需求替换仓储实现 | Harness Team |
 | 手机号明文写入日志 | 泄露敏感信息 | 设计约束 adapter 不记录手机号明文 | Harness Team |
-
-## Required Current-State Updates
-
-- `context/project/spark/user/current-state.md`

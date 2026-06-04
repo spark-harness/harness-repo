@@ -7,7 +7,6 @@
 ```text
 context/project/{project-name}/{domain-name}/{service-name}/
 ├── INDEX.md
-├── current-state.md
 ├── sop/
 └── experience/
 ```

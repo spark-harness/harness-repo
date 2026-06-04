@@ -1,17 +1,16 @@
----
-requirement_id: "SPARK-2"
-gate_id: "service-repo-check"
-gate_name: "服务仓库检查门禁"
-stage: "4.3"
-checked_by: "service_repo_checker"
-checked_at: "2026-06-03T23:09:00+08:00"
-result: "BLOCKED"
-blocks_next_stage: true
----
-
 <!-- Generated from service-repo-check.gate.json. Do not edit blocking fields here. -->
 
 # 服务仓库检查门禁
+
+## 元数据
+
+- Requirement: `SPARK-2`
+- Gate: `service-repo-check`
+- Stage: `4.3`
+- Checked by: `service_repo_checker`
+- Checked at: `2026-06-03T23:09:00+08:00`
+- Result: `BLOCKED`
+- Blocks next stage: `true`
 
 ## 结论
 
@@ -21,11 +20,10 @@ blocks_next_stage: true
 
 | Path | SHA-256 |
 | --- | --- |
-| `requirements/SPARK-2/impact-analysis.md` | `ed6338609b0482ede50a6029366a3577701e6b0ba2f4aa68a321eb5aa8769b9f` |
+| `requirements/SPARK-2/impact-analysis.md` | `3041ce80d08a8c87bc25b11e398b8e02247c0eb2a6b3fcedd0fbbfd68a7c5df4` |
 | `requirements/SPARK-2/design.md` | `caed5bb615c33b6e8fcb33829d2e0d2208e502a42c770f5f24e5f8f16b0773aa` |
 | `requirements/SPARK-2/tasks.json` | `abf6091a70aa6cc9de06f7b0c31b0ec97b21514e018b211331a6f7a0899dcc1d` |
 | `.service-matrix/dependencies.yaml` | `77862a05e23a539cdb42d8229099ac1624283dd887d8a8b25537fd14bef5627d` |
-| `context/project/spark/user/current-state.md` | `eafb882b61d68cb32cd41a4fba632e601e1398e98973f6d6aedbd198614a19e4` |
 | `context/harness-framework/gate-policy.md` | `e2af35b2c1e0eff8aa9ee3ea854cde58e59f44d84b27026ce98f781610a176fa` |
 | `context/harness-framework/gate-implementation.md` | `4017a3e9a1a9e6413b646662a2f29436b7fba117e22fa4043d2132d5c819dafa` |
 
@@ -37,7 +35,6 @@ blocks_next_stage: true
 | repo_path 能解析到实际业务仓目录 | `PASS` | ../business-repo/services/backend/user-api and ../business-repo/services/frontend/aegis exist. |
 | IDL 仓和 Buf v2 配置已就位 | `PASS` | ../idl-repo/buf.yaml, ../idl-repo/buf.gen.yaml, and ../idl-repo/vesta/spark/user/v1/auth.proto exist. |
 | Harness 仓、业务仓、IDL 仓分支必须包含需求 ID | `PASS` | Current branch snapshot is feature/SPARK-2-mobile-code-register for all three repositories. |
-| 项目当前状态已同步 | `PASS` | context/project/spark/user/current-state.md records AuthService, mobile code rules, and SPARK-2 decision. |
 
 ## 阻塞问题
 

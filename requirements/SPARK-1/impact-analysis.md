@@ -61,7 +61,3 @@
 | Risk | Impact | Mitigation | Owner |
 |---|---|---|---|
 | 业务仓、IDL 仓和 Harness 仓不在同一需求分支 | 无法安全进入编码循环 | 4.3 服务仓库检查门禁阻塞 | Harness Team |
-
-## Required Current-State Updates
-
-- `context/project/spark/user/current-state.md`

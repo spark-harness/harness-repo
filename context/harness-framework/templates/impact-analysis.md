@@ -59,7 +59,3 @@ updated_at: ""
 | Risk | Impact | Mitigation | Owner |
 |---|---|---|---|
 |  |  |  |  |
-
-## Required Current-State Updates
-
-- 
