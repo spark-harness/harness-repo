@@ -4,6 +4,10 @@ owner: ""
 status: "Draft"
 created_at: ""
 related_branch: ""
+requirement_review_status: "pending"
+approved_by: ""
+approved_at: ""
+decision: ""
 ---
 
 # {Requirement Title}
