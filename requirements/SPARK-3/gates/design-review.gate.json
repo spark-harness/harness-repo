@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "SPARK-3",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-07T23:28:01+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/SPARK-3/requirement.md",
+      "sha256": "a5493e310f9e3f542851c4977f26bf6606027946f13be018741417fcb6bdf92d"
+    },
+    {
+      "path": "requirements/SPARK-3/impact-analysis.md",
+      "sha256": "9247998bddf9d3848633574383ec7a3de1e1d294a16e7dae4a1606f57d4102e7"
+    },
+    {
+      "path": "requirements/SPARK-3/design.md",
+      "sha256": "8bfe421b84b4977f37f30a5ff0bdd21da27023dfc4fb313a49aaca8fc13acb71"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/SPARK-3/design.md approved by Codex at 2026-06-07T23:35:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "SPARK-3 only adds an HTTP readiness endpoint and does not modify protobuf IDL or external contracts."
+  },
+  "decision": "设计覆盖服务边界、接口、测试和回滚，可以进入任务拆分。"
+}
