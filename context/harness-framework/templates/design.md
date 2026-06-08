@@ -1,9 +1,8 @@
 ---
 requirement_id: ""
 owner: ""
-status: "Draft"
+status: "draft"
 updated_at: ""
-design_review_status: "pending"
 approved_by: ""
 approved_at: ""
 decision: ""

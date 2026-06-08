@@ -124,6 +124,17 @@ decision
 
 如果所有机器检查项都满足，但缺少人工批准记录，也必须使用 `BLOCKED`。这类阻塞项的 `required_action` 应指向对应人工评审人，而不是要求 Agent 自行继续推进。
 
+人工批准字段保留在被评审的原始产物中，gate JSON 只保存本次检查快照：
+
+| gate-id | 批准源 |
+| --- | --- |
+| `requirement-review` | `requirements/{requirement-id}/requirement.md` front matter |
+| `design-review` | `requirements/{requirement-id}/design.md` front matter |
+| `dev-entry` | `requirements/{requirement-id}/tasks.json` 顶层字段 |
+| `service-repo-check` | `requirements/{requirement-id}/impact-analysis.md` front matter |
+
+批准源使用统一字段：`status`、`approved_by`、`approved_at`、`decision`。`status` 为 `approved` 表示该产物对应的门禁已批准；`tasks.json` 中单个任务的执行状态使用 `state`，不能再使用 `status`。
+
 ## 5. 门禁检查矩阵
 
 ### 2.2 需求评审门禁
@@ -177,11 +188,12 @@ decision
 通过条件：
 
 - 任务拆分完整。
-- 每个任务有范围、验收和追溯来源。
+- 每个任务有状态、范围、验收和追溯来源。
 
 阻塞条件：
 
 - 任务文件缺失或格式不合法。
+- 任务缺少 `state`。
 - 任务没有验收标准。
 - 任务无法追溯到需求或设计。
 

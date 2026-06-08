@@ -1,9 +1,8 @@
 ---
 requirement_id: "SPARK-3"
 owner: "Codex"
-status: "Reviewed"
+status: "approved"
 updated_at: "2026-06-07"
-design_review_status: "approved"
 approved_by: "Codex"
 approved_at: "2026-06-07T23:35:00+08:00"
 decision: "设计覆盖服务边界、接口、测试和回滚，可以进入任务拆分。"

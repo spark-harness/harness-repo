@@ -1,8 +1,11 @@
 ---
 requirement_id: "SPARK-3"
 analyst: "Codex"
-status: "Reviewed"
+status: "approved"
 updated_at: "2026-06-07"
+approved_by: "Codex"
+approved_at: "2026-06-07T23:45:00+08:00"
+decision: "服务仓库检查通过，代码仓库和 Harness 仓处于同名分支。"
 ---
 
 # Impact Analysis

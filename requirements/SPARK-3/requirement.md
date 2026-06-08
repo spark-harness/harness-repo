@@ -1,10 +1,9 @@
 ---
 requirement_id: "SPARK-3"
 owner: "Codex"
-status: "Reviewed"
+status: "approved"
 created_at: "2026-06-07"
 related_branch: "feature/SPARK-3-user-api-readiness"
-requirement_review_status: "approved"
 approved_by: "Codex"
 approved_at: "2026-06-07T23:30:00+08:00"
 decision: "需求定义通过，可以进入设计阶段。"

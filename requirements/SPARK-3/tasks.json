@@ -1,6 +1,9 @@
 {
   "requirement_id": "SPARK-3",
-  "status": "reviewed",
+  "status": "approved",
+  "approved_by": "Codex",
+  "approved_at": "2026-06-07T23:40:00+08:00",
+  "decision": "任务拆分通过，任务已完成并有测试证据。",
   "tasks": [
     {
       "id": "T1",
@@ -12,7 +15,7 @@
       },
       "affected_services": ["user-api"],
       "acceptance": ["AC1", "AC2", "AC3", "AC4"],
-      "status": "done"
+      "state": "done"
     },
     {
       "id": "T2",
@@ -24,7 +27,7 @@
       },
       "affected_services": ["user-api"],
       "acceptance": ["AC5", "AC6"],
-      "status": "done"
+      "state": "done"
     }
   ]
 }

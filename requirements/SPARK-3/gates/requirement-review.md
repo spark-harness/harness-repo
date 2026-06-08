@@ -4,7 +4,7 @@ gate_id: "requirement-review"
 gate_name: "需求评审门禁"
 stage: "2.2"
 checked_by: "requirement_reviewer"
-checked_at: "2026-06-07T23:28:01+08:00"
+checked_at: "2026-06-08T08:23:47+08:00"
 result: "PASS"
 blocks_next_stage: false
 ---
@@ -21,8 +21,8 @@ blocks_next_stage: false
 
 | Path | SHA-256 |
 | --- | --- |
-| `requirements/SPARK-3/requirement.md` | `a5493e310f9e3f542851c4977f26bf6606027946f13be018741417fcb6bdf92d` |
-| `requirements/SPARK-3/impact-analysis.md` | `9247998bddf9d3848633574383ec7a3de1e1d294a16e7dae4a1606f57d4102e7` |
+| `requirements/SPARK-3/requirement.md` | `cd3a697834d98ab64593eaea8538f11a6185d7b42d8247c62f8a90ccf74b71d1` |
+| `requirements/SPARK-3/impact-analysis.md` | `ea5999ad4b8b81ba4241dce73bf41cd738f58aa7b68576d9148f6243a45dc922` |
 
 ## 检查项
 
@@ -46,5 +46,7 @@ blocks_next_stage: false
 
 ## 外部证据
 
-无。
+| Path | SHA-256 |
+| --- | --- |
+| `requirements/SPARK-3/evidence/user-api-tests.md` | `99b5e5123cb03a0edf86f21219b09ca85a4eb8689ea86fe7e1e173f9e58b4f1a` |
 

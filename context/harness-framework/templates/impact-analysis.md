@@ -1,8 +1,11 @@
 ---
 requirement_id: ""
 analyst: ""
-status: "Draft"
+status: "draft"
 updated_at: ""
+approved_by: ""
+approved_at: ""
+decision: ""
 ---
 
 # Impact Analysis

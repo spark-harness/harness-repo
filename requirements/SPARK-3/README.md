@@ -2,7 +2,7 @@
 requirement_id: "SPARK-3"
 owner: "Codex"
 current_stage: "5"
-status: "Draft"
+status: "approved"
 created_at: "2026-06-07"
 ---
 
