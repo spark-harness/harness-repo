@@ -1,0 +1,89 @@
+{
+  "schema_version": "1",
+  "requirement_id": "SPARK-3",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-08T08:23:47+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/SPARK-3/impact-analysis.md",
+      "sha256": "ea5999ad4b8b81ba4241dce73bf41cd738f58aa7b68576d9148f6243a45dc922"
+    },
+    {
+      "path": "requirements/SPARK-3/design.md",
+      "sha256": "a5c89db9b938af3dbc3326da5fd9c415891cb88b677e622badb07a947174e5b1"
+    },
+    {
+      "path": "requirements/SPARK-3/tasks.json",
+      "sha256": "68b433acd65803af9ec4c353de55dc6e208bee22976e57fc849eb088ac92daea"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "77862a05e23a539cdb42d8229099ac1624283dd887d8a8b25537fd14bef5627d"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "SPARK-3"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "2 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "user-api"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/SPARK-3/impact-analysis.md approved by Codex at 2026-06-07T23:45:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/SPARK-3-user-api-readiness",
+      "commit": "5b3e673"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/SPARK-3-user-api-readiness",
+      "commit": "2bad703"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "requirements/SPARK-3/evidence/user-api-tests.md",
+      "sha256": "99b5e5123cb03a0edf86f21219b09ca85a4eb8689ea86fe7e1e173f9e58b4f1a"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "需求文档明确声明不涉及 protobuf IDL 或外部契约影响。"
+  },
+  "decision": "服务仓库检查通过，代码仓库和 Harness 仓处于同名分支。"
+}

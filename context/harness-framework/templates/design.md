@@ -1,11 +1,14 @@
+---
+requirement_id: ""
+owner: ""
+status: "draft"
+updated_at: ""
+approved_by: ""
+approved_at: ""
+decision: ""
+---
+
 # Design
-
-## Metadata
-
-- Requirement ID:
-- Owner:
-- Status: Draft
-- Updated At:
 
 ## Requirement Traceability
 

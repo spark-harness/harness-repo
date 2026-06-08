@@ -1,6 +1,9 @@
 {
   "requirement_id": "",
   "status": "draft",
+  "approved_by": "",
+  "approved_at": "",
+  "decision": "",
   "tasks": [
     {
       "id": "T1",
@@ -12,7 +15,7 @@
       },
       "affected_services": [],
       "acceptance": [],
-      "status": "todo"
+      "state": "todo"
     }
   ]
 }

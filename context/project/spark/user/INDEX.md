@@ -4,7 +4,6 @@
 
 ## Files
 
-- `current-state.md`：当前业务语义和实现状态。
 - `experience/`：历史问题和经验沉淀。
 
 ## Related Services

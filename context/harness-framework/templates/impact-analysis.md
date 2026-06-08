@@ -1,11 +1,14 @@
+---
+requirement_id: ""
+analyst: ""
+status: "draft"
+updated_at: ""
+approved_by: ""
+approved_at: ""
+decision: ""
+---
+
 # Impact Analysis
-
-## Metadata
-
-- Requirement ID:
-- Analyst:
-- Status: Draft
-- Updated At:
 
 ## Summary
 
@@ -59,7 +62,3 @@
 | Risk | Impact | Mitigation | Owner |
 |---|---|---|---|
 |  |  |  |  |
-
-## Required Current-State Updates
-
-- 

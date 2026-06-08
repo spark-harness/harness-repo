@@ -11,7 +11,7 @@
   "inputs": [
     {
       "path": "requirements/SPARK-1/impact-analysis.md",
-      "sha256": "3fa8edfcdb5b523aa0361b64445959debfe5598c9ba1534785892b613eacb4f8"
+      "sha256": "193ee06ec9b65494c2291e11d87d050b90ceeb3a04246bfd7479eeabe20d54fa"
     },
     {
       "path": "requirements/SPARK-1/design.md",
