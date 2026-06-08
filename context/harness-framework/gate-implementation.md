@@ -135,6 +135,25 @@ decision
 
 批准源使用统一字段：`status`、`approved_by`、`approved_at`、`decision`。`status` 为 `approved` 表示该产物对应的门禁已批准；`tasks.json` 中单个任务的执行状态使用 `state`，不能再使用 `status`。
 
+状态值必须使用中心化枚举：
+
+| 字段 | 允许值 | 说明 |
+| --- | --- | --- |
+| lifecycle artifact `status` | `draft`、`approved`、`blocked`、`waived` | 用于 `README.md`、`requirement.md`、`impact-analysis.md`、`design.md` front matter，以及 `tasks.json` 顶层字段 |
+| task `state` | `todo`、`in_progress`、`done`、`blocked`、`waived` | 用于 `tasks.json` 中单个任务的执行状态 |
+| gate `result` | `PASS`、`BLOCKED`、`WARN`、`WAIVED` | 用于 gate JSON 和 checklist item |
+
+不要使用 `Reviewed`、`reviewed` 或其他大小写变体表达批准状态。人工批准只能使用 `status: "approved"`，并同时补齐 `approved_by`、`approved_at`、`decision`。
+
+`impact-analysis.md` 必须在 front matter 中声明 IDL 影响：
+
+```yaml
+idl_impact: "no"
+idl_impact_reason: "只复用现有 protobuf IDL，不修改契约。"
+```
+
+Janus 优先读取结构化字段 `idl_impact` 和 `idl_impact_reason`。正文中的 `IDL`、`protobuf`、`Proto files` 只作为兼容旧文档的辅助检查，不能覆盖 front matter 的结构化结论。
+
 ## 5. 门禁检查矩阵
 
 ### 2.2 需求评审门禁

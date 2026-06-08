@@ -6,6 +6,8 @@ updated_at: ""
 approved_by: ""
 approved_at: ""
 decision: ""
+idl_impact: "no"
+idl_impact_reason: "未声明 protobuf IDL 或外部契约影响。"
 ---
 
 # Impact Analysis
