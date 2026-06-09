@@ -40,3 +40,17 @@ If approval is missing or inferred only from a technical clarification, stop and
 - Avoid unrelated refactors.
 - Make non-goals explicit when they constrain implementation.
 - If design cannot resolve a requirement ambiguity, return to `spark-requirement-intake`.
+
+## Gate
+
+Approval and gate generation are the same stage task. When `design.md` is
+approved or updated with an approval record, immediately create or refresh
+`requirements/{requirement-id}/gates/design-review.gate.json` with current
+SHA-256 inputs, then run:
+
+```bash
+janus gate validate requirements/{requirement-id}/gates/design-review.gate.json
+janus gate render --input requirements/{requirement-id}/gates/design-review.gate.json --output requirements/{requirement-id}/gates/design-review.md
+```
+
+Do not proceed to task planning while the design gate is missing or stale.

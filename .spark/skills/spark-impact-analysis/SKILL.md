@@ -48,3 +48,18 @@ For IDL work, explicitly state:
 - compatibility risk
 
 Do not proceed to design if IDL impact is unclear.
+
+## Gate
+
+Impact approval is part of the requirement-review gate stage. When
+`impact-analysis.md` is approved or updated after approval, immediately refresh
+`requirements/{requirement-id}/gates/requirement-review.gate.json` with current
+SHA-256 inputs for `requirement.md` and `impact-analysis.md`, then run:
+
+```bash
+janus gate validate requirements/{requirement-id}/gates/requirement-review.gate.json
+janus gate render --input requirements/{requirement-id}/gates/requirement-review.gate.json --output requirements/{requirement-id}/gates/requirement-review.md
+```
+
+Do not wait until final evidence completion to create this gate. If the
+requirement approval is missing, the gate must remain `BLOCKED`.

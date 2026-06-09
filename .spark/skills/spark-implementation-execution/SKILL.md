@@ -40,6 +40,13 @@ npm test
 
 Record exact commands and outcomes for evidence.
 
+After running verification commands, immediately inspect `git status --short`
+from the affected repo root. If the test/build command created disposable
+outputs such as Maven `target/`, Gradle `build/`, Node `.next/`, `dist/`, or
+coverage folders, remove those outputs before staging. Do not add repository
+ignore rules for one-off verification artifacts unless the user explicitly
+asks for repository ignore policy changes.
+
 ## Output
 
 Report changed files, tests run, failures, and remaining risks. Continue to `spark-evidence-gate-completion` when implementation is verified.

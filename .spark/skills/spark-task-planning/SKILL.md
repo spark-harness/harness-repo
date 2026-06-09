@@ -48,3 +48,20 @@ Each task must include:
 - Keep tasks small enough to verify locally.
 - Do not hide IDL and business implementation in one task.
 - Do not create tasks with vague scopes like "handle errors" or "add tests" without concrete acceptance links.
+
+## Gate
+
+Approval and gate generation are the same stage task. When `tasks.json` is
+approved or updated with an approval record, immediately create or refresh
+`requirements/{requirement-id}/gates/dev-entry.gate.json`, then run:
+
+```bash
+janus gate validate requirements/{requirement-id}/gates/dev-entry.gate.json
+janus gate render --input requirements/{requirement-id}/gates/dev-entry.gate.json --output requirements/{requirement-id}/gates/dev-entry.md
+```
+
+If service branches, service matrix entries, or IDL readiness are already known
+at task approval time, also create or refresh
+`requirements/{requirement-id}/gates/service-repo-check.gate.json` and render it
+with Janus. If they are not ready, write `service-repo-check.gate.json` as
+`BLOCKED` with the missing readiness item instead of leaving it absent.

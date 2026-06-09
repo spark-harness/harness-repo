@@ -5,7 +5,7 @@ description: Create or update Harness requirement artifacts for Spark requiremen
 
 # Spark Requirement Authoring
 
-Write reviewable Harness requirement files. Do not write design, IDL, gates, or business code in this skill.
+Write reviewable Harness requirement files. Do not write design, IDL, or business code in this skill.
 
 ## Inputs
 
@@ -36,6 +36,23 @@ Clarifying implementation direction does not satisfy this precondition. If appro
 - Keep Harness docs semantic; do not copy business implementation details.
 - If a concept is easy to confuse, state what it is not before what it is.
 
+## Gate
+
+Approval and gate generation are the same stage task. When the requirement
+artifact is approved or updated with an approval record, immediately create or
+refresh `requirements/{requirement-id}/gates/requirement-review.gate.json`, then
+run:
+
+```bash
+janus gate validate requirements/{requirement-id}/gates/requirement-review.gate.json
+janus gate render --input requirements/{requirement-id}/gates/requirement-review.gate.json --output requirements/{requirement-id}/gates/requirement-review.md
+```
+
+If `impact-analysis.md` is not available yet but the gate matrix expects it,
+still write the gate report with `result: "BLOCKED"` and a blocking issue that
+names the missing impact analysis. Do not leave the gate file absent.
+
 ## Output
 
-Summarize changed files and unresolved open questions. Continue to `spark-impact-analysis` when requirement artifacts are ready.
+Summarize changed files, the gate result, and unresolved open questions.
+Continue to `spark-impact-analysis` when requirement artifacts are ready.
