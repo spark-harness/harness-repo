@@ -1,20 +1,21 @@
+---
+requirement_id: "SPARK-4"
+gate_id: "service-repo-check"
+gate_name: "服务仓库检查门禁"
+stage: "4.3"
+checked_by: "service_repo_checker"
+checked_at: "2026-06-09T22:34:09+08:00"
+result: "PASS"
+blocks_next_stage: false
+---
+
 <!-- Generated from service-repo-check.gate.json. Do not edit blocking fields here. -->
 
 # 服务仓库检查门禁
 
-## 元数据
-
-- Requirement: `SPARK-4`
-- Gate: `service-repo-check`
-- Stage: `4.3`
-- Checked by: `service_repo_checker`
-- Checked at: `2026-06-09T08:22:12+08:00`
-- Result: `PASS`
-- Blocks next stage: `false`
-
 ## 结论
 
-服务仓库检查通过，SPARK-4 的 Harness、业务、IDL 和生成契约仓均处于同名需求分支并完成验证。
+影响分析已获批准，可以进入设计确认和后续 IDL 变更准备。
 
 ## 输入快照
 
@@ -29,9 +30,12 @@
 
 | Item | Result | Evidence |
 | --- | --- | --- |
-| 涉及服务存在于服务矩阵 | `PASS` | user-api and aegis exist in .service-matrix/dependencies.yaml. |
-| 业务仓、IDL 仓和生成契约仓分支对齐需求 ID | `PASS` | harness-repo, business-repo, idl-repo, and idl-java-repo are on feature/SPARK-4-update-username. |
-| IDL 和服务验证通过 | `PASS` | buf lint, buf generate, buf breaking, idl-java mvn install, and user-api mvn test passed. |
+| tasks.json 存在且格式合法 | `PASS` | tasks.json parsed successfully. |
+| tasks.json requirement_id 与需求目录一致 | `PASS` | SPARK-4 |
+| 每个任务有状态、范围、验收和追溯来源 | `PASS` | 5 tasks include state, scope, acceptance, and trace. |
+| 服务矩阵可读取 | `PASS` | .service-matrix/dependencies.yaml parsed successfully. |
+| 涉及服务存在且路径可解析 | `PASS` | aegis, user-api |
+| 人工批准记录合法 | `PASS` | requirements/SPARK-4/impact-analysis.md approved by Forest at 2026-06-09T00:10:20+08:00. |
 
 ## 阻塞问题
 

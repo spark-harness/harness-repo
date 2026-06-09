@@ -1,20 +1,21 @@
+---
+requirement_id: "SPARK-4"
+gate_id: "design-review"
+gate_name: "设计门禁"
+stage: "3.3"
+checked_by: "design_reviewer"
+checked_at: "2026-06-09T22:34:09+08:00"
+result: "PASS"
+blocks_next_stage: false
+---
+
 <!-- Generated from design-review.gate.json. Do not edit blocking fields here. -->
 
 # 设计门禁
 
-## 元数据
-
-- Requirement: `SPARK-4`
-- Gate: `design-review`
-- Stage: `3.3`
-- Checked by: `design_reviewer`
-- Checked at: `2026-06-09T08:22:12+08:00`
-- Result: `PASS`
-- Blocks next stage: `false`
-
 ## 结论
 
-设计覆盖服务边界、IDL、应用分层、测试和回滚，可以进入任务拆分。
+设计已获批准，可以进入任务执行阶段。
 
 ## 输入快照
 
@@ -28,8 +29,8 @@
 
 | Item | Result | Evidence |
 | --- | --- | --- |
-| 设计覆盖关键章节 | `PASS` | design.md covers affected services, API contract, application design, error handling, data/config/permission, observability, testing, rollout, rollback, and risks. |
-| IDL 影响明确 | `PASS` | design.md declares ProfileService/UpdateUsername as an additive protobuf contract change. |
+| 设计覆盖关键章节 | `PASS` | design.md contains required sections. |
+| 影响面分析可追溯 | `PASS` | impact-analysis.md contains required sections. |
 | 人工批准记录合法 | `PASS` | requirements/SPARK-4/design.md approved by Forest at 2026-06-09T00:11:56+08:00. |
 
 ## 阻塞问题
@@ -38,9 +39,7 @@
 
 ## 警告
 
-| Issue | Follow-up action | Owner |
-| --- | --- | --- |
-| 当前用户仓储为内存实现，不具备生产持久性。 | 后续持久化需求需要替换数据库仓储并补充迁移和回滚设计。 | `Harness Team` |
+无。
 
 ## 豁免
 

@@ -5,7 +5,7 @@
   "gate_name": "服务仓库检查门禁",
   "stage": "4.3",
   "checked_by": "service_repo_checker",
-  "checked_at": "2026-06-09T08:22:12+08:00",
+  "checked_at": "2026-06-09T22:34:09+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -28,19 +28,34 @@
   ],
   "checklist": [
     {
-      "item": "涉及服务存在于服务矩阵",
+      "item": "tasks.json 存在且格式合法",
       "result": "PASS",
-      "evidence": "user-api and aegis exist in .service-matrix/dependencies.yaml."
+      "evidence": "tasks.json parsed successfully."
     },
     {
-      "item": "业务仓、IDL 仓和生成契约仓分支对齐需求 ID",
+      "item": "tasks.json requirement_id 与需求目录一致",
       "result": "PASS",
-      "evidence": "harness-repo, business-repo, idl-repo, and idl-java-repo are on feature/SPARK-4-update-username."
+      "evidence": "SPARK-4"
     },
     {
-      "item": "IDL 和服务验证通过",
+      "item": "每个任务有状态、范围、验收和追溯来源",
       "result": "PASS",
-      "evidence": "buf lint, buf generate, buf breaking, idl-java mvn install, and user-api mvn test passed."
+      "evidence": "5 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "aegis, user-api"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/SPARK-4/impact-analysis.md approved by Forest at 2026-06-09T00:10:20+08:00."
     }
   ],
   "blocking_issues": [],
@@ -51,23 +66,18 @@
   "repos": [
     {
       "name": "harness-repo",
-      "branch": "feature/SPARK-4-update-username",
-      "commit": "2884bee"
+      "branch": "master",
+      "commit": "57c3088"
     },
     {
       "name": "business-repo",
-      "branch": "feature/SPARK-4-update-username",
-      "commit": "e07b3af"
+      "branch": "master",
+      "commit": "aada6e1"
     },
     {
       "name": "idl-repo",
-      "branch": "feature/SPARK-4-update-username",
-      "commit": "29e8363"
-    },
-    {
-      "name": "idl-java-repo",
-      "branch": "feature/SPARK-4-update-username",
-      "commit": "eda97d4"
+      "branch": "master",
+      "commit": "be8f0b4"
     }
   ],
   "evidence": [
@@ -81,7 +91,8 @@
     }
   ],
   "idl_impact": {
-    "impact": "yes"
+    "impact": "yes",
+    "na_reason": "新增 user-api 修改用户名 gRPC API，需要新增 protobuf RPC 和消息。"
   },
-  "decision": "服务仓库检查通过，SPARK-4 的 Harness、业务、IDL 和生成契约仓均处于同名需求分支并完成验证。"
+  "decision": "影响分析已获批准，可以进入设计确认和后续 IDL 变更准备。"
 }

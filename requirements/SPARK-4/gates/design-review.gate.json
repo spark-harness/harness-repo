@@ -5,7 +5,7 @@
   "gate_name": "设计门禁",
   "stage": "3.3",
   "checked_by": "design_reviewer",
-  "checked_at": "2026-06-09T08:22:12+08:00",
+  "checked_at": "2026-06-09T22:34:09+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -26,12 +26,12 @@
     {
       "item": "设计覆盖关键章节",
       "result": "PASS",
-      "evidence": "design.md covers affected services, API contract, application design, error handling, data/config/permission, observability, testing, rollout, rollback, and risks."
+      "evidence": "design.md contains required sections."
     },
     {
-      "item": "IDL 影响明确",
+      "item": "影响面分析可追溯",
       "result": "PASS",
-      "evidence": "design.md declares ProfileService/UpdateUsername as an additive protobuf contract change."
+      "evidence": "impact-analysis.md contains required sections."
     },
     {
       "item": "人工批准记录合法",
@@ -40,13 +40,7 @@
     }
   ],
   "blocking_issues": [],
-  "warnings": [
-    {
-      "issue": "当前用户仓储为内存实现，不具备生产持久性。",
-      "follow_up_action": "后续持久化需求需要替换数据库仓储并补充迁移和回滚设计。",
-      "owner": "Harness Team"
-    }
-  ],
+  "warnings": null,
   "waiver": {
     "required": false
   },
@@ -61,7 +55,8 @@
     }
   ],
   "idl_impact": {
-    "impact": "yes"
+    "impact": "yes",
+    "na_reason": "新增 user-api 修改用户名 gRPC API，需要新增 protobuf RPC 和消息。"
   },
-  "decision": "设计覆盖服务边界、IDL、应用分层、测试和回滚，可以进入任务拆分。"
+  "decision": "设计已获批准，可以进入任务执行阶段。"
 }

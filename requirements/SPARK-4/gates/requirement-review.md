@@ -1,20 +1,21 @@
+---
+requirement_id: "SPARK-4"
+gate_id: "requirement-review"
+gate_name: "需求评审门禁"
+stage: "2.2"
+checked_by: "requirement_reviewer"
+checked_at: "2026-06-09T22:34:09+08:00"
+result: "PASS"
+blocks_next_stage: false
+---
+
 <!-- Generated from requirement-review.gate.json. Do not edit blocking fields here. -->
 
 # 需求评审门禁
 
-## 元数据
-
-- Requirement: `SPARK-4`
-- Gate: `requirement-review`
-- Stage: `2.2`
-- Checked by: `requirement_reviewer`
-- Checked at: `2026-06-09T08:22:12+08:00`
-- Result: `PASS`
-- Blocks next stage: `false`
-
 ## 结论
 
-需求定义通过，可以进入设计阶段。
+Requirement Brief 已在会话中批准，可以创建需求文档进入下一阶段。
 
 ## 输入快照
 
@@ -27,8 +28,8 @@
 
 | Item | Result | Evidence |
 | --- | --- | --- |
-| 需求文档存在 | `PASS` | requirement.md contains Background, Goals, Non-Goals, scenarios, business rules, acceptance criteria, and open questions. |
-| 影响面分析存在 | `PASS` | impact-analysis.md covers user-api, aegis, protobuf IDL, generated contracts, data, config, observability, rollout, and rollback. |
+| 需求文档存在 | `PASS` | requirement.md contains required sections. |
+| 影响面分析存在 | `PASS` | impact-analysis.md contains required sections. |
 | 人工批准记录合法 | `PASS` | requirements/SPARK-4/requirement.md approved by Forest at 2026-06-09T00:01:10+08:00. |
 
 ## 阻塞问题
