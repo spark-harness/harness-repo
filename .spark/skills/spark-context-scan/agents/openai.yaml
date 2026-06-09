@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spark Context Scan"
+  short_description: "Read Spark repo context and multi-repo state."
+  default_prompt: "Scan Spark context for this task."

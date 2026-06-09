@@ -1,0 +1,57 @@
+{
+  "schema_version": "1",
+  "requirement_id": "SPARK-4",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-09T08:22:12+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/SPARK-4/design.md",
+      "sha256": "575de62b5a7d2a86e725874dc634c6163002ecfab199caed8add5b95baa3aa09"
+    },
+    {
+      "path": "requirements/SPARK-4/tasks.json",
+      "sha256": "f2f972b1fc915d25d602ded004cc0e721767be50fbdbaf9e7d19a899a25c8365"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "任务拆分覆盖 IDL、生成契约、应用实现、gRPC adapter、测试和证据",
+      "result": "PASS",
+      "evidence": "T1-T5 cover lifecycle artifacts, contract generation, use case, adapter, and verification."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/SPARK-4/tasks.json approved by Forest at 2026-06-09T00:11:56+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/SPARK-4/evidence/buf-checks.md",
+      "sha256": "7086931ed18672db5bbdbda90ca93a866127a00e94a5ce633198354ec97d7d08"
+    },
+    {
+      "path": "requirements/SPARK-4/evidence/user-api-tests.md",
+      "sha256": "c0887d9f81b1b170e6520397f5b899b20b699a581b7ef647d90dee01f017af8f"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes"
+  },
+  "decision": "任务拆分通过，任务已完成并有 IDL 与服务测试证据。"
+}

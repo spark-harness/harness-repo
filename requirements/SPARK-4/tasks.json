@@ -1,0 +1,69 @@
+{
+  "requirement_id": "SPARK-4",
+  "status": "approved",
+  "approved_by": "Forest",
+  "approved_at": "2026-06-09T00:11:56+08:00",
+  "decision": "任务拆分已获批准，可以开始执行 T2 IDL 变更。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "Create lifecycle artifacts",
+      "scope": "Create SPARK-4 requirement, impact analysis, design, and traceable task plan.",
+      "trace": {
+        "requirement_items": ["R7"],
+        "design_decisions": ["D5"]
+      },
+      "affected_services": ["user-api", "aegis"],
+      "acceptance": ["AC10"],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "Add profile protobuf contract",
+      "scope": "Add ProfileService/UpdateUsername protobuf messages and regenerate generated contracts.",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R6"],
+        "design_decisions": ["D1", "D2"]
+      },
+      "affected_services": ["user-api"],
+      "acceptance": ["AC1", "AC2", "AC3"],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "Implement update username use case",
+      "scope": "Add application command, result, use case, repository update method, and in-memory repository support.",
+      "trace": {
+        "requirement_items": ["R2", "R3", "R4", "R5", "R6"],
+        "design_decisions": ["D2", "D3", "D4"]
+      },
+      "affected_services": ["user-api"],
+      "acceptance": ["AC4", "AC5", "AC6"],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "Add profile grpc adapter",
+      "scope": "Expose ProfileService/UpdateUsername through the inbound gRPC adapter and map application errors to gRPC status codes.",
+      "trace": {
+        "requirement_items": ["R1", "R4", "R5", "R6"],
+        "design_decisions": ["D1", "D2", "D3", "D4"]
+      },
+      "affected_services": ["user-api"],
+      "acceptance": ["AC7", "AC8"],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "Verify service and gates",
+      "scope": "Run user-api Maven tests, record IDL and service evidence, then create Janus gate JSON and rendered reports.",
+      "trace": {
+        "requirement_items": ["R7"],
+        "design_decisions": ["D5"]
+      },
+      "affected_services": ["user-api", "aegis"],
+      "acceptance": ["AC9", "AC10"],
+      "state": "done"
+    }
+  ]
+}

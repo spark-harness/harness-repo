@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spark Requirement Authoring"
+  short_description: "Write Harness requirement artifacts."
+  default_prompt: "Author the Harness requirement artifacts."

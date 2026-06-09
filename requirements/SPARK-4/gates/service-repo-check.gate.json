@@ -1,0 +1,87 @@
+{
+  "schema_version": "1",
+  "requirement_id": "SPARK-4",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-09T08:22:12+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/SPARK-4/impact-analysis.md",
+      "sha256": "421421a2b0a029afea0ddfaf2ab5cd682bf2a9b105e55f40f68d5acd6ea7c898"
+    },
+    {
+      "path": "requirements/SPARK-4/design.md",
+      "sha256": "575de62b5a7d2a86e725874dc634c6163002ecfab199caed8add5b95baa3aa09"
+    },
+    {
+      "path": "requirements/SPARK-4/tasks.json",
+      "sha256": "f2f972b1fc915d25d602ded004cc0e721767be50fbdbaf9e7d19a899a25c8365"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "77862a05e23a539cdb42d8229099ac1624283dd887d8a8b25537fd14bef5627d"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "涉及服务存在于服务矩阵",
+      "result": "PASS",
+      "evidence": "user-api and aegis exist in .service-matrix/dependencies.yaml."
+    },
+    {
+      "item": "业务仓、IDL 仓和生成契约仓分支对齐需求 ID",
+      "result": "PASS",
+      "evidence": "harness-repo, business-repo, idl-repo, and idl-java-repo are on feature/SPARK-4-update-username."
+    },
+    {
+      "item": "IDL 和服务验证通过",
+      "result": "PASS",
+      "evidence": "buf lint, buf generate, buf breaking, idl-java mvn install, and user-api mvn test passed."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/SPARK-4-update-username",
+      "commit": "2884bee"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/SPARK-4-update-username",
+      "commit": "e07b3af"
+    },
+    {
+      "name": "idl-repo",
+      "branch": "feature/SPARK-4-update-username",
+      "commit": "29e8363"
+    },
+    {
+      "name": "idl-java-repo",
+      "branch": "feature/SPARK-4-update-username",
+      "commit": "eda97d4"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "requirements/SPARK-4/evidence/buf-checks.md",
+      "sha256": "7086931ed18672db5bbdbda90ca93a866127a00e94a5ce633198354ec97d7d08"
+    },
+    {
+      "path": "requirements/SPARK-4/evidence/user-api-tests.md",
+      "sha256": "c0887d9f81b1b170e6520397f5b899b20b699a581b7ef647d90dee01f017af8f"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes"
+  },
+  "decision": "服务仓库检查通过，SPARK-4 的 Harness、业务、IDL 和生成契约仓均处于同名需求分支并完成验证。"
+}

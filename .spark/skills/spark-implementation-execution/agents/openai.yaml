@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spark Implementation"
+  short_description: "Implement Spark business code from approved tasks."
+  default_prompt: "Implement this Spark task."
