@@ -1,0 +1,42 @@
+---
+name: spark-design-authoring
+description: Write Spark Harness design documents after requirement and impact analysis. Use to create or update design.md with requirement-to-design traceability, architecture boundaries, API/contract design, error handling, testing strategy, rollout, rollback, and risks.
+---
+
+# Spark Design Authoring
+
+Turn approved requirements and impact analysis into a focused design.
+
+## File
+
+Write `harness-repo/requirements/{requirement-id}/design.md`.
+
+## Preconditions
+
+Do not write design files unless:
+
+- `requirements/{requirement-id}/requirement.md` exists and is approved
+- impact analysis exists or the current workflow explicitly documents why impact analysis is not needed
+
+If approval is missing or inferred only from a technical clarification, stop and return to intake.
+
+## Required Sections
+
+- Requirement Traceability table mapping requirement items to design decisions.
+- Summary.
+- Affected services.
+- API / contract design when relevant.
+- Application design.
+- Data / config / permission.
+- Observability.
+- Testing strategy.
+- Rollout and rollback.
+- Risks.
+
+## Rules
+
+- Do not write code or IDL here.
+- Use existing service architecture and local naming.
+- Avoid unrelated refactors.
+- Make non-goals explicit when they constrain implementation.
+- If design cannot resolve a requirement ambiguity, return to `spark-requirement-intake`.

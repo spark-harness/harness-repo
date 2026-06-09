@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spark Impact Analysis"
+  short_description: "Analyze Spark service and IDL impact."
+  default_prompt: "Analyze the Spark impact for this requirement."

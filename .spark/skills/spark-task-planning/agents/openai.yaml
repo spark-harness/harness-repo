@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spark Task Planning"
+  short_description: "Create traceable implementation task slices."
+  default_prompt: "Plan Spark implementation tasks."

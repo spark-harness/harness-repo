@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spark Workflow Router"
+  short_description: "Route Spark development work to the right workflow skill."
+  default_prompt: "Use Spark workflow routing for this task."
