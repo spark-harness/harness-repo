@@ -38,21 +38,18 @@ Clarifying implementation direction does not satisfy this precondition. If appro
 
 ## Gate
 
-Approval and gate generation are the same stage task. When the requirement
-artifact is approved or updated with an approval record, immediately create or
-refresh `requirements/{requirement-id}/gates/requirement-review.gate.json`, then
-run:
+`requirement.md` and `impact-analysis.md` are one review stage. Do not create
+`requirements/{requirement-id}/gates/requirement-review.gate.json` from this
+skill when `impact-analysis.md` is missing. A missing impact analysis means the
+stage is still in progress, not a formal gate failure.
 
-```bash
-janus gate validate requirements/{requirement-id}/gates/requirement-review.gate.json
-janus gate render --input requirements/{requirement-id}/gates/requirement-review.gate.json --output requirements/{requirement-id}/gates/requirement-review.md
-```
-
-If `impact-analysis.md` is not available yet but the gate matrix expects it,
-still write the gate report with `result: "BLOCKED"` and a blocking issue that
-names the missing impact analysis. Do not leave the gate file absent.
+After writing `requirement.md`, continue to `spark-impact-analysis`. The
+`requirement-review` gate is created or refreshed only after both
+`requirement.md` and `impact-analysis.md` exist and the required approval
+records are present.
 
 ## Output
 
-Summarize changed files, the gate result, and unresolved open questions.
-Continue to `spark-impact-analysis` when requirement artifacts are ready.
+Summarize changed files and unresolved open questions. State that
+`requirement-review` is not generated until impact analysis is ready, then
+continue to `spark-impact-analysis`.

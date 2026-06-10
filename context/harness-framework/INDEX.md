@@ -4,7 +4,7 @@
 
 ## 当前入口
 
-- `main-process-numbering.md`：五阶段流程和四道门禁。
+- `main-process-numbering.md`：五阶段流程、阶段门禁和合并就绪门禁。
 - `gate-policy.md`：门禁状态和报告要求。
 - `gate-implementation.md`：门禁报告字段、Agent 输出、Skill 流程、阶段推进、CI / MR 阻塞和豁免规则。
 - `document-template-policy.md`：需求生命周期文档模板的真相源、使用阶段和维护规则。

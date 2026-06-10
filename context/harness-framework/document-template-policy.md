@@ -14,8 +14,8 @@
 | 影响面分析 | `context/harness-framework/templates/impact-analysis.md` | 阶段 2 | `requirements/{requirement-id}/impact-analysis.md` |
 | 设计说明 | `context/harness-framework/templates/design.md` | 阶段 3 | `requirements/{requirement-id}/design.md` |
 | 任务拆分 | `context/harness-framework/templates/tasks.json` | 阶段 4.1 | `requirements/{requirement-id}/tasks.json` |
-| 门禁 JSON | `context/harness-framework/templates/gate-report.gate.json` | 阶段 2.2、3.3、4.2、4.3 | `requirements/{requirement-id}/gates/{gate-id}.gate.json` |
-| 门禁审计视图 | Janus 渲染生成 | 阶段 2.2、3.3、4.2、4.3 | `requirements/{requirement-id}/gates/{gate-id}.md` |
+| 门禁 JSON | `context/harness-framework/templates/gate-report.gate.json` | 阶段 2.2、3.3、4.2、4.3、5.1 | `requirements/{requirement-id}/gates/{gate-id}.gate.json` |
+| 门禁审计视图 | Janus 渲染生成 | 阶段 2.2、3.3、4.2、4.3、5.1 | `requirements/{requirement-id}/gates/{gate-id}.md` |
 
 门禁 JSON 必须使用固定字段。阶段推进只能读取 JSON 结论，不能读取聊天记录或手写 Markdown 作为放行依据。
 

@@ -51,6 +51,7 @@ requirements/{requirement-id}/gates/{gate-id}.md
 | 3.3 | 设计门禁 | `design-review` |
 | 4.2 | Dev 进入门禁 | `dev-entry` |
 | 4.3 | 服务仓库检查门禁 | `service-repo-check` |
+| 5.1 | 合并就绪门禁 | `merge-readiness` |
 
 `stage` 字段保留阶段编号，用来表达流程位置。
 
@@ -132,6 +133,7 @@ decision
 | `design-review` | `requirements/{requirement-id}/design.md` front matter |
 | `dev-entry` | `requirements/{requirement-id}/tasks.json` 顶层字段 |
 | `service-repo-check` | `requirements/{requirement-id}/impact-analysis.md` front matter |
+| `merge-readiness` | `requirements/{requirement-id}/tasks.json` 顶层字段和 evidence 文件 |
 
 批准源使用统一字段：`status`、`approved_by`、`approved_at`、`decision`。`status` 为 `approved` 表示该产物对应的门禁已批准；`tasks.json` 中单个任务的执行状态使用 `state`，不能再使用 `status`。
 
@@ -168,6 +170,7 @@ Janus 优先读取结构化字段 `idl_impact` 和 `idl_impact_reason`。正文�
 - 背景、目标、非目标明确。
 - 场景、业务规则和验收标准可测试。
 - 待确认问题显式列出。
+- 影响分析覆盖服务、契约、数据、配置、权限、可观测性和回滚。
 
 阻塞条件：
 
@@ -175,6 +178,14 @@ Janus 优先读取结构化字段 `idl_impact` 和 `idl_impact_reason`。正文�
 - 关键业务规则缺失。
 - 验收标准不可测试。
 - 待确认问题未列出。
+- 影响分析缺失或关键影响面未覆盖。
+
+生成时机：
+
+- `requirement.md` 和 `impact-analysis.md` 都存在后才生成正式门禁。
+- 两者之一尚未创建时，阶段仍在进行中，不生成预期失败的 `BLOCKED` 门禁。
+
+`janus requirement status` 可以展示未来阶段 gate 的存在状态，但正常未到阶段的 gate 缺失不应计入当前阶段阻塞。阶段推进由 `janus requirement next` 只验证当前阶段所需 gate；合并前完整性由 `janus requirement verify --target merge` 验证。
 
 ### 3.3 设计门禁
 
@@ -230,7 +241,7 @@ Janus 优先读取结构化字段 `idl_impact` 和 `idl_impact_reason`。正文�
 - 涉及服务存在于服务矩阵。
 - 涉及仓库分支已就位。
 - 如涉及 IDL，IDL 契约仓已就位。
-- 如涉及 IDL，契约检查证据已记录。
+- 如涉及 IDL，契约仓存在 `buf.yaml` v2 和 `buf.gen.yaml` v2。
 
 阻塞条件：
 
@@ -240,6 +251,37 @@ Janus 优先读取结构化字段 `idl_impact` 和 `idl_impact_reason`。正文�
 - 设计未说明是否涉及 IDL。
 
 无 IDL 变化时，IDL 检查项可以标记为 `N/A`，但必须在报告中说明理由。
+
+### 5.1 合并就绪门禁
+
+输入：
+
+- `requirements/{requirement-id}/requirement.md`
+- `requirements/{requirement-id}/impact-analysis.md`
+- `requirements/{requirement-id}/design.md`
+- `requirements/{requirement-id}/tasks.json`
+- `requirements/{requirement-id}/evidence/*`
+- `.service-matrix/dependencies.yaml`
+
+通过条件：
+
+- `requirement-review`、`design-review`、`dev-entry` 和 `service-repo-check` 都是 `PASS`、`WARN` 或 `WAIVED`。
+- 涉及 IDL 时，合并就绪门禁包含 Buf 检查证据。
+- 涉及服务实现时，合并就绪门禁包含服务测试证据。
+- 证据文件 hash 与当前文件内容一致。
+- 仓库分支和 ticket id 策略满足合并目标。
+
+阻塞条件：
+
+- 必需阶段门禁缺失或未通过。
+- 任务标记完成但缺少对应证据。
+- `idl_impact.impact = "yes"` 但缺少 Buf 或契约检查证据。
+- 测试证据缺失或 hash 过期。
+
+说明：
+
+- 早期阶段门禁只负责阶段推进，不承载实现完成后的证据。
+- `merge-readiness` 是合并前唯一强制检查实现证据的门禁。
 
 ## 6. Agent 输出格式
 
@@ -275,13 +317,13 @@ Reason: 缺少回滚方案，不能进入 4.1。
 
 ## 7. Skill 执行流程
 
-Skill 执行门禁时按以下顺序：
+Skill 执行阶段门禁时按以下顺序：
 
 1. 读取流程真相源，确认当前阶段和目标门禁。
 2. 读取门禁所需输入文件。
 3. 校验输入文件是否存在。
 4. 执行门禁检查矩阵中的检查项。
-5. 收集证据路径。
+5. 只在当前门禁职责需要时收集证据路径。
 6. 生成门禁 JSON。
 7. 运行 `janus gate validate` 和 `janus gate render`。
 8. 根据 `result` 决定是否允许继续。
@@ -289,7 +331,7 @@ Skill 执行门禁时按以下顺序：
 10. 如果 `WARN`，继续推进但记录后续动作。
 11. 如果 `WAIVED`，检查豁免信息是否完整。
 
-Skill 不应在缺少报告时继续推进阶段。
+Skill 不应在缺少报告时继续推进阶段。正常流程尚未完成时，不应为了表达“还没做到下一步”而生成预期失败的正式门禁。
 
 ## 8. 阶段推进命令
 
@@ -335,10 +377,11 @@ CI 或 MR 检查应复用同一套门禁报告，不重新定义第二套口径�
 
 - 需求目录存在。
 - 当前阶段所需门禁报告存在。
+- 合并前 `merge-readiness` 门禁存在。
 - 门禁报告固定字段完整。
 - `Result` 不是 `BLOCKED`。
 - `Blocks Next Stage` 与 `Result` 一致。
-- 涉及 IDL 时，有契约检查证据。
+- 涉及 IDL 时，`merge-readiness` 有契约检查证据。
 - 不涉及 IDL 时，报告中有 `N/A` 和理由。
 
 CI / MR 必须失败的情况：

@@ -41,7 +41,7 @@ Each task must include:
 - generated contracts
 - application tests
 - implementation
-- evidence and gates
+- evidence and merge-readiness gate
 
 ## Rules
 
@@ -63,5 +63,6 @@ janus gate render --input requirements/{requirement-id}/gates/dev-entry.gate.jso
 If service branches, service matrix entries, or IDL readiness are already known
 at task approval time, also create or refresh
 `requirements/{requirement-id}/gates/service-repo-check.gate.json` and render it
-with Janus. If they are not ready, write `service-repo-check.gate.json` as
-`BLOCKED` with the missing readiness item instead of leaving it absent.
+with Janus. If they are not ready, keep the task-planning stage open and report
+the missing readiness item; do not create an expected-failure `BLOCKED` gate for
+normal in-progress work.

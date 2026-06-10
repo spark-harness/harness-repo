@@ -31,6 +31,9 @@ If evidence would be based only on intent, discussion, or unapproved work, stop 
   requirement explicitly documents a different gate plan:
   `requirement-review`, `design-review`, `dev-entry`, and
   `service-repo-check`.
+- A merge-target requirement must also have
+  `requirements/{requirement-id}/gates/merge-readiness.gate.json`. This final
+  gate owns implementation evidence such as Buf checks and service tests.
 - If `tasks.json` marks evidence or gate work as done but any required
   `requirements/{requirement-id}/gates/{gate-id}.gate.json` file is missing,
   treat that as incomplete work. Create the missing gate JSON, render the
@@ -41,27 +44,32 @@ If evidence would be based only on intent, discussion, or unapproved work, stop 
 - `WARN` has warnings with follow-up actions.
 - `WAIVED` has complete waiver fields and future expiration.
 - If IDL impact is absent, set `idl_impact.impact` to `no` and include `na_reason`.
-- If IDL impact is `yes`, include evidence.
+- Early stage gates (`requirement-review`, `design-review`, `dev-entry`, and
+  `service-repo-check`) declare IDL impact and readiness only. Do not backfill
+  implementation evidence into those gates.
+- If IDL impact is `yes`, include concrete evidence in `merge-readiness`.
 
 ## Gate Completion Workflow
 
 Run from `harness-repo` before claiming a requirement is merge-ready:
 
 ```bash
-find requirements/{requirement-id}/gates -name '*.gate.json' -maxdepth 1 -type f | sort
-python3 scripts/render-gates.py {requirement-id}
+find requirements/{requirement-id}/gates -maxdepth 1 -name '*.gate.json' -type f | sort
+janus gate validate requirements/{requirement-id}/gates/merge-readiness.gate.json
+janus gate render --input requirements/{requirement-id}/gates/merge-readiness.gate.json --output requirements/{requirement-id}/gates/merge-readiness.md
 janus requirement verify --requirement {requirement-id} --target merge
 ```
 
 If the first command shows no gate JSON files, or fewer than the standard gate
-set for a normal merge-target requirement, create the missing gate reports from
-the approved requirement, impact analysis, design, tasks, evidence files, and
-current service matrix before running `render-gates.py`.
+set for a normal merge-target requirement, create the missing stage gate reports
+from the approved requirement, impact analysis, design, tasks, and current
+service matrix before creating `merge-readiness`.
 
-This workflow is a final safety net. Stage skills must create and render their
-own gates immediately after approval: `requirement-review` during requirement
-and impact work, `design-review` during design work, and `dev-entry` plus
-`service-repo-check` during task planning or service readiness work.
+This workflow is a final safety net. Stage skills create and render their own
+stage gates after approval: `requirement-review` after requirement plus impact,
+`design-review` during design work, and `dev-entry` plus `service-repo-check`
+during task planning or service readiness work. Evidence completion creates
+`merge-readiness` and does not rewrite earlier gates just to attach evidence.
 
 ## Commands
 

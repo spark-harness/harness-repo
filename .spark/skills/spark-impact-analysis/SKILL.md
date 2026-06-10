@@ -52,7 +52,7 @@ Do not proceed to design if IDL impact is unclear.
 ## Gate
 
 Impact approval is part of the requirement-review gate stage. When
-`impact-analysis.md` is approved or updated after approval, immediately refresh
+`impact-analysis.md` is approved or updated after approval, create or refresh
 `requirements/{requirement-id}/gates/requirement-review.gate.json` with current
 SHA-256 inputs for `requirement.md` and `impact-analysis.md`, then run:
 
@@ -61,5 +61,6 @@ janus gate validate requirements/{requirement-id}/gates/requirement-review.gate.
 janus gate render --input requirements/{requirement-id}/gates/requirement-review.gate.json --output requirements/{requirement-id}/gates/requirement-review.md
 ```
 
-Do not wait until final evidence completion to create this gate. If the
-requirement approval is missing, the gate must remain `BLOCKED`.
+Do not create `requirement-review` before `impact-analysis.md` exists. If the
+requirement or impact approval record is missing after both files exist, the
+gate may be generated as `BLOCKED` with a human-approval blocking issue.

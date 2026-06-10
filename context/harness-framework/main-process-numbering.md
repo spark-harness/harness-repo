@@ -27,6 +27,9 @@
 - 背景、目标、非目标明确。
 - 场景、业务规则和验收标准可测试。
 - 待确认问题显式列出。
+- 影响分析覆盖服务、契约、数据、配置、权限、可观测性、灰度和回滚。
+
+说明：`requirement.md` 和 `impact-analysis.md` 属于同一个需求定义阶段。两者都进入可评审状态前，不生成正式 `requirement-review` 门禁。
 
 ## 阶段 3：设计
 
@@ -69,7 +72,7 @@
 - `.service-matrix/dependencies.yaml` 中涉及服务存在。
 - Harness 仓、业务仓、IDL 仓分支一致。
 - `idl_required` 服务已准备 protobuf 契约仓。
-- 契约仓存在 `buf.yaml` v2、`buf.gen.yaml` v2 和必要的 breaking check 记录。
+- 契约仓存在 `buf.yaml` v2 和 `buf.gen.yaml` v2。
 
 ### 阶段 4.4：编码循环
 
@@ -84,3 +87,14 @@
 - 验收标准有证据。
 - 必要测试已执行。
 - 项目知识和经验沉淀已处理。
+
+### 阶段 5.1：合并就绪门禁
+
+通过条件：
+
+- `requirement-review`、`design-review`、`dev-entry` 和 `service-repo-check` 都已通过。
+- 涉及 IDL 时，Buf lint、generate 和 breaking 证据已记录。
+- 涉及服务实现时，服务测试证据已记录。
+- 合并目标所需仓库和分支状态已记录。
+
+说明：实现后才产生的证据只进入 `merge-readiness` 门禁，不回写早期阶段门禁。
