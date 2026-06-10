@@ -1,0 +1,63 @@
+{
+  "schema_version": "1",
+  "requirement_id": "SPARK-5",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-10T08:31:08+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/SPARK-5/design.md",
+      "sha256": "897711be6211683b200545677d559e46de01ac0d6511747d9fdf0a67c01b3f73"
+    },
+    {
+      "path": "requirements/SPARK-5/tasks.json",
+      "sha256": "0b1e533a10ab514fdbff9a57583e2accb1e0edea7f65ef47b5baf86b124a2c69"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "SPARK-5"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "6 tasks include state, scope, acceptance, trace, and all task states are done."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/SPARK-5/tasks.json approved by Forest at 2026-06-10T08:31:08+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/SPARK-5/evidence/buf-checks.md",
+      "sha256": "f41430b0bb65d7b79b0712321eff84379e23ad3ea7b1f3337f662117f46d415e"
+    },
+    {
+      "path": "requirements/SPARK-5/evidence/user-api-tests.md",
+      "sha256": "e90c20bf2b8ac4ccbbf003f1d9b127e36705186009f4110805a93c9645514b02"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "新增 user-api 禁用和恢复用户 gRPC API，需要新增 protobuf RPC 和消息。"
+  },
+  "decision": "任务拆分已获批准，可以开始执行 T2 IDL 变更。"
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "1",
+  "requirement_id": "SPARK-5",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-10T08:14:25+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/SPARK-5/requirement.md",
+      "sha256": "6fc5da480e88566fd78d857785f3782d66a5ee270f389c83f6fed641e6278c82"
+    },
+    {
+      "path": "requirements/SPARK-5/impact-analysis.md",
+      "sha256": "62ed33b2b627de0d098f54f8b6ba2d54944d22558745f060f776b4c28c7c04a2"
+    },
+    {
+      "path": "context/harness-framework/gate-policy.md",
+      "sha256": "e2af35b2c1e0eff8aa9ee3ea854cde58e59f44d84b27026ce98f781610a176fa"
+    },
+    {
+      "path": "context/harness-framework/gate-implementation.md",
+      "sha256": "05d491f367623bcdb353194b444fe0e3dd42ec6bc110c1cbfe34dc104a855193"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirements/SPARK-5/requirement.md exists and contains required sections."
+    },
+    {
+      "item": "背景、目标、非目标明确",
+      "result": "PASS",
+      "evidence": "requirement.md defines login-only disable/restore scope and explicit non-goals."
+    },
+    {
+      "item": "场景、业务规则和验收标准可测试",
+      "result": "PASS",
+      "evidence": "requirement.md lists five Given/When/Then scenarios, BR1-BR10, and AC1-AC13."
+    },
+    {
+      "item": "待确认问题显式列出",
+      "result": "PASS",
+      "evidence": "Open Questions table records login-only scope, no admin auth, no session kickout, and no persistence."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/SPARK-5/requirement.md approved by Forest at 2026-06-10T08:09:36+08:00."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "requirements/SPARK-5/impact-analysis.md exists and covers affected services, protobuf, generated contracts, data, config, permissions, observability, rollout, and rollback."
+    },
+    {
+      "item": "影响面分析已批准",
+      "result": "PASS",
+      "evidence": "requirements/SPARK-5/impact-analysis.md approved by Forest at 2026-06-10T08:14:25+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/SPARK-5/evidence/buf-checks.md",
+      "sha256": "f41430b0bb65d7b79b0712321eff84379e23ad3ea7b1f3337f662117f46d415e"
+    },
+    {
+      "path": "requirements/SPARK-5/evidence/user-api-tests.md",
+      "sha256": "e90c20bf2b8ac4ccbbf003f1d9b127e36705186009f4110805a93c9645514b02"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "新增 user-api 禁用和恢复用户 gRPC API，需要新增 protobuf RPC 和消息。"
+  },
+  "decision": "Requirement Brief 和影响分析已获批准，可以进入设计阶段。"
+}
