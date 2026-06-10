@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spark IDL Protocol"
+  short_description: "Safely change protobuf IDL and generated contracts."
+  default_prompt: "Apply the Spark IDL change protocol."

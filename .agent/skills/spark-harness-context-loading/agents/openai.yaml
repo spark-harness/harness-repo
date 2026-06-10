@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spark Harness Context"
+  short_description: "Load minimal Harness semantic context."
+  default_prompt: "Load Harness context for this Spark task."
