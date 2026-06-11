@@ -30,14 +30,22 @@ Load only files that can affect the review:
 
 ## Review Dimensions
 
-Check these dimensions independently:
+Four dimensions are delegated to independent checker agents and run in
+parallel, each in its own context:
 
-- Requirement and design traceability.
-- Task-slice scope and unrelated changes.
-- Architecture boundaries and dependency direction.
-- Protobuf, HTTP, error-code, event, and generated-contract compatibility.
-- Data, transaction, concurrency, retry, idempotency, and rollback behavior.
-- Error handling, logging, metrics, tracing, and security.
+| Dimension | Checker agent |
+|---|---|
+| Requirement/design/task traceability and task-slice scope | `code_review_traceability_checker` |
+| Protobuf, HTTP, error-code, event, and generated-contract compatibility | `code_review_contract_checker` |
+| Data, transaction, concurrency, retry, idempotency, and rollback behavior | `code_review_data_concurrency_checker` |
+| Security, error handling, logging, metrics, and tracing | `code_review_security_error_checker` |
+
+When the diff touches backend services, also dispatch
+`backend_architecture_reviewer` for architecture boundaries and dependency
+direction.
+
+The remaining dimensions are checked by the aggregation step, not delegated:
+
 - Test value, failure-path assertions, and evidence quality.
 - Complexity, duplicated logic, reviewability, and build artifacts.
 
@@ -46,17 +54,28 @@ next gate, but Janus gate state and human approval remain separate.
 
 ## Process
 
-1. Establish the exact diff and base revision.
-2. Map changed files to requirement items, design decisions, and task IDs.
-3. Inspect affected service or IDL entry points before judging behavior.
-4. Review each dimension and collect only actionable findings.
-5. If findings conflict with existing context, cite the source file and line.
-6. If the review finds a reusable lesson, hand off to `spark-self-refinement`
+1. Establish the exact diff, base revision, and task ID.
+2. Dispatch the four checker agents in parallel with the same diff scope.
+   Include `backend_architecture_reviewer` when backend services change.
+3. Each checker returns fixed-format findings (severity, file:line, issue,
+   impact, required fix) for its dimension only, or an explicit no-findings
+   result with the checked scope.
+4. Run the aggregation step via `code_review_reporter`: merge all checker
+   findings verbatim, add the non-delegated dimension checks, and write the
+   report to `requirements/{requirement-id}/reviews/{task-id}.md` using
+   `context/harness-framework/templates/review-report.md`.
+5. A checker that did not run must appear in the report as `skipped` with a
+   reason. Never treat a skipped dimension as passed.
+6. If findings conflict with existing context, cite the source file and line.
+7. If the review finds a reusable lesson, hand off to `spark-self-refinement`
    after the review result is reported.
 
 ## Output
 
-Lead with findings ordered by severity:
+The persisted report at `requirements/{requirement-id}/reviews/{task-id}.md`
+is the review record. A spoken summary in conversation never replaces it.
+
+Findings are ordered by severity:
 
 - `P0`: correctness, data loss, security, or contract break.
 - `P1`: likely production bug, missing required evidence, or gate blocker.
@@ -65,10 +84,15 @@ Lead with findings ordered by severity:
 
 For each finding include:
 
+- source dimension and checker
 - file and tight line reference when available
 - issue
 - impact
 - required fix or decision
 
-Then include open questions, tests inspected or run, and residual risk. If no
-issues are found, say so and still report test or evidence gaps.
+The report conclusion is `not-ready` while any P0 or P1 finding is open, and
+`ready-for-gate` otherwise. Then include open questions, tests inspected or
+run, and residual risk. If no issues are found, say so and still report test
+or evidence gaps.
+
+In conversation, reply with a one-line summary pointing to the report file.

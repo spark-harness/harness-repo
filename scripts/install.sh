@@ -12,15 +12,8 @@ copy_dir() {
   rsync -a --delete "$ROOT/.spark/rules/" "$ROOT/$target/rules/"
 }
 
-copy_skills_dir() {
-  local target="$1"
-  mkdir -p "$ROOT/$target/skills"
-  rsync -a --delete "$ROOT/.spark/skills/" "$ROOT/$target/skills/"
-}
-
-copy_dir ".codex"
 copy_dir ".claude"
 copy_dir ".gemini"
-copy_skills_dir ".agent"
+copy_dir ".codex"
 
 echo "installed Spark Harness assets"
