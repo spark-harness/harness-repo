@@ -13,6 +13,7 @@ Implement only the approved task slice.
 - `spark-workspace-scan` has checked dirty state.
 - `spark-harness-context-loading` has loaded relevant team, framework, project, and service context.
 - IDL changes, if any, have passed `spark-idl-change-protocol` or are explicitly deferred.
+- Behavior changes and bug fixes have passed `spark-test-first-implementation`, or a test-first exception is recorded.
 - Target task from `tasks.json` is known.
 - `design.md` exists for feature, behavior, API, or IDL-linked work.
 
@@ -21,6 +22,7 @@ Clarifying an implementation direction is not requirement approval. If the task 
 ## Rules
 
 - Prefer tests first for behavior changes.
+- Use `spark-debugging-root-cause` before fixing failing tests, builds, gates, Buf checks, or runtime symptoms.
 - Follow existing package, framework, and architecture patterns.
 - Keep edits scoped to affected service files.
 - Do not overwrite unrelated dirty changes.
@@ -50,4 +52,6 @@ asks for repository ignore policy changes.
 
 ## Output
 
-Report changed files, tests run, failures, and remaining risks. Continue to `spark-evidence-gate-completion` when implementation is verified.
+Report changed files, tests run, failures, and remaining risks. Continue to
+`spark-code-review` before `spark-evidence-gate-completion` when implementation
+is verified.

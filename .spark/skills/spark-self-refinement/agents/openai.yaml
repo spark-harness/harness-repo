@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spark Self Refinement"
+  short_description: "Capture reusable lessons into Spark Harness assets."
+  default_prompt: "Refine Spark Harness knowledge from this lesson."

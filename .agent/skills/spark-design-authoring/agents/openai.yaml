@@ -1,4 +1,0 @@
-interface:
-  display_name: "Spark Design Authoring"
-  short_description: "Write design docs with requirement traceability."
-  default_prompt: "Author the Spark design for this requirement."

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Spark Workspace Scan"
-  short_description: "Read Spark multi-repo state and topology."
-  default_prompt: "Scan Spark workspace state for this task."

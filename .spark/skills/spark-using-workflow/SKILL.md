@@ -29,16 +29,22 @@ Process skills run before production skills:
 6. `spark-design-authoring`
 7. `spark-task-planning`
 8. `spark-idl-change-protocol`
-9. `spark-implementation-execution`
-10. `spark-evidence-gate-completion`
+9. `spark-test-first-implementation`
+10. `spark-implementation-execution`
+11. `spark-debugging-root-cause`
+12. `spark-code-review`
+13. `spark-self-refinement`
+14. `spark-evidence-gate-completion`
 
 ## Routing
 
-- New feature or behavior change: intake -> workspace scan -> harness context loading -> requirement authoring -> impact -> design -> tasks -> implementation -> evidence/gates.
-- IDL or contract change: intake -> workspace scan -> harness context loading -> impact -> design -> tasks -> IDL protocol -> implementation -> evidence/gates.
-- Bugfix: intake enough to define expected behavior -> workspace scan -> harness context loading -> design only if behavior or architecture is ambiguous -> implementation -> evidence/gates.
+- New feature or behavior change: intake -> workspace scan -> harness context loading -> requirement authoring -> impact -> design -> tasks -> test-first -> IDL protocol when needed -> implementation -> code review -> evidence/gates -> self-refinement when reusable lessons appear.
+- IDL or contract change: intake -> workspace scan -> harness context loading -> impact -> design -> tasks -> IDL protocol -> test-first for consumers when needed -> implementation -> code review -> evidence/gates.
+- Bugfix: intake enough to define expected behavior -> workspace scan -> harness context loading -> root cause debugging -> test-first -> implementation -> code review -> evidence/gates -> self-refinement when the root cause is reusable.
 - Harness documentation or process change: intake -> workspace scan -> harness context loading -> authoring or impact/design as needed -> evidence/gates if gate-linked files change.
-- Gate-only work: workspace scan -> harness context loading -> evidence/gates.
+- Gate-only work: workspace scan -> harness context loading -> root cause debugging if the gate failure is unclear -> evidence/gates.
+- Code review request: workspace scan -> harness context loading -> code review; do not edit unless the user asks for fixes.
+- Repeated correction, reusable lesson, or context gap: workspace scan -> harness context loading -> self-refinement; do not edit durable assets without explicit approval.
 - User explicitly asks for analysis only: workspace scan -> harness context loading when semantic context matters -> answer; do not edit.
 
 ## Stage Lock
@@ -70,6 +76,7 @@ Stop and ask before editing when:
 - User asks to demonstrate, discuss, review, or plan rather than implement.
 - The user has clarified an implementation direction but has not explicitly approved the Requirement Brief.
 - The next step would set `status: approved`, `approved_by`, or `approved_at` without a user approval message for that exact brief or stage.
+- A behavior change would start production edits without `spark-test-first-implementation` evidence or an explicit exception.
 
 ## Red Flags
 

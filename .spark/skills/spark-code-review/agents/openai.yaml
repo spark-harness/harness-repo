@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spark Code Review"
+  short_description: "Review Spark changes against lifecycle and team rules."
+  default_prompt: "Review these Spark changes."

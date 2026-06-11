@@ -1,4 +1,0 @@
-interface:
-  display_name: "Spark Evidence Gates"
-  short_description: "Refresh evidence, Janus gates, and final verification."
-  default_prompt: "Complete Spark evidence and gates."

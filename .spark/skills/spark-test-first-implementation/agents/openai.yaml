@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spark Test First"
+  short_description: "Set failing or baseline tests before Spark implementation."
+  default_prompt: "Prepare test-first implementation for this Spark task."

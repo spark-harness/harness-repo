@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spark Root Cause"
+  short_description: "Debug Spark failures before fixing symptoms."
+  default_prompt: "Find the Spark root cause."
