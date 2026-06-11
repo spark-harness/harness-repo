@@ -24,27 +24,29 @@ Process skills run before production skills:
 1. `spark-requirement-intake`
 2. `spark-workspace-scan`
 3. `spark-harness-context-loading`
-4. `spark-requirement-authoring`
-5. `spark-impact-analysis`
-6. `spark-design-authoring`
-7. `spark-task-planning`
-8. `spark-idl-change-protocol`
-9. `spark-test-first-implementation`
-10. `spark-implementation-execution`
-11. `spark-debugging-root-cause`
-12. `spark-code-review`
-13. `spark-self-refinement`
-14. `spark-evidence-gate-completion`
+4. `spark-worktree-isolation`
+5. `spark-requirement-authoring`
+6. `spark-impact-analysis`
+7. `spark-design-authoring`
+8. `spark-task-planning`
+9. `spark-idl-change-protocol`
+10. `spark-test-first-implementation`
+11. `spark-implementation-execution`
+12. `spark-debugging-root-cause`
+13. `spark-code-review`
+14. `spark-self-refinement`
+15. `spark-evidence-gate-completion`
 
 ## Routing
 
-- New feature or behavior change: intake -> workspace scan -> harness context loading -> requirement authoring -> impact -> design -> tasks -> test-first -> IDL protocol when needed -> implementation -> code review -> evidence/gates -> self-refinement when reusable lessons appear.
-- IDL or contract change: intake -> workspace scan -> harness context loading -> impact -> design -> tasks -> IDL protocol -> test-first for consumers when needed -> implementation -> code review -> evidence/gates.
-- Bugfix: intake enough to define expected behavior -> workspace scan -> harness context loading -> root cause debugging -> test-first -> implementation -> code review -> evidence/gates -> self-refinement when the root cause is reusable.
-- Harness documentation or process change: intake -> workspace scan -> harness context loading -> authoring or impact/design as needed -> evidence/gates if gate-linked files change.
+- New feature or behavior change: intake -> workspace scan -> harness context loading -> worktree isolation before approved file edits -> requirement authoring -> impact -> design -> tasks -> test-first -> IDL protocol when needed -> implementation -> code review -> evidence/gates -> self-refinement when reusable lessons appear.
+- IDL or contract change: intake -> workspace scan -> harness context loading -> worktree isolation before approved file edits -> impact -> design -> tasks -> IDL protocol -> test-first for consumers when needed -> implementation -> code review -> evidence/gates.
+- Bugfix: intake enough to define expected behavior -> workspace scan -> harness context loading -> root cause debugging -> worktree isolation before production edits -> test-first -> implementation -> code review -> evidence/gates -> self-refinement when the root cause is reusable.
+- Harness documentation or process change: intake -> workspace scan -> harness context loading -> worktree isolation when edits are requested -> authoring or impact/design as needed -> evidence/gates if gate-linked files change.
 - Gate-only work: workspace scan -> harness context loading -> root cause debugging if the gate failure is unclear -> evidence/gates.
 - Code review request: workspace scan -> harness context loading -> code review; do not edit unless the user asks for fixes.
 - Repeated correction, reusable lesson, or context gap: workspace scan -> harness context loading -> self-refinement; do not edit durable assets without explicit approval.
+- Branch, worktree, or isolated workspace setup: workspace scan -> harness context loading -> worktree isolation.
 - User explicitly asks for analysis only: workspace scan -> harness context loading when semantic context matters -> answer; do not edit.
 
 ## Stage Lock

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spark Worktree Isolation"
+  short_description: "Set up isolated Git workspaces for Spark multi-repo work."
+  default_prompt: "Prepare Spark worktree isolation for this task."

@@ -68,6 +68,7 @@ Load only files relevant to the task:
 | Money or currency work | `money.md`, service or library entry points, related tests |
 | Gate work | `gate-policy.md`, `gate-implementation.md`, gate inputs, relevant team rules |
 | Git, merge, or delivery | `git.md`, `git-workflow.md`, related gate and evidence files |
+| Worktree or branch setup | `git.md`, `git-workflow.md`, `.service-matrix/dependencies.yaml` when multiple repos may be affected |
 | Context or process governance | `context-collection.md`, affected `INDEX.md`, affected skills, agents, commands, and rules |
 
 ## Context Pack
