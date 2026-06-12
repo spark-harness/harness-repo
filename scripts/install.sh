@@ -1,19 +1,22 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+HARNESS_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+WORKSPACE_ROOT="$(cd "$HARNESS_ROOT/.." && pwd)"
 
 copy_dir() {
-  local target="$1"
-  mkdir -p "$ROOT/$target"
-  rsync -a --delete "$ROOT/.spark/skills/" "$ROOT/$target/skills/"
-  rsync -a --delete "$ROOT/.spark/agents/" "$ROOT/$target/agents/"
-  rsync -a --delete "$ROOT/.spark/commands/" "$ROOT/$target/commands/"
-  rsync -a --delete "$ROOT/.spark/rules/" "$ROOT/$target/rules/"
+  local root="$1"
+  local target="$2"
+
+  mkdir -p "$root/$target"
+  rsync -a --delete "$HARNESS_ROOT/.spark/skills/" "$root/$target/skills/"
+  rsync -a --delete "$HARNESS_ROOT/.spark/agents/" "$root/$target/agents/"
+  rsync -a --delete "$HARNESS_ROOT/.spark/commands/" "$root/$target/commands/"
+  rsync -a --delete "$HARNESS_ROOT/.spark/rules/" "$root/$target/rules/"
 }
 
-copy_dir ".claude"
-copy_dir ".gemini"
-copy_dir ".codex"
+copy_dir "$WORKSPACE_ROOT" ".claude"
+copy_dir "$WORKSPACE_ROOT" ".gemini"
+copy_dir "$WORKSPACE_ROOT" ".codex"
 
 echo "installed Spark Harness assets"
