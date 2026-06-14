@@ -46,6 +46,7 @@ Include:
 
 - requirement ID or ticket ID
 - proposed branch name
+- canonical worktree ID
 - goal
 - non-goals
 - affected domain and services

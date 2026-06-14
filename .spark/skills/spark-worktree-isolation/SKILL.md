@@ -40,6 +40,8 @@ For multi-repo requirements:
 
 - Use the same branch name in every affected repo.
 - Include the requirement ID or ticket ID in the branch name.
+- Use the requirement ID or ticket ID as the canonical worktree directory name.
+  Do not invent a separate agent-specific worktree name.
 - New requirement authoring always affects `harness-repo`; isolate it before
   creating `requirements/{requirement-id}/`.
 - If `business-repo` or `idl-repo` will be edited, isolate each affected repo
@@ -88,25 +90,51 @@ Spark repos moved with it.
 Use this only when no native tool is available.
 
 Default to a workspace-level directory so worktree contents cannot be committed
-inside any Spark subrepo:
+inside any Spark subrepo. For requirement work, derive the directory from the
+ticket or requirement ID, not from the branch name:
 
 ```bash
 WORKSPACE=/Users/forest/Code/spark
+TICKET_ID=TICKET-123
 BRANCH=feature/workstream/TICKET-123
-SLUG=$(printf '%s' "$BRANCH" | sed 's#[^A-Za-z0-9._-]#-#g')
-BASE="$WORKSPACE/.worktrees/$SLUG"
+WORKTREE_ID=$(printf '%s' "$TICKET_ID" | sed 's#[^A-Za-z0-9._-]#-#g')
+BASE="$WORKSPACE/.worktrees/$WORKTREE_ID"
 mkdir -p "$BASE"
 ```
 
 The resulting directory layout is:
 
 ```text
-/Users/forest/Code/spark/.worktrees/{branch-slug}/harness-repo
-/Users/forest/Code/spark/.worktrees/{branch-slug}/business-repo
-/Users/forest/Code/spark/.worktrees/{branch-slug}/idl-repo
+/Users/forest/Code/spark/.worktrees/{TICKET_ID}/harness-repo
+/Users/forest/Code/spark/.worktrees/{TICKET_ID}/business-repo
+/Users/forest/Code/spark/.worktrees/{TICKET_ID}/idl-repo
 ```
 
 Only create directories for affected repos.
+
+For non-requirement maintenance work without a ticket or requirement ID, fall
+back to the branch slug:
+
+```bash
+WORKTREE_ID=$(printf '%s' "$BRANCH" | sed 's#[^A-Za-z0-9._-]#-#g')
+BASE="$WORKSPACE/.worktrees/$WORKTREE_ID"
+```
+
+If `$BASE` already exists, verify every existing affected repo worktree is on
+the requested branch before reusing it:
+
+```bash
+if [ -d "$target/.git" ] || git -C "$target" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  current_branch=$(git -C "$target" branch --show-current)
+  if [ "$current_branch" != "$BRANCH" ]; then
+    echo "worktree path conflict: $target is on $current_branch, expected $BRANCH" >&2
+    exit 1
+  fi
+fi
+```
+
+Do not create alternate names such as `$WORKTREE_ID-2`, `$WORKTREE_ID-new`, or
+agent-specific suffixes to avoid the conflict. Stop and report the conflict.
 
 For each affected repo, create or attach the matching branch:
 
@@ -154,6 +182,7 @@ Include:
 
 - affected repos
 - branch name
+- canonical worktree ID
 - whether each repo is normal checkout, native worktree, existing linked
   worktree, or git fallback worktree
 - worktree paths
@@ -175,3 +204,4 @@ Stop before creating or using a worktree when:
 - a native worktree tool is available but cannot cover the needed repo set
 - branch names would diverge across affected repos
 - the fallback path already exists and is not clearly the same requested branch
+- an existing `.worktrees/{TICKET_ID}/{repo}` path is on a different branch
