@@ -37,6 +37,11 @@ Process skills run before production skills:
 14. `spark-self-refinement`
 15. `spark-evidence-gate-completion`
 
+For new requirement work, `spark-worktree-isolation` is the first allowed
+side-effect after Requirement Brief approval. Do not create requirement files,
+gate files, IDL, generated contracts, or business code before the affected repos
+have been isolated or explicitly confirmed as existing linked worktrees.
+
 ## Routing
 
 - New feature or behavior change: intake -> workspace scan -> harness context loading -> worktree isolation before approved file edits -> requirement authoring -> impact -> design -> tasks -> test-first -> IDL protocol when needed -> implementation -> code review -> evidence/gates -> self-refinement when reusable lessons appear.
@@ -67,6 +72,17 @@ In intake stage:
 
 Do not create draft lifecycle artifacts just to make progress. Wait for explicit approval first.
 
+After intake approval:
+
+- Resolve the required branch name and affected repos from the approved
+  Requirement Brief.
+- Run workspace scan and Harness context loading if they are not current.
+- Run worktree isolation before any file authoring.
+- Write requirement files only inside the isolated `harness-repo` path.
+- If impact analysis, design, or implementation later discovers an additional
+  affected repo, pause production work and isolate that repo on the same branch
+  before editing it.
+
 ## Stop Conditions
 
 Stop and ask before editing when:
@@ -86,6 +102,9 @@ If you think any of these, stop and return to intake:
 
 - "The user confirmed the interface direction, so the requirement is approved."
 - "I can write the requirement files first and ask later."
+- "I can create requirement files in the main workspace and move them later."
+- "Only `harness-repo` needs isolation; I can edit `business-repo` or `idl-repo`
+  in the main checkout."
 - "Harness lifecycle files are documentation, not real edits."
 - "I can update IDL first and backfill the brief."
 - "`status: approved` is only a placeholder."

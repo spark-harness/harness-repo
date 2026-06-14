@@ -36,15 +36,21 @@ Before Requirement Brief approval, do not:
 5. If the request spans independent subsystems, propose a split before drafting.
 6. Produce a Requirement Brief in the chat only and ask for approval.
 
+During intake, requirement IDs and branch names are planning values only. Do not
+reserve them by writing files or creating branches. If an external ticket ID is
+available, prefer it over allocating a local sequential ID during discussion.
+
 ## Requirement Brief
 
 Include:
 
 - requirement ID or ticket ID
+- proposed branch name
 - goal
 - non-goals
 - affected domain and services
 - affected repos
+- worktree isolation plan
 - IDL impact and breaking risk
 - business rules
 - acceptance criteria
@@ -77,6 +83,7 @@ When the brief is ready, end with one direct approval question:
 ```
 
 If approved, continue to `spark-workspace-scan`, then
-`spark-harness-context-loading`, or to `spark-requirement-authoring` only when
-both workspace facts and Harness context are already current. If not approved,
-revise the brief before any production work.
+`spark-harness-context-loading`, then `spark-worktree-isolation`. Continue to
+`spark-requirement-authoring` only after the affected repos have been isolated
+or confirmed as existing linked worktrees. If not approved, revise the brief
+before any production work.

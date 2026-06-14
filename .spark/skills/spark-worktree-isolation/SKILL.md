@@ -40,6 +40,12 @@ For multi-repo requirements:
 
 - Use the same branch name in every affected repo.
 - Include the requirement ID or ticket ID in the branch name.
+- New requirement authoring always affects `harness-repo`; isolate it before
+  creating `requirements/{requirement-id}/`.
+- If `business-repo` or `idl-repo` will be edited, isolate each affected repo
+  before the first edit in that repo.
+- If a later workflow step discovers another affected repo, stop and add a
+  same-branch worktree for that repo before editing it.
 - Do not create worktrees for cleanly unaffected repos.
 - Do not include `idl-java-repo` just because `idl-repo` changes; include it
   only when generated Java contract changes are part of the requested work.
@@ -63,8 +69,9 @@ Interpretation:
   Use it; do not create another one.
 - `GIT_DIR == GIT_COMMON`: normal checkout. It may need isolation before edits.
 - A superproject path means submodule behavior, not Spark worktree isolation.
-- Dirty target files block worktree setup until the user decides whether to keep,
-  commit, stash, or move those changes.
+- Dirty target files in the main checkout block worktree setup for that repo
+  until the user decides whether to keep, commit, stash, or move those changes.
+  Do not treat "already on the right branch in the main checkout" as isolation.
 
 ## Step 3: Prefer Native Isolation
 
@@ -90,6 +97,16 @@ SLUG=$(printf '%s' "$BRANCH" | sed 's#[^A-Za-z0-9._-]#-#g')
 BASE="$WORKSPACE/.worktrees/$SLUG"
 mkdir -p "$BASE"
 ```
+
+The resulting directory layout is:
+
+```text
+/Users/forest/Code/spark/.worktrees/{branch-slug}/harness-repo
+/Users/forest/Code/spark/.worktrees/{branch-slug}/business-repo
+/Users/forest/Code/spark/.worktrees/{branch-slug}/idl-repo
+```
+
+Only create directories for affected repos.
 
 For each affected repo, create or attach the matching branch:
 
@@ -140,6 +157,7 @@ Include:
 - whether each repo is normal checkout, native worktree, existing linked
   worktree, or git fallback worktree
 - worktree paths
+- confirmation that no affected repo will be edited from the main checkout
 - dirty-state blockers
 - baseline commands run
 - next Spark workflow skill
@@ -151,6 +169,8 @@ Stop before creating or using a worktree when:
 - affected repos are unclear
 - requirement ID or branch name is missing for requirement work
 - current dirty changes overlap target files
+- the next edit would happen under `/Users/forest/Code/spark/{repo}` for an
+  affected repo that has not been confirmed as an existing linked worktree
 - the lifecycle stage does not allow edits
 - a native worktree tool is available but cannot cover the needed repo set
 - branch names would diverge across affected repos

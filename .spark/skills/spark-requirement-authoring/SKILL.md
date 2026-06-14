@@ -12,6 +12,8 @@ Write reviewable Harness requirement files. Do not write design, IDL, or busines
 - Approved Requirement Brief.
 - Current Workspace Pack from `spark-workspace-scan`.
 - Current Context Pack from `spark-harness-context-loading`.
+- Worktree Isolation Report with an isolated or existing linked `harness-repo`
+  path.
 - Requirement ID.
 
 ## Preconditions
@@ -23,10 +25,14 @@ Do not write files unless one of these is true:
 
 Clarifying implementation direction does not satisfy this precondition. If approval is missing, return to `spark-requirement-intake` and produce a chat-only Requirement Brief.
 
+Do not write requirement files in the main workspace checkout. If the target
+path is `/Users/forest/Code/spark/harness-repo` and it is not an existing linked
+worktree, return to `spark-worktree-isolation` first.
+
 ## Files
 
-- `harness-repo/requirements/{requirement-id}/README.md`
-- `harness-repo/requirements/{requirement-id}/requirement.md`
+- `{isolated-harness-repo}/requirements/{requirement-id}/README.md`
+- `{isolated-harness-repo}/requirements/{requirement-id}/requirement.md`
 
 ## Requirements
 
