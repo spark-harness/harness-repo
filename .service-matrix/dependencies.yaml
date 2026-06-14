@@ -37,6 +37,11 @@ services:
     repo_path: "{business-repo}/services/frontend/aegis"
     idl_required: false
 
+  fides:
+    module: frontend
+    repo_path: "{business-repo}/services/frontend/fides"
+    idl_required: false
+
   user-api:
     module: user
     repo_path: "{business-repo}/services/backend/user-api"

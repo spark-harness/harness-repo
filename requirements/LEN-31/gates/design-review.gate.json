@@ -1,0 +1,30 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-31",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-14T23:32:06+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    { "path": "requirements/LEN-31/requirement.md", "sha256": "83773b0fa92ceee09b47d6affcb01b740bb2450a3174ece304bc00ceed89260d" },
+    { "path": "requirements/LEN-31/impact-analysis.md", "sha256": "07851246c53cef37adcaf8003b81541c4eae8a2507ad647a0c470084c06c5bc8" },
+    { "path": "requirements/LEN-31/design.md", "sha256": "77074b097ef4c533a298777ea70835a0edfea4223f54e4c12f4ca68c2eb6c368" },
+    { "path": "context/team/frontend-clean-architecture.md", "sha256": "5dae80a1e45d6d35ced4f41a839dbc34bf15cdfa23708c36ad43a941c4314023" }
+  ],
+  "checklist": [
+    { "item": "设计覆盖关键章节", "result": "PASS", "evidence": "design.md 含 Traceability、Summary、Affected Services、App Shell Design、Layer & Dependency Design、Dependency-Cruiser Rule Design、CI Design、Data/Config/Permission、Observability、Testing Strategy、Rollout/Rollback、Risks。" },
+    { "item": "影响面分析可追溯", "result": "PASS", "evidence": "D0-D9 对应 R0-R7/AC1-AC5；impact-analysis.md 覆盖配置/回滚/风险并被引用。" },
+    { "item": "IDL 或外部契约影响已说明", "result": "PASS", "evidence": "idl_impact=no；design 明确无 protobuf/外部契约，仅前端结构与构建期门禁。" },
+    { "item": "需求条目可追溯到设计决策", "result": "PASS", "evidence": "Requirement Traceability 表逐条映射 R0-R7、AC1-AC5 到 D0-D9。" },
+    { "item": "灰度与回滚已说明", "result": "PASS", "evidence": "Rollout And Rollback 节说明构建期门禁不需运行时灰度、误报 kill switch、删除 fides/CI/矩阵条目即可完整回退、aegis 不受影响。" },
+    { "item": "人工批准记录合法", "result": "PASS", "evidence": "design.md front matter status=approved，approved_by=Forest（会话回复「批准，继续实现」并明确 fides + 完整应用外壳）。" }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": { "required": false },
+  "idl_impact": { "impact": "no", "na_reason": "本票仅前端结构与静态门禁，不涉及 protobuf/外部契约。" },
+  "decision": "设计与人工批准均已满足，design-review PASS，可以进入任务拆分（4.1）。"
+}
