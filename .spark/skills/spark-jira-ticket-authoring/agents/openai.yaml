@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spark JIRA Ticket Authoring"
+  short_description: "Author Epic/Story/Sub-task at the right altitude with traceability."
+  default_prompt: "Author or refine the JIRA work items for this work."
