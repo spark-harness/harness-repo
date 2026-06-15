@@ -1,5 +1,17 @@
 {
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "janus hook guard-edit",
+            "statusMessage": "Checking lifecycle edit guard"
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "hooks": [
