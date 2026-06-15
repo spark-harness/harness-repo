@@ -20,6 +20,10 @@
 
 Agent 不能代表人工评审人批准门禁。Agent 自检通过只能说明门禁材料 `ready for approval`；在人工评审人明确批准前，门禁总结果必须保持 `BLOCKED`，阻塞项写明“等待人工批准”。
 
+这条由机器执行，不只靠自觉：`janus hook guard-edit` 拦截任何把产物 `status` 改为
+`approved` 的 Write/Edit；人工批准只能由人执行 `janus requirement approve ... --yes`
+写入。见 `.spark/hooks/README.md`。
+
 ```text
 没有门禁报告 = 阻塞
 门禁报告格式不合法 = 阻塞

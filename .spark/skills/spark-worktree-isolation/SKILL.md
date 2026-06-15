@@ -31,6 +31,13 @@ Worktree decisions are made per affected subrepo:
 Prefer platform-native worktree tools. Use `git worktree` only as a fallback.
 Never create a nested worktree inside an already isolated subrepo.
 
+## Enforcement
+
+This is not advisory. The `janus hook guard-edit` PreToolUse hook denies any
+write to `requirements/**` when the target is a repo's main checkout rather than
+an isolated linked worktree. If you skip isolation, the edit is blocked, not
+warned. Build the worktree first.
+
 ## Preconditions
 
 - `spark-workspace-scan` has captured repo branch and dirty state.

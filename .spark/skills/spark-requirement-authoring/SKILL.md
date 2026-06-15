@@ -55,6 +55,14 @@ After writing `requirement.md`, continue to `spark-impact-analysis`. The
 `requirement.md` and `impact-analysis.md` exist and the required approval
 records are present.
 
+Do not write the approval block (`status: "approved"`, `approved_by`,
+`approved_at`, `decision`) yourself. The `janus hook guard-edit` hook blocks any
+edit that flips `status` to `approved`. Human approval is recorded only by a
+person running `janus requirement approve --requirement <id> --gate <gate> --approved-by <name> --decision <text> --yes`.
+The stage-order rules also block `design.md` before `requirement.md` +
+`impact-analysis.md` exist, and `requirement-review.gate.json` before
+`impact-analysis.md` exists.
+
 ## Output
 
 Summarize changed files and unresolved open questions. State that
