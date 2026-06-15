@@ -1,0 +1,72 @@
+{
+  "requirement_id": "LEN-31",
+  "status": "approved",
+  "approved_by": "Forest",
+  "approved_at": "2026-06-14T23:32:06+08:00",
+  "decision": "用户在设计批准时回复「批准，继续实现」，并明确 fides + 完整应用外壳；dev-entry 批准成立。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "Harness 生命周期产物 + 服务矩阵新增 fides",
+      "scope": "创建 LEN-31 requirement/impact/design/tasks 与四个阶段门禁 + merge-readiness；在 .service-matrix/dependencies.yaml 新增 fides 服务条目。",
+      "trace": { "requirement_items": ["R7"], "design_decisions": ["D9"] },
+      "affected_services": ["fides"],
+      "acceptance": [],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "fides Next.js 应用外壳",
+      "scope": "在 business-repo/services/frontend/fides 新建 Next 16 + TS + Tailwind v4 应用外壳（package.json/tsconfig/next/eslint/postcss/.gitignore/app/layout+page+globals/README），系统字体不依赖 next/font/google；pnpm build 通过。",
+      "trace": { "requirement_items": ["R0"], "design_decisions": ["D0"] },
+      "affected_services": ["fides"],
+      "acceptance": ["AC5"],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "分层骨架目录",
+      "scope": "fides/src 建 domain/application/adapters/infrastructure/presentation/api 六层根目录，各放中文职责 README；保留 src/app/。不引入业务子域。",
+      "trace": { "requirement_items": ["R1"], "design_decisions": ["D1"] },
+      "affected_services": ["fides"],
+      "acceptance": ["AC5"],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "dependency-cruiser 门禁 + lint:deps 脚本",
+      "scope": "新增 fides/.dependency-cruiser.cjs（6 条 forbidden 规则，anyDepth/anyDepthOrApi 子域优先正则，tsConfig 解析别名，tsPreCompilationDeps）；package.json 增 lint:deps/dep:graph 脚本与 devDep dependency-cruiser；生成 pnpm-lock.yaml。空骨架 pnpm lint:deps 须绿。",
+      "trace": { "requirement_items": ["R2", "R3", "R4"], "design_decisions": ["D2", "D3", "D4", "D5", "D6"] },
+      "affected_services": ["fides"],
+      "acceptance": ["AC3", "AC4"],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "红线验证（test-first）",
+      "scope": "临时注入违规（domain→infrastructure、core→react）运行 pnpm lint:deps，确认非零退出并打印规则名+文件，随后删除；输出捕获为 evidence/lint-deps-redline.md。不提交违规代码。",
+      "trace": { "requirement_items": ["R5"], "design_decisions": ["D8"] },
+      "affected_services": ["fides"],
+      "acceptance": ["AC1"],
+      "state": "done"
+    },
+    {
+      "id": "T6",
+      "title": "CI 接入 lint:deps",
+      "scope": "business-repo 新增 .github/workflows/fides-ci.yml：push/pull_request paths 过滤 services/frontend/fides/**；pin Node22/pnpm10，pnpm install --frozen-lockfile 后 pnpm lint:deps；permissions: contents:read；违规即失败阻断合并。",
+      "trace": { "requirement_items": ["R5", "R6"], "design_decisions": ["D7"] },
+      "affected_services": ["fides"],
+      "acceptance": ["AC2"],
+      "state": "done"
+    },
+    {
+      "id": "T7",
+      "title": "证据、代码评审与 merge-readiness 门禁",
+      "scope": "汇总 build/绿基线/红线证据到 evidence/，完成代码审查报告，刷新 merge-readiness 门禁（引用证据 hash、确认前置门禁 PASS、记录分支与合并目标）。",
+      "trace": { "requirement_items": ["R7"], "design_decisions": ["D8", "D9"] },
+      "affected_services": ["fides"],
+      "acceptance": ["AC1", "AC2", "AC3", "AC5"],
+      "state": "done"
+    }
+  ]
+}

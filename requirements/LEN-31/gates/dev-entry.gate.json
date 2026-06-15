@@ -1,0 +1,26 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-31",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-14T23:32:06+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    { "path": "requirements/LEN-31/design.md", "sha256": "77074b097ef4c533a298777ea70835a0edfea4223f54e4c12f4ca68c2eb6c368" },
+    { "path": "requirements/LEN-31/tasks.json", "sha256": "f550c28ecab365415a1a8b3c0ae6170e26f9f32eabcec14aa4adcfe2016a65cf" }
+  ],
+  "checklist": [
+    { "item": "tasks.json 存在且格式合法", "result": "PASS", "evidence": "tasks.json 含 T1-T7，字段完整。" },
+    { "item": "tasks.json requirement_id 与需求目录一致", "result": "PASS", "evidence": "requirement_id=LEN-31。" },
+    { "item": "每个任务有状态、范围、验收和追溯来源", "result": "PASS", "evidence": "T1-T7 均有 state、scope、acceptance、trace.requirement_items 与 trace.design_decisions。" },
+    { "item": "人工批准记录合法", "result": "PASS", "evidence": "tasks.json status=approved，approved_by=Forest（「批准，继续实现」授权任务拆分与实现）。" }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": { "required": false },
+  "idl_impact": { "impact": "no", "na_reason": "本票仅前端结构与静态门禁，不涉及 protobuf/外部契约。" },
+  "decision": "任务拆分完整且已获人工批准，dev-entry PASS，可进入服务仓库检查与编码循环。"
+}
