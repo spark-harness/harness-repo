@@ -8,9 +8,17 @@ description: Use when Spark workspace work needs Git isolation, branch setup, mu
 Use this before creating branches or editing files when Spark work needs an
 isolated Git workspace.
 
+## Workspace Root
+
+`$SPARK_WORKSPACE` is the multi-repo workspace root: the directory that contains
+`harness-repo/`, `business-repo/`, `idl-repo/`, etc. Resolve it at runtime rather
+than hard-coding a machine path — it is the workspace root of the current
+checkout (the parent of `harness-repo`). All paths below are written relative to
+`$SPARK_WORKSPACE`.
+
 ## Rule
 
-`/Users/forest/Code/spark` is a multi-repo workspace, not a Git repository.
+`$SPARK_WORKSPACE` is a multi-repo workspace, not a Git repository.
 Worktree decisions are made per affected subrepo:
 
 - `harness-repo`: requirements, gates, context, templates, Spark skills, agents, commands, and rules.
@@ -54,7 +62,7 @@ For multi-repo requirements:
 
 ## Step 2: Detect Current State
 
-Run this from `/Users/forest/Code/spark` for every affected repo:
+Run this from `$SPARK_WORKSPACE` for every affected repo:
 
 ```bash
 repo=harness-repo
@@ -94,7 +102,7 @@ inside any Spark subrepo. For requirement work, derive the directory from the
 ticket or requirement ID, not from the branch name:
 
 ```bash
-WORKSPACE=/Users/forest/Code/spark
+WORKSPACE="$SPARK_WORKSPACE"
 TICKET_ID=TICKET-123
 BRANCH=feature/workstream/TICKET-123
 WORKTREE_ID=$(printf '%s' "$TICKET_ID" | sed 's#[^A-Za-z0-9._-]#-#g')
@@ -105,9 +113,9 @@ mkdir -p "$BASE"
 The resulting directory layout is:
 
 ```text
-/Users/forest/Code/spark/.worktrees/{TICKET_ID}/harness-repo
-/Users/forest/Code/spark/.worktrees/{TICKET_ID}/business-repo
-/Users/forest/Code/spark/.worktrees/{TICKET_ID}/idl-repo
+$SPARK_WORKSPACE/.worktrees/{TICKET_ID}/harness-repo
+$SPARK_WORKSPACE/.worktrees/{TICKET_ID}/business-repo
+$SPARK_WORKSPACE/.worktrees/{TICKET_ID}/idl-repo
 ```
 
 Only create directories for affected repos.
@@ -198,7 +206,7 @@ Stop before creating or using a worktree when:
 - affected repos are unclear
 - requirement ID or branch name is missing for requirement work
 - current dirty changes overlap target files
-- the next edit would happen under `/Users/forest/Code/spark/{repo}` for an
+- the next edit would happen under `$SPARK_WORKSPACE/{repo}` for an
   affected repo that has not been confirmed as an existing linked worktree
 - the lifecycle stage does not allow edits
 - a native worktree tool is available but cannot cover the needed repo set
