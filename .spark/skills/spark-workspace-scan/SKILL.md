@@ -13,7 +13,9 @@ when a task needs framework, team, project, or service knowledge.
 
 ## Commands
 
-Prefer these checks from `/Users/forest/Code/spark`:
+Prefer these checks from `$SPARK_WORKSPACE` (the multi-repo workspace root, i.e.
+the parent of `harness-repo`; resolve it at runtime, do not hard-code a machine
+path):
 
 ```bash
 janus version

@@ -26,7 +26,7 @@ Do not write files unless one of these is true:
 Clarifying implementation direction does not satisfy this precondition. If approval is missing, return to `spark-requirement-intake` and produce a chat-only Requirement Brief.
 
 Do not write requirement files in the main workspace checkout. If the target
-path is `/Users/forest/Code/spark/harness-repo` and it is not an existing linked
+path is `$SPARK_WORKSPACE/harness-repo` and it is not an existing linked
 worktree, return to `spark-worktree-isolation` first.
 
 ## Files
@@ -54,6 +54,14 @@ After writing `requirement.md`, continue to `spark-impact-analysis`. The
 `requirement-review` gate is created or refreshed only after both
 `requirement.md` and `impact-analysis.md` exist and the required approval
 records are present.
+
+Do not write the approval block (`status: "approved"`, `approved_by`,
+`approved_at`, `decision`) yourself. The `janus hook guard-edit` hook blocks any
+edit that flips `status` to `approved`. Human approval is recorded only by a
+person running `janus requirement approve --requirement <id> --gate <gate> --approved-by <name> --decision <text> --yes`.
+The stage-order rules also block `design.md` before `requirement.md` +
+`impact-analysis.md` exist, and `requirement-review.gate.json` before
+`impact-analysis.md` exists.
 
 ## Output
 

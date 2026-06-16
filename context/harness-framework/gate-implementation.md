@@ -20,6 +20,10 @@
 
 Agent 不能代表人工评审人批准门禁。Agent 自检通过只能说明门禁材料 `ready for approval`；在人工评审人明确批准前，门禁总结果必须保持 `BLOCKED`，阻塞项写明“等待人工批准”。
 
+这条由机器执行，不只靠自觉：`janus hook guard-edit` 拦截任何把产物 `status` 改为
+`approved` 的 Write/Edit；人工批准只能由人执行 `janus requirement approve ... --yes`
+写入。见 `.spark/hooks/README.md`。
+
 ```text
 没有门禁报告 = 阻塞
 门禁报告格式不合法 = 阻塞
@@ -391,6 +395,17 @@ CI / MR 必须失败的情况：
 - `Result: BLOCKED`。
 - `Result: WAIVED` 但缺少批准人、原因或有效期。
 - 代码或 IDL 变更无法追溯到需求、设计或任务。
+
+### 落地
+
+`harness-repo` 的 `.github/workflows/harness-gates.yml` 已落地这套口径：对本次改动
+涉及的 `requirements/<id>` 跑 `janus requirement status`（按阶段判定）、对涉及的 gate
+JSON 跑 `janus gate render --check`（防 Markdown 漂移）；向默认分支发起的 PR 额外跑
+`janus requirement verify --target merge`（合并就绪）。
+
+`business-repo` 与 `idl-repo` 的 MR 流水线应复用同一个 `janus`：按改动关联的
+ticket id 跑 `janus requirement verify --requirement <id> --target merge`，不另写第二套
+判定。（跨仓接入待后续补齐。）
 
 ## 10. 异常豁免规则
 
