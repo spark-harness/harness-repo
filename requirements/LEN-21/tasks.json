@@ -1,0 +1,57 @@
+{
+  "requirement_id": "LEN-21",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-15T00:00:00+08:00",
+  "decision": "任务拆分满足进入编码循环的最低要求；先实现 T1。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "fides-bff Kratos 可运行骨架 + 健康检查 + CI",
+      "scope": "初始化 Kratos 工程 cmd/fides-bff + internal/{conf,server,service,biz,data}；HTTP server 暴露 /api/v1；实现 GET /api/v1/health 返回 {status,version}；Makefile 本地一键运行；Go CI(lint/test)；在 .service-matrix 登记 fides-bff。不含下游 gRPC、不依赖契约。",
+      "trace": {
+        "requirement_items": ["R1", "R5"],
+        "design_decisions": ["Application Design: 遵循 Kratos 布局", "API/Contract Design: /api/v1 + health"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": ["AC1", "AC5"],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "统一错误信封 + 校验中间件 + gRPC status→REST 映射",
+      "scope": "共享 Go 中间件包(business-repo/packages/...)实现统一错误信封 {error:{code,message,field?,traceId}}、字段校验 422+details[]、gRPC status→REST 映射表；fides-bff server 装配该中间件。",
+      "trace": {
+        "requirement_items": ["R2", "R6"],
+        "design_decisions": ["API/Contract Design: 错误信封与 status 映射表", "Application Design: 共享中间件(BR6)"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": ["AC2", "AC6"],
+      "state": "todo"
+    },
+    {
+      "id": "T3",
+      "title": "幂等中间件 + IdempotencyStore 端口与实现",
+      "scope": "Idempotency-Key 中间件；biz 定义 IdempotencyStore 端口；data 提供内存实现(端口隔离，后替 Redis)；相同 key 重复写回放首次结果。",
+      "trace": {
+        "requirement_items": ["R3"],
+        "design_decisions": ["Application Design: 幂等中间件", "Data/Config: IdempotencyStore 端口"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": ["AC3"],
+      "state": "todo"
+    },
+    {
+      "id": "T4",
+      "title": "可观测基线：结构化日志 + OTel tracing + traceId 透传",
+      "scope": "traceId/correlationId 中间件；结构化日志(team/logging，不打印 PII)；OTel server span 并透传到下游 gRPC metadata(team/tracing)；RED 指标基线(team/metrics)。",
+      "trace": {
+        "requirement_items": ["R4"],
+        "design_decisions": ["Observability"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": ["AC4"],
+      "state": "todo"
+    }
+  ]
+}

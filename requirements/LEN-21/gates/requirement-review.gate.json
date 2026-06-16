@@ -1,0 +1,64 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-21",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-15T00:00:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-21/requirement.md",
+      "sha256": "7f1a406f2388a4724ce647a04fbd8bb4e253800ad417c9536edc0c0665653b67"
+    },
+    {
+      "path": "requirements/LEN-21/impact-analysis.md",
+      "sha256": "9d0b14a065a2ed8c8334c29329477205357cd977a23ab886d2357799d66b17e1"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "背景、目标、非目标明确",
+      "result": "PASS",
+      "evidence": "requirement.md 含 Background、Goals(R1-R6)、Non-Goals。"
+    },
+    {
+      "item": "场景、业务规则和验收标准可测试",
+      "result": "PASS",
+      "evidence": "requirement.md 含 S1-S4(GWT)、BR1-BR6、AC1-AC6。"
+    },
+    {
+      "item": "待确认问题显式列出",
+      "result": "PASS",
+      "evidence": "Open Questions 表列出 3 条设计阶段待确认（Kratos 布局 / idl-go-repo 消费 / 下游桩）。"
+    },
+    {
+      "item": "影响分析覆盖服务、契约、数据、配置、权限、可观测性和回滚",
+      "result": "PASS",
+      "evidence": "impact-analysis.md 覆盖 fides-bff/fides/领域服务、HTTP 契约、数据(幂等存储)、配置、可观测、灰度与回滚。"
+    },
+    {
+      "item": "人工批准记录存在",
+      "result": "PASS",
+      "evidence": "requirement.md 与 impact-analysis.md front matter status=approved, approved_by=forest。"
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [
+    {
+      "issue": "idl-go-repo 当前非 git 仓、Go 契约消费路径未定",
+      "follow_up_action": "设计阶段定模块路径/获取方式；T1 骨架不依赖下游 gRPC",
+      "owner": "backend"
+    }
+  ],
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不新增/修改 protobuf 契约；fides-bff 仅消费现有 Go 契约生成物，引入的是 HTTP/REST 契约（/api/v1）。"
+  },
+  "decision": "需求定义满足进入设计阶段的最低要求。"
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-21",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-16T10:30:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "3ab59dbf36b41d9c8be4df35ea5017618aeeee7a4d250001e570feb9f6b1dce5"
+    },
+    {
+      "path": "requirements/LEN-21/impact-analysis.md",
+      "sha256": "9d0b14a065a2ed8c8334c29329477205357cd977a23ab886d2357799d66b17e1"
+    },
+    {
+      "path": "requirements/LEN-21/design.md",
+      "sha256": "468cbfdec1ba37421291b1ac21c330c747b3cd69ac0f5936d07edcf73795f717"
+    },
+    {
+      "path": "requirements/LEN-21/tasks.json",
+      "sha256": "8fd491a0306adbf74cd7dd0d1cd3d4c0f71a846237b4b57eb4dfdec06291e9a8"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "受影响服务存在于服务矩阵",
+      "result": "PASS",
+      "evidence": "fides-bff 登记于 .service-matrix/dependencies.yaml（module: frontend, idl_required: false）。"
+    },
+    {
+      "item": "repo_path 解析到实际业务仓目录",
+      "result": "PASS",
+      "evidence": "repo_path {business-repo}/services/backend/fides-bff 实际存在（T1 已创建 Go/Kratos 工程）。"
+    },
+    {
+      "item": "Harness 仓、业务仓、IDL 仓分支一致",
+      "result": "PASS",
+      "evidence": "harness-repo 与 business-repo 均在 feature/fides-bff/LEN-21；idl-repo 不涉及（fides-bff idl_required=false，本需求无 .proto 变更）。"
+    },
+    {
+      "item": "idl_required 服务已准备 IDL 仓/proto_path/buf v2",
+      "result": "PASS",
+      "evidence": "N/A：fides-bff idl_required=false，不消费/产出 protobuf 契约；引入的是 HTTP/REST 契约 /api/v1。无需契约仓与 buf 配置。"
+    },
+    {
+      "item": "人工批准记录存在",
+      "result": "PASS",
+      "evidence": "服务仓库检查批准源 impact-analysis.md front matter status=approved, approved_by=forest。"
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [
+    {
+      "issue": "首个下游 gRPC 调用任务前需为 idl-go-repo 补 go.mod + replace（设计阶段风险延续）",
+      "follow_up_action": "在首个业务端点任务（晚于 T1）引入下游客户端时处理；T1 不依赖契约",
+      "owner": "backend"
+    }
+  ],
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/fides-bff/LEN-21",
+      "commit": "7c8d363"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/fides-bff/LEN-21",
+      "commit": "9298274"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不新增/修改 protobuf 契约；fides-bff idl_required=false，引入的是 HTTP/REST 契约（/api/v1）。"
+  },
+  "decision": "受影响服务 fides-bff 已登记且仓库路径与分支就绪，idl 影响为 no，满足服务仓库检查门禁；可进入编码循环与后续合并就绪前置。"
+}
