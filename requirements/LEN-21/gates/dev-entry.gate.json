@@ -1,0 +1,49 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-21",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-16T10:30:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-21/design.md",
+      "sha256": "607672b4313a739d6e0c1b36c2a9c85ad6f0d38bfc9c6a9ff7f2c6de9593ea4e"
+    },
+    {
+      "path": "requirements/LEN-21/tasks.json",
+      "sha256": "11a3ac07ed8cdd25dca8d3295b5f15ec646c57f35f6c6c7762b7f46e6b2fe027"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "任务文件存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json 含 requirement_id、status、4 个任务对象。"
+    },
+    {
+      "item": "每个任务有 state、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "T1-T4 均含 scope、acceptance、trace.requirement_items、trace.design_decisions、affected_services、state。"
+    },
+    {
+      "item": "affected_services 来自服务矩阵或将登记",
+      "result": "PASS",
+      "evidence": "所有任务引用 fides-bff；将于 service-repo-check 前登记进 .service-matrix。"
+    },
+    {
+      "item": "人工 Dev 进入批准记录存在",
+      "result": "PASS",
+      "evidence": "tasks.json status=approved, approved_by=forest。"
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "decision": "任务拆分满足进入编码循环的最低要求。"
+}

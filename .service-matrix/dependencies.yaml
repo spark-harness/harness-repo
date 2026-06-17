@@ -50,6 +50,11 @@ services:
     proto_path: "{idl-repo}/vesta/spark/user/v1"
     buf_module: "local/spark-user"
 
+  fides-bff:
+    module: frontend
+    repo_path: "{business-repo}/services/backend/fides-bff"
+    idl_required: false
+
 dependencies:
   user-api:
     upstream:

@@ -24,7 +24,7 @@ Requirement Brief 与影响分析已获批准，机器检查全部满足，requi
 | `requirements/LEN-31/requirement.md` | `83773b0fa92ceee09b47d6affcb01b740bb2450a3174ece304bc00ceed89260d` |
 | `requirements/LEN-31/impact-analysis.md` | `07851246c53cef37adcaf8003b81541c4eae8a2507ad647a0c470084c06c5bc8` |
 | `context/harness-framework/gate-policy.md` | `e2af35b2c1e0eff8aa9ee3ea854cde58e59f44d84b27026ce98f781610a176fa` |
-| `context/harness-framework/gate-implementation.md` | `ded8691ce6e731782e6bc27aef1bd63be27b9e369d456c77b5c30b829ece4755` |
+| `context/harness-framework/gate-implementation.md` | `402bcbcd192ce3adbed476aef17051c969e289253b2a7772d08cd357bfae54fd` |
 
 ## 检查项
 

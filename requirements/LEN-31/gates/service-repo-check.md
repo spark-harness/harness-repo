@@ -24,7 +24,7 @@ fides 存在于矩阵、路径可解析、相关仓分支一致、无 IDL 依赖
 | `requirements/LEN-31/impact-analysis.md` | `07851246c53cef37adcaf8003b81541c4eae8a2507ad647a0c470084c06c5bc8` |
 | `requirements/LEN-31/design.md` | `77074b097ef4c533a298777ea70835a0edfea4223f54e4c12f4ca68c2eb6c368` |
 | `requirements/LEN-31/tasks.json` | `f550c28ecab365415a1a8b3c0ae6170e26f9f32eabcec14aa4adcfe2016a65cf` |
-| `.service-matrix/dependencies.yaml` | `3e27f7b2f1d67a427b5aabad6e9283903effa0f557c7f79a630274264c08cf41` |
+| `.service-matrix/dependencies.yaml` | `fd4ff8d37331eada97ebe2fe539e993d70146462d2e5243664351a593a03e091` |
 
 ## 检查项
 
