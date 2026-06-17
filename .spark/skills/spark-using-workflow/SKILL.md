@@ -1,6 +1,6 @@
 ---
 name: spark-using-workflow
-description: Top-level router for Spark workspace development. Use at the start of any real development, bugfix, IDL, Harness requirement, gate, documentation-governance, refactor, or multi-repo task in /Users/forest/Code/spark to choose the right Spark workflow skills before editing files.
+description: Top-level router for Spark workspace development. Use at the start of any real development, bugfix, IDL, Harness requirement, gate, documentation-governance, refactor, or multi-repo task in the Spark multi-repo workspace ($SPARK_WORKSPACE) to choose the right Spark workflow skills before editing files.
 ---
 
 # Spark Using Workflow
