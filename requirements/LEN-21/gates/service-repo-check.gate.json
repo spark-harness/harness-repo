@@ -11,7 +11,7 @@
   "inputs": [
     {
       "path": ".service-matrix/dependencies.yaml",
-      "sha256": "3ab59dbf36b41d9c8be4df35ea5017618aeeee7a4d250001e570feb9f6b1dce5"
+      "sha256": "fd4ff8d37331eada97ebe2fe539e993d70146462d2e5243664351a593a03e091"
     },
     {
       "path": "requirements/LEN-21/impact-analysis.md",
