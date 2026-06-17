@@ -27,19 +27,19 @@
       },
       "affected_services": ["fides-bff"],
       "acceptance": ["AC2", "AC6"],
-      "state": "todo"
+      "state": "done"
     },
     {
       "id": "T3",
       "title": "幂等中间件 + IdempotencyStore 端口与实现",
-      "scope": "Idempotency-Key 中间件；biz 定义 IdempotencyStore 端口；data 提供内存实现(端口隔离，后替 Redis)；相同 key 重复写回放首次结果。",
+      "scope": "Idempotency-Key 中间件；共享 bffkit 定义 IdempotencyStore 端口并提供内存实现(端口隔离，后替 Redis)；bootstrap 注入 store；相同 key + 相同请求指纹重复写回放首次结果，缺 key 返回 422，不同指纹返回 409。",
       "trace": {
         "requirement_items": ["R3"],
         "design_decisions": ["Application Design: 幂等中间件", "Data/Config: IdempotencyStore 端口"]
       },
       "affected_services": ["fides-bff"],
       "acceptance": ["AC3"],
-      "state": "todo"
+      "state": "done"
     },
     {
       "id": "T4",
@@ -51,7 +51,7 @@
       },
       "affected_services": ["fides-bff"],
       "acceptance": ["AC4"],
-      "state": "todo"
+      "state": "done"
     }
   ]
 }

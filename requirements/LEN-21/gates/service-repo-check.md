@@ -23,8 +23,8 @@ blocks_next_stage: false
 | --- | --- |
 | `.service-matrix/dependencies.yaml` | `3ab59dbf36b41d9c8be4df35ea5017618aeeee7a4d250001e570feb9f6b1dce5` |
 | `requirements/LEN-21/impact-analysis.md` | `9d0b14a065a2ed8c8334c29329477205357cd977a23ab886d2357799d66b17e1` |
-| `requirements/LEN-21/design.md` | `468cbfdec1ba37421291b1ac21c330c747b3cd69ac0f5936d07edcf73795f717` |
-| `requirements/LEN-21/tasks.json` | `8fd491a0306adbf74cd7dd0d1cd3d4c0f71a846237b4b57eb4dfdec06291e9a8` |
+| `requirements/LEN-21/design.md` | `607672b4313a739d6e0c1b36c2a9c85ad6f0d38bfc9c6a9ff7f2c6de9593ea4e` |
+| `requirements/LEN-21/tasks.json` | `11a3ac07ed8cdd25dca8d3295b5f15ec646c57f35f6c6c7762b7f46e6b2fe027` |
 
 ## 检查项
 

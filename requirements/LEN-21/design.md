@@ -92,21 +92,32 @@ services/backend/fides-bff/
 横切（共享中间件，BR6）：
 
 - 错误信封中间件：捕获用例 / 下游错误 → 统一信封；gRPC status→HTTP 映射（BR2/BR3）。
-- 幂等中间件：读 `Idempotency-Key` → 经 `IdempotencyStore` 端口去重 / 回放首次结果（BR4）。
-- 可观测中间件：每请求生成 traceId/correlationId，注入 context + 结构化日志 + 透传下游 gRPC metadata（BR5）。
+- 幂等中间件：读 `Idempotency-Key` → 经共享包 `IdempotencyStore` 端口原子占位、校验请求指纹、去重 / 回放首次结果（BR4）。`fides-bff` 只在 bootstrap 注入具体 store，`server` 只注册中间件。MVP 内存实现必须限制 key 格式 / 长度、请求体指纹读取上限和进程内记录数，避免横切层成为无界资源入口。
+- 可观测中间件：每请求生成 traceId/correlationId，注入 context + 结构化日志 + 透传下游 gRPC metadata（BR5）。日志、metric、span 使用低基数 route/operation，并在错误响应上记录稳定 `error_code`。
 
 ## Data / Config / Permission
 
-- Data model：BFF 无自有业务持久化。幂等需 `IdempotencyStore`（key → 首次响应 + TTL）：候选 Redis（与 user-api 既有 Redis 对齐）；MVP 可先内存实现（端口隔离、后替换）。T1 可用内存 / noop。
+- Data model：BFF 无自有业务持久化。幂等需 `IdempotencyStore`（key + 请求指纹 → 首次响应 + TTL）：候选 Redis（与 user-api 既有 Redis 对齐）；MVP 可先在共享 `bffkit` 中提供内存实现（端口隔离、后替换），由 bootstrap 注入到 `server`。T1 可用内存 / noop。
 - Config：服务端口、下游 gRPC 地址、幂等存储连接、日志 / OTel 配置（Kratos conf）。
 - Permission：本需求不含鉴权（属 LEN-22）；BFF 是其挂载点。
 
 ## Observability
 
-- Logs：结构化（`team/logging`），每条带 traceId/correlationId；不打印 PII / 密钥。
-- Metrics：RED 基线（请求量 / 错误率 / 时延），命名与标签遵 `team/metrics`。
-- Tracing：OpenTelemetry（`team/tracing`），server span 并透传到下游 gRPC metadata。
+- Logs：结构化（`team/logging`），每条带 traceId/correlationId；错误请求带稳定 `error_code`；不打印 PII / 密钥。
+- Metrics：RED 基线（请求量 / 错误率 / 时延），命名与标签遵 `team/metrics`；route/operation 标签保持低基数。
+- Tracing：OpenTelemetry（`team/tracing`），server span 并透传到下游 gRPC metadata；错误 span 带稳定 `error_code`。
 - Events：无。
+
+## Error Codes
+
+| Error Code | HTTP / gRPC Mapping | Meaning | Retryable | User Visible | Owner | Status |
+|---|---|---|---:|---:|---|---|
+| `BFF-PARAM-0001` | HTTP 400/422；gRPC `INVALID_ARGUMENT` | 前端 BFF 请求参数或字段校验失败，包括缺少必需 `Idempotency-Key` | No | Yes | backend | Active |
+| `BFF-STATE-0001` | HTTP 404；gRPC `NOT_FOUND` | 请求资源不存在或下游返回 not found | No | Yes | backend | Active |
+| `BFF-CONFLICT-0001` | HTTP 409；gRPC `ALREADY_EXISTS` / `ABORTED` | 请求冲突，包括相同幂等 key 搭配不同请求指纹 | Depends | Yes | backend | Active |
+| `BFF-PERMISSION-0001` | HTTP 403；gRPC `PERMISSION_DENIED` | 当前主体无权限执行该操作 | No | Yes | backend | Active |
+| `BFF-AUTH-0001` | HTTP 401；gRPC `UNAUTHENTICATED` | 未认证或认证失效 | No | Yes | backend | Active |
+| `BFF-SYSTEM-0001` | HTTP 500；其余 gRPC status | BFF 内部或未分类下游错误 | Yes | No | backend | Active |
 
 ## Testing strategy
 

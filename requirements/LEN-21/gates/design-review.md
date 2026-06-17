@@ -23,7 +23,7 @@ blocks_next_stage: false
 | --- | --- |
 | `requirements/LEN-21/requirement.md` | `7f1a406f2388a4724ce647a04fbd8bb4e253800ad417c9536edc0c0665653b67` |
 | `requirements/LEN-21/impact-analysis.md` | `9d0b14a065a2ed8c8334c29329477205357cd977a23ab886d2357799d66b17e1` |
-| `requirements/LEN-21/design.md` | `468cbfdec1ba37421291b1ac21c330c747b3cd69ac0f5936d07edcf73795f717` |
+| `requirements/LEN-21/design.md` | `607672b4313a739d6e0c1b36c2a9c85ad6f0d38bfc9c6a9ff7f2c6de9593ea4e` |
 
 ## 检查项
 
