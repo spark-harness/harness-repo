@@ -1,0 +1,81 @@
+{
+  "requirement_id": "LEN-33",
+  "status": "approved",
+  "approved_by": "Forest",
+  "approved_at": "2026-06-17T21:28:36+08:00",
+  "decision": "批准 LEN-33 tasks，允许进入开发实现。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "Harness 生命周期产物与阶段门禁",
+      "scope": "创建 LEN-33 requirement/impact/design/tasks，并生成 requirement-review、design-review、dev-entry、service-repo-check 门禁；记录分支和 worktree 隔离信息。",
+      "trace": {
+        "requirement_items": ["R7"],
+        "design_decisions": ["D7"]
+      },
+      "affected_services": ["user-api"],
+      "acceptance": ["AC5"],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "test-first：服务启动与健康检查 smoke test",
+      "scope": "在 user-api 添加 Spring Boot 启动/健康检查测试，先确认当前骨架缺失导致测试失败，再补生产代码。",
+      "trace": {
+        "requirement_items": ["R2"],
+        "design_decisions": ["D2"]
+      },
+      "affected_services": ["user-api"],
+      "acceptance": ["AC1"],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "test-first：架构边界测试",
+      "scope": "使用 ArchUnit 或等价机制约束 domain 不依赖 Spring/Web/DB/消息/SDK，并记录红线验证。",
+      "trace": {
+        "requirement_items": ["R4"],
+        "design_decisions": ["D4"]
+      },
+      "affected_services": ["user-api"],
+      "acceptance": ["AC3"],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "user-api Java 21 + Spring Boot 骨架实现",
+      "scope": "补齐 bootstrap 主类、分层包/README、Actuator health 配置、Java 21 Maven 配置和最小可运行代码；不新增业务 API、IDL 或持久化。",
+      "trace": {
+        "requirement_items": ["R0", "R1", "R2", "R3"],
+        "design_decisions": ["D0", "D1", "D2", "D3"]
+      },
+      "affected_services": ["user-api"],
+      "acceptance": ["AC1", "AC2", "AC5"],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "CI 与 README",
+      "scope": "新增或更新 user-api CI job，执行 Maven test；更新 README 说明运行、测试、健康检查和后续业务票落点。",
+      "trace": {
+        "requirement_items": ["R5", "R6"],
+        "design_decisions": ["D5", "D6"]
+      },
+      "affected_services": ["user-api"],
+      "acceptance": ["AC2", "AC4"],
+      "state": "done"
+    },
+    {
+      "id": "T6",
+      "title": "证据、代码评审与 merge-readiness",
+      "scope": "记录测试/构建/红线证据，完成代码审查报告，刷新 merge-readiness 门禁并确认 LEN-9 前置阻塞解除。",
+      "trace": {
+        "requirement_items": ["R7"],
+        "design_decisions": ["D7"]
+      },
+      "affected_services": ["user-api"],
+      "acceptance": ["AC1", "AC3", "AC4", "AC6"],
+      "state": "done"
+    }
+  ]
+}

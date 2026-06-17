@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-33",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-17T21:38:58+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-33/requirement.md",
+      "sha256": "09f71b01987862fd9b620b94a1fd425f0fec77a7a009447637287251f61d10cc"
+    },
+    {
+      "path": "requirements/LEN-33/impact-analysis.md",
+      "sha256": "bd299e69df645b3725de698abff8ff49bb3311e60a0754ecdfa4da70d3e80c2b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-33/requirement.md approved by Forest at 2026-06-17T21:08:22+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本票只补 user-api Java + Spring 服务骨架、测试和 CI，不新增或修改 protobuf IDL、生成契约或外部 API。"
+  },
+  "decision": "批准 LEN-33 requirement 与 impact-analysis，允许进入设计阶段。"
+}

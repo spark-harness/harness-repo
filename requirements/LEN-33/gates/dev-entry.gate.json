@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-33",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-17T22:01:09+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-33/design.md",
+      "sha256": "58179871fc758bc9bb3f6acbe8e2e7e0cce08edcb1cacc44f2e20bcb62a8d2e8"
+    },
+    {
+      "path": "requirements/LEN-33/tasks.json",
+      "sha256": "9095be0962a64f47ebd3ec6684c02ec2b32f5c9c33be2cb16d27062bf9a841c3"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-33"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "6 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-33/tasks.json approved by Forest at 2026-06-17T21:28:36+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本票只补 user-api Java + Spring 服务骨架、测试和 CI，不新增或修改 protobuf IDL、生成契约或外部 API。"
+  },
+  "decision": "批准 LEN-33 tasks，允许进入开发实现。"
+}
