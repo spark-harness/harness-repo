@@ -10,6 +10,7 @@
 - `frontend-clean-architecture.md`：前端干净架构分层、Dependency Cruiser 依赖规则和评审要求。
 - `testing.md`：单元测试、集成测试、端到端测试和测试门禁要求。
 - `contract-compatibility.md`：protobuf、HTTP、事件和错误码的契约兼容性要求。
+- `contract-versioning.md`：IDL 生成契约的 development / RC / formal 版本发布、消费和门禁要求。
 - `error-codes.md`：错误码空间、分配规则和兼容性要求。
 - `logging.md`：日志与可观测性要求。
 - `metrics.md`：指标命名、标签、业务指标、告警和 SLO 要求。
