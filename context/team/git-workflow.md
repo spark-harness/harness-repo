@@ -15,6 +15,7 @@ Git workflow 规定：
 - 什么时候创建分支。
 - 多仓需求如何保持分支一致。
 - 每个阶段应该提交什么。
+- Agent 执行提交、推送和 PR/MR 时如何保持可追溯。
 - 合并前必须确认哪些门禁。
 - hotfix 如何最小化风险。
 
@@ -22,11 +23,14 @@ Git workflow 规定：
 
 | Type | 用途 | 示例 |
 |---|---|---|
-| `feature` | 新需求或能力 | `feature/order-checkout/TAPD-12345` |
-| `fix` | 普通缺陷修复 | `fix/payment-timeout/TAPD-23456` |
-| `hotfix` | 线上紧急修复 | `hotfix/order-status/TAPD-34567` |
-| `docs` | 学习文档或规范文档 | `docs/git-workflow/TAPD-45678` |
-| `chore` | 脚手架、配置、工具维护 | `chore/harness-scripts/TAPD-56789` |
+| `feature` | 新需求或能力 | `feature/LEN-33-user-api-skeleton` |
+| `fix` | 普通缺陷修复 | `fix/LEN-21-ci-package-auth` |
+| `hotfix` | 线上紧急修复 | `hotfix/LEN-35-order-status` |
+| `docs` | 学习文档或规范文档 | `docs/LEN-34-agentic-git-workflow` |
+| `chore` | 脚手架、配置、工具维护 | `chore/LEN-36-harness-scripts` |
+
+旧格式 `{type}/{workstream}/{ticket-id}` 仍可用于需要表达业务流的需求，但同
+一个 ticket 的所有仓库必须完全同名。
 
 ## 标准流程
 
@@ -35,22 +39,30 @@ Git workflow 规定：
 在 Harness 仓创建需求分支：
 
 ```text
-harness-repo: feature/{workstream}/{ticket-id}
+harness-repo: feature/{ticket-id}-{brief-description}
 ```
 
 如果需求涉及业务代码，同步在业务仓创建同名分支：
 
 ```text
-business-repo: feature/{workstream}/{ticket-id}
+business-repo: feature/{ticket-id}-{brief-description}
 ```
 
 如果需求涉及 protobuf 契约，同步在 IDL 仓创建同名分支：
 
 ```text
-idl-repo: feature/{workstream}/{ticket-id}
+idl-repo: feature/{ticket-id}-{brief-description}
 ```
 
 学习文档仓只有在需要沉淀培训材料或方法论时才创建分支。
+
+正式需求和治理优化必须先绑定 ticket ID。worktree 路径使用 ticket ID：
+
+```text
+.worktrees/{ticket-id}/harness-repo
+.worktrees/{ticket-id}/business-repo
+.worktrees/{ticket-id}/idl-repo
+```
 
 ### 2. 需求和设计阶段
 
@@ -113,7 +125,65 @@ learning-docs-repo: docs(harness): explain checkout workflow
 
 禁止把业务代码、protobuf 契约和 Harness 规范混进同一个仓库提交。
 
-### 6. 合并顺序
+Agent 执行提交时必须先做三件事：
+
+1. 在所有 Spark 子仓分别检查 `git status --short --branch`。
+2. 只暂存当前 ticket 相关文件，并检查 `git diff --staged`。
+3. 清理或排除本地噪声文件，例如 `.DS_Store`、`__pycache__/`、`.pyc`。
+
+长任务可以使用 `[WIP]` 检查点提交记录阶段进展。检查点提交只用于临时交接，
+进入 PR/MR 或最终交付前必须整理成语义提交。
+
+### 6. PR / MR
+
+PR / MR 描述必须说明行为和验证，而不只是列出文件。
+
+建议模板：
+
+```markdown
+## Task
+
+## What Changed
+
+## Key Decisions
+
+## Validation
+
+## Gates / Evidence
+
+## Risks / Follow-up
+
+## Review Guidance
+```
+
+必填信息：
+
+- ticket ID 或 requirement ID。
+- 涉及的仓库和分支。
+- 已运行的测试、lint、Janus gate 或 requirement verify 命令。
+- 未运行的验证和原因。
+- 需要人工重点评审的风险点。
+
+当一个 ticket 天然需要多个可独立评审的层次时，可以使用堆叠 PR / MR。每一
+层都必须有聚焦 diff，并保持中间分支可构建、可测试。
+
+### 7. 历史清理
+
+创建 PR/MR 或交接分支前，检查当前分支相对集成分支的提交：
+
+```bash
+git log --oneline origin/master..HEAD
+```
+
+清理目标：
+
+- 将 `[WIP]` 检查点提交整理成有意义的语义提交。
+- 改写含糊的提交信息。
+- 删除临时探索提交。
+- 保留的每个提交都应可评审、可追溯、可独立理解。
+- 共享分支不得随意 force-push；需要改写共享历史时先给出计划并等待确认。
+
+### 8. 合并顺序
 
 推荐顺序：
 
@@ -124,7 +194,7 @@ learning-docs-repo: docs(harness): explain checkout workflow
 
 如果业务仓必须和 IDL 仓一起灰度，合并顺序应在设计文档中说明。
 
-### 7. 收尾
+### 9. 收尾
 
 合并后必须确认：
 
@@ -139,7 +209,7 @@ hotfix 可以跳过完整设计文档，但不能跳过记录。
 
 最低要求：
 
-- 创建 `hotfix/{workstream}/{ticket-id}` 分支。
+- 创建 `hotfix/{ticket-id}-{brief-description}` 分支。
 - 在 Harness 仓记录问题、影响范围、修复方案和回滚方式。
 - 修改范围只覆盖线上问题。
 - 合并后补齐门禁报告和经验沉淀。
