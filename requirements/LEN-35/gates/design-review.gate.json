@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-35",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-20T01:04:25+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-35/requirement.md",
+      "sha256": "df945c2b0cfbe46c5b496280ec08008c0420abff929480411ce51d360f5efdbc"
+    },
+    {
+      "path": "requirements/LEN-35/impact-analysis.md",
+      "sha256": "90b9c591eb6d09071e42ca3d03390e37687f0a2d9629a5764208c628b7c8fad7"
+    },
+    {
+      "path": "requirements/LEN-35/design.md",
+      "sha256": "7a47004b2cc88a488273d35ea64b3a40583571a98f2860f54c3a8ee4489e5142"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-35/design.md approved by Forest at 2026-06-20T00:49:44+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "本需求不修改具体 .proto，但定义 IDL 生成契约的发布、消费、版本和门禁规则，影响 protobuf 契约治理和业务仓消费方式。"
+  },
+  "decision": "批准 LEN-35 design，允许进入任务拆分。"
+}
