@@ -36,6 +36,7 @@ Process skills run before production skills:
 13. `spark-code-review`
 14. `spark-self-refinement`
 15. `spark-evidence-gate-completion`
+16. `spark-git-delivery`
 
 For new requirement work, `spark-worktree-isolation` is the first allowed
 side-effect after Requirement Brief approval. Do not create requirement files,
@@ -49,6 +50,7 @@ have been isolated or explicitly confirmed as existing linked worktrees.
 - Bugfix: intake enough to define expected behavior -> workspace scan -> harness context loading -> root cause debugging -> worktree isolation before production edits -> test-first -> implementation -> code review -> evidence/gates -> self-refinement when the root cause is reusable.
 - Harness documentation or process change: intake -> workspace scan -> harness context loading -> worktree isolation when edits are requested -> authoring or impact/design as needed -> evidence/gates if gate-linked files change.
 - Gate-only work: workspace scan -> harness context loading -> root cause debugging if the gate failure is unclear -> evidence/gates.
+- Git commit, push, PR/MR, merge, or delivery cleanup: workspace scan -> harness context loading -> code review when reviewing changed code is needed -> evidence/gates when gate artifacts must be refreshed -> git delivery.
 - Code review request: workspace scan -> harness context loading -> code review; do not edit unless the user asks for fixes.
 - Repeated correction, reusable lesson, or context gap: workspace scan -> harness context loading -> self-refinement; do not edit durable assets without explicit approval.
 - Branch, worktree, or isolated workspace setup: workspace scan -> harness context loading -> worktree isolation.
