@@ -5,7 +5,7 @@
   "gate_name": "服务仓库检查门禁",
   "stage": "4.3",
   "checked_by": "service_repo_checker",
-  "checked_at": "2026-06-20T18:44:15+08:00",
+  "checked_at": "2026-06-20T18:46:44+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -67,7 +67,7 @@
     {
       "name": "harness-repo",
       "branch": "feature/LEN-38-go-idl-publishing",
-      "commit": "4f1033c"
+      "commit": "f8b8b15"
     },
     {
       "name": "business-repo",
