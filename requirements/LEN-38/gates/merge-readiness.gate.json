@@ -1,0 +1,103 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-38",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "Codex",
+  "checked_at": "2026-06-20T18:50:19+08:00",
+  "result": "WARN",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-38/requirement.md",
+      "sha256": "c90b47f942d4feb7f11572e594d09aa59fefe95d2ae5d7c20ee162cb5cfe327c"
+    },
+    {
+      "path": "requirements/LEN-38/impact-analysis.md",
+      "sha256": "a577c4c9a48d513f99cb9babd305d51297c9d5cb3bfc6ac9b2bf8320516a9eba"
+    },
+    {
+      "path": "requirements/LEN-38/design.md",
+      "sha256": "214e3bba71790c4946a89058b5d6a24db795d565d8266571d0cbcbe277ec9a3d"
+    },
+    {
+      "path": "requirements/LEN-38/tasks.json",
+      "sha256": "9c19b32143d885a57d32fe5ba60069b13e2b0ce2e05cdb5e56cf8ff147654250"
+    },
+    {
+      "path": "requirements/LEN-38/evidence/go-idl-publishing.md",
+      "sha256": "8b2f4166d1bc6fca86e8651eae971d8e8ff33a233aee9d6e14b645f7238d7933"
+    },
+    {
+      "path": "requirements/LEN-38/gates/requirement-review.gate.json",
+      "sha256": "06599da73162402c443c0ff90cbaeab774871be3c53b2bdf48d81b0dea2bd4c0"
+    },
+    {
+      "path": "requirements/LEN-38/gates/design-review.gate.json",
+      "sha256": "31d854ba7fd7c6d965090450de5e4992603e3883a1ec8593ebd30fa5e16b5c51"
+    },
+    {
+      "path": "requirements/LEN-38/gates/dev-entry.gate.json",
+      "sha256": "ec6c1283aa928fdb760d7d5f4dcd29f1d559b0b59edd7272f092a1534e36ebfc"
+    },
+    {
+      "path": "requirements/LEN-38/gates/service-repo-check.gate.json",
+      "sha256": "80513baf6220be38647ebdcce843fc0e61851df4249881ce6d70c0000b0c3998"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁齐备",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, service-repo-check are PASS."
+    },
+    {
+      "item": "Go 生成仓初始化",
+      "result": "PASS",
+      "evidence": "spark-harness/idl-go-repo master initialized and pushed; latest verified commit b0c16809791831ba9461ddd5ebec1fa6eeaf2580."
+    },
+    {
+      "item": "Buf 与 Go 本地验证",
+      "result": "PASS",
+      "evidence": "buf lint, buf generate --template buf.gen.go.yaml, go mod tidy, go test ./... passed."
+    },
+    {
+      "item": "Branch sync 验证",
+      "result": "PASS",
+      "evidence": "Sync Go IDL run 27868669016 succeeded and created idl-go-repo feature/LEN-38-go-idl-publishing branch at b0c16809791831ba9461ddd5ebec1fa6eeaf2580."
+    },
+    {
+      "item": "RC tag 发布验证",
+      "result": "PASS",
+      "evidence": "Publish Go IDL run 27868778869 succeeded and created v0.1.0-rc.LEN-38.20260620.7976082 in idl-go-repo."
+    },
+    {
+      "item": "Formal tag 发布验证",
+      "result": "WARN",
+      "evidence": "Formal workflow path is implemented and YAML/regex validated, but no formal SemVer tag was pushed because formal tags are release source of truth and require an approved formal release."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [
+    {
+      "issue": "Formal SemVer tag publish was not executed in this validation pass.",
+      "follow_up_action": "Run formal publish from an approved release SemVer tag when the release is ready.",
+      "owner": "release owner"
+    }
+  ],
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "LEN-38 changes generated-contract publication flow without changing wire proto semantics."
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-38/evidence/go-idl-publishing.md",
+      "sha256": "8b2f4166d1bc6fca86e8651eae971d8e8ff33a233aee9d6e14b645f7238d7933"
+    }
+  ],
+  "decision": "Implementation is ready for review with a documented formal-tag validation warning."
+}
