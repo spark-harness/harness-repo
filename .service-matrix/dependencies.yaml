@@ -64,8 +64,8 @@ services:
     repo_path: "{business-repo}/services/backend/applicant-api"
     idl_required: true
     idl_repo: "{idl-repo}"
-    proto_path: "{idl-repo}/vesta/spark/applicant/v1"
-    buf_module: "local/spark-applicant"
+    proto_path: "{idl-repo}/vesta/lendora/applicant/v1"
+    buf_module: "local/lendora-applicant"
 
 dependencies:
   user-api:

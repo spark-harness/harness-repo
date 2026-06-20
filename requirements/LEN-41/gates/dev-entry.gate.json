@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-41",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-21T01:43:22+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-41/design.md",
+      "sha256": "c1bcf8d1971c6d254c59100759f35ea98ab73c1d745add03b078fb550482e832"
+    },
+    {
+      "path": "requirements/LEN-41/tasks.json",
+      "sha256": "88e9f3d3c114793bc5fdb34a4c94aa75150e37bf8ab974ad33a2ffd2cfc86251"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-41"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "7 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-41/tasks.json approved by Forest at 2026-06-21T00:50:40+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "本需求迁移 Lendora applicant protobuf namespace，并在既有 Java / Go generated contract 仓库和发布坐标下同步生成路径。"
+  },
+  "decision": "批准 LEN-41 tasks，允许进入开发实现。"
+}
