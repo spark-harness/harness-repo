@@ -1,0 +1,88 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-40",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-21T01:09:48+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-40/impact-analysis.md",
+      "sha256": "62d0a5c355ffb3fb33eaa4cd7056150227aa064f5264b0b6b3751e9879726b4f"
+    },
+    {
+      "path": "requirements/LEN-40/design.md",
+      "sha256": "e44fdd872cc4f444ce21642278f4dd91ffca6cfec860d8dcf1be92a62c4100b4"
+    },
+    {
+      "path": "requirements/LEN-40/tasks.json",
+      "sha256": "9d79cd2214ffc2f66d336412de4f9fefc7cb6a34c7656b4630c84733dec0a82d"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "606b4c27ac2e5512d28db42d55a0e4dece1c5f53e08c3ebfdd18a322f2d08540"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-40"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "5 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "tasks.json 未声明业务服务；跳过服务矩阵路径校验。"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-40/impact-analysis.md approved by forest at 2026-06-21T00:50:33+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-40-delivery-flow",
+      "commit": "75cc7cc"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-40-delivery-flow",
+      "commit": "6dc5178"
+    },
+    {
+      "name": "idl-repo",
+      "branch": "feature/LEN-40-delivery-flow",
+      "commit": "b0bedba"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "不修改 protobuf 文件，但修改 IDL 发布证据与 contract dependency gate 的治理口径。"
+  },
+  "decision": "批准 LEN-40 服务仓库检查门禁。"
+}

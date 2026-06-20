@@ -1,4 +1,4 @@
-name: branch-coherence
+name: delivery-readiness
 
 on:
   push:
@@ -10,73 +10,135 @@ on:
 permissions:
   contents: read
 
-env:
-  BUSINESS_REPOSITORY: "spark-harness/business-repo"
-  IDL_REPOSITORY: "spark-harness/idl-repo"
-
 jobs:
-  branch-coherence:
+  delivery-readiness:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout harness-repo
+        uses: actions/checkout@v4
+        with:
+          path: harness-repo
+          fetch-depth: 0
 
-      - name: Check same branch in required peer repositories
+      - name: Resolve requirement id
+        id: requirement
+        working-directory: harness-repo
         shell: bash
         env:
           CURRENT_BRANCH: ${{ github.head_ref || github.ref_name }}
-          GH_TOKEN: ${{ secrets.BRANCH_COHERENCE_TOKEN || github.token }}
         run: |
           set -euo pipefail
-
-          if [ -z "$CURRENT_BRANCH" ]; then
-            echo "::error::Cannot resolve current branch from GitHub context."
-            exit 1
-          fi
-
           requirement_id="$(grep -Eo '[A-Z][A-Z0-9]*-[0-9]+' <<<"$CURRENT_BRANCH" | tail -n 1 || true)"
-          if [ -z "$requirement_id" ]; then
-            echo "No requirement id found in branch $CURRENT_BRANCH; skip peer branch check."
-            exit 0
-          fi
+          echo "id=$requirement_id" >> "$GITHUB_OUTPUT"
 
-          impact_file="requirements/$requirement_id/impact-analysis.md"
-          if [ ! -f "$impact_file" ]; then
-            echo "No $impact_file in this branch; skip peer branch check."
-            exit 0
-          fi
-
-          idl_impact="$(python3 -c 'import re, sys; text=open(sys.argv[1], encoding="utf-8").read(); patterns=[r"(?im)^idl_impact:\s*\"?([^\"\n]+)", r"(?im)^-\s*Does this change involve protobuf IDL or external contracts:\s*\**\s*([^。\n*]+)"]; value="";
-          for pattern in patterns:
-              match=re.search(pattern, text)
-              if match:
-                  value=match.group(1).strip().lower()
-                  break
-          print(value)' "$impact_file")"
-
-          required_repositories=""
-          if grep -Eq 'business-repo|\\{business-repo\\}' "$impact_file"; then
-            required_repositories="$required_repositories $BUSINESS_REPOSITORY"
-          fi
-          if [ "$idl_impact" = "yes" ]; then
-            required_repositories="$required_repositories $IDL_REPOSITORY"
-          fi
-
-          if [ -z "${required_repositories// }" ]; then
-            echo "No peer repository is required by $impact_file."
-            exit 0
-          fi
-
+      - name: Resolve janus ref
+        id: janus-ref
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.JANUS_REPO_TOKEN || github.token }}
+          CURRENT_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          set -euo pipefail
           encoded_branch="$(python3 -c 'import os, urllib.parse; print(urllib.parse.quote(os.environ["CURRENT_BRANCH"], safe=""))')"
+          if [ -n "${CURRENT_BRANCH:-}" ] && gh api --silent "repos/spark-harness/janus/branches/$encoded_branch"; then
+            echo "ref=$CURRENT_BRANCH" >> "$GITHUB_OUTPUT"
+          else
+            echo "ref=master" >> "$GITHUB_OUTPUT"
+          fi
 
-          missing=0
-          for repo in $required_repositories; do
-            echo "Checking $repo branch $CURRENT_BRANCH"
-            if gh api --silent "repos/$repo/branches/$encoded_branch"; then
-              echo "$repo has branch $CURRENT_BRANCH"
-            else
-              echo "::error title=Missing same-named branch::$repo does not have accessible branch $CURRENT_BRANCH"
-              missing=1
-            fi
-          done
+      - name: Checkout janus
+        uses: actions/checkout@v4
+        with:
+          repository: spark-harness/janus
+          ref: ${{ steps.janus-ref.outputs.ref }}
+          path: janus
+          token: ${{ secrets.JANUS_REPO_TOKEN || github.token }}
 
-          exit "$missing"
+      - name: Resolve business ref
+        id: business-ref
+        if: steps.requirement.outputs.id != ''
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.BRANCH_COHERENCE_TOKEN || github.token }}
+          CURRENT_BRANCH: ${{ github.head_ref || github.ref_name }}
+          BASE_BRANCH: ${{ github.base_ref || github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          encoded_branch="$(python3 -c 'import os, urllib.parse; print(urllib.parse.quote(os.environ["CURRENT_BRANCH"], safe=""))')"
+          if [ -n "${CURRENT_BRANCH:-}" ] && gh api --silent "repos/spark-harness/business-repo/branches/$encoded_branch"; then
+            echo "ref=$CURRENT_BRANCH" >> "$GITHUB_OUTPUT"
+          else
+            echo "ref=$BASE_BRANCH" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout business-repo
+        if: steps.requirement.outputs.id != ''
+        uses: actions/checkout@v4
+        with:
+          repository: spark-harness/business-repo
+          ref: ${{ steps.business-ref.outputs.ref }}
+          path: business-repo
+          fetch-depth: 0
+          token: ${{ secrets.BRANCH_COHERENCE_TOKEN || github.token }}
+
+      - name: Resolve idl ref
+        id: idl-ref
+        if: steps.requirement.outputs.id != ''
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.BRANCH_COHERENCE_TOKEN || github.token }}
+          CURRENT_BRANCH: ${{ github.head_ref || github.ref_name }}
+          BASE_BRANCH: ${{ github.base_ref || github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          encoded_branch="$(python3 -c 'import os, urllib.parse; print(urllib.parse.quote(os.environ["CURRENT_BRANCH"], safe=""))')"
+          if [ -n "${CURRENT_BRANCH:-}" ] && gh api --silent "repos/spark-harness/idl-repo/branches/$encoded_branch"; then
+            echo "ref=$CURRENT_BRANCH" >> "$GITHUB_OUTPUT"
+          else
+            echo "ref=$BASE_BRANCH" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout idl-repo
+        if: steps.requirement.outputs.id != ''
+        uses: actions/checkout@v4
+        with:
+          repository: spark-harness/idl-repo
+          ref: ${{ steps.idl-ref.outputs.ref }}
+          path: idl-repo
+          fetch-depth: 0
+          token: ${{ secrets.BRANCH_COHERENCE_TOKEN || github.token }}
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: janus/go.mod
+
+      - name: Build janus
+        working-directory: janus
+        run: |
+          set -euo pipefail
+          go build -o "$RUNNER_TEMP/bin/janus" ./cmd/janus
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+
+      - name: Verify delivery readiness
+        if: steps.requirement.outputs.id != ''
+        shell: bash
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
+          HEAD_BRANCH: ${{ github.head_ref || github.ref_name }}
+          GH_TOKEN: ${{ secrets.BRANCH_COHERENCE_TOKEN || github.token }}
+          IDL_JAVA_REPO_TOKEN: ${{ secrets.IDL_JAVA_REPO_TOKEN || secrets.BRANCH_COHERENCE_TOKEN || github.token }}
+          IDL_GO_REPO_TOKEN: ${{ secrets.IDL_GO_REPO_TOKEN || secrets.BRANCH_COHERENCE_TOKEN || github.token }}
+          JANUS_GITHUB_OWNER: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+          base_arg=()
+          if [ -n "${BASE_BRANCH:-}" ]; then
+            base_arg=(--base "$BASE_BRANCH")
+          fi
+          janus delivery verify \
+            --workspace "$GITHUB_WORKSPACE" \
+            --requirement "${{ steps.requirement.outputs.id }}" \
+            --repo harness-repo \
+            "${base_arg[@]}" \
+            --head "$HEAD_BRANCH"
