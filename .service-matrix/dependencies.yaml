@@ -19,6 +19,10 @@ modules:
     team: core
     name: "用户域"
 
+  applicant:
+    team: core
+    name: "申请人域"
+
   frontend:
     team: core
     name: "前端体验"
@@ -55,9 +59,21 @@ services:
     repo_path: "{business-repo}/services/backend/fides-bff"
     idl_required: false
 
+  applicant-api:
+    module: applicant
+    repo_path: "{business-repo}/services/backend/applicant-api"
+    idl_required: true
+    idl_repo: "{idl-repo}"
+    proto_path: "{idl-repo}/vesta/spark/applicant/v1"
+    buf_module: "local/spark-applicant"
+
 dependencies:
   user-api:
     upstream:
       - "aegis"
     libraries:
       - "money"
+
+  applicant-api:
+    upstream:
+      - "fides-bff"
