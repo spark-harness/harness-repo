@@ -1,0 +1,153 @@
+{
+  "requirement_id": "LEN-36",
+  "status": "approved",
+  "approved_by": "Forest",
+  "approved_at": "2026-06-20T11:46:53+08:00",
+  "decision": "批准 LEN-36 tasks，允许进入开发门禁。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 LEN-36 Harness 生命周期产物",
+      "scope": "新增 requirement、impact-analysis、design、tasks 和阶段门禁，明确 contract-versioning 规则来源、wire contract 无变化、受影响仓库和验证边界。",
+      "trace": {
+        "requirement_items": [
+          "R10"
+        ],
+        "design_decisions": [
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "user-api"
+      ],
+      "acceptance": [
+        "AC10"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "建立 contract dependency scan 测试 fixture",
+      "scope": "在 business-repo 新增扫描脚本测试和 fixture，覆盖 Java formal pass、Java RC pass/fail、Java SNAPSHOT fail、Go formal pass、Go RC pass/fail、Go pseudo-version fail、Go replace fail。",
+      "trace": {
+        "requirement_items": [
+          "R3",
+          "R4",
+          "R6",
+          "R7",
+          "R8"
+        ],
+        "design_decisions": [
+          "D2",
+          "D3",
+          "D5",
+          "D6",
+          "D7"
+        ]
+      },
+      "affected_services": [
+        "user-api"
+      ],
+      "acceptance": [
+        "AC3",
+        "AC4",
+        "AC6",
+        "AC7",
+        "AC8",
+        "AC9"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "实现本地可执行扫描脚本和集中配置",
+      "scope": "新增 config/contract-dependencies.json 与 scripts/contract_dependency_scan.py，实现 --mode master / --mode rc、Maven pom.xml 扫描、Go go.mod 扫描、版本分类和违规输出。",
+      "trace": {
+        "requirement_items": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R6",
+          "R7",
+          "R8",
+          "R9"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3",
+          "D5",
+          "D6"
+        ]
+      },
+      "affected_services": [
+        "user-api"
+      ],
+      "acceptance": [
+        "AC1",
+        "AC2",
+        "AC3",
+        "AC4",
+        "AC6",
+        "AC7",
+        "AC9"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "接入 GitHub Actions 契约依赖扫描",
+      "scope": "新增 business-repo workflow，使 PR 变更 pom.xml、go.mod、go.sum、扫描脚本、配置或 workflow 时运行 master 模式；提供 workflow_dispatch mode=rc 用于 RC 候选验证。",
+      "trace": {
+        "requirement_items": [
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "design_decisions": [
+          "D4"
+        ]
+      },
+      "affected_services": [
+        "user-api"
+      ],
+      "acceptance": [
+        "AC5",
+        "AC6",
+        "AC7"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "完成验证证据和合并门禁",
+      "scope": "运行扫描脚本测试、代表性 CLI 命令、Janus gate validate/render/verify，并在 evidence 中记录命令、结果、分支和剩余风险。",
+      "trace": {
+        "requirement_items": [
+          "R1",
+          "R2",
+          "R8",
+          "R10"
+        ],
+        "design_decisions": [
+          "D1",
+          "D6",
+          "D7",
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "user-api"
+      ],
+      "acceptance": [
+        "AC1",
+        "AC2",
+        "AC8",
+        "AC9",
+        "AC10"
+      ],
+      "state": "done"
+    }
+  ]
+}

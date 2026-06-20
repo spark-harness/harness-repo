@@ -1,0 +1,98 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-36",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-20T11:52:17+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-36/requirement.md",
+      "sha256": "cfc217ea5f19ec1258380663a4e9a9286ec2ce98695bd508ecfaa9ca822de721"
+    },
+    {
+      "path": "requirements/LEN-36/impact-analysis.md",
+      "sha256": "3ffd30b7960ae58a6ec5d20cd2c64d328886ba5e00b7d6a6b357af9561c334e9"
+    },
+    {
+      "path": "requirements/LEN-36/design.md",
+      "sha256": "7b17e99f7c441c47343ccacae3e88d042adef1f103df5882a2a04c022182d8ad"
+    },
+    {
+      "path": "requirements/LEN-36/tasks.json",
+      "sha256": "d98a52a63cb6821313428566e1fc13b5661217c3a1d6cb4bfcfd2c6cefe68c69"
+    },
+    {
+      "path": "requirements/LEN-36/gates/requirement-review.gate.json",
+      "sha256": "63ea1f6e7e46f602865180d5582fb78d4163fb5fde2d028f939a0b4a25d9ecfa"
+    },
+    {
+      "path": "requirements/LEN-36/gates/design-review.gate.json",
+      "sha256": "b4aa6cd4ada21c741dd3404903574545e5717c5abec3c3a632b2791759c821c3"
+    },
+    {
+      "path": "requirements/LEN-36/gates/dev-entry.gate.json",
+      "sha256": "086eb71ca52dc9204435604c0db74e3d746379423cc380f102bf19edb4b56ad8"
+    },
+    {
+      "path": "requirements/LEN-36/gates/service-repo-check.gate.json",
+      "sha256": "95fc53de3a79106a87c82c8fcb8b2f9979c2e7a9ba58d1ec488587bbcc090524"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "fd4ff8d37331eada97ebe2fe539e993d70146462d2e5243664351a593a03e091"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "1 evidence files recorded."
+    },
+    {
+      "item": "business-repo contract dependency scan",
+      "result": "PASS",
+      "evidence": "Changed-file scan for this PR shape passed: workflow/script/config changes do not scan historical dependency files; touching services/backend/user-api/pom.xml still fails on the existing SNAPSHOT dependency."
+    },
+    {
+      "item": "IDL 证据已记录",
+      "result": "PASS",
+      "evidence": "Buf or contract evidence exists."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-36/tasks.json approved by Forest at 2026-06-20T11:46:53+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [
+    {
+      "issue": "Manual full-repo contract dependency scan still finds services/backend/user-api/pom.xml consuming com.spark.contract:spark-idl-java:0.1.0-SNAPSHOT.",
+      "owner": "Contract / user-api owner",
+      "follow_up_action": "Publish a formal spark-idl-java version and update user-api in a separate requirement before requiring full-repo scans to pass."
+    }
+  ],
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-36/evidence/contract-dependency-scan-verification.md",
+      "sha256": "0b5fcd6386a25deff9c0ab2580ec3a7495a999063249aec4373b66c5120d654a"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "本需求不修改 .proto 或 wire contract，但新增业务仓消费 IDL 生成契约的 CI 门禁，影响契约依赖治理和 merge-readiness 证据。"
+  },
+  "decision": "LEN-36 scanner, fixture tests, changed-file PR workflow, and Harness evidence are ready. Existing user-api SNAPSHOT dependency remains a recorded follow-up for full-repo scans."
+}

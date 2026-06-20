@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-36",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-20T11:47:58+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-36/requirement.md",
+      "sha256": "cfc217ea5f19ec1258380663a4e9a9286ec2ce98695bd508ecfaa9ca822de721"
+    },
+    {
+      "path": "requirements/LEN-36/impact-analysis.md",
+      "sha256": "3ffd30b7960ae58a6ec5d20cd2c64d328886ba5e00b7d6a6b357af9561c334e9"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-36/requirement.md approved by Forest at 2026-06-20T11:40:19+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "本需求不修改 .proto 或 wire contract，但新增业务仓消费 IDL 生成契约的 CI 门禁，影响契约依赖治理和 merge-readiness 证据。"
+  },
+  "decision": "批准 LEN-36 requirement 与 impact-analysis，允许进入设计阶段。"
+}
