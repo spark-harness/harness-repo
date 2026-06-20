@@ -69,9 +69,12 @@ release-bound 合法 peer repo 状态：
 
 1. peer repo 的 `related_branch` 已合入 `release_branch`。
 2. peer repo 的 `target_branch` 已合入 `release_branch`。
+3. PR gate 阶段存在同一 requirement 的 `related_branch -> release_branch`
+   open PR。
 
 feature 分支被合并或清理后，只要 Git / PR / tag 证据能证明已合入 target 或
-release，delivery readiness 不应失败。
+release，delivery readiness 不应失败。open PR 证据只表示待合并状态，不替代
+最终发布时的 merge、Formal tag 和 artifact 证据。
 
 ## 标准流程
 

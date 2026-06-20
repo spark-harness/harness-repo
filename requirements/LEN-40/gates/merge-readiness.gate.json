@@ -5,13 +5,13 @@
   "gate_name": "合并就绪门禁",
   "stage": "5.1",
   "checked_by": "merge_readiness_checker",
-  "checked_at": "2026-06-21T01:10:09+08:00",
+  "checked_at": "2026-06-21T01:28:36+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
     {
       "path": "requirements/LEN-40/requirement.md",
-      "sha256": "b742d40eb3a8638cef61aae6c487df43936c3f9040ef4e46c99586c0da2ecbbf"
+      "sha256": "d0c54697f28de96c3a66e8b659000eaae1444a5afaf544118901c7e6fbfe2036"
     },
     {
       "path": "requirements/LEN-40/impact-analysis.md",
@@ -19,7 +19,7 @@
     },
     {
       "path": "requirements/LEN-40/design.md",
-      "sha256": "e44fdd872cc4f444ce21642278f4dd91ffca6cfec860d8dcf1be92a62c4100b4"
+      "sha256": "2ef8e09a3207de06c72fc22c033209e38c033ca767e16976f38429d0b981098e"
     },
     {
       "path": "requirements/LEN-40/tasks.json",
@@ -27,19 +27,19 @@
     },
     {
       "path": "requirements/LEN-40/gates/requirement-review.gate.json",
-      "sha256": "8508a39a462dfd9c998dacf28a411e2dc717db4899da2e07566fe5092e334e6d"
+      "sha256": "5cc6aea0a40f15263dc27a1d6090651c80c47802592cdc8e17f301182fdfb26d"
     },
     {
       "path": "requirements/LEN-40/gates/design-review.gate.json",
-      "sha256": "4034cc27008b8e922a5c3bb7b621716009aadaff56a795cbcdd54e5d88dfbed5"
+      "sha256": "c9b3cef5680c470682c70dda7c7ce589861f807c770bfb8a613cce1a9a0e532a"
     },
     {
       "path": "requirements/LEN-40/gates/dev-entry.gate.json",
-      "sha256": "57030d3fd48eeb4ab33f535332ac807e63b8c672663f8d714a3249e9d30b6dae"
+      "sha256": "41c7059c6f7247385c090b861b9ba4e16ba2b7f8380a82b17f8d423ed01a924e"
     },
     {
       "path": "requirements/LEN-40/gates/service-repo-check.gate.json",
-      "sha256": "d4af65497eb730c2597f8d93c8d9b417469a3d0997885635f30140a02aae100e"
+      "sha256": "194698013c9cb37cf018c294ebbc35e5059edec216e0b08be7af9e3a47b70c6e"
     },
     {
       "path": ".service-matrix/dependencies.yaml",
@@ -76,7 +76,7 @@
   "evidence": [
     {
       "path": "requirements/LEN-40/evidence/contract-delivery-verification.md",
-      "sha256": "9c85e83f4584a8a44d44a9563d112b56b95904aaf6492f97dcea65d31a3c49bc"
+      "sha256": "6ba6d6c2a905a2b5d18b58a16beee34f1fb00bc8c1aec23ccd0fdf2f82ea3357"
     }
   ],
   "idl_impact": {

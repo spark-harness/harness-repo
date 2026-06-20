@@ -95,7 +95,8 @@ Then: Janus / CI 验证 tag、commit 可追溯性、artifact 和 business depend
   `related_branch` 已合入 `target_branch`、或 `target_branch` 已合入
   `release_branch`。
 - BR4 release-bound peer repo 合法状态要求 `related_branch` 或 `target_branch` 已合入
-  `release_branch`。
+  `release_branch`；在 PR gate 阶段，允许用同一 requirement 的 open release PR
+  作为待合并 peer 证据。
 - BR5 integration-bound 禁止 SNAPSHOT，但允许 immutable RC 或 formal。
 - BR6 release-bound 只允许 formal。
 - BR7 Formal 发布由人完成；Janus / CI 只验证证据。
@@ -114,6 +115,8 @@ Then: Janus / CI 验证 tag、commit 可追溯性、artifact 和 business depend
 - AC9 business contract scan 支持 `rc-or-formal` 和 `formal-only`。
 - AC10 Harness、business、IDL 的 branch coherence workflow 改为调用
   `janus delivery verify`。
+- AC11 多仓 release-bound PR 同步打开时，peer repo 可用 open release PR 证据通过
+  PR 阶段 readiness；最终发布仍必须验证 merge / formal 证据。
 
 ## Open Questions
 

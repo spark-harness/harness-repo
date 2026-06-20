@@ -5,7 +5,7 @@
   "gate_name": "服务仓库检查门禁",
   "stage": "4.3",
   "checked_by": "service_repo_checker",
-  "checked_at": "2026-06-21T01:09:48+08:00",
+  "checked_at": "2026-06-21T01:27:13+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -15,7 +15,7 @@
     },
     {
       "path": "requirements/LEN-40/design.md",
-      "sha256": "e44fdd872cc4f444ce21642278f4dd91ffca6cfec860d8dcf1be92a62c4100b4"
+      "sha256": "2ef8e09a3207de06c72fc22c033209e38c033ca767e16976f38429d0b981098e"
     },
     {
       "path": "requirements/LEN-40/tasks.json",
@@ -67,17 +67,17 @@
     {
       "name": "harness-repo",
       "branch": "feature/LEN-40-delivery-flow",
-      "commit": "75cc7cc"
+      "commit": "5a46d94"
     },
     {
       "name": "business-repo",
       "branch": "feature/LEN-40-delivery-flow",
-      "commit": "6dc5178"
+      "commit": "e6ff19b"
     },
     {
       "name": "idl-repo",
       "branch": "feature/LEN-40-delivery-flow",
-      "commit": "b0bedba"
+      "commit": "040ac03"
     }
   ],
   "idl_impact": {

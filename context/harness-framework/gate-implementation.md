@@ -310,7 +310,10 @@ janus delivery verify --requirement <REQ-ID> --repo <repo-name>
 通过条件：
 
 - peer repo 的 `related_branch` 或 `target_branch` 已合入 `release_branch`，或能
-  通过 PR / merge commit / tag 证据证明当前需求已进入 release。
+  通过 open PR / merge commit / tag 证据证明当前需求已进入 release。
+- open PR 证据只用于 PR gate 阶段，表示 peer repo 已有同一 requirement 的
+  `related_branch -> release_branch` 待合并 PR；最终发布仍必须验证 merge、
+  Formal tag 和 artifact 证据。
 - 当前仓是 `business-repo` 时，当前 PR 变更到的 contract dependency 文件使用
   `formal-only` 模式。
 - Formal 发布证据要求：tag 存在、tag commit 可从 `release_branch` 追溯、

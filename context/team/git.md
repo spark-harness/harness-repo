@@ -59,7 +59,8 @@ ticket ID 为准，例如 `.worktrees/LEN-34/harness-repo`，不得从完整分�
   `related_branch` 已合入 `target_branch`、或 `target_branch` 已合入
   `release_branch`。
 - release-bound peer repo 合法状态要求 `related_branch` 或 `target_branch` 已合入
-  `release_branch`。
+  `release_branch`；在 PR gate 阶段，允许同一 requirement 的 open release PR
+  作为待合并 peer 证据。
 - 禁止直接在 `main`、`master` 或其他受保护集成分支上提交或推送需求变更。
 - 禁止把多个无关需求混在一个分支。
 - 需求分支名必须能追溯到需求 ID 或工单 ID。

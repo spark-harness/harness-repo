@@ -5,13 +5,13 @@
   "gate_name": "Dev 进入门禁",
   "stage": "4.2",
   "checked_by": "dev_entry_checker",
-  "checked_at": "2026-06-21T01:09:48+08:00",
+  "checked_at": "2026-06-21T01:27:13+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
     {
       "path": "requirements/LEN-40/design.md",
-      "sha256": "e44fdd872cc4f444ce21642278f4dd91ffca6cfec860d8dcf1be92a62c4100b4"
+      "sha256": "2ef8e09a3207de06c72fc22c033209e38c033ca767e16976f38429d0b981098e"
     },
     {
       "path": "requirements/LEN-40/tasks.json",

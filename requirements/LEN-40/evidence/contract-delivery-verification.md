@@ -8,23 +8,21 @@
 - Janus repo: `/Users/forest/Code/spark/.worktrees/LEN-40/janus`
 - Business repo: `/Users/forest/Code/spark/.worktrees/LEN-40/business-repo`
 - IDL repo: `/Users/forest/Code/spark/.worktrees/LEN-40/idl-repo`
-- Verified at: `2026-06-21T00:52:58+08:00`
+- Verified at: `2026-06-21T01:28:28+08:00`
 
 ## Result
 
-PARTIAL PASS.
+PASS.
 
 Implementation tests, scanner tests, workflow syntax checks, actionlint checks, gate JSON
-validation, formal evidence unit tests, and diff checks passed. `janus delivery verify` correctly reports a current
-release-bound peer-state blocker for `idl-repo` when run from `harness-repo`, `janus`, and
-`business-repo`; this is expected real-state evidence because `idl-repo` has not yet been
-merged to `release_branch`.
+validation, formal evidence unit tests, diff checks, PR-stage delivery readiness checks, and
+merge-target requirement verification passed.
 
 ## Commands
 
 | Command | Repo | Result | Notes |
 |---|---|---|---|
-| `go test ./...` | `janus` | PASS | Covers CLI, delivery verifier, formal evidence checks, gate, and requirement packages. |
+| `go test ./...` | `janus` | PASS | Covers CLI, delivery verifier, open release PR evidence, formal evidence checks, gate, and requirement packages. |
 | `python3 -m unittest tests/test_contract_dependency_scan.py` | `business-repo` | PASS | 17 tests cover `rc-or-formal`, `formal-only`, and legacy modes. |
 | `bash -n .github/workflows/branch-coherence.yml` | `harness-repo` | PASS | Workflow shell syntax check. |
 | `bash -n .github/workflows/branch-coherence.yml && bash -n .github/workflows/contract-dependency-scan.yml` | `business-repo` | PASS | Workflow shell syntax check. |
@@ -45,10 +43,10 @@ merged to `release_branch`.
 
 | Command | Result | Evidence |
 |---|---|---|
-| `/tmp/janus-len40 delivery verify --requirement LEN-40 --repo harness-repo --workspace /Users/forest/Code/spark/.worktrees/LEN-40 --base master --head feature/LEN-40-delivery-flow` | BLOCKED | `idl-repo has no acceptable peer state for related="feature/LEN-40-delivery-flow" target="master" release="master"`. |
-| `/tmp/janus-len40 delivery verify --requirement LEN-40 --repo janus --workspace /Users/forest/Code/spark/.worktrees/LEN-40 --base master --head feature/LEN-40-delivery-flow` | BLOCKED | `idl-repo has no acceptable peer state for related="feature/LEN-40-delivery-flow" target="master" release="master"`. |
-| `/tmp/janus-len40 delivery verify --requirement LEN-40 --repo business-repo --workspace /Users/forest/Code/spark/.worktrees/LEN-40 --base master --head feature/LEN-40-delivery-flow` | BLOCKED | Contract scan passed `formal-only`; peer status blocks on `idl-repo`. |
-| `/tmp/janus-len40 delivery verify --requirement LEN-40 --repo idl-repo --workspace /Users/forest/Code/spark/.worktrees/LEN-40 --base master --head feature/LEN-40-delivery-flow` | PASS | Peers `business-repo`, `harness-repo`, and `janus` are detected as `related_merged_to_release`. |
+| `/tmp/janus-len40 delivery verify --requirement LEN-40 --repo harness-repo --workspace /Users/forest/Code/spark/.worktrees/LEN-40 --base master --head feature/LEN-40-delivery-flow` | PASS | Peers are accepted by release merge evidence or `release_pr_open` PR-stage evidence. |
+| `/tmp/janus-len40 delivery verify --requirement LEN-40 --repo janus --workspace /Users/forest/Code/spark/.worktrees/LEN-40 --base master --head feature/LEN-40-delivery-flow` | PASS | Peers are accepted by release merge evidence or `release_pr_open` PR-stage evidence. |
+| `/tmp/janus-len40 delivery verify --requirement LEN-40 --repo business-repo --workspace /Users/forest/Code/spark/.worktrees/LEN-40 --base master --head feature/LEN-40-delivery-flow` | PASS | Contract scan passed `formal-only`; peers are accepted by release merge evidence or `release_pr_open` PR-stage evidence. |
+| `/tmp/janus-len40 delivery verify --requirement LEN-40 --repo idl-repo --workspace /Users/forest/Code/spark/.worktrees/LEN-40 --base master --head feature/LEN-40-delivery-flow` | PASS | Peers are accepted by release merge evidence or `release_pr_open` PR-stage evidence. |
 
 ## Contract / IDL Boundary
 
@@ -58,9 +56,9 @@ merged to `release_branch`.
 - Formal publishing remains human-operated.
 - Artifact registry validation is implemented for changed formal contract dependency files. It requires read-only GitHub package / generated-contract repo credentials in CI.
 
-## Current Blocking Finding
+## PR-Stage Peer Evidence
 
-`release-readiness` currently blocks in repos that depend on `idl-repo` as a peer until
-`idl-repo` has merge evidence into `release_branch` or the verifier can query equivalent PR /
-tag evidence. This is not a gate implementation failure; it is the intended release-bound
-peer-state rule.
+`release_pr_open` is valid only for PR-stage readiness. It proves the peer repo has an open
+`related_branch -> release_branch` PR for the same requirement. After merge, final release
+readiness continues to require merge evidence plus Formal tag / artifact evidence where
+contract dependency files changed.

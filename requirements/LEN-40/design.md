@@ -15,7 +15,7 @@ decision: "批准 LEN-40 设计方案。"
 | Requirement Item | Design Decision | Notes |
 |---|---|---|
 | AC1, AC2, AC3 | Requirement front matter 增加 `target_branch`、`release_branch`、`contract_gate_mode`、`affected_repositories` | 不写死 master |
-| AC4 | Janus `delivery verify` 用 Git refs / merge-base / merge commit 证据判断 peer 状态 | 后续可接 GitHub PR 查询 |
+| AC4, AC11 | Janus `delivery verify` 用 Git refs / merge-base / merge commit / GitHub PR 证据判断 peer 状态 | open PR 只表示 PR 阶段待合并证据，不替代最终发布证据 |
 | AC5, AC6, AC9 | business contract scan 支持 `rc-or-formal` / `formal-only`，Janus 在 business PR 上调用变更范围扫描 | 旧 `rc` / `master` 模式保留兼容 |
 | AC7 | release-readiness 验证 business formal dependency、IDL formal tag 和 artifact，不触发发布 | 仅扫描当前 PR 变更到的 contract dependency 文件 |
 | AC8, AC10 | 三仓 workflow 调用 Janus，不复制分支判断 bash | workflow 只负责 checkout 和构建 Janus |
@@ -74,6 +74,8 @@ peer repo 合法状态：
 - `related_branch` 是 `target_branch` 的 ancestor。
 - `related_branch` 或 `target_branch` 已进入 `release_branch`。
 - feature 分支删除后，本地 fallback 可用 merge commit message 证明 related branch。
+- release-bound PR gate 阶段可用同一 `related_branch -> release_branch` 的 open PR
+  作为 `release_pr_open` peer 证据。
 - `epic/foo -> master` 时，PR head 等于 `target_branch` 且 base 等于
   `release_branch`，按 release-bound / formal-only 处理。
 - 当前仓是 `business-repo` 时，Janus 对当前 PR 变更到的 `pom.xml`、`go.mod`、
@@ -81,11 +83,11 @@ peer repo 合法状态：
 
 MVP 不做：
 
-- 不直接调用 GitHub PR API。
 - 不自动执行 Formal 发布。
 
-GitHub PR / merge commit 查询作为后续增强接入同一 `delivery verify`，不再散落到
-workflow bash。
+GitHub PR 查询集中在 `delivery verify` 内，不散落到 workflow bash。open PR
+证据只用于 PR 阶段 readiness；合并后和 Formal 发布仍以 merge / tag / artifact
+证据为准。
 
 Release-bound 且当前 PR 变更 `pom.xml`、`go.mod` 或 `go.sum` 时，Janus 解析
 business formal dependency，并验证：
@@ -127,5 +129,5 @@ business formal dependency，并验证：
 | Risk | Mitigation | Owner |
 |---|---|---|
 | workflow checkout 多仓时 token 不足 | 使用专用 token fallback，并在 PR 验证中暴露缺失权限 | Harness Team |
-| 本地 Git fallback 无法覆盖所有 feature 删除场景 | 后续把 GitHub PR / merge commit 查询集中接入 Janus | Harness Team |
+| 本地 Git fallback 无法覆盖所有 feature 删除场景 | GitHub PR 查询集中接入 Janus；open PR 只作为 PR 阶段证据 | Harness Team |
 | artifact 查询凭据缺失 | workflow 传入只读 artifact / generated-contract repo token；缺失时 release-bound formal dependency PR 阻塞 | Harness Team |
