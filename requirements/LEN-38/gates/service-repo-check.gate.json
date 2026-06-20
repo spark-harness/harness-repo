@@ -1,0 +1,88 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-38",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-20T18:38:54+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-38/impact-analysis.md",
+      "sha256": "a577c4c9a48d513f99cb9babd305d51297c9d5cb3bfc6ac9b2bf8320516a9eba"
+    },
+    {
+      "path": "requirements/LEN-38/design.md",
+      "sha256": "df0f240cd6dc5e8ec5d6719409349c1cc08ce844afe8e08578eddf1ce12f2466"
+    },
+    {
+      "path": "requirements/LEN-38/tasks.json",
+      "sha256": "9c19b32143d885a57d32fe5ba60069b13e2b0ce2e05cdb5e56cf8ff147654250"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "fd4ff8d37331eada97ebe2fe539e993d70146462d2e5243664351a593a03e091"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-38"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "6 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "user-api"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-38/impact-analysis.md approved by Forest at 2026-06-20T18:09:32+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-38-go-idl-publishing",
+      "commit": "9a0d3a3"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-38-go-idl-publishing",
+      "commit": "1c64a36"
+    },
+    {
+      "name": "idl-repo",
+      "branch": "feature/LEN-38-go-idl-publishing",
+      "commit": "4a589e4"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "本需求不修改具体 .proto 语义，但新增 Go IDL 生成物仓库化、同名分支同步、RC tag 发布和 formal tag 发布能力，影响 protobuf 生成契约发布链路。"
+  },
+  "decision": "批准 LEN-38 service-repo-check，允许进入实现阶段。"
+}
