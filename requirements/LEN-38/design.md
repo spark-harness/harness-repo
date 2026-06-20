@@ -16,7 +16,7 @@ decision: "批准 LEN-38 design，允许进入任务拆分阶段。"
 |---|---|---|
 | R1, AC1-AC3 | 初始化 `spark-harness/idl-go-repo` 为 Go module 仓库，默认分支为 `master`，module path 为 `github.com/spark-harness/idl-go-repo`。 | 远端仓库已创建但为空仓，实现阶段补齐默认分支和 `go.mod`。 |
 | R2-R4, AC4-AC7 | 在 `idl-repo` 新增 Go branch sync workflow，复用 Java 同步链路的跨仓 checkout、目标分支选择、生成、校验、提交和 push 模式。 | workflow 名称建议为 `.github/workflows/sync-go-idl.yml`。 |
-| R5, AC8, AC10 | RC 发布使用 `workflow_dispatch`，输入 RC tag 和冻结的 IDL ref，生成后在 `idl-go-repo` 创建不可覆盖 tag。 | 第一版不使用 PR label 或 comment 触发。 |
+| R5, AC8, AC10 | RC 发布支持 `workflow_dispatch` 输入 RC tag 和冻结的 IDL ref，也支持 RC tag push；生成后在 `idl-go-repo` 创建不可覆盖 tag。 | 第一版不使用 PR label 或 comment 触发。 |
 | R6, AC9-AC10 | Formal 发布由 `idl-repo` SemVer tag push 触发，并在 `idl-go-repo` 创建同名 Go module tag。 | 与 LEN-35 的 formal tag 事实来源一致。 |
 | R7, BR15-BR16 | tag 创建前检查 `idl-go-repo` 远端 tag 是否已存在；存在即失败。 | 不提供覆盖、移动或删除 tag 的 workflow。 |
 | R8, AC6-AC7 | 生成和发布统一执行 `buf generate --template buf.gen.go.yaml`、`go mod tidy`、`go test ./...`。 | Go message 与 gRPC stub 先写入 staging 目录，再同步到 `idl-go-repo`，避免清理 `.git`、`go.mod` 或 README。 |
@@ -99,12 +99,16 @@ vesta/spark/user/v1/profile.pb.go
 
 ### RC Publish Workflow
 
-新增或合并到 `idl-repo/.github/workflows/publish-go-idl.yml`，RC 使用 `workflow_dispatch`：
+新增或合并到 `idl-repo/.github/workflows/publish-go-idl.yml`，RC 支持两种触发：
+
+- `workflow_dispatch`
+- `push` 符合格式的 RC tag
 
 输入：
 
-- `idl_ref`: 冻结 IDL ref，必须能解析为 commit。
-- `go_tag`: RC tag，例如 `v1.8.0-rc.LEN-38.20260620.<short-sha>`。
+- `workflow_dispatch` 输入 `idl_ref`: 冻结 IDL ref，必须能解析为 commit。
+- `workflow_dispatch` 输入 `go_tag`: RC tag，例如 `v1.8.0-rc.LEN-38.20260620.<short-sha>`。
+- tag push 使用 tag 指向的 IDL commit 作为冻结 IDL ref。
 
 规则：
 
@@ -115,7 +119,7 @@ vesta/spark/user/v1/profile.pb.go
 - 创建 `idl-go-repo` tag 前必须执行 `git ls-remote --tags origin "$go_tag"`；已存在则失败。
 - push commit 到发布基线分支或发布专用分支后，再 push tag。
 
-第一版选择 `workflow_dispatch`，因为 RC 来自冻结 IDL commit，不应从任意分支名自动推断。
+第一版不从任意分支名自动推断 RC。RC 必须由显式输入的冻结 ref 或显式 RC tag 决定。
 
 ### Formal Publish Workflow
 
