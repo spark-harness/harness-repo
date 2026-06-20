@@ -58,12 +58,11 @@ approved or updated with an approval record, immediately create or refresh
 
 ```bash
 janus gate validate requirements/{requirement-id}/gates/dev-entry.gate.json
-janus gate render --input requirements/{requirement-id}/gates/dev-entry.gate.json --output requirements/{requirement-id}/gates/dev-entry.md
 ```
 
 If service branches, service matrix entries, or IDL readiness are already known
 at task approval time, also create or refresh
-`requirements/{requirement-id}/gates/service-repo-check.gate.json` and render it
+`requirements/{requirement-id}/gates/service-repo-check.gate.json` and validate it
 with Janus. If they are not ready, keep the task-planning stage open and report
 the missing readiness item; do not create an expected-failure `BLOCKED` gate for
 normal in-progress work.

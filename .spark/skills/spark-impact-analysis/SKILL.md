@@ -59,7 +59,6 @@ SHA-256 inputs for `requirement.md` and `impact-analysis.md`, then run:
 
 ```bash
 janus gate validate requirements/{requirement-id}/gates/requirement-review.gate.json
-janus gate render --input requirements/{requirement-id}/gates/requirement-review.gate.json --output requirements/{requirement-id}/gates/requirement-review.md
 ```
 
 Do not create `requirement-review` before `impact-analysis.md` exists. If the

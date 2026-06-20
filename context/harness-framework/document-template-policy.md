@@ -15,10 +15,11 @@
 | 设计说明 | `context/harness-framework/templates/design.md` | 阶段 3 | `requirements/{requirement-id}/design.md` |
 | 任务拆分 | `context/harness-framework/templates/tasks.json` | 阶段 4.1 | `requirements/{requirement-id}/tasks.json` |
 | 门禁 JSON | `context/harness-framework/templates/gate-report.gate.json` | 阶段 2.2、3.3、4.2、4.3、5.1 | `requirements/{requirement-id}/gates/{gate-id}.gate.json` |
-| 门禁审计视图 | Janus 渲染生成 | 阶段 2.2、3.3、4.2、4.3、5.1 | `requirements/{requirement-id}/gates/{gate-id}.md` |
 | 代码审查报告 | `context/harness-framework/templates/review-report.md` | 阶段 4.4 | `requirements/{requirement-id}/reviews/{task-id}.md` |
 
 门禁 JSON 必须使用固定字段。阶段推进只能读取 JSON 结论，不能读取聊天记录或手写 Markdown 作为放行依据。
+
+历史 `requirements/{requirement-id}/gates/{gate-id}.md` 只视为旧审计快照，不再由 Janus 生成、刷新或校验。新需求不得新增 gate Markdown。
 
 Markdown 文档的轻量元数据使用文件顶部 YAML front matter。正文不再保留 `## Metadata` 列表，避免同一份文档出现两套元数据口径。
 
@@ -37,7 +38,7 @@ Markdown 文档的轻量元数据使用文件顶部 YAML front matter。正文�
 
 - `context/harness-framework/templates/tasks.json`
 
-执行门禁时，应生成或更新固定格式门禁 JSON，并用 Janus 渲染审计 Markdown。
+执行门禁时，应生成或更新固定格式门禁 JSON，并用 Janus 校验 JSON。
 
 阶段 4.4 每个任务完成审查时，应从 `review-report.md` 模板生成 `requirements/{requirement-id}/reviews/{task-id}.md`。
 

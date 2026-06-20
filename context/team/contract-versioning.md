@@ -149,4 +149,4 @@ Merge-readiness 应检查：
 - Go module path 和 version major 匹配。
 - 业务依赖版本、consumer commit 和测试结果已记录。
 
-门禁输出必须是机器可读的；渲染后的 Markdown 只作为审计输出。
+门禁输出必须是机器可读的 gate JSON；历史 gate Markdown 只作为旧审计快照。

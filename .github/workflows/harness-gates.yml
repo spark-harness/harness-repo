@@ -78,14 +78,13 @@ jobs:
           echo "changed requirements:"; cat "$RUNNER_TEMP/req_ids.txt" || true
           echo "changed gate JSONs:"; cat "$RUNNER_TEMP/gate_jsons.txt" || true
 
-      - name: Gate Markdown drift (changed gates)
+      - name: Gate JSON validation (changed gates)
         run: |
           set -euo pipefail
           while read -r g; do
             [ -z "$g" ] && continue
-            md="${g%.gate.json}.md"
-            echo "::group::render --check $g"
-            janus gate render --check --input "$g" --output "$md"
+            echo "::group::validate $g"
+            janus gate validate "$g"
             echo "::endgroup::"
           done < "$RUNNER_TEMP/gate_jsons.txt"
 

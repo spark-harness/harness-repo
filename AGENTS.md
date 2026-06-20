@@ -21,10 +21,10 @@
 ## Gate Reports
 
 - 门禁机器事实源使用 `requirements/{requirement-id}/gates/{gate-id}.gate.json`。
-- 门禁审计视图使用 `requirements/{requirement-id}/gates/{gate-id}.md`，由 Janus 从 JSON 渲染生成。
-- 阶段推进只能读取门禁 JSON 结论，不能读取聊天记录或手写 Markdown 作为放行依据。
+- 阶段推进只能读取门禁 JSON 结论，不能读取聊天记录、手写 Markdown 或历史 Markdown 作为放行依据。
+- 历史 `requirements/{requirement-id}/gates/{gate-id}.md` 只视为旧审计快照，不再刷新、不再校验、不再作为事实来源。
 - Harness 运行环境必须提供 PATH 中的 `janus` 命令；开始门禁工作前先运行 `janus version`。
-- 门禁变更后必须运行 `janus gate validate`、`janus gate render --check`，合并前运行 `janus requirement verify --requirement <id> --target merge`。
+- 门禁变更后必须运行 `janus gate validate`，合并前运行 `janus requirement verify --requirement <id> --target merge`。
 
 ## Editing Rules
 

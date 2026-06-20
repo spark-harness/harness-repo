@@ -41,11 +41,7 @@ Result 为 WAIVED = 按豁免规则放行
 requirements/{requirement-id}/gates/{gate-id}.gate.json
 ```
 
-门禁审计视图由 Janus 渲染到：
-
-```text
-requirements/{requirement-id}/gates/{gate-id}.md
-```
+历史 `requirements/{requirement-id}/gates/{gate-id}.md` 只视为旧审计快照，不再由 Janus 生成、刷新、校验或作为阶段推进事实源。新需求不得新增 gate Markdown。
 
 推荐 `gate-id` 使用语义名称，不把阶段编号写进身份字段：
 
@@ -293,7 +289,6 @@ Agent 执行门禁时，必须输出两类内容：
 
 - 写入 `*.gate.json`。
 - 运行 `janus gate validate <gate.json>`。
-- 运行 `janus gate render --input <gate.json> --output <gate.md>`。
 - 在对话中给出简短结论和文件路径。
 
 Agent 不能只在对话中说“通过”。
@@ -315,7 +310,6 @@ Agent 输出 JSON 时必须包含：
 Gate: design-review
 Result: BLOCKED
 Source: requirements/T12345/gates/design-review.gate.json
-Report: requirements/T12345/gates/design-review.md
 Reason: 缺少回滚方案，不能进入 4.1。
 ```
 
@@ -329,7 +323,7 @@ Skill 执行阶段门禁时按以下顺序：
 4. 执行门禁检查矩阵中的检查项。
 5. 只在当前门禁职责需要时收集证据路径。
 6. 生成门禁 JSON。
-7. 运行 `janus gate validate` 和 `janus gate render`。
+7. 运行 `janus gate validate`。
 8. 根据 `result` 决定是否允许继续。
 9. 如果 `BLOCKED`，停止推进并列出阻塞项。
 10. 如果 `WARN`，继续推进但记录后续动作。
@@ -400,7 +394,7 @@ CI / MR 必须失败的情况：
 
 `harness-repo` 的 `.github/workflows/harness-gates.yml` 已落地这套口径：对本次改动
 涉及的 `requirements/<id>` 跑 `janus requirement status`（按阶段判定）、对涉及的 gate
-JSON 跑 `janus gate render --check`（防 Markdown 漂移）；向默认分支发起的 PR 额外跑
+JSON 跑 `janus gate validate`；向默认分支发起的 PR 额外跑
 `janus requirement verify --target merge`（合并就绪）。
 
 `business-repo` 与 `idl-repo` 的 MR 流水线应复用同一个 `janus`：按改动关联的
@@ -439,60 +433,61 @@ Follow-Up Issue:
 
 `WAIVED` 只能由有批准记录的门禁报告使用。没有批准记录时，必须保持 `BLOCKED`。
 
-## 11. 最小可用门禁报告示例
+## 11. 最小可用门禁 JSON 示例
 
-```markdown
----
-requirement_id: "T12345"
-gate_id: "design-review"
-gate_name: "设计门禁"
-stage: "3.3"
-checked_by: "detail-design-quality-reviewer"
-checked_at: "2026-05-31T10:00:00+08:00"
-result: "BLOCKED"
-blocks_next_stage: true
----
-
-# Gate Report
-
-## 输入快照
-
-| Path | SHA-256 |
-| --- | --- |
-| `requirements/T12345/requirement.md` | `...` |
-| `requirements/T12345/impact-analysis.md` | `...` |
-| `requirements/T12345/design.md` | `...` |
-
-## Checklist
-
-| Item | Result | Evidence |
-| --- | --- | --- |
-| 覆盖服务影响 | PASS | design.md#服务影响 |
-| 明确 IDL 影响 | PASS | design.md#契约影响 |
-| 明确回滚方案 | BLOCKED | design.md 缺少回滚章节 |
-
-## Blocking Issues
-
-| Issue | Required Action | Owner |
-| --- | --- | --- |
-| 缺少回滚方案 | 补充灰度关闭和代码回滚策略 | backend |
-
-## Warnings
-
-| Warning | Follow-Up | Owner |
-| --- | --- | --- |
-|  |  |  |
-
-## Waiver
-
-- Waiver Required: no
-- Waiver Reason:
-- Approved By:
-- Approved At:
-- Expires At:
-- Follow-Up Issue:
-
-## Decision
-
-不允许进入 4.1 任务拆分。补齐回滚方案后重新执行 3.3 设计门禁。
+```json
+{
+  "schema_version": "1",
+  "requirement_id": "T12345",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-05-31T10:00:00+08:00",
+  "result": "BLOCKED",
+  "blocks_next_stage": true,
+  "inputs": [
+    {
+      "path": "requirements/T12345/requirement.md",
+      "sha256": "..."
+    },
+    {
+      "path": "requirements/T12345/impact-analysis.md",
+      "sha256": "..."
+    },
+    {
+      "path": "requirements/T12345/design.md",
+      "sha256": "..."
+    }
+  ],
+  "checklist": [
+    {
+      "item": "覆盖服务影响",
+      "result": "PASS",
+      "evidence": "design.md#服务影响"
+    },
+    {
+      "item": "明确 IDL 影响",
+      "result": "PASS",
+      "evidence": "design.md#契约影响"
+    },
+    {
+      "item": "明确回滚方案",
+      "result": "BLOCKED",
+      "evidence": "design.md 缺少回滚章节"
+    }
+  ],
+  "blocking_issues": [
+    {
+      "issue": "缺少回滚方案",
+      "required_action": "补充灰度关闭和代码回滚策略",
+      "owner": "backend"
+    }
+  ],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "decision": "不允许进入 4.1 任务拆分。补齐回滚方案后重新执行 3.3 设计门禁。"
+}
 ```

@@ -1,0 +1,45 @@
+{
+  "requirement_id": "LEN-37",
+  "status": "approved",
+  "approved_by": "Forest",
+  "approved_at": "2026-06-20T13:50:57+08:00",
+  "decision": "批准 LEN-37 dev-entry，允许进入实现验证。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "移除 Harness 强制 gate Markdown render 依赖",
+      "scope": "更新 Harness CI、AGENTS、framework docs、team docs、commands、hooks、agents 和 .spark skills，使 gate JSON 成为唯一机器事实源；历史 gate Markdown 仅作为旧审计快照，不再刷新、不再校验；保留 scripts/render-gates.py 兼容入口但改为 validate-only。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R6", "R7"],
+        "design_decisions": ["D1", "D2"]
+      },
+      "affected_services": [],
+      "acceptance": ["AC1", "AC3", "AC4", "AC7"],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "删除 Janus gate render CLI 能力",
+      "scope": "删除 janus gate render 子命令、render --check、gate Markdown render 实现和相关测试；调整 requirement gate-check、requirement status、gate verify、requirement verify 与 hook gate-drift-check，使它们只依赖 gate JSON。",
+      "trace": {
+        "requirement_items": ["R3", "R4", "R5"],
+        "design_decisions": ["D3", "D4", "D5", "D6"]
+      },
+      "affected_services": [],
+      "acceptance": ["AC2", "AC5", "AC6", "AC7", "AC8"],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "完成 JSON-only 门禁验证与交付证据",
+      "scope": "运行 Janus 和 Harness 验证命令，确认 gate render 不可用、gate validate 可用、merge 级 requirement verify 可用；刷新 LEN-37 标准 gate JSON 和 evidence，不新增 gate Markdown；记录搜索结果、测试命令和剩余风险。",
+      "trace": {
+        "requirement_items": ["R1", "R3", "R4", "R5", "R6", "R7"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6"]
+      },
+      "affected_services": [],
+      "acceptance": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8"],
+      "state": "done"
+    }
+  ]
+}

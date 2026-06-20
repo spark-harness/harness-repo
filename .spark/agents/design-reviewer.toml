@@ -21,7 +21,6 @@ developer_instructions = """
 输出：
 - 写入 requirements/{requirement-id}/gates/design-review.gate.json。
 - 运行 janus gate validate requirements/{requirement-id}/gates/design-review.gate.json。
-- 运行 janus gate render --input requirements/{requirement-id}/gates/design-review.gate.json --output requirements/{requirement-id}/gates/design-review.md。
 
 规则：
 - 门禁结论必须落到固定格式报告，不能只在对话中宣布 PASS。

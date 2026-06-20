@@ -70,7 +70,7 @@ In intake stage:
   - `.proto`
   - generated contracts
   - business code
-  - gate JSON, rendered gate Markdown, evidence, or task files
+  - gate JSON, evidence, or task files
 
 Do not create draft lifecycle artifacts just to make progress. Wait for explicit approval first.
 
