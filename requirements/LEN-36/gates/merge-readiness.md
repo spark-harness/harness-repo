@@ -60,3 +60,4 @@ LEN-36 scanner, fixture tests, changed-file PR workflow, and Harness evidence ar
 | Path | SHA-256 |
 | --- | --- |
 | `requirements/LEN-36/evidence/contract-dependency-scan-verification.md` | `0b5fcd6386a25deff9c0ab2580ec3a7495a999063249aec4373b66c5120d654a` |
+
