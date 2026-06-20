@@ -7,10 +7,10 @@ import sys
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Validate and render Janus gate reports.")
+    parser = argparse.ArgumentParser(description="Validate Janus gate JSON reports.")
     parser.add_argument("requirement_id", help="requirement id")
     parser.add_argument("--root", default=".", help="harness-repo root")
-    parser.add_argument("--check", action="store_true", help="check rendered Markdown instead of writing it")
+    parser.add_argument("--check", action="store_true", help="deprecated compatibility flag; JSON validation is always checked")
     args = parser.parse_args()
 
     root = pathlib.Path(args.root).resolve()
@@ -23,20 +23,7 @@ def main() -> int:
         return 1
 
     for gate_file in gate_files:
-        markdown = gate_file.with_suffix("").with_suffix(".md")
         run([janus, "gate", "validate", str(gate_file.relative_to(root))], root)
-        command = [
-            janus,
-            "gate",
-            "render",
-            "--input",
-            str(gate_file.relative_to(root)),
-            "--output",
-            str(markdown.relative_to(root)),
-        ]
-        if args.check:
-            command.append("--check")
-        run(command, root)
 
     return 0
 

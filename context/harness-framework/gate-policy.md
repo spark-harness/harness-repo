@@ -13,11 +13,13 @@
 
 ## 报告位置
 
-门禁报告应写入：
+门禁机器事实源应写入：
 
 ```text
-requirements/{requirement-id}/gates/{gate-id}.md
+requirements/{requirement-id}/gates/{gate-id}.gate.json
 ```
+
+历史 `requirements/{requirement-id}/gates/{gate-id}.md` 只视为旧审计快照，不再生成、刷新、校验或作为阶段推进事实源。
 
 ## 最低内容
 

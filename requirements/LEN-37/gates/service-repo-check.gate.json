@@ -1,0 +1,78 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-37",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-20T14:22:16+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-37/impact-analysis.md",
+      "sha256": "e3acc97a4bf3cc456ff5918aa320a5543e446e3b42b16ef0f50c2a6b6b107a79"
+    },
+    {
+      "path": "requirements/LEN-37/design.md",
+      "sha256": "65ccefca4449ef6cb6198dce7de608913acb4e5e51149c99a1990bb5105667a9"
+    },
+    {
+      "path": "requirements/LEN-37/tasks.json",
+      "sha256": "9cca2d36a6f6e548be32e438e4edbfde05bca3e35f66f80284b26ace554529c4"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "fd4ff8d37331eada97ebe2fe539e993d70146462d2e5243664351a593a03e091"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-37"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "3 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "tasks.json 未声明业务服务；跳过服务矩阵路径校验。"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-37/impact-analysis.md approved by Forest at 2026-06-20T14:14:53+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-37-remove-janus-gate-render",
+      "commit": "1bd4d35"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf IDL、Buf 配置或 generated contracts。"
+  },
+  "decision": "批准 LEN-37 service-repo-check，允许进入合并就绪验证。"
+}

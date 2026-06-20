@@ -12,7 +12,7 @@ Hook 用于把流程顺序和审批完整性从「散文约束」变成「机器
 | 事件 | matcher | 命令 | 作用 |
 | --- | --- | --- | --- |
 | PreToolUse | `Write\|Edit\|MultiEdit` | `janus hook guard-edit` | 编辑生命周期产物前阻断违规写入 |
-| Stop | （全部） | `janus hook gate-drift-check` | 收尾时检查 gate Markdown 是否过期 |
+| Stop | （全部） | `janus hook gate-drift-check` | 收尾时检查 gate JSON 是否有效 |
 
 ## guard-edit 判定（事前阻断）
 

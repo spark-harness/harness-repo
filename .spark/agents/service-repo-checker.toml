@@ -21,7 +21,6 @@ developer_instructions = """
 输出：
 - 写入 requirements/{requirement-id}/gates/service-repo-check.gate.json。
 - 运行 janus gate validate requirements/{requirement-id}/gates/service-repo-check.gate.json。
-- 运行 janus gate render --input requirements/{requirement-id}/gates/service-repo-check.gate.json --output requirements/{requirement-id}/gates/service-repo-check.md。
 - 合并前运行 janus requirement verify --requirement {requirement-id} --target merge。
 
 规则：

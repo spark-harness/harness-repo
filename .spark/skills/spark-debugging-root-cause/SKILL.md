@@ -39,7 +39,7 @@ decisive static cause is proven.
 
 ## Failure-Specific Checks
 
-- Gate failure: inspect gate JSON, rendered Markdown, input hashes, approval source, and `janus` command output.
+- Gate failure: inspect gate JSON, input hashes, approval source, and `janus` command output.
 - IDL failure: inspect `.proto`, `buf.yaml`, `buf.gen.yaml`, generated output, and consuming service dependency.
 - Contract consumption failure: confirm generated artifact version, local install or repository auth, package names, and service imports.
 - Test failure: inspect the failing assertion and the behavior under test before editing implementation.

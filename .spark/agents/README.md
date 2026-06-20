@@ -50,7 +50,6 @@ Agent 定义为本目录下平铺的 `*.toml` 文件，按阶段的归属在下�
 - 读取 `context/harness-framework/gate-implementation.md`。
 - 按门禁 JSON 模板写入 `requirements/{requirement-id}/gates/{gate-id}.gate.json`。
 - 运行 `janus gate validate <gate-json>`。
-- 运行 `janus gate render --input <gate-json> --output <gate-md>`。
 - 使用固定字段 `result` 和 `blocks_next_stage`。
 - 在 `checklist` 中列出检查项、结果和证据。
 - 在 `blocking_issues` 中列出所有阻塞项。

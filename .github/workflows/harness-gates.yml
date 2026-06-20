@@ -32,10 +32,25 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Resolve janus ref
+        id: janus-ref
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.JANUS_REPO_TOKEN || github.token }}
+          CURRENT_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: |
+          set -euo pipefail
+          if [ -n "${CURRENT_BRANCH:-}" ] && gh api --silent "repos/spark-harness/janus/branches/$CURRENT_BRANCH"; then
+            echo "ref=$CURRENT_BRANCH" >> "$GITHUB_OUTPUT"
+          else
+            echo "ref=master" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout janus
         uses: actions/checkout@v4
         with:
           repository: spark-harness/janus
+          ref: ${{ steps.janus-ref.outputs.ref }}
           path: .janus-src
           # janus is a separate repo; a read token is needed if it is private.
           token: ${{ secrets.JANUS_REPO_TOKEN || github.token }}
@@ -78,14 +93,13 @@ jobs:
           echo "changed requirements:"; cat "$RUNNER_TEMP/req_ids.txt" || true
           echo "changed gate JSONs:"; cat "$RUNNER_TEMP/gate_jsons.txt" || true
 
-      - name: Gate Markdown drift (changed gates)
+      - name: Gate JSON validation (changed gates)
         run: |
           set -euo pipefail
           while read -r g; do
             [ -z "$g" ] && continue
-            md="${g%.gate.json}.md"
-            echo "::group::render --check $g"
-            janus gate render --check --input "$g" --output "$md"
+            echo "::group::validate $g"
+            janus gate validate "$g"
             echo "::endgroup::"
           done < "$RUNNER_TEMP/gate_jsons.txt"
 

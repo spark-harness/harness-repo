@@ -51,7 +51,6 @@ SHA-256 inputs, then run:
 
 ```bash
 janus gate validate requirements/{requirement-id}/gates/design-review.gate.json
-janus gate render --input requirements/{requirement-id}/gates/design-review.gate.json --output requirements/{requirement-id}/gates/design-review.md
 ```
 
 Do not proceed to task planning while the design gate is missing or stale.

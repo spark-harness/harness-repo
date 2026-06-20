@@ -1,6 +1,6 @@
 ---
 name: spark-evidence-gate-completion
-description: Complete Spark requirement evidence, Janus gates, verification, and optional commits. Use after docs, IDL, generated contracts, or implementation changes to write evidence, refresh gate input hashes, validate/render/verify gates, run requirement verify, and report multi-repo status.
+description: Complete Spark requirement evidence, Janus gates, verification, and optional commits. Use after docs, IDL, generated contracts, or implementation changes to write evidence, refresh gate input hashes, validate/verify gates, run requirement verify, and report multi-repo status.
 ---
 
 # Spark Evidence Gate Completion
@@ -10,8 +10,11 @@ Turn work into auditable Harness evidence and Janus gate state.
 ## Source Of Truth
 
 - Gate JSON: `harness-repo/requirements/{requirement-id}/gates/{gate-id}.gate.json`
-- Gate Markdown: `harness-repo/requirements/{requirement-id}/gates/{gate-id}.md`
 - Evidence: `harness-repo/requirements/{requirement-id}/evidence/`
+
+Historical `harness-repo/requirements/{requirement-id}/gates/{gate-id}.md`
+files are old audit snapshots only. Do not create, refresh, validate, or use
+them as gate facts.
 
 ## Preconditions
 
@@ -36,8 +39,8 @@ If evidence would be based only on intent, discussion, or unapproved work, stop 
   gate owns implementation evidence such as Buf checks and service tests.
 - If `tasks.json` marks evidence or gate work as done but any required
   `requirements/{requirement-id}/gates/{gate-id}.gate.json` file is missing,
-  treat that as incomplete work. Create the missing gate JSON, render the
-  Markdown, and run merge verification before reporting completion.
+  treat that as incomplete work. Create the missing gate JSON and run merge
+  verification before reporting completion.
 - Recompute SHA-256 values after every evidence or input edit, including small
   timestamp changes. A gate JSON must never cite stale hashes.
 - `BLOCKED` sets `blocks_next_stage: true` and has `blocking_issues`.
@@ -56,7 +59,6 @@ Run from `harness-repo` before claiming a requirement is merge-ready:
 ```bash
 find requirements/{requirement-id}/gates -maxdepth 1 -name '*.gate.json' -type f | sort
 janus gate validate requirements/{requirement-id}/gates/merge-readiness.gate.json
-janus gate render --input requirements/{requirement-id}/gates/merge-readiness.gate.json --output requirements/{requirement-id}/gates/merge-readiness.md
 janus requirement verify --requirement {requirement-id} --target merge
 ```
 
@@ -65,8 +67,8 @@ set for a normal merge-target requirement, create the missing stage gate reports
 from the approved requirement, impact analysis, design, tasks, and current
 service matrix before creating `merge-readiness`.
 
-This workflow is a final safety net. Stage skills create and render their own
-stage gates after approval: `requirement-review` after requirement plus impact,
+This workflow is a final safety net. Stage skills create and validate their own
+stage gate JSON after approval: `requirement-review` after requirement plus impact,
 `design-review` during design work, and `dev-entry` plus `service-repo-check`
 during task planning or service readiness work. Evidence completion creates
 `merge-readiness` and does not rewrite earlier gates just to attach evidence.
@@ -78,7 +80,6 @@ Run from `harness-repo`:
 ```bash
 jq empty requirements/{requirement-id}/gates/{gate-id}.gate.json
 janus gate validate requirements/{requirement-id}/gates/{gate-id}.gate.json
-janus gate render --input requirements/{requirement-id}/gates/{gate-id}.gate.json --output requirements/{requirement-id}/gates/{gate-id}.md
 janus gate verify --input requirements/{requirement-id}/gates/{gate-id}.gate.json
 janus requirement verify --requirement {requirement-id} --target merge
 ```

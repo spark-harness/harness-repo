@@ -8,7 +8,7 @@ developer_instructions = """
 - context/harness-framework/gate-implementation.md
 - context/harness-framework/document-template-policy.md
 - context/harness-framework/context-collection.md
-- context/harness-framework/templates/gate-report.md
+- context/harness-framework/templates/gate-report.gate.json
 - requirements/{requirement-id}/requirement.md
 - requirements/{requirement-id}/impact-analysis.md
 
@@ -21,7 +21,6 @@ developer_instructions = """
 输出：
 - 写入 requirements/{requirement-id}/gates/requirement-review.gate.json。
 - 运行 janus gate validate requirements/{requirement-id}/gates/requirement-review.gate.json。
-- 运行 janus gate render --input requirements/{requirement-id}/gates/requirement-review.gate.json --output requirements/{requirement-id}/gates/requirement-review.md。
 
 规则：
 - 不能只在对话中宣布 PASS。

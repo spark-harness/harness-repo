@@ -34,7 +34,7 @@
 1. 读取门禁检查矩阵。
 2. 读取当前门禁所需输入文件。
 3. 生成固定格式门禁 JSON。
-4. 用 Janus 渲染审计 Markdown。
+4. 运行 `janus gate validate <gate-json>`。
 5. 不允许只在对话中给出“通过”或“阻塞”。
 
 ## `/requirement:gate-waive`

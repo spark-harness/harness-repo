@@ -19,7 +19,6 @@ developer_instructions = """
 输出：
 - 写入 requirements/{requirement-id}/gates/dev-entry.gate.json。
 - 运行 janus gate validate requirements/{requirement-id}/gates/dev-entry.gate.json。
-- 运行 janus gate render --input requirements/{requirement-id}/gates/dev-entry.gate.json --output requirements/{requirement-id}/gates/dev-entry.md。
 
 规则：
 - 任务文件缺失或格式不合法必须 BLOCKED。
