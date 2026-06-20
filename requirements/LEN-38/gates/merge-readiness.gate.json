@@ -5,7 +5,7 @@
   "gate_name": "合并就绪门禁",
   "stage": "5.1",
   "checked_by": "Codex",
-  "checked_at": "2026-06-20T18:50:19+08:00",
+  "checked_at": "2026-06-20T19:00:51+08:00",
   "result": "WARN",
   "blocks_next_stage": false,
   "inputs": [
@@ -27,7 +27,11 @@
     },
     {
       "path": "requirements/LEN-38/evidence/go-idl-publishing.md",
-      "sha256": "8b2f4166d1bc6fca86e8651eae971d8e8ff33a233aee9d6e14b645f7238d7933"
+      "sha256": "38007f05c0e00c94e9ec788d7c38badf92edc5e51bd8cacb7a445ad23fafd552"
+    },
+    {
+      "path": "requirements/LEN-38/reviews/T1-T6.md",
+      "sha256": "58f7ae34dca4c58b6a86f36dd289154a02a3df01ad0ca4944d8c03efd1fd3d0b"
     },
     {
       "path": "requirements/LEN-38/gates/requirement-review.gate.json",
@@ -70,7 +74,12 @@
     {
       "item": "RC tag 发布验证",
       "result": "PASS",
-      "evidence": "Publish Go IDL run 27868778869 succeeded and created v0.1.0-rc.LEN-38.20260620.7976082 in idl-go-repo."
+      "evidence": "Publish Go IDL run 27869108222 succeeded and created v0.1.0-rc.LEN-38.20260620.313cbaf in idl-go-repo after validating the RC tag suffix against the resolved IDL commit."
+    },
+    {
+      "item": "实现审查",
+      "result": "PASS",
+      "evidence": "requirements/LEN-38/reviews/T1-T6.md is ready-for-gate; the RC tag traceability P1 was closed in idl-repo 313cbaf and verified by run 27869108222."
     },
     {
       "item": "Formal tag 发布验证",
@@ -96,7 +105,11 @@
   "evidence": [
     {
       "path": "requirements/LEN-38/evidence/go-idl-publishing.md",
-      "sha256": "8b2f4166d1bc6fca86e8651eae971d8e8ff33a233aee9d6e14b645f7238d7933"
+      "sha256": "38007f05c0e00c94e9ec788d7c38badf92edc5e51bd8cacb7a445ad23fafd552"
+    },
+    {
+      "path": "requirements/LEN-38/reviews/T1-T6.md",
+      "sha256": "58f7ae34dca4c58b6a86f36dd289154a02a3df01ad0ca4944d8c03efd1fd3d0b"
     }
   ],
   "decision": "Implementation is ready for review with a documented formal-tag validation warning."
