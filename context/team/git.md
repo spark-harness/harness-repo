@@ -122,6 +122,31 @@ Agent-Limitation: no business code or IDL changes included
 - 禁止只写 `update`、`fix bug`、`wip` 作为最终提交信息。
 - `[WIP]` 只允许作为长任务检查点提交，合并或交接前必须 squash、改写或删除。
 
+### PR 标题
+
+PR 标题必须同时包含 ticket ID 和 Conventional Commits 摘要：
+
+```text
+[<ticket-id>] <type>(<scope>): <summary>
+```
+
+示例：
+
+```text
+[PROJ-38] docs(harness): add PR metadata policy
+```
+
+规则：
+
+- ticket ID 必须放在标题开头的方括号中，便于 PR 列表、通知、合并提交和
+  Jira 自动关联稳定追溯。
+- ticket ID 使用 `{字符串}-{数字}` 格式，不限定项目 key；例如 `LEN-38`、
+  `SPARK-1`、`OPS_foo-123`。
+- 方括号后的摘要必须符合提交信息的 Conventional Commits 格式。
+- PR 标题不能使用 `[WIP]`、`update`、`fix bug`、`wip` 等最终交付禁用表达。
+- commit message 仍保持纯 Conventional Commits；不要为了 PR 标题规则给每个
+  commit subject 额外加 `[<ticket-id>]` 前缀。
+
 ## 不得提交
 
 - 密钥、token、证书、`.env`、`*.local` 和个人 IDE 配置。
