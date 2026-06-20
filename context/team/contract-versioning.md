@@ -4,7 +4,7 @@
 
 它不是什么：它不是 Git branching 模型，不规定团队是否使用 epic 分支；也不是契约兼容性规则的替代品。字段、RPC、HTTP、事件和错误码的兼容性仍以 `contract-compatibility.md` 为准。
 
-它是什么：它规定业务仓消费 Java / Go 生成契约时，哪些版本可以用于开发、合并候选和 master-bound 变更，以及这些版本必须如何追溯。
+它是什么：它规定业务仓消费 Java / Go 生成契约时，哪些版本可以用于开发、integration-bound、release-bound 变更，以及这些版本必须如何追溯。
 
 ## 发布阶段
 
@@ -92,9 +92,37 @@ CI 不得从 proto diff、commit message、分支名或业务仓依赖自动推�
 
 Formal tag 不得移动、删除或 force-push。
 
-## Master-bound 消费规则
+## Integration-bound 消费规则
 
-Master-bound business change 只能消费 formal version。
+Integration-bound 变更指 `target_branch != release_branch`，例如：
+
+```text
+feature/LEN-40-delivery-flow -> epic/lending
+```
+
+该阶段允许：
+
+- immutable RC。
+- formal。
+
+该阶段禁止：
+
+- 普通或 ticket scoped `SNAPSHOT`。
+- Go pseudo-version。
+- Branch dependency。
+- Local `replace`。
+- 可被覆盖或无法追溯到冻结 IDL commit 的版本。
+
+## Release-bound 消费规则
+
+Release-bound 变更指 `target_branch == release_branch`，例如：
+
+```text
+feature/LEN-40-delivery-flow -> master
+epic/lending -> master
+```
+
+Release-bound business change 只能消费 formal version。
 
 以下依赖不得进入 master：
 
@@ -143,7 +171,8 @@ Merge-readiness 应检查：
 - Maven 文件没有共享或非允许阶段的 `SNAPSHOT`。
 - `go.mod` 没有 contract local `replace`。
 - 依赖没有使用 branch name。
-- Master-bound 变更没有消费 RC、SNAPSHOT、pseudo-version 或 local replacement。
+- Integration-bound 变更没有消费 SNAPSHOT、pseudo-version、branch dependency 或 local replacement。
+- Release-bound 变更没有消费 RC、SNAPSHOT、pseudo-version 或 local replacement。
 - Formal 版本可以解析到已发布 Java artifact 或 Go module tag。
 - Formal 版本来自 `idl-repo` SemVer tag。
 - Go module path 和 version major 匹配。

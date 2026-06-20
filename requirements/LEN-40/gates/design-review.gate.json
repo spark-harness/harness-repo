@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-40",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-21T01:27:13+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-40/requirement.md",
+      "sha256": "d0c54697f28de96c3a66e8b659000eaae1444a5afaf544118901c7e6fbfe2036"
+    },
+    {
+      "path": "requirements/LEN-40/impact-analysis.md",
+      "sha256": "62d0a5c355ffb3fb33eaa4cd7056150227aa064f5264b0b6b3751e9879726b4f"
+    },
+    {
+      "path": "requirements/LEN-40/design.md",
+      "sha256": "2ef8e09a3207de06c72fc22c033209e38c033ca767e16976f38429d0b981098e"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-40/design.md approved by forest at 2026-06-21T00:48:20+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "不修改 protobuf 文件，但修改 IDL 发布证据与 contract dependency gate 的治理口径。"
+  },
+  "decision": "批准 LEN-40 设计方案。"
+}

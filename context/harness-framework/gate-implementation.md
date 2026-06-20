@@ -51,6 +51,8 @@ requirements/{requirement-id}/gates/{gate-id}.gate.json
 | 3.3 | 设计门禁 | `design-review` |
 | 4.2 | Dev 进入门禁 | `dev-entry` |
 | 4.3 | 服务仓库检查门禁 | `service-repo-check` |
+| delivery | 集成就绪门禁 | `integration-readiness` |
+| delivery | 发布就绪门禁 | `release-readiness` |
 | 5.1 | 合并就绪门禁 | `merge-readiness` |
 
 `stage` 字段保留阶段编号，用来表达流程位置。
@@ -282,6 +284,42 @@ Janus 优先读取结构化字段 `idl_impact` 和 `idl_impact_reason`。正文�
 
 - 早期阶段门禁只负责阶段推进，不承载实现完成后的证据。
 - `merge-readiness` 是合并前唯一强制检查实现证据的门禁。
+
+### Delivery readiness 语义门禁
+
+Delivery readiness 不是新的需求生命周期阶段。它是各仓 CI 在 PR / push 上调用
+Janus 的交付语义检查，用来替代各仓复制的同名分支 bash。
+
+统一入口：
+
+```bash
+janus delivery verify --requirement <REQ-ID> --repo <repo-name>
+```
+
+`integration-readiness` 适用于 `target_branch != release_branch`。
+
+通过条件：
+
+- peer repo 存在同名 `related_branch`，或已合入 `target_branch`，或
+  `target_branch` 已合入 `release_branch`。
+- 当前仓是 `business-repo` 时，当前 PR 变更到的 contract dependency 文件使用
+  `rc-or-formal` 模式。
+
+`release-readiness` 适用于 `target_branch == release_branch`。
+
+通过条件：
+
+- peer repo 的 `related_branch` 或 `target_branch` 已合入 `release_branch`，或能
+  通过 open PR / merge commit / tag 证据证明当前需求已进入 release。
+- open PR 证据只用于 PR gate 阶段，表示 peer repo 已有同一 requirement 的
+  `related_branch -> release_branch` 待合并 PR；最终发布仍必须验证 merge、
+  Formal tag 和 artifact 证据。
+- 当前仓是 `business-repo` 时，当前 PR 变更到的 contract dependency 文件使用
+  `formal-only` 模式。
+- Formal 发布证据要求：tag 存在、tag commit 可从 `release_branch` 追溯、
+  artifact 存在、artifact version 与 tag 匹配、business dependency 使用 formal。
+
+Formal 发布仍由人完成。Janus / CI 只验证证据，不自动发布。
 
 ## 6. Agent 输出格式
 

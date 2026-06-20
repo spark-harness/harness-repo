@@ -20,7 +20,9 @@ Git 规范定义：
 
 ## 分支
 
-同一个需求在 Harness 仓、业务仓和 IDL 仓中应使用一致分支名。
+同一个需求在开发阶段应优先使用一致的 `related_branch`。如果需求经过
+epic / integration 分支汇总，不能再把“同名 feature 分支必须一直存在”当作
+跨仓一致性的唯一规则。
 
 推荐格式：
 
@@ -51,7 +53,14 @@ ticket ID 为准，例如 `.worktrees/LEN-34/harness-repo`，不得从完整分�
 ### 强制规则
 
 - 业务需求必须从 `main` 或团队指定集成分支拉出。
-- 同一个需求涉及多个仓库时，分支名必须一致。
+- 同一个需求涉及多个仓库时，需求文档必须声明 `related_branch`、
+  `target_branch`、`release_branch` 和 `affected_repositories`。
+- integration-bound peer repo 合法状态包括：存在同名 `related_branch`、
+  `related_branch` 已合入 `target_branch`、或 `target_branch` 已合入
+  `release_branch`。
+- release-bound peer repo 合法状态要求 `related_branch` 或 `target_branch` 已合入
+  `release_branch`；在 PR gate 阶段，允许同一 requirement 的 open release PR
+  作为待合并 peer 证据。
 - 禁止直接在 `main`、`master` 或其他受保护集成分支上提交或推送需求变更。
 - 禁止把多个无关需求混在一个分支。
 - 需求分支名必须能追溯到需求 ID 或工单 ID。

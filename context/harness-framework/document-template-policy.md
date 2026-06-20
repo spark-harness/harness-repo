@@ -23,6 +23,16 @@
 
 Markdown 文档的轻量元数据使用文件顶部 YAML front matter。正文不再保留 `## Metadata` 列表，避免同一份文档出现两套元数据口径。
 
+需求模板中的分支字段语义：
+
+| 字段 | 含义 |
+| --- | --- |
+| `related_branch` | 当前需求开发分支 |
+| `target_branch` | 当前 PR / MR 目标分支 |
+| `release_branch` | 最终发布分支 |
+| `contract_gate_mode` | `auto`、`rc-or-formal` 或 `formal-only` |
+| `affected_repositories` | 本需求涉及的 Spark 子仓列表 |
+
 ## 2. 使用规则
 
 创建需求目录时，至少复制：

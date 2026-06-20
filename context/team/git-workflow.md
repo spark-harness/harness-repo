@@ -32,6 +32,50 @@ Git workflow 规定：
 旧格式 `{type}/{workstream}/{ticket-id}` 仍可用于需要表达业务流的需求，但同
 一个 ticket 的所有仓库必须完全同名。
 
+## 分支声明模型
+
+多仓需求必须在 `requirement.md` front matter 中声明三类分支：
+
+```yaml
+related_branch: "feature/LEN-40-delivery-flow"
+target_branch: "epic/lending"
+release_branch: "master"
+contract_gate_mode: "auto"
+affected_repositories:
+  - harness-repo
+  - business-repo
+  - idl-repo
+```
+
+它不是什么：这不是要求 peer repo 的 feature 分支永久存在。
+
+它是什么：`related_branch` 表示本需求开发分支，`target_branch` 表示当前 PR
+要合入的分支，`release_branch` 表示最终发布分支。
+
+Janus 按以下规则判断交付阶段：
+
+```text
+target_branch == release_branch => release-bound => formal-only
+target_branch != release_branch => integration-bound => rc-or-formal
+```
+
+integration-bound 合法 peer repo 状态：
+
+1. peer repo 存在同名 `related_branch`。
+2. peer repo 的 `related_branch` 已合入 `target_branch`。
+3. peer repo 的 `target_branch` 已合入 `release_branch`。
+
+release-bound 合法 peer repo 状态：
+
+1. peer repo 的 `related_branch` 已合入 `release_branch`。
+2. peer repo 的 `target_branch` 已合入 `release_branch`。
+3. PR gate 阶段存在同一 requirement 的 `related_branch -> release_branch`
+   open PR。
+
+feature 分支被合并或清理后，只要 Git / PR / tag 证据能证明已合入 target 或
+release，delivery readiness 不应失败。open PR 证据只表示待合并状态，不替代
+最终发布时的 merge、Formal tag 和 artifact 证据。
+
 ## 标准流程
 
 ### 1. 创建需求分支
@@ -205,7 +249,21 @@ git log --oneline origin/master..HEAD
 - 保留的每个提交都应可评审、可追溯、可独立理解。
 - 共享分支不得随意 force-push；需要改写共享历史时先给出计划并等待确认。
 
-### 8. 合并顺序
+### 8. 合并路径和顺序
+
+支持两类路径：
+
+```text
+feature -> master
+feature -> epic/foo -> master
+```
+
+`feature -> master` 是 release-bound：contract dependency 只能使用 formal。
+
+`feature -> epic/foo` 是 integration-bound：contract dependency 禁止 SNAPSHOT，
+但可以使用 immutable RC 或 formal。
+
+`epic/foo -> master` 重新进入 release-bound：contract dependency 只能使用 formal。
 
 推荐顺序：
 
@@ -242,7 +300,7 @@ hotfix 禁止顺手重构、顺手升级依赖或夹带无关需求。
 
 Dev 进入门禁必须检查：
 
-- 所有关联仓库分支名是否一致。
+- 所有关联仓库是否满足当前阶段的 peer repo 状态。
 - 是否存在未记录的业务仓或 IDL 仓变更。
 - 涉及 protobuf 时是否完成 buf 检查。
 - 是否存在未关联需求 ID 的提交。
@@ -252,4 +310,11 @@ Dev 进入门禁必须检查：
 - `.service-matrix/dependencies.yaml` 中涉及服务是否存在。
 - `repo_path` 是否能定位到业务仓服务目录。
 - `proto_path` 是否能定位到 IDL 仓 `.proto` 目录。
-- 当前分支是否与 Harness 仓需求分支一致。
+- `related_branch`、`target_branch`、`release_branch` 是否能被 Janus delivery
+  verifier 识别。
+
+各仓 workflow 不应复制 peer 分支判断 bash。CI 应调用：
+
+```bash
+janus delivery verify --requirement <REQ-ID> --repo <repo-name>
+```

@@ -1,0 +1,112 @@
+{
+  "requirement_id": "LEN-40",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-21T00:50:17+08:00",
+  "decision": "批准 LEN-40 任务拆分和 Dev 进入门禁。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "更新 Harness 分支与契约治理文档",
+      "scope": "在 harness-repo 中更新 requirement 模板、Git workflow、contract versioning、gate implementation 和 branch coherence workflow，明确 related_branch、target_branch、release_branch、integration-bound、release-bound、integration-readiness 与 release-readiness 规则。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8", "AC10"],
+        "design_decisions": [
+          "Requirement front matter 增加 target_branch、release_branch、contract_gate_mode、affected_repositories",
+          "三仓 workflow 调用 Janus，不复制分支判断 bash"
+        ]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "模板包含 related_branch、target_branch、release_branch、contract_gate_mode 和 affected_repositories 字段。",
+        "Git workflow 说明 feature -> master、feature -> epic/foo、epic/foo -> master 的阶段语义。",
+        "gate implementation 记录 integration-readiness 和 release-readiness 的检查条件。",
+        "harness-repo branch-coherence workflow 调用 janus delivery verify。"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "实现 Janus delivery verifier",
+      "scope": "在 janus 中新增 delivery verify CLI 和 internal/delivery，实现 requirement front matter 读取、bound 判断、peer repo Git 状态判断、promotion 判断、readiness gate JSON 输出和 business contract dependency scan 调用。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC9", "AC10"],
+        "design_decisions": [
+          "新增 internal/delivery 和 delivery verify CLI",
+          "Janus delivery verify 用 Git refs、merge-base、merge commit 证据判断 peer 状态",
+          "epic/foo -> master 时按 release-bound 和 formal-only 处理"
+        ]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "delivery verify 支持 --requirement、--repo、--workspace、--base、--head 和 --output-gate。",
+        "target_branch == release_branch 输出 release-readiness 和 formal-only。",
+        "target_branch != release_branch 输出 integration-readiness 和 rc-or-formal。",
+        "feature 分支不存在但已合入 target 或 release 时 peer 状态可通过。",
+        "Janus 单元测试覆盖 release-bound、integration-bound、promotion 和 peer 状态场景。"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "扩展 business contract dependency scan",
+      "scope": "在 business-repo 中扩展 contract dependency scan 模式名，支持 rc-or-formal 和 formal-only，并让 CI 默认按 delivery verifier 语义调用。",
+      "trace": {
+        "requirement_items": ["AC5", "AC6", "AC9", "AC10"],
+        "design_decisions": [
+          "business contract scan 支持 rc-or-formal / formal-only，旧 rc / master 模式保留兼容",
+          "Janus 在 business PR 上调用变更范围扫描"
+        ]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "rc-or-formal 禁止 SNAPSHOT、pseudo-version、branch dependency 和 local replace，允许 immutable RC 或 formal。",
+        "formal-only 禁止 RC、SNAPSHOT、pseudo-version、branch dependency 和 local replace。",
+        "旧 rc 和 master 模式仍可用。",
+        "business-repo 单元测试覆盖新旧模式名。"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "接入 IDL 与各仓 workflow readiness",
+      "scope": "在 idl-repo、business-repo 和 harness-repo 的 branch-coherence workflow 中调用 Janus delivery verifier，并保留 Formal 发布人工执行、证据验证由 Janus/CI 承担的边界。",
+      "trace": {
+        "requirement_items": ["AC7", "AC10"],
+        "design_decisions": [
+          "idl-repo delivery readiness workflow 调用 Janus",
+          "Formal tag / artifact registry 查询后续接入同一 delivery verify"
+        ]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "idl-repo branch-coherence workflow 不再复制同名分支 bash。",
+        "business-repo branch-coherence workflow 不再复制同名分支 bash。",
+        "workflow 使用 Janus delivery verify 输出 readiness 结果。",
+        "文档明确 Formal 发布不自动化，Janus/CI 只验证证据。"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "补齐验证证据和合并就绪门禁",
+      "scope": "运行 Janus、business scan、workflow 语法、actionlint、diff check 和 delivery verify 验证；记录当前真实 peer repo 状态造成的 readiness 阻塞，生成生命周期 gate。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8", "AC9", "AC10"],
+        "design_decisions": [
+          "Testing Strategy",
+          "Rollout And Rollback"
+        ]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "go test ./... 在 janus worktree 通过。",
+        "python3 -m unittest tests/test_contract_dependency_scan.py 在 business-repo worktree 通过。",
+        "编辑过的 workflow 通过 bash -n 和 actionlint。",
+        "四个 worktree 通过 git diff --check。",
+        "delivery verify 记录当前 release-bound peer 状态的真实通过或阻塞结果。"
+      ],
+      "state": "done"
+    }
+  ]
+}

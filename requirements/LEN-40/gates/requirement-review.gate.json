@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-40",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-21T01:27:13+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-40/requirement.md",
+      "sha256": "d0c54697f28de96c3a66e8b659000eaae1444a5afaf544118901c7e6fbfe2036"
+    },
+    {
+      "path": "requirements/LEN-40/impact-analysis.md",
+      "sha256": "62d0a5c355ffb3fb33eaa4cd7056150227aa064f5264b0b6b3751e9879726b4f"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-40/requirement.md approved by forest at 2026-06-21T00:48:09+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "不修改 protobuf 文件，但修改 IDL 发布证据与 contract dependency gate 的治理口径。"
+  },
+  "decision": "批准 LEN-40 需求定义和影响分析。"
+}
