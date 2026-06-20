@@ -136,6 +136,18 @@ Agent 执行提交时必须先做三件事：
 
 ### 6. PR / MR
 
+PR / MR 标题必须使用：
+
+```text
+[<ticket-id>] <type>(<scope>): <summary>
+```
+
+示例：
+
+```text
+[PROJ-38] docs(harness): add PR metadata policy
+```
+
 PR / MR 描述必须说明行为和验证，而不只是列出文件。
 
 建议模板：
@@ -163,6 +175,16 @@ PR / MR 描述必须说明行为和验证，而不只是列出文件。
 - 已运行的测试、lint、Janus gate 或 requirement verify 命令。
 - 未运行的验证和原因。
 - 需要人工重点评审的风险点。
+
+`pr-metadata` CI 会在 PR 进入评审前检查：
+
+- 标题以 `[<ticket-id>]` 开头，并且后半段符合 Conventional Commits。
+- ticket ID 使用 `{字符串}-{数字}` 格式，不限定项目 key。
+- 描述包含上述模板章节，并引用同一个 ticket ID。
+- PR 内人工提交符合 Conventional Commits；自动生成提交允许明确例外。
+
+`harness-repo` 保存 PR metadata policy 的脚本和 reusable workflow。其他 Spark
+子仓接入时，只添加调用该 reusable workflow 的轻量 workflow，不复制规则实现。
 
 当一个 ticket 天然需要多个可独立评审的层次时，可以使用堆叠 PR / MR。每一
 层都必须有聚焦 diff，并保持中间分支可构建、可测试。

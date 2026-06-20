@@ -407,6 +407,10 @@ JSON 跑 `janus gate render --check`（防 Markdown 漂移）；向默认分支�
 ticket id 跑 `janus requirement verify --requirement <id> --target merge`，不另写第二套
 判定。（跨仓接入待后续补齐。）
 
+`pr-metadata` 是独立的 Git 元数据门禁，只检查 PR 标题、描述和提交信息是否
+满足 `context/team/git.md` 与 `context/team/git-workflow.md`。它不能替代 Janus
+生命周期门禁，也不能把缺失的需求、设计、任务或证据视为通过。
+
 ## 10. 异常豁免规则
 
 豁免不是绕过门禁。豁免是把一次例外写成可审计记录。
