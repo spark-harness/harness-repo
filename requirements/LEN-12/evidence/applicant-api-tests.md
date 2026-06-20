@@ -117,3 +117,36 @@ Final result:
 Tests run: 29, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
+
+## Formal Contract Consumption Verification
+
+After `idl-repo` formal tag `v0.1.0` published
+`com.spark.contract:spark-idl-java:0.1.0`, `applicant-api` was changed to
+consume the formal Maven artifact instead of `0.1.0-SNAPSHOT`.
+
+Contract dependency scan:
+
+```bash
+cd /Users/forest/Code/spark/.worktrees/LEN-12/business-repo
+python3 scripts/contract_dependency_scan.py --mode master --path services/backend/applicant-api/pom.xml
+```
+
+Result: PASS.
+
+Service test with GitHub Packages credentials supplied through a temporary
+Maven settings file:
+
+```bash
+cd /Users/forest/Code/spark/.worktrees/LEN-12/business-repo/services/backend/applicant-api
+mvn -s /private/tmp/len12-maven-settings/settings.xml test
+```
+
+Result: PASS.
+
+Maven downloaded `com.spark.contract:spark-idl-java:0.1.0` from GitHub
+Packages and the test summary remained:
+
+```text
+Tests run: 29, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+```

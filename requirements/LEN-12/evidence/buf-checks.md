@@ -118,7 +118,22 @@ buf breaking --against .git#branch=master
 
 Result: PASS.
 
-A dry-run in `/private/tmp/len12-java-publish-dryrun` copied the IDL and Java
+## Formal Contract Publication
+
+After merging `idl-repo` PR #2, `v0.1.0` was created on IDL merge commit
+`b0bedbaf673048132d4eb670edbdbbec9f842874`.
+
+Publication evidence:
+
+- `Publish Go IDL` run `27875158056`: PASS.
+- `Publish Java IDL` run `27875158037`: initial attempt failed because the old
+  `IDL_JAVA_REPO_TOKEN` secret lacked `read:packages`; after updating the
+  secret, rerun job `82493823897` passed.
+- GitHub Packages now contains `com.spark.contract:spark-idl-java:0.1.0`.
+- Existing snapshot package remains `0.1.0-SNAPSHOT`, but `LEN-12` business
+  consumption now uses formal `0.1.0`.
+
+The earlier dry-run in `/private/tmp/len12-java-publish-dryrun` copied the IDL and Java
 generated-contract repositories, ran `buf generate`, prepared a temporary
 `spark-idl-java` version `0.2.0`, detected protobuf Java gencode `4.35.1`, and
 ran:
