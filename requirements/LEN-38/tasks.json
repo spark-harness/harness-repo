@@ -1,0 +1,164 @@
+{
+  "requirement_id": "LEN-38",
+  "status": "approved",
+  "approved_by": "Forest",
+  "approved_at": "2026-06-20T18:05:56+08:00",
+  "decision": "批准 LEN-38 tasks，允许进入开发门禁。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 LEN-38 Harness 生命周期产物",
+      "scope": "补齐 requirement、impact-analysis、design、tasks 和阶段门禁，明确 Go IDL 发布链路不修改业务 proto 语义，规则来源为 LEN-35 contract-versioning。",
+      "trace": {
+        "requirement_items": [
+          "R10"
+        ],
+        "design_decisions": [
+          "Requirement Traceability R10"
+        ]
+      },
+      "affected_services": [
+        "user-api"
+      ],
+      "acceptance": [
+        "AC12"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "初始化 idl-go-repo Go module",
+      "scope": "在 spark-harness/idl-go-repo 初始化 master 默认分支、go.mod、当前 Buf Go 生成物和最小 README，使 module path 固定为 github.com/spark-harness/idl-go-repo。",
+      "trace": {
+        "requirement_items": [
+          "R1",
+          "BR1",
+          "BR2",
+          "BR3"
+        ],
+        "design_decisions": [
+          "Go Module Layout"
+        ]
+      },
+      "affected_services": [
+        "user-api"
+      ],
+      "acceptance": [
+        "AC1",
+        "AC2",
+        "AC3"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "实现 Go 生成物同名分支同步 workflow",
+      "scope": "在 idl-repo 新增 sync-go-idl workflow，支持任意分支 push 和 workflow_dispatch，使用 IDL_GO_REPO_TOKEN checkout/push idl-go-repo，同步 buf generate 输出并运行 go mod tidy 与 go test ./...。",
+      "trace": {
+        "requirement_items": [
+          "R2",
+          "R3",
+          "R4",
+          "R8",
+          "R9"
+        ],
+        "design_decisions": [
+          "Branch Sync Workflow"
+        ]
+      },
+      "affected_services": [
+        "user-api"
+      ],
+      "acceptance": [
+        "AC4",
+        "AC5",
+        "AC6",
+        "AC7",
+        "AC11"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "实现 Go RC 与 formal tag 发布 workflow",
+      "scope": "在 idl-repo 新增 publish-go-idl workflow，RC 使用 workflow_dispatch 输入 idl_ref 和 go_tag，formal 使用 SemVer tag push 触发；发布前检查远端 tag 不存在，生成并校验 Go module 后创建不可覆盖 tag。",
+      "trace": {
+        "requirement_items": [
+          "R5",
+          "R6",
+          "R7",
+          "R8",
+          "R9",
+          "BR12",
+          "BR13",
+          "BR14",
+          "BR15",
+          "BR16"
+        ],
+        "design_decisions": [
+          "RC Publish Workflow",
+          "Formal Publish Workflow"
+        ]
+      },
+      "affected_services": [
+        "user-api"
+      ],
+      "acceptance": [
+        "AC8",
+        "AC9",
+        "AC10",
+        "AC11"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "验证 Go 生成、module 校验和 workflow 规则",
+      "scope": "运行 buf generate、go mod tidy、go test ./...，静态检查 sync-go-idl 与 publish-go-idl 的触发条件、secret 检查、tag 已存在失败路径和输出信息。",
+      "trace": {
+        "requirement_items": [
+          "R8",
+          "R9",
+          "R10"
+        ],
+        "design_decisions": [
+          "Testing Strategy",
+          "Observability"
+        ]
+      },
+      "affected_services": [
+        "user-api"
+      ],
+      "acceptance": [
+        "AC6",
+        "AC7",
+        "AC10",
+        "AC11",
+        "AC12"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T6",
+      "title": "完成发布证据和交付门禁",
+      "scope": "记录 branch sync、RC tag publish、formal tag publish 的验证证据，刷新 dev-entry、service-repo-check 和 merge-readiness gate，保存 idl-repo commit、idl-go-repo commit、tag 和 CI run 追溯信息。",
+      "trace": {
+        "requirement_items": [
+          "R10",
+          "BR17"
+        ],
+        "design_decisions": [
+          "Testing Strategy",
+          "Rollout And Rollback"
+        ]
+      },
+      "affected_services": [
+        "user-api"
+      ],
+      "acceptance": [
+        "AC12"
+      ],
+      "state": "done"
+    }
+  ]
+}
