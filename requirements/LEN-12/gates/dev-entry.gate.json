@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-12",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-20T18:12:26+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-12/design.md",
+      "sha256": "48ceb9a5864eb3a87b3ffb9e80d8b24f370902734c633e0969dccecc078ad6d9"
+    },
+    {
+      "path": "requirements/LEN-12/tasks.json",
+      "sha256": "c852ef2faca4845b5acbd2af2d6271127b60ed197515acd502f78267725c8575"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-12"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "8 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-12/tasks.json approved by Forest at 2026-06-19T19:02:47+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "本需求新增 applicant-api 后端服务及 OTP/session protobuf 契约，属于 additive new service/RPC/message。"
+  },
+  "decision": "批准 LEN-12 tasks，允许进入开发准备。"
+}

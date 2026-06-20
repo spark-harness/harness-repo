@@ -1,0 +1,91 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-12",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-20T19:13:13+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-12/requirement.md",
+      "sha256": "61eb2f91fdb9e3a94171299a76c307c43f5dcd4b96b62c4065fce9ec85518cff"
+    },
+    {
+      "path": "requirements/LEN-12/impact-analysis.md",
+      "sha256": "23bf8e7145512d24447f78f2990e4418e6f54ce7baecefc3d38fcd5f6d3df129"
+    },
+    {
+      "path": "requirements/LEN-12/design.md",
+      "sha256": "48ceb9a5864eb3a87b3ffb9e80d8b24f370902734c633e0969dccecc078ad6d9"
+    },
+    {
+      "path": "requirements/LEN-12/tasks.json",
+      "sha256": "c852ef2faca4845b5acbd2af2d6271127b60ed197515acd502f78267725c8575"
+    },
+    {
+      "path": "requirements/LEN-12/gates/requirement-review.gate.json",
+      "sha256": "680a638f9e742f5c7345369abbafcb735e283227d7de0fcacb04c92e6c6d3975"
+    },
+    {
+      "path": "requirements/LEN-12/gates/design-review.gate.json",
+      "sha256": "9184ba290534d8a2c15b55bd680d64d270569223c689ec87fa6d1afcd056b7bc"
+    },
+    {
+      "path": "requirements/LEN-12/gates/dev-entry.gate.json",
+      "sha256": "dbf8c43907e522c1f2c138c11dfafdf5a130959904f018ec7a3f5517e6077f9f"
+    },
+    {
+      "path": "requirements/LEN-12/gates/service-repo-check.gate.json",
+      "sha256": "c8f911d2ebbd0be412ef792e3ae66609891e91063105dd27761e040174a1e3bc"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "606b4c27ac2e5512d28db42d55a0e4dece1c5f53e08c3ebfdd18a322f2d08540"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "2 evidence files recorded."
+    },
+    {
+      "item": "IDL 证据已记录",
+      "result": "PASS",
+      "evidence": "Buf or contract evidence exists."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-12/tasks.json approved by Forest at 2026-06-19T19:02:47+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-12/evidence/applicant-api-tests.md",
+      "sha256": "056d84ec5891553b89a5995aa4ad1af4d68926959dfcdb871eb9d9f440ce0025"
+    },
+    {
+      "path": "requirements/LEN-12/evidence/buf-checks.md",
+      "sha256": "ab0c5dbc093f1d94f7258684b23139d8f8ebde72ee8e3410786170c57d1b6ebe"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "本需求新增 applicant-api 后端服务及 OTP/session protobuf 契约，属于 additive new service/RPC/message。"
+  },
+  "decision": "批准 LEN-12 tasks，允许进入开发准备。"
+}

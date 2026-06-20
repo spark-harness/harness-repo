@@ -1,0 +1,105 @@
+{
+  "requirement_id": "LEN-12",
+  "status": "approved",
+  "approved_by": "Forest",
+  "approved_at": "2026-06-19T19:02:47+08:00",
+  "decision": "批准 LEN-12 tasks，允许进入开发准备。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "Harness 生命周期产物与服务矩阵",
+      "scope": "维护 LEN-12 requirement/impact/design/tasks 与阶段门禁；在 .service-matrix/dependencies.yaml 新增 applicant module 与 applicant-api 服务条目，声明 repo_path、idl_required、idl_repo、proto_path、buf_module，并记录后续 worktree 隔离计划。",
+      "trace": {
+        "requirement_items": ["R1", "R9"],
+        "design_decisions": ["D1", "D9"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC9"],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "IDL 契约：ApplicantAuthService",
+      "scope": "在 idl-repo 新增 vesta/spark/applicant/v1/auth.proto，定义 SendOtp、VerifyOtp、RefreshToken RPC、request/response、错误语义注释和 idempotency_key 字段；运行 buf lint 与 breaking 检查。",
+      "trace": {
+        "requirement_items": ["R2", "R7"],
+        "design_decisions": ["D2", "D7"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC8", "AC9"],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "生成 Java 契约",
+      "scope": "运行 buf generate，更新 idl-java-repo 中 applicant v1 Java message 与 gRPC stub；记录生成命令和输出路径。Go 生成物不作为本需求消费交付。",
+      "trace": {
+        "requirement_items": ["R2", "R9"],
+        "design_decisions": ["D2", "D9"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC9"],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "applicant-api Java + Spring 服务骨架",
+      "scope": "在 business-repo/services/backend/applicant-api 新建 Java 21 + Spring Boot 服务骨架、Clean Architecture 分层、gRPC adapter、配置入口、README 和最小启动测试；不实现 fides-bff。",
+      "trace": {
+        "requirement_items": ["R1"],
+        "design_decisions": ["D1"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC10"],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "test-first：OTP、token 与幂等业务测试",
+      "scope": "先写失败测试覆盖 +852 校验、非香港拒绝、OTP 过期/冷却/错误锁定、Applicant 新建/查找、access/refresh 1h TTL、refresh 不滚动续期、Idempotency-Key 缺失/回放/冲突。",
+      "trace": {
+        "requirement_items": ["R3", "R4", "R5", "R6", "R7", "R8"],
+        "design_decisions": ["D3", "D4", "D5", "D6", "D7", "D8"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8", "AC10"],
+      "state": "done"
+    },
+    {
+      "id": "T6",
+      "title": "applicant-api 业务实现与 Redis/持久化适配",
+      "scope": "实现 SendOtpUseCase、VerifyOtpUseCase、RefreshTokenUseCase、ApplicantRepository、OtpChallengeRepository、SessionTokenStore、IdempotencyRepository、TokenService 和 test SmsCodeSender；Redis 保存 challenge/冷却/错误次数/锁定/token/幂等状态，Applicant 使用最小持久化实现。",
+      "trace": {
+        "requirement_items": ["R3", "R4", "R5", "R6", "R7", "R8"],
+        "design_decisions": ["D3", "D4", "D5", "D6", "D7", "D8"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8", "AC10"],
+      "state": "done"
+    },
+    {
+      "id": "T7",
+      "title": "可观测性、安全与配置门禁",
+      "scope": "补齐日志脱敏、稳定错误码、低基数指标、trace/span、Redis 健康/超时配置、test provider 生产禁用校验和 README 配置说明；确保不记录 OTP 明文、手机号明文、token 或真实密钥。",
+      "trace": {
+        "requirement_items": ["R8", "R9"],
+        "design_decisions": ["D8", "D9"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC10"],
+      "state": "done"
+    },
+    {
+      "id": "T8",
+      "title": "证据、评审与 merge-readiness",
+      "scope": "记录 buf lint/generate/breaking、生成契约、applicant-api mvn test、服务测试、架构测试、代码审查和 merge-readiness gate；确认 requirement-review、design-review、dev-entry、service-repo-check 均为 PASS。",
+      "trace": {
+        "requirement_items": ["R9"],
+        "design_decisions": ["D9"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC9", "AC10"],
+      "state": "done"
+    }
+  ]
+}
