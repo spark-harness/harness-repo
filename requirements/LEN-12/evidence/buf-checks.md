@@ -85,3 +85,46 @@ Local verification found that the current remote Java generator emits protobuf
 Java gencode `4.35.1`; the CI-generated Java contract artifact must use a
 protobuf runtime version that is not older than that gencode version before
 `applicant-api` consumes the published package.
+
+## Java Formal Publish Readiness
+
+On 2026-06-20, GitHub Packages was checked for
+`com.spark.contract:spark-idl-java`. The package exists, but only version
+`0.1.0-SNAPSHOT` is currently published. No formal SemVer Java contract version
+exists yet, so `business-repo` cannot satisfy the master-bound contract
+dependency scan by changing to an already-published formal version.
+
+To unblock formal contract consumption without hand-pushing generated Java
+contracts, `idl-repo` now includes `.github/workflows/publish-java-idl.yml`.
+The workflow:
+
+- is triggered by `idl-repo` SemVer / RC tags or manual RC dispatch;
+- resolves the frozen IDL ref from the tag or workflow input;
+- checks that the target Maven package version does not already exist;
+- checks out `spark-harness/idl-java-repo` as the generated Java Maven project;
+- runs `buf generate` from the frozen `idl-repo` ref;
+- writes the target Maven version for the publish run only;
+- aligns `protobuf-java.version` with the generated Java gencode version; and
+- publishes `com.spark.contract:spark-idl-java` with `mvn -B deploy`.
+
+Local validation:
+
+```bash
+cd /Users/forest/Code/spark/.worktrees/LEN-12/idl-repo
+actionlint .github/workflows/publish-java-idl.yml
+buf lint
+buf breaking --against .git#branch=master
+```
+
+Result: PASS.
+
+A dry-run in `/private/tmp/len12-java-publish-dryrun` copied the IDL and Java
+generated-contract repositories, ran `buf generate`, prepared a temporary
+`spark-idl-java` version `0.2.0`, detected protobuf Java gencode `4.35.1`, and
+ran:
+
+```bash
+mvn -B test
+```
+
+Result: PASS.
