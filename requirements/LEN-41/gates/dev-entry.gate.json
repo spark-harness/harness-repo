@@ -5,7 +5,7 @@
   "gate_name": "Dev 进入门禁",
   "stage": "4.2",
   "checked_by": "dev_entry_checker",
-  "checked_at": "2026-06-21T01:43:22+08:00",
+  "checked_at": "2026-06-21T04:16:54+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [

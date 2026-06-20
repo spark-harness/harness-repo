@@ -4,6 +4,13 @@ owner: "Codex"
 status: "approved"
 created_at: "2026-06-21"
 related_branch: "feature/LEN-41-lendora-applicant-idl"
+target_branch: "master"
+release_branch: "master"
+contract_gate_mode: "auto"
+affected_repositories:
+  - harness-repo
+  - idl-repo
+  - business-repo
 approved_by: "Forest"
 approved_at: "2026-06-21T00:43:30+08:00"
 decision: "批准 LEN-41 requirement 与 impact-analysis，允许进入设计阶段。"

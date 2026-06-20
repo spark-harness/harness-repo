@@ -5,7 +5,7 @@
   "gate_name": "服务仓库检查门禁",
   "stage": "4.3",
   "checked_by": "service_repo_checker",
-  "checked_at": "2026-06-21T01:43:22+08:00",
+  "checked_at": "2026-06-21T04:16:54+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -67,17 +67,17 @@
     {
       "name": "harness-repo",
       "branch": "feature/LEN-41-lendora-applicant-idl",
-      "commit": "ff393a1"
+      "commit": "5429be2"
     },
     {
       "name": "business-repo",
       "branch": "feature/LEN-41-lendora-applicant-idl",
-      "commit": "2537f7d"
+      "commit": "1db92f9"
     },
     {
       "name": "idl-repo",
       "branch": "feature/LEN-41-lendora-applicant-idl",
-      "commit": "a220c10"
+      "commit": "5909aa0"
     }
   ],
   "idl_impact": {
