@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-42",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-21T13:32:39+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-42/impact-analysis.md",
+      "sha256": "0b364afa9e9eb35c5c81f7b708eb4e3d5416653a504ceed547791fc690afa934"
+    },
+    {
+      "path": "requirements/LEN-42/design.md",
+      "sha256": "ce60227334a11b0dedab71a895a878fd7631e25cdfd2d4db3c896b9a93f7d9b5"
+    },
+    {
+      "path": "requirements/LEN-42/tasks.json",
+      "sha256": "9206fee32deb92d146c46135d4934052744befc86f545eecf40a237fa2cd47cf"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "afbed63bd52790eaddbd2fd0c7999af01ff22682fe9f9ccaebc5778c7abd43d9"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-42"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "3 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "tasks.json 未声明业务服务；跳过服务矩阵路径校验。"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-42/impact-analysis.md approved by Forest at 2026-06-21T13:14:40+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-42-buf-plugin-version-lock",
+      "commit": "e881cae"
+    },
+    {
+      "name": "idl-repo",
+      "branch": "feature/LEN-42-buf-plugin-version-lock",
+      "commit": "5ae0eb6"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "本需求不修改 .proto，但修改 IDL 仓 Buf 生成配置，影响 generated contract 的生成输入可复现性。"
+  },
+  "decision": "批准 LEN-42 service repo readiness；本票无业务服务影响，涉及仓库为 harness-repo 与 idl-repo。"
+}
