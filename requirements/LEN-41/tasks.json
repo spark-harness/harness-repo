@@ -63,7 +63,7 @@
       },
       "affected_services": ["applicant-api"],
       "acceptance": ["AC4", "AC7"],
-      "state": "blocked"
+      "state": "done"
     },
     {
       "id": "T6",
@@ -87,7 +87,7 @@
       },
       "affected_services": ["applicant-api"],
       "acceptance": ["AC6", "AC7", "AC8", "AC9"],
-      "state": "blocked"
+      "state": "done"
     }
   ]
 }
