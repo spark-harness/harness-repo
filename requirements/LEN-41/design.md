@@ -154,6 +154,7 @@ No application, domain, Redis, token, telemetry, or endpoint behavior changes ar
 - 增加 `release_pr_merged` peer 状态，接受 closed + merged 的同名 `related_branch -> release_branch` PR 作为 release-bound peer 证据。
 - `resolveRef` 优先解析 `refs/remotes/origin/<branch>`，再回退本地 branch，避免 stale local `master` 影响 CI/本地复现。
 - Java artifact lookup 依次尝试 `IDL_JAVA_REPO_TOKEN`、`GH_TOKEN`、`GITHUB_TOKEN`，避免低权限 token 造成 false negative。
+- `business-repo/.github/workflows/branch-coherence.yml` 创建 `idl-java-repo` reader app token，并将其注入 Janus 的 `IDL_JAVA_REPO_TOKEN`。
 - 保留 `release_pr_open` 作为 PR 阶段证据；正式发布仍必须验证 formal tag 和 artifact。
 
 ## Service Matrix And Harness Docs

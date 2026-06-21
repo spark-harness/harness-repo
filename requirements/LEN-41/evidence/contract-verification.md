@@ -42,6 +42,8 @@
 | `janus` | `go test ./...` | PASS | Delivery verifier tests cover merged release PR evidence and remote release ref formal tag reachability. |
 | `janus` | `go build -o /tmp/janus-len41-fixed ./cmd/janus` | PASS | Built Janus CLI from `feature/LEN-41-lendora-applicant-idl` commit `92af82c`. |
 | `janus` | `/tmp/janus-len41-fixed delivery verify --workspace /Users/forest/Code/spark/.worktrees/LEN-41 --requirement LEN-41 --repo business-repo --base master --head feature/LEN-41-lendora-applicant-idl` | PASS | Release-readiness passed: contract scan `formal-only`, formal tag `v0.2.1` reachable from `idl-repo master`, Maven `0.2.1` exists, `harness-repo` has open release PR, and `idl-repo` is accepted as `release_pr_merged`. |
+| `business-repo` | `actionlint .github/workflows/branch-coherence.yml` | PASS | Workflow syntax passed after adding the `idl-java-repo` reader app token for delivery-readiness. |
+| `business-repo` | `gh run watch 27891516878 -R spark-harness/business-repo --exit-status` | PASS | Pull request delivery-readiness passed after the workflow created `IDL_JAVA_REPO_TOKEN`; run verified Janus same-name branch, formal `0.2.1`, `release_pr_merged` idl peer, and Maven package lookup. |
 
 ## Contract Shape
 

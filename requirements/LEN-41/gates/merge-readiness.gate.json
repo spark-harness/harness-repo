@@ -5,7 +5,7 @@
   "gate_name": "合并就绪门禁",
   "stage": "5.1",
   "checked_by": "merge_readiness_checker",
-  "checked_at": "2026-06-21T10:51:23+08:00",
+  "checked_at": "2026-06-21T10:58:26+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -15,31 +15,31 @@
     },
     {
       "path": "requirements/LEN-41/impact-analysis.md",
-      "sha256": "4d15a2f0be70218401f92478f9213c56dcedaa212f447fda4ad1ec4a1babf628"
+      "sha256": "8b483da8a43830217395db63f83256de1eb9589805fb0eae77494dd9eaeb5e4a"
     },
     {
       "path": "requirements/LEN-41/design.md",
-      "sha256": "8cd9babbc787c28cd2e76de1a97aeda74b09dee51a42fdbe3bd12221ea20d238"
+      "sha256": "34510b0e279c37f6659ea7ca99a055d2f5bd2b63c21377ac389f79752cced01e"
     },
     {
       "path": "requirements/LEN-41/tasks.json",
-      "sha256": "94f654eb97f3ebf2376bc5aafbca7db05923b9b484a807daff0b6cf8387af6e6"
+      "sha256": "18b642e3088fdc339a35e3b9eba17014afe579d638c041297cc34382e08401ff"
     },
     {
       "path": "requirements/LEN-41/gates/requirement-review.gate.json",
-      "sha256": "4a6127c272135a08f911fa493c37432f0502cf8df3b2edfc3067e4ec4e18ec30"
+      "sha256": "378d473454c07a5cebfec4688eb6a9f5d64893793b895c5314aa1c81cfa6cf33"
     },
     {
       "path": "requirements/LEN-41/gates/design-review.gate.json",
-      "sha256": "b33045612ab24e6f5d6dbdca753781615ec3dfcf00cc20a8f783fea322d8ef8b"
+      "sha256": "ab92658a636c8ed0e94dbf688c72829f33a3a3b5c6894b54d0265c2ec41fd451"
     },
     {
       "path": "requirements/LEN-41/gates/dev-entry.gate.json",
-      "sha256": "d769f4c60ad5f50254ed9b55b87c54465e021c88ec47fb5dfe9edc5e34b955dd"
+      "sha256": "d9b94603acbcfc3f98a59d1bf2c47cc2c39a67531b65ca7183a34e53b032e931"
     },
     {
       "path": "requirements/LEN-41/gates/service-repo-check.gate.json",
-      "sha256": "d353647cb0a9103671a94a51100d7f8acf8d851dbc664632af1087551ce6a296"
+      "sha256": "ca55a3f3ea6d5e58efa18c916cd97d4dd348cb07d611dc3409ab699226fafcb0"
     },
     {
       "path": ".service-matrix/dependencies.yaml",
@@ -76,7 +76,7 @@
   "evidence": [
     {
       "path": "requirements/LEN-41/evidence/contract-verification.md",
-      "sha256": "6c48b9a3b640ddffa40657b4351d8d7cfcf3caf58ec36b3eb60a72e3e167b1d3"
+      "sha256": "9f25f01323de89752fea4cffadc7c1ccd1a36984c01e86ebcbdca2a0397c34a3"
     }
   ],
   "idl_impact": {

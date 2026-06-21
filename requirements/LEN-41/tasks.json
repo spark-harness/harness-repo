@@ -92,7 +92,7 @@
     {
       "id": "T8",
       "title": "Janus delivery-readiness 判定修复",
-      "scope": "修正 janus internal/delivery，使 release-bound delivery verify 接受已 squash merge 的 peer PR，formal tag reachability 优先使用远端 release ref，并优先使用 Java generated contract token 查询 Maven package；用 Janus 单测和 LEN-41 business delivery verify 现场命令验证。",
+      "scope": "修正 janus internal/delivery，使 release-bound delivery verify 接受已 squash merge 的 peer PR，formal tag reachability 优先使用远端 release ref，并优先使用 Java generated contract token 查询 Maven package；更新 business-repo delivery-readiness workflow 以创建 idl-java-repo reader app token 并传给 Janus；用 Janus 单测和 LEN-41 business delivery verify 现场命令验证。",
       "trace": {
         "requirement_items": ["R10"],
         "design_decisions": ["D8"]

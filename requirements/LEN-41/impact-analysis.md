@@ -99,6 +99,7 @@ idl_impact_reason: "本需求迁移 Lendora applicant protobuf namespace，并�
   - Go module path / tag 发布配置不变。
   - GitHub Actions secret 继续使用既有 generated repo 权限。
   - `business-repo` delivery-readiness workflow 继续从同名 Janus 分支构建 `janus`。
+  - `business-repo` delivery-readiness workflow 需要创建 `idl-java-repo` reader app token，并传给 Janus 的 `IDL_JAVA_REPO_TOKEN`。
 - Permission:
   - Java publish token 继续对 `spark-harness/idl-java-repo` / `com.spark.contract:spark-idl-java` 有写权限。
   - Go publish token 继续对 `spark-harness/idl-go-repo` 有写权限。
