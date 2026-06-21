@@ -1,0 +1,88 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-45",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-21T19:54:58+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-45/impact-analysis.md",
+      "sha256": "7e5e1bf15545f5250a1edcbb8eb1b117fb2a5b6b0d0966ee5a532c77f6c99036"
+    },
+    {
+      "path": "requirements/LEN-45/design.md",
+      "sha256": "c90050e9a57690c6728332b8088b59a8f3a91eda1850bbc17471c8ced2d9e4eb"
+    },
+    {
+      "path": "requirements/LEN-45/tasks.json",
+      "sha256": "8653fe16223dd29b71e9e377f6060068bd182c2067ddacb96211518b80c623fb"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "08a1386945abf2e0c3092c3cce607237caeed467c25dfa1937a89c93685e728c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-45"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "4 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "applicant-api, fides, fides-bff"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-45/impact-analysis.md approved by forest at 2026-06-21T19:33:53+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-45-cleanup-old-spark-assets",
+      "commit": "87eb794"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-45-cleanup-old-spark-assets",
+      "commit": "0aac3f0"
+    },
+    {
+      "name": "idl-repo",
+      "branch": "feature/LEN-45-cleanup-old-spark-assets",
+      "commit": "ea84f8e"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "删除 idl-repo 中旧 vesta/spark/user protobuf 源契约；不手工修改生成契约仓。"
+  },
+  "decision": "用户在 Codex 会话中明确回复“批准”，批准 LEN-45 服务仓、IDL 仓和排除范围检查进入执行收尾阶段。"
+}

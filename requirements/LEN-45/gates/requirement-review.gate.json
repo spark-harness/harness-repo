@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-45",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-21T19:54:37+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-45/requirement.md",
+      "sha256": "c3efd8babf6226b3e10111014115e7fc83e6f0c27949effdc2e6f0182ee875ee"
+    },
+    {
+      "path": "requirements/LEN-45/impact-analysis.md",
+      "sha256": "7e5e1bf15545f5250a1edcbb8eb1b117fb2a5b6b0d0966ee5a532c77f6c99036"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-45/requirement.md approved by forest at 2026-06-21T19:29:21+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "删除 idl-repo 中旧 vesta/spark/user protobuf 源契约；不手工修改生成契约仓。"
+  },
+  "decision": "用户在 Codex 会话中明确回复“批准”，批准 LEN-45 需求定义和影响分析进入下一阶段。"
+}
