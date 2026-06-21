@@ -15,10 +15,6 @@ modules:
     team: core
     name: "公共能力"
 
-  user:
-    team: core
-    name: "用户域"
-
   applicant:
     team: core
     name: "申请人域"
@@ -36,23 +32,10 @@ libraries:
     purpose: "统一金额、币种、舍入和最小货币单位转换"
 
 services:
-  aegis:
-    module: frontend
-    repo_path: "{business-repo}/services/frontend/aegis"
-    idl_required: false
-
   fides:
     module: frontend
     repo_path: "{business-repo}/services/frontend/fides"
     idl_required: false
-
-  user-api:
-    module: user
-    repo_path: "{business-repo}/services/backend/user-api"
-    idl_required: true
-    idl_repo: "{idl-repo}"
-    proto_path: "{idl-repo}/vesta/spark/user/v1"
-    buf_module: "local/spark-user"
 
   fides-bff:
     module: frontend
@@ -68,12 +51,6 @@ services:
     buf_module: "local/lendora-applicant"
 
 dependencies:
-  user-api:
-    upstream:
-      - "aegis"
-    libraries:
-      - "money"
-
   applicant-api:
     upstream:
       - "fides-bff"

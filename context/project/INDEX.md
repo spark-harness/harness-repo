@@ -20,4 +20,4 @@ context/project/{project-name}/{domain-name}/{service-name}/
 
 ## 当前项目
 
-- `spark/user/`：Spark 用户域上下文。
+当前没有已沉淀的项目级上下文入口。

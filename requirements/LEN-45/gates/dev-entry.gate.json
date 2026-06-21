@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-45",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-21T19:54:58+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-45/design.md",
+      "sha256": "c90050e9a57690c6728332b8088b59a8f3a91eda1850bbc17471c8ced2d9e4eb"
+    },
+    {
+      "path": "requirements/LEN-45/tasks.json",
+      "sha256": "8653fe16223dd29b71e9e377f6060068bd182c2067ddacb96211518b80c623fb"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-45"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "4 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-45/tasks.json approved by forest at 2026-06-21T19:37:05+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "删除 idl-repo 中旧 vesta/spark/user protobuf 源契约；不手工修改生成契约仓。"
+  },
+  "decision": "用户在 Codex 会话中明确回复“批准”，批准 LEN-45 清理结果、验证证据和已知 breaking 删除风险进入合并就绪。"
+}

@@ -1,0 +1,60 @@
+{
+  "requirement_id": "LEN-45",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-21T19:37:05+08:00",
+  "decision": "用户在 Codex 会话中明确回复“批准”，批准 LEN-45 清理结果、验证证据和已知 breaking 删除风险进入合并就绪。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "Harness 旧资产注册清理",
+      "scope": "删除 SPARK-* 历史需求目录、spark/user 项目上下文，并从服务矩阵删除 aegis/user-api 及依赖关系。",
+      "trace": {
+        "requirement_items": ["R1", "R4"],
+        "design_decisions": ["D1", "D4"]
+      },
+      "affected_services": ["applicant-api", "fides", "fides-bff"],
+      "retired_services": ["aegis", "user-api"],
+      "acceptance": ["AC1", "AC4", "AC5"],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "业务仓旧服务与 CI 清理",
+      "scope": "删除 services/backend/user-api、services/frontend/aegis 和 user-api-ci，并更新 services/README.md 示例。",
+      "trace": {
+        "requirement_items": ["R2"],
+        "design_decisions": ["D2"]
+      },
+      "affected_services": ["applicant-api", "fides", "fides-bff"],
+      "retired_services": ["aegis", "user-api"],
+      "acceptance": ["AC2", "AC5"],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "IDL 源契约清理与验证",
+      "scope": "删除 idl-repo/vesta/spark 源契约，运行 buf lint，并记录 breaking check 预期风险。",
+      "trace": {
+        "requirement_items": ["R3"],
+        "design_decisions": ["D3"]
+      },
+      "affected_services": ["applicant-api"],
+      "retired_services": ["user-api"],
+      "acceptance": ["AC3", "AC5"],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "交叉引用扫描与交付报告",
+      "scope": "验证 learning-docs-repo 与生成契约仓未被手工修改，扫描服务矩阵、业务仓和 IDL 源仓残留引用，汇总剩余生产流程清理项。",
+      "trace": {
+        "requirement_items": ["R5"],
+        "design_decisions": ["D5"]
+      },
+      "affected_services": ["applicant-api", "fides", "fides-bff"],
+      "acceptance": ["AC5"],
+      "state": "done"
+    }
+  ]
+}
