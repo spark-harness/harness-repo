@@ -1,0 +1,128 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-13",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-21T17:18:20+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-13/requirement.md",
+      "sha256": "0457c98aca86876fd9e45e28272bc3d3bfe9d54208353d292452b30ded84aecb"
+    },
+    {
+      "path": "requirements/LEN-13/impact-analysis.md",
+      "sha256": "60496b04dce5a57cbd03af158e77fc3f0d8e08430f09c25889f1b0dc1e3eb262"
+    },
+    {
+      "path": "requirements/LEN-13/design.md",
+      "sha256": "81d73894c1d8407d78adc6b0e711008417e973c7223fcbef5781a4657a451561"
+    },
+    {
+      "path": "requirements/LEN-13/tasks.json",
+      "sha256": "7338420af795d9f5cb497abd1ab7e95382447d19e267eb5c79dbd7345577e884"
+    },
+    {
+      "path": "requirements/LEN-13/gates/requirement-review.gate.json",
+      "sha256": "6aa24fd94956ad9cd46b2ccef8c2f5ed15781153c258460717c36b25729536a5"
+    },
+    {
+      "path": "requirements/LEN-13/gates/design-review.gate.json",
+      "sha256": "678fe94795a4bac146bdeb4db4138046fd1124459fbcde8d89563d7c1144c004"
+    },
+    {
+      "path": "requirements/LEN-13/gates/dev-entry.gate.json",
+      "sha256": "905753e3b91c9f15ff39b99715b476be4cfc4f89db3955a73cc79dae322d21a5"
+    },
+    {
+      "path": "requirements/LEN-13/gates/service-repo-check.gate.json",
+      "sha256": "f10dd03b00673c2b442fd938bc718802921017970620c141047f2872b2f34440"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "afbed63bd52790eaddbd2fd0c7999af01ff22682fe9f9ccaebc5778c7abd43d9"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check gate JSON are present and verified."
+    },
+    {
+      "item": "前端实现验证已通过",
+      "result": "PASS",
+      "evidence": "fides: pnpm test PASS (11 files, 45 tests); pnpm exec tsc --noEmit PASS; pnpm lint PASS; pnpm lint:deps PASS; pnpm build PASS."
+    },
+    {
+      "item": "代码审查 findings 已关闭",
+      "result": "PASS",
+      "evidence": "requirements/LEN-13/reviews/T7.md conclusion is ready-for-gate and all P0/P1/P2 findings are fixed."
+    },
+    {
+      "item": "IDL / protobuf 影响已确认",
+      "result": "PASS",
+      "evidence": "N/A: LEN-13 only changes fides frontend and consumes BFF REST OTP contract; no protobuf, Buf config, or generated-contract changes."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-13/tasks.json approved by Forest at 2026-06-21T14:50:51+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [
+    {
+      "issue": "Real BFF smoke remains pending because LEN-12 OTP backend/BFF implementation is not ready.",
+      "follow_up_action": "Run real adapter smoke against /api/v1/auth/otp:send and /api/v1/auth/otp:verify when LEN-12 is implemented.",
+      "owner": "Frontend / Backend"
+    }
+  ],
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-13/evidence/fides-t2-domain-application.md",
+      "sha256": "5e34d2c5195a159ea03efba27fc75b930c62bddf0c914ec6d8e3d2bca598335c"
+    },
+    {
+      "path": "requirements/LEN-13/evidence/fides-t3-otp-gateway.md",
+      "sha256": "4fecccadf2299e61f0e86019c52477b9299e717173a4bfc353f0b2c24de4662f"
+    },
+    {
+      "path": "requirements/LEN-13/evidence/fides-t4-mobile-verification-ui.md",
+      "sha256": "af021709ac42a185e8fffe202c841d6945f800554e88b38284ed0c0f2c47c9e5"
+    },
+    {
+      "path": "requirements/LEN-13/evidence/fides-t5-session-flow-controller.md",
+      "sha256": "689d208d7beddf926063be65497b77eaf61d18b352d9657fa9c9834b53062d4d"
+    },
+    {
+      "path": "requirements/LEN-13/evidence/fides-t6-behavior-build-deps.md",
+      "sha256": "3167881770752cb62aeff0071ddedd7b73288404f38faa2de38a9270caeff82a"
+    },
+    {
+      "path": "requirements/LEN-13/reviews/T7.md",
+      "sha256": "7d3c5418aa86a3b58e193610a63ce352809adfeb4d28eb872f92dfe31da1335d"
+    }
+  ],
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-13-fe-otp-verification"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-13-fe-otp-verification"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改前端 fides 的手机验证屏，消费 BFF REST OTP 契约；不新增或修改 protobuf IDL、Buf 配置或生成契约。"
+  },
+  "decision": "LEN-13 的 fides 手机验证前端实现、测试、代码审查和证据已完成；真实 BFF smoke 等 LEN-12 就绪后补充，不阻塞当前前端 mock/adapter 合并。"
+}

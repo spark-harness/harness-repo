@@ -1,0 +1,93 @@
+{
+  "requirement_id": "LEN-13",
+  "status": "approved",
+  "approved_by": "Forest",
+  "approved_at": "2026-06-21T14:50:51+08:00",
+  "decision": "批准 LEN-13 tasks，可以进入 dev-entry 和服务仓库检查。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "Harness 任务与实现前仓库隔离",
+      "scope": "维护 LEN-13 README/design/tasks/gates 的阶段状态；在进入业务实现前，为 business-repo 建立 feature/LEN-13-fe-otp-verification 隔离分支或 worktree，并确认 fides 服务路径存在且与服务矩阵一致。",
+      "trace": {
+        "requirement_items": ["R7"],
+        "design_decisions": ["D9"]
+      },
+      "affected_services": ["fides"],
+      "acceptance": ["AC10"],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "mobile-verification 领域与应用端口测试",
+      "scope": "在 fides 中为手机验证功能建立最小 domain/application 边界：PhoneNumber、OtpCode、OTP 错误分类、sendOtp/verifyOtp command/result，以及 OtpAuthGateway、SessionStore、FlowControllerPort。先补单元测试覆盖 +852 校验、6 位 OTP、错误映射和同一用户意图 idempotency key 复用。",
+      "trace": {
+        "requirement_items": ["R1", "R3", "R6"],
+        "design_decisions": ["D1", "D3", "D5", "D6"]
+      },
+      "affected_services": ["fides"],
+      "acceptance": ["AC4", "AC5", "AC6", "AC7"],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "OTP REST infrastructure 与 mock adapter",
+      "scope": "实现 OtpAuthGateway 的 BFF REST adapter、错误信封解析、mock adapter 和 adapter mode 配置；发码使用 POST /api/v1/auth/otp:send，验码使用 POST /api/v1/auth/otp:verify，写请求携带 Idempotency-Key。mock adapter 支持 AC1-AC8 演示。",
+      "trace": {
+        "requirement_items": ["R2", "R4", "R6"],
+        "design_decisions": ["D2", "D4", "D5", "D6"]
+      },
+      "affected_services": ["fides", "fides-bff"],
+      "acceptance": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC10"],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "手机验证 presentation 与 OTP 输入体验",
+      "scope": "实现 fides 手机验证页面/组件/controller/presenter：+852 手机号输入、本地错误、Send loading、OTP 输入区、6 位输入/粘贴/退格、倒计时禁用、错误恢复、可达性反馈。移除或绕开原型 setTimeout 假成功路径。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R5"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5"]
+      },
+      "affected_services": ["fides"],
+      "acceptance": ["AC1", "AC2", "AC4", "AC5", "AC6", "AC7", "AC9"],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "会话保存与 FlowController 接入",
+      "scope": "实现或接入 SessionStore 与 FlowControllerPort：verify 成功后保存 verified session result 并前进到步骤 2；401 或 1 小时过期场景清理短期会话、提示重新验证并保留允许保留的非敏感草稿定位。",
+      "trace": {
+        "requirement_items": ["R4", "R6"],
+        "design_decisions": ["D4", "D7", "D8"]
+      },
+      "affected_services": ["fides"],
+      "acceptance": ["AC3", "AC8", "AC9"],
+      "state": "done"
+    },
+    {
+      "id": "T6",
+      "title": "前端行为测试、构建与依赖边界验证",
+      "scope": "补齐 unit/component/mock E2E 或项目等价测试，覆盖合法发码、冷却、正确验码、错误码、过期、限流、非 +852、登录态过期回验证；运行 fides 的 lint:deps、测试命令和 build，并记录原始输出。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R5", "R6"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8"]
+      },
+      "affected_services": ["fides"],
+      "acceptance": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8", "AC9", "AC10"],
+      "state": "done"
+    },
+    {
+      "id": "T7",
+      "title": "证据、代码审查与合并就绪",
+      "scope": "汇总测试/build/lint:deps/mock 演示证据到 requirements/LEN-13/evidence/；完成任务代码审查报告；刷新 dev-entry、service-repo-check 和 merge-readiness 门禁，记录多仓分支、证据 hash、上下文缺口和剩余风险。",
+      "trace": {
+        "requirement_items": ["R7"],
+        "design_decisions": ["D9"]
+      },
+      "affected_services": ["fides"],
+      "acceptance": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8", "AC9", "AC10"],
+      "state": "todo"
+    }
+  ]
+}

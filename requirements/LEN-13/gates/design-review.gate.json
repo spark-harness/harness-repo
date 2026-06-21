@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-13",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-21T15:11:14+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-13/requirement.md",
+      "sha256": "0457c98aca86876fd9e45e28272bc3d3bfe9d54208353d292452b30ded84aecb"
+    },
+    {
+      "path": "requirements/LEN-13/impact-analysis.md",
+      "sha256": "60496b04dce5a57cbd03af158e77fc3f0d8e08430f09c25889f1b0dc1e3eb262"
+    },
+    {
+      "path": "requirements/LEN-13/design.md",
+      "sha256": "81d73894c1d8407d78adc6b0e711008417e973c7223fcbef5781a4657a451561"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-13/design.md approved by Forest at 2026-06-21T14:37:14+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改前端 fides 的手机验证屏，消费 BFF REST OTP 契约；不新增或修改 protobuf IDL、Buf 配置或生成契约。"
+  },
+  "decision": "批准 LEN-13 design，可以进入任务拆分。"
+}
