@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-41",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-21T10:58:26+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-41/requirement.md",
+      "sha256": "7f70d987bcd5ed0ba83876490487fd14478f2ce7dcf4b3b9e9e15def13b44d19"
+    },
+    {
+      "path": "requirements/LEN-41/impact-analysis.md",
+      "sha256": "8b483da8a43830217395db63f83256de1eb9589805fb0eae77494dd9eaeb5e4a"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-41/requirement.md approved by Forest at 2026-06-21T00:43:30+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "本需求迁移 Lendora applicant protobuf namespace，并在既有 Java / Go generated contract 仓库和发布坐标下同步生成路径。"
+  },
+  "decision": "批准 LEN-41 requirement 与 impact-analysis，允许进入设计阶段。"
+}

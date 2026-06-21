@@ -1,0 +1,88 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-41",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-21T10:58:26+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-41/impact-analysis.md",
+      "sha256": "8b483da8a43830217395db63f83256de1eb9589805fb0eae77494dd9eaeb5e4a"
+    },
+    {
+      "path": "requirements/LEN-41/design.md",
+      "sha256": "34510b0e279c37f6659ea7ca99a055d2f5bd2b63c21377ac389f79752cced01e"
+    },
+    {
+      "path": "requirements/LEN-41/tasks.json",
+      "sha256": "18b642e3088fdc339a35e3b9eba17014afe579d638c041297cc34382e08401ff"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "afbed63bd52790eaddbd2fd0c7999af01ff22682fe9f9ccaebc5778c7abd43d9"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-41"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "8 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "applicant-api"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-41/impact-analysis.md approved by Forest at 2026-06-21T01:08:50+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-41-lendora-applicant-idl",
+      "commit": "e52bbe8"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-41-lendora-applicant-idl",
+      "commit": "93d81e7"
+    },
+    {
+      "name": "idl-repo",
+      "branch": "feature/LEN-41-lendora-applicant-idl",
+      "commit": "5909aa0"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "本需求迁移 Lendora applicant protobuf namespace，并在既有 Java / Go generated contract 仓库和发布坐标下同步生成路径。"
+  },
+  "decision": "批准 LEN-41 impact-analysis 和 service-repo-check，允许继续后续交付验证。"
+}

@@ -1,0 +1,105 @@
+{
+  "requirement_id": "LEN-41",
+  "status": "approved",
+  "approved_by": "Forest",
+  "approved_at": "2026-06-21T00:50:40+08:00",
+  "decision": "批准 LEN-41 tasks，允许进入开发实现。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "Harness 生命周期与服务矩阵",
+      "scope": "维护 LEN-41 requirement、impact-analysis、design、tasks 和阶段门禁；更新 .service-matrix/dependencies.yaml 中 applicant-api 的 proto_path 与 buf_module，使其指向 vesta/lendora/applicant/v1；记录 LEN-41 supersede LEN-12 旧 applicant proto path。",
+      "trace": {
+        "requirement_items": ["R7", "R9"],
+        "design_decisions": ["D5", "D6"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC5", "AC9"],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "IDL namespace 迁移",
+      "scope": "在 idl-repo 将 vesta/spark/applicant/v1/auth.proto 迁移到 vesta/lendora/applicant/v1/auth.proto，修改 package、java_package、go_package；保持 ApplicantAuthService RPC、message、字段编号、字段名和业务语义不变；不修改 vesta/spark/user/*。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R5", "R8"],
+        "design_decisions": ["D1", "D2", "D4", "D7"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC1", "AC2", "AC3", "AC6", "AC8"],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "Java generated contract package 迁移",
+      "scope": "保持 idl-java-repo 的 Maven groupId/artifactId/name/README 与 idl-repo Java publish workflow 不变，继续发布 com.spark.contract:spark-idl-java；通过 buf generate 生成 com.vesta.lendora.applicant.v1 Java package；运行 idl-java-repo mvn test。",
+      "trace": {
+        "requirement_items": ["R3", "R4", "R9"],
+        "design_decisions": ["D2", "D3", "D6"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC2", "AC4", "AC6", "AC9"],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "Go generated contract package path 迁移",
+      "scope": "保持 idl-repo 的 Go generation prefix、sync-go-idl workflow 和 publish-go-idl workflow 不变，继续发布到 spark-harness/idl-go-repo；将 applicant go_package 指向 github.com/spark-harness/idl-go-repo/vesta/lendora/applicant/v1；同步 idl-go-repo 生成物并运行 go test ./...。",
+      "trace": {
+        "requirement_items": ["R5", "R9"],
+        "design_decisions": ["D4", "D6"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC3", "AC6", "AC9"],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "applicant-api 契约消费切换",
+      "scope": "保持 business-repo/services/backend/applicant-api 的 Maven dependency/property/README 使用 com.spark.contract:spark-idl-java；将 Java imports 从 com.vesta.spark.applicant.v1.* 改为 com.vesta.lendora.applicant.v1.*；保持业务行为不变。",
+      "trace": {
+        "requirement_items": ["R6", "R8"],
+        "design_decisions": ["D2", "D3"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC4", "AC7"],
+      "state": "done"
+    },
+    {
+      "id": "T6",
+      "title": "契约依赖扫描与发布坐标治理",
+      "scope": "确认 business-repo 的 contract dependency scanner config/tests 不需要新增 Lendora Maven artifact 或 Go module；验证既有 spark-idl-java 与 idl-go-repo policy 仍阻止 RC/SNAPSHOT/local replacement，并允许 formal contract。",
+      "trace": {
+        "requirement_items": ["R4", "R5", "R9"],
+        "design_decisions": ["D3", "D4", "D6"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC2", "AC3", "AC9"],
+      "state": "done"
+    },
+    {
+      "id": "T7",
+      "title": "验证、审查与 merge-readiness 证据",
+      "scope": "记录 buf lint、buf generate、buf breaking、Java generated repo mvn test、Go generated repo go test、applicant-api mvn test、contract dependency scan、代码审查和 merge-readiness gate；如 buf breaking 因旧 Spark applicant package 删除失败，记录受控 breaking 分类、消费者清单、批准和回滚方案。",
+      "trace": {
+        "requirement_items": ["R8", "R9"],
+        "design_decisions": ["D6", "D7"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC6", "AC7", "AC8", "AC9"],
+      "state": "done"
+    },
+    {
+      "id": "T8",
+      "title": "Janus delivery-readiness 判定修复",
+      "scope": "修正 janus internal/delivery，使 release-bound delivery verify 接受已 squash merge 的 peer PR，formal tag reachability 优先使用远端 release ref，并优先使用 Java generated contract token 查询 Maven package；更新 business-repo delivery-readiness workflow 以创建 idl-java-repo reader app token 并传给 Janus；用 Janus 单测和 LEN-41 business delivery verify 现场命令验证。",
+      "trace": {
+        "requirement_items": ["R10"],
+        "design_decisions": ["D8"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC10"],
+      "state": "done"
+    }
+  ]
+}
