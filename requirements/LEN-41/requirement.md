@@ -11,6 +11,7 @@ affected_repositories:
   - harness-repo
   - idl-repo
   - business-repo
+  - janus
 approved_by: "Forest"
 approved_at: "2026-06-21T00:43:30+08:00"
 decision: "批准 LEN-41 requirement 与 impact-analysis，允许进入设计阶段。"
@@ -39,6 +40,7 @@ LEN-12 已经为 Lendora 申请漏斗建立 `applicant-api` 和 `ApplicantAuthSe
 - R7：更新服务矩阵、需求、影响分析、设计、任务、证据和门禁，使 applicant 契约路径统一指向 `vesta/lendora/applicant/v1`。
 - R8：保留 `ApplicantAuthService` 的 RPC、字段编号、字段名和业务语义，确保迁移是命名和发布坐标修正，不夹带行为变更。
 - R9：记录 breaking 风险、发布顺序、回滚方式和生成契约发布证据。
+- R10：修正 release-bound delivery-readiness 对已 squash merge 的 IDL peer PR、formal tag reachability 和 Maven package 查询的判定，使 LEN-41 business PR 能用正式契约证据通过交付门禁。
 
 ## Non-Goals
 
@@ -93,6 +95,7 @@ Then：本需求不迁移 user proto，不要求 `user-api` 同步改动；user 
 - BR5：`vesta/spark/user/*` 不属于本需求范围，不能为了“顺手清理”迁移或删除。
 - BR6：master-bound business change 只能消费 formal contract version，不能把 RC、SNAPSHOT、branch dependency 或 local replacement 合入 master。
 - BR7：发布证据必须能追溯到 IDL commit、既有 Java artifact、既有 Go module tag、业务仓 consumer commit 和测试结果。
+- BR8：交付门禁不得因为 peer repo 已 squash merge、local `master` ref 陈旧或优先使用低权限 token 而误判正式契约发布不可用。
 
 ## Acceptance Criteria
 
@@ -105,6 +108,7 @@ Then：本需求不迁移 user proto，不要求 `user-api` 同步改动；user 
 - AC7：`applicant-api` 测试通过，并覆盖现有 `ApplicantAuthService` gRPC adapter 行为。
 - AC8：`vesta/spark/user/*` 未被本需求迁移或删除。
 - AC9：Harness 生命周期产物和门禁证据记录既有 Maven artifact、既有 Go module、发布顺序和回滚方案。
+- AC10：`janus delivery verify` 对 LEN-41 business PR 判定通过，证据包含 `idl-repo` 已 merge peer 状态、`v0.2.1` formal tag reachability 和 Maven `0.2.1` artifact 查询。
 
 ## Open Questions
 

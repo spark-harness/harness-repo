@@ -88,6 +88,18 @@
       "affected_services": ["applicant-api"],
       "acceptance": ["AC6", "AC7", "AC8", "AC9"],
       "state": "done"
+    },
+    {
+      "id": "T8",
+      "title": "Janus delivery-readiness 判定修复",
+      "scope": "修正 janus internal/delivery，使 release-bound delivery verify 接受已 squash merge 的 peer PR，formal tag reachability 优先使用远端 release ref，并优先使用 Java generated contract token 查询 Maven package；用 Janus 单测和 LEN-41 business delivery verify 现场命令验证。",
+      "trace": {
+        "requirement_items": ["R10"],
+        "design_decisions": ["D8"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC10"],
+      "state": "done"
     }
   ]
 }

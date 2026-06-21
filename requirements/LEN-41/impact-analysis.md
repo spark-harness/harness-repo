@@ -16,6 +16,8 @@ idl_impact_reason: "本需求迁移 Lendora applicant protobuf namespace，并�
 
 将 Lendora applicant 身份契约从 Spark applicant namespace 迁移到 Lendora applicant namespace；同步更新 `applicant-api` generated Java imports、服务矩阵和契约发布证据。生成仓库和发布坐标保持既有 `idl-java-repo` / `idl-go-repo`。
 
+交付验证发现 release-bound `janus delivery verify` 需要识别已 squash merge 的 IDL peer PR、优先使用远端 release ref 判定 formal tag reachability，并优先使用 Java generated contract token 查询 Maven package。因此本需求同时纳入 Janus delivery verifier 的聚焦修复。
+
 ## Affected Domains
 
 - `applicant`：Lendora 申请人身份、手机号 OTP 和短期会话契约。
@@ -32,6 +34,7 @@ idl_impact_reason: "本需求迁移 Lendora applicant protobuf namespace，并�
 | Java generated contract | idl-java-repo | 保持 `com.spark.contract:spark-idl-java`，生成 `com.vesta.lendora.applicant.v1` | Yes |
 | Go generated contract | idl-go-repo | 保持 `github.com/spark-harness/idl-go-repo`，生成 `vesta/lendora/applicant/v1` package path | Yes |
 | harness lifecycle | harness-repo (`requirements/LEN-41`) | 记录需求、影响、设计、任务、证据和门禁 | No |
+| delivery verifier | janus (`internal/delivery`) | release-bound delivery-readiness 需要接受已 merge peer PR、远端 release ref 和正式 Maven package 查询 | No |
 
 ## Upstream / Downstream Consumers
 
@@ -76,6 +79,10 @@ idl_impact_reason: "本需求迁移 Lendora applicant protobuf namespace，并�
 - Package publication:
   - Formal version 必须来自 `idl-repo` SemVer tag。
   - Master-bound `applicant-api` 不能消费 RC、SNAPSHOT、branch dependency 或 local replacement。
+- Delivery verification:
+  - `janus delivery verify` 必须接受同名 `idl-repo` PR 已合入 `master` 的 release-bound peer 证据。
+  - Formal tag reachability 应优先使用 `origin/master` 等远端 release ref，避免 stale local branch 阻塞。
+  - Maven package 查询应优先使用 `IDL_JAVA_REPO_TOKEN`，再回退到通用 GitHub token。
 
 ## Data Impact
 
@@ -91,9 +98,11 @@ idl_impact_reason: "本需求迁移 Lendora applicant protobuf namespace，并�
   - Maven repository / artifact 坐标不变。
   - Go module path / tag 发布配置不变。
   - GitHub Actions secret 继续使用既有 generated repo 权限。
+  - `business-repo` delivery-readiness workflow 继续从同名 Janus 分支构建 `janus`。
 - Permission:
   - Java publish token 继续对 `spark-harness/idl-java-repo` / `com.spark.contract:spark-idl-java` 有写权限。
   - Go publish token 继续对 `spark-harness/idl-go-repo` 有写权限。
+  - Java package 查询优先使用 workflow 中的 `IDL_JAVA_REPO_TOKEN`，避免低权限通用 token 造成 false negative。
 - Metrics: 无运行时指标变更。
 - Logs: 无运行时日志字段变更。
 - Tracing: 无运行时 tracing 变更。
@@ -122,6 +131,7 @@ idl_impact_reason: "本需求迁移 Lendora applicant protobuf namespace，并�
 | Go 生成物仍带 Spark applicant path | Go 消费者继续看到错误 namespace | 通过 proto `go_package` 和生成物路径验证 `vesta/lendora/applicant/v1` | Platform |
 | 历史 LEN-12 文档仍引用 Spark path | 审计时出现新旧路径并存 | LEN-41 记录 supersede 关系；不回写篡改已批准历史门禁 | Codex |
 | user proto 不迁移 | `vesta/spark/user/*` 仍存在短期噪声 | 明确作为 Non-Goal，后续 user 移除任务处理 | Product / Backend |
+| delivery-readiness 不识别 squash merge peer 状态 | business PR 被错误阻塞 | 在 Janus 中增加 `release_pr_merged` peer 状态、远端 release ref 优先级和 Java token fallback，并用 LEN-41 现场命令验证 | Harness |
 
 ## Context Gaps
 

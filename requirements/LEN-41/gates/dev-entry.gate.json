@@ -5,17 +5,17 @@
   "gate_name": "Dev 进入门禁",
   "stage": "4.2",
   "checked_by": "dev_entry_checker",
-  "checked_at": "2026-06-21T09:18:00+08:00",
+  "checked_at": "2026-06-21T10:51:23+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
     {
       "path": "requirements/LEN-41/design.md",
-      "sha256": "c1bcf8d1971c6d254c59100759f35ea98ab73c1d745add03b078fb550482e832"
+      "sha256": "8cd9babbc787c28cd2e76de1a97aeda74b09dee51a42fdbe3bd12221ea20d238"
     },
     {
       "path": "requirements/LEN-41/tasks.json",
-      "sha256": "af49462b5da7aa74472c166432722518c159b8454ce72281fdece5ca5c51f113"
+      "sha256": "94f654eb97f3ebf2376bc5aafbca7db05923b9b484a807daff0b6cf8387af6e6"
     }
   ],
   "checklist": [
@@ -32,7 +32,7 @@
     {
       "item": "每个任务有状态、范围、验收和追溯来源",
       "result": "PASS",
-      "evidence": "7 tasks include state, scope, acceptance, and trace."
+      "evidence": "8 tasks include state, scope, acceptance, and trace."
     },
     {
       "item": "人工批准记录合法",

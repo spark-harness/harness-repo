@@ -21,6 +21,7 @@ decision: "批准 LEN-41 design，允许进入任务拆分。"
 | R7, AC5, AC9 | D5: 更新服务矩阵和 Harness 产物，使 applicant proto path 统一指向 `vesta/lendora/applicant/v1` | 历史 LEN-12 产物不回写，只由 LEN-41 supersede |
 | BR4, AC6, AC9 | D6: 迁移按受控 breaking 处理；`buf breaking` 预期可能因删除旧 package/service 失败，证据必须记录失败项和已知消费者清单 | 已知直接消费者为 `applicant-api` |
 | BR5, AC8 | D7: `vesta/spark/user/*` 完全不纳入本需求 diff | user 后续移除任务处理 |
+| R10, BR8, AC10 | D8: 修正 Janus delivery verifier，使 release-bound gate 接受已 squash merge 的 peer PR、远端 release ref 和正式 Maven package token fallback | 不改变 contract 坐标或业务行为 |
 
 ## Summary
 
@@ -37,6 +38,7 @@ decision: "批准 LEN-41 design，允许进入任务拆分。"
 | idl-java-repo | 继续发布 `com.spark.contract:spark-idl-java`，新增 Lendora applicant generated Java package | Java generated contract 发布目标 |
 | idl-go-repo | 继续发布 `github.com/spark-harness/idl-go-repo`，新增 Lendora applicant Go package path | Go generated contract 发布目标 |
 | harness-repo | 更新服务矩阵、LEN-41 需求生命周期产物和证据 | 追溯与门禁 |
+| janus | 更新 `internal/delivery` 的 release-bound peer / formal evidence 判定 | 交付门禁实现 |
 
 `user-api`、`vesta/spark/user/*`、`fides-bff` 和前端不在本设计修改范围内。
 
@@ -139,6 +141,21 @@ Required changes:
 
 No application, domain, Redis, token, telemetry, or endpoint behavior changes are allowed in this ticket.
 
+## Delivery Gate Design
+
+`janus delivery verify` 需要支持 LEN-41 的真实交付状态：
+
+- `idl-repo` feature PR 已 squash merge 到 `master`，feature branch 仍存在但不再是 `origin/master` 的祖先。
+- Formal tag `v0.2.1` 指向 IDL squash merge commit，必须用远端 release ref 判定可追溯性。
+- Maven package 查询应优先使用 Java contract token，再回退到通用 GitHub token。
+
+设计决策：
+
+- 增加 `release_pr_merged` peer 状态，接受 closed + merged 的同名 `related_branch -> release_branch` PR 作为 release-bound peer 证据。
+- `resolveRef` 优先解析 `refs/remotes/origin/<branch>`，再回退本地 branch，避免 stale local `master` 影响 CI/本地复现。
+- Java artifact lookup 依次尝试 `IDL_JAVA_REPO_TOKEN`、`GH_TOKEN`、`GITHUB_TOKEN`，避免低权限 token 造成 false negative。
+- 保留 `release_pr_open` 作为 PR 阶段证据；正式发布仍必须验证 formal tag 和 artifact。
+
 ## Service Matrix And Harness Docs
 
 `harness-repo/.service-matrix/dependencies.yaml` changes:
@@ -186,6 +203,9 @@ Business consumer checks:
 
 - `mvn test` in `business-repo/services/backend/applicant-api`
 - Contract dependency scanner in `business-repo` for master mode using the existing artifact/module policy
+- Janus delivery verifier:
+  - `go test ./...`
+  - `janus delivery verify --workspace <LEN-41 worktree> --requirement LEN-41 --repo business-repo --base master --head feature/LEN-41-lendora-applicant-idl`
 
 Expected breaking behavior:
 
@@ -224,6 +244,7 @@ Rollback:
 | Existing `idl-java-repo` still contains user generated code | Accept as existing generated contract repo scope; do not change user proto in this ticket | Platform |
 | Business scanner behavior drifts after namespace migration | Verify existing scanner still accepts `spark-idl-java` and `idl-go-repo` policies | Backend |
 | Historical LEN-12 docs still mention Spark path | Record supersede relation in LEN-41 and avoid rewriting old approved gates | Codex |
+| Delivery verifier rejects already merged IDL peer PR | Add and verify `release_pr_merged` peer status in Janus | Harness |
 
 ## Open Decisions Before Implementation
 
