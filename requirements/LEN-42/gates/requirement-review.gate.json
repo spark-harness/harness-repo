@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-42",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-21T13:32:28+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-42/requirement.md",
+      "sha256": "81e58ef4cdcdc04b7ef64b3acd3b36db1c4568a3d55edfe7bd0a1ffefbeb14e3"
+    },
+    {
+      "path": "requirements/LEN-42/impact-analysis.md",
+      "sha256": "0b364afa9e9eb35c5c81f7b708eb4e3d5416653a504ceed547791fc690afa934"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-42/requirement.md approved by Forest at 2026-06-21T13:18:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "本需求不修改 .proto，但修改 IDL 仓 Buf 生成配置，影响 generated contract 的生成输入可复现性。"
+  },
+  "decision": "批准 LEN-42 requirement 与 impact-analysis，允许进入设计阶段。"
+}
