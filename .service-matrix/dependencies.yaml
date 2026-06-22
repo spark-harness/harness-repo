@@ -40,7 +40,10 @@ services:
   fides-bff:
     module: frontend
     repo_path: "{business-repo}/services/backend/fides-bff"
-    idl_required: false
+    idl_required: true
+    idl_repo: "{idl-repo}"
+    proto_path: "{idl-repo}/vesta/lendora/fides-bff/v1"
+    buf_module: "local/lendora-fides-bff"
 
   applicant-api:
     module: applicant
