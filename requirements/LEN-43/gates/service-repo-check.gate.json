@@ -1,0 +1,88 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-43",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-23T00:09:26+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-43/impact-analysis.md",
+      "sha256": "685067a34643424ee05bf2e15cca9e7f0f045d6ee0c1cdc8a1b59b51fdc09131"
+    },
+    {
+      "path": "requirements/LEN-43/design.md",
+      "sha256": "235c2cad7e4a6fd8bb202dd8af53ccafa656d62a8c0dae21e37671b3f51de514"
+    },
+    {
+      "path": "requirements/LEN-43/tasks.json",
+      "sha256": "e8045899272108a90080e606612ee36c2b0b90450e116016acfe32b28d054a78"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "150989a2f46012137b4b64db5a064c74daff35158535f1df54ab27238bb56ab2"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-43"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "10 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "applicant-api, fides, fides-bff"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-43/impact-analysis.md approved by Forest at 2026-06-23T00:03:21+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-43-fides-bff-mobile-verification",
+      "commit": "3f4469d"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-43-fides-bff-mobile-verification",
+      "commit": "f0557b3"
+    },
+    {
+      "name": "idl-repo",
+      "branch": "feature/LEN-43-fides-bff-mobile-verification",
+      "commit": "0497b0d"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "本需求新增 fides-bff BFF-facing protobuf，RPC 带 google.api.http 注解并生成 Go contract 供 BFF 消费。"
+  },
+  "decision": "批准 LEN-43 impact-analysis 与服务仓库检查，允许进入合并准备。"
+}

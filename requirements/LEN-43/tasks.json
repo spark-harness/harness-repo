@@ -1,0 +1,266 @@
+{
+  "requirement_id": "LEN-43",
+  "status": "approved",
+  "approved_by": "Forest",
+  "approved_at": "2026-06-21T23:16:31+08:00",
+  "decision": "批准 LEN-43 tasks，允许进入开发实现。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "Harness 生命周期与服务矩阵",
+      "scope": "维护 LEN-43 README、requirement、impact-analysis、design、tasks 和阶段门禁；更新 .service-matrix/dependencies.yaml，将 fides-bff 标记为 idl_required，并登记 {idl-repo}/vesta/lendora/fides-bff/v1 与 local/lendora-fides-bff。",
+      "trace": {
+        "requirement_items": [
+          "R3",
+          "R9"
+        ],
+        "design_decisions": [
+          "D2",
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "AC8",
+        "AC9"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "BFF-facing protobuf 与 HTTP 注解",
+      "scope": "在 idl-repo 新增 vesta/lendora/fides-bff/v1/auth.proto，定义 FidesBffAuthService、SendOtp、VerifyOtp、RefreshToken 及 DTO；每个 RPC 带 google.api.http 注解，映射到 /api/v1/auth/otp:send、/api/v1/auth/otp:verify、/api/v1/auth/token:refresh；运行 buf lint、buf generate、buf breaking 并记录证据。",
+      "trace": {
+        "requirement_items": [
+          "R1",
+          "R2"
+        ],
+        "design_decisions": [
+          "D1"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "AC7",
+        "AC9"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "Go generated contract 验证与消费准备",
+      "scope": "确认 BFF-facing proto 生成到 github.com/spark-harness/idl-go-repo/vesta/lendora/fides-bff/v1；分支验证可用同分支或 RC 生成物，master-bound 前必须记录 formal Go module tag 或等价正式发布证据；不手工编辑生成物。",
+      "trace": {
+        "requirement_items": [
+          "R1",
+          "R9"
+        ],
+        "design_decisions": [
+          "D1",
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "AC9"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "fides-bff test-first：auth 路由、映射与错误",
+      "scope": "先为 fides-bff 增加失败测试：auth REST 路由存在且要求 Idempotency-Key；REST path 与 proto HTTP annotation 一致；BFF proto DTO 映射到 biz command；applicant gRPC response 映射到 BFF response；unsupported_country、code_invalid、code_expired、too_many_attempts、token_expired、Consul 无实例和 gRPC unavailable 映射为统一错误信封。",
+      "trace": {
+        "requirement_items": [
+          "R4",
+          "R6"
+        ],
+        "design_decisions": [
+          "D3",
+          "D5"
+        ]
+      },
+      "affected_services": [
+        "fides-bff",
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC1",
+        "AC2",
+        "AC3",
+        "AC4",
+        "AC5",
+        "AC6",
+        "AC10"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "fides-bff auth 实现与 Consul applicant client",
+      "scope": "实现 fides-bff auth usecase、service handler、applicant client port、Consul resolver、gRPC client、配置结构和 wire 装配；从 HTTP header/context 读取 Idempotency-Key 和 trace metadata，并调用 applicant-api；不在 BFF 保存 OTP 状态或实现 applicant 业务规则。",
+      "trace": {
+        "requirement_items": [
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "design_decisions": [
+          "D3",
+          "D4",
+          "D5"
+        ]
+      },
+      "affected_services": [
+        "fides-bff",
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC1",
+        "AC2",
+        "AC3",
+        "AC4",
+        "AC5",
+        "AC6",
+        "AC10"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T6",
+      "title": "fides-bff OpenTelemetry OTLP 可观测性",
+      "scope": "使用 OpenTelemetry 官方 SDK 与官方 OTLP exporter 接入 tracing；配置 service.name=fides-bff、OTLP endpoint/protocol/headers、environment、release；默认导出到 OpenTelemetry Collector，由部署层将 Collector 导出到 Sentry；不引入 Sentry SDK、Sentry exporter 或 Sentry-specific span processor；测试 trace context 传播、error_code attribute、脱敏和未配置 endpoint 时本地启动不阻塞。",
+      "trace": {
+        "requirement_items": [
+          "R6",
+          "R9"
+        ],
+        "design_decisions": [
+          "D5",
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "AC10",
+        "AC12"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T7",
+      "title": "fides 前端真实 BFF adapter 测试",
+      "scope": "先补 fides 测试：RestOtpAuthGateway 的 send/verify/refresh path、body、Idempotency-Key header、统一错误信封、retryAfterSec；controller 和 screen 覆盖 AC1-AC6、session_expired、real/mock/disabled adapter mode；确认前端不消费 generated proto。",
+      "trace": {
+        "requirement_items": [
+          "R7"
+        ],
+        "design_decisions": [
+          "D6"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff"
+      ],
+      "acceptance": [
+        "AC1",
+        "AC2",
+        "AC3",
+        "AC4",
+        "AC5",
+        "AC6",
+        "AC11"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T8",
+      "title": "fides 前端真实接入实现",
+      "scope": "实现或补齐 fides real adapter、refreshToken port、错误映射、页面状态和本地配置说明；通过 NEXT_PUBLIC_FIDES_OTP_ADAPTER=real 与 NEXT_PUBLIC_FIDES_BFF_BASE_URL 指向 fides-bff；不持久化 OTP、完整手机号、access token、refresh token 或 BFF 原始敏感响应。",
+      "trace": {
+        "requirement_items": [
+          "R7",
+          "R8"
+        ],
+        "design_decisions": [
+          "D6",
+          "D7"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff"
+      ],
+      "acceptance": [
+        "AC1",
+        "AC2",
+        "AC3",
+        "AC4",
+        "AC5",
+        "AC6",
+        "AC11"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T9",
+      "title": "本地联调、smoke 与证据",
+      "scope": "记录 fides-bff Go test/build、fides pnpm test/lint:deps/build、buf checks、generated Go contract 验证和本地 smoke；优先使用本地 Consul + applicant-api test provider，若 applicant-api runtime 不可用，则用 applicant gRPC test server 证明 BFF integration 并记录真实 E2E blocker。",
+      "trace": {
+        "requirement_items": [
+          "R8",
+          "R9"
+        ],
+        "design_decisions": [
+          "D7",
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff",
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC9",
+        "AC10",
+        "AC11",
+        "AC12"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T10",
+      "title": "代码审查与 merge-readiness",
+      "scope": "为完成的实现任务生成 review 报告；汇总 evidence；刷新 dev-entry、service-repo-check 和 merge-readiness 门禁；记录多仓分支、contract formal 证据、测试输出、上下文缺口和剩余风险。",
+      "trace": {
+        "requirement_items": [
+          "R9"
+        ],
+        "design_decisions": [
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff"
+      ],
+      "acceptance": [
+        "AC9",
+        "AC10",
+        "AC11",
+        "AC12"
+      ],
+      "state": "done"
+    }
+  ]
+}

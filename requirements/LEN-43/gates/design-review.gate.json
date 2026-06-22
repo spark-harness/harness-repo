@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-43",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-23T00:09:26+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-43/requirement.md",
+      "sha256": "ca1a035c44c31464fc539c38372b6aa07c6cc0effd05018e8e888f8ba0ada2d9"
+    },
+    {
+      "path": "requirements/LEN-43/impact-analysis.md",
+      "sha256": "685067a34643424ee05bf2e15cca9e7f0f045d6ee0c1cdc8a1b59b51fdc09131"
+    },
+    {
+      "path": "requirements/LEN-43/design.md",
+      "sha256": "235c2cad7e4a6fd8bb202dd8af53ccafa656d62a8c0dae21e37671b3f51de514"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-43/design.md approved by Forest at 2026-06-21T23:12:21+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "本需求新增 fides-bff BFF-facing protobuf，RPC 带 google.api.http 注解并生成 Go contract 供 BFF 消费。"
+  },
+  "decision": "批准 LEN-43 design，允许进入任务拆分。"
+}
