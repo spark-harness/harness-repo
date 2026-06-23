@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-54",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-23T18:22:33+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-54/design.md",
+      "sha256": "972b67e21db6377ffbf76af559290aeec88735dc1f65abee142006a1ebea27bb"
+    },
+    {
+      "path": "requirements/LEN-54/tasks.json",
+      "sha256": "95ef6b0fa3698c3263c9a3f07e39a603c415a9eeb643f834ac9cb2f8a2869026"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-54"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "5 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-54/tasks.json approved by forest at 2026-06-23T18:21:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求删除 idl-repo 的 GitHub Actions 自动化，但不修改 protobuf 源契约。"
+  },
+  "decision": "批准 LEN-54 任务拆分进入执行和收尾。"
+}

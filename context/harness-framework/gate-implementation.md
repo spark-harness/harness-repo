@@ -430,16 +430,19 @@ CI / MR 必须失败的情况：
 
 ### 落地
 
-`harness-repo` 的 `.github/workflows/harness-gates.yml` 已落地这套口径：对本次改动
-涉及的 `requirements/<id>` 跑 `janus requirement status`（按阶段判定）、对涉及的 gate
+Spark 仓库门禁由 Argo Workflows 执行，GitHub 只作为 PR 事件入口和 required
+status 消费方。Argo 的 `spark/harness-gates` 对本次改动涉及的
+`requirements/<id>` 跑 `janus requirement status`（按阶段判定）、对涉及的 gate
 JSON 跑 `janus gate validate`；向默认分支发起的 PR 额外跑
-`janus requirement verify --target merge`（合并就绪）。
+`janus requirement verify --target merge`（合并就绪）。门禁失败通过
+`spark/*` GitHub commit status 阻止合并。
 
-`business-repo` 与 `idl-repo` 的 MR 流水线应复用同一个 `janus`：按改动关联的
-ticket id 跑 `janus requirement verify --requirement <id> --target merge`，不另写第二套
-判定。（跨仓接入待后续补齐。）
+`business-repo` 与 `idl-repo` 的交付语义门禁复用同一个 `janus`：按改动关联的
+ticket id 跑 `janus delivery verify --requirement <id> --repo <repo-name>`，不另写第二套
+判定。仓库级业务测试、契约扫描和 PR 元数据检查同样由 Argo WorkflowTemplate 执行并回写
+稳定的 `spark/*` status。
 
-`pr-metadata` 是独立的 Git 元数据门禁，只检查 PR 标题、描述和提交信息是否
+`spark/pr-metadata` 是独立的 Git 元数据门禁，只检查 PR 标题、描述和提交信息是否
 满足 `context/team/git.md` 与 `context/team/git-workflow.md`。它不能替代 Janus
 生命周期门禁，也不能把缺失的需求、设计、任务或证据视为通过。
 
