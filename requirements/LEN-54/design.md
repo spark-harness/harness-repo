@@ -1,11 +1,11 @@
 ---
 requirement_id: "LEN-54"
 owner: "Codex"
-status: "draft"
+status: "approved"
 updated_at: "2026-06-23"
-approved_by: ""
-approved_at: ""
-decision: ""
+approved_by: "forest"
+approved_at: "2026-06-23T18:21:00+08:00"
+decision: "批准 LEN-54 Argo 仓库门禁硬切设计。"
 ---
 
 # Design

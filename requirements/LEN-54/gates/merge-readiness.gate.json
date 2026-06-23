@@ -1,0 +1,82 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-54",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-23T18:25:05+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-54/requirement.md",
+      "sha256": "725633476bcf8926b8c94b0322cedab7b3c0baa10ff8494e00cce6ea9547440c"
+    },
+    {
+      "path": "requirements/LEN-54/impact-analysis.md",
+      "sha256": "ce5c2a0bfc7e535242a7dfd0c9a175a490305af0da5cae755aa8d29a5e053f7d"
+    },
+    {
+      "path": "requirements/LEN-54/design.md",
+      "sha256": "972b67e21db6377ffbf76af559290aeec88735dc1f65abee142006a1ebea27bb"
+    },
+    {
+      "path": "requirements/LEN-54/tasks.json",
+      "sha256": "95ef6b0fa3698c3263c9a3f07e39a603c415a9eeb643f834ac9cb2f8a2869026"
+    },
+    {
+      "path": "requirements/LEN-54/gates/requirement-review.gate.json",
+      "sha256": "3b0bdf004f947fc815d2dc7347bb5ddb72e4f8e50f0145c90fd32f36bee730d3"
+    },
+    {
+      "path": "requirements/LEN-54/gates/design-review.gate.json",
+      "sha256": "e93c8fdf830f26e986d4cb60a328e7f2c61823fffa1944bba1a455a7af2e83f3"
+    },
+    {
+      "path": "requirements/LEN-54/gates/dev-entry.gate.json",
+      "sha256": "8ebc09a1afccc6ea0c8d59d882e7af015204f91298a4a4ebec77b749b90c7a09"
+    },
+    {
+      "path": "requirements/LEN-54/gates/service-repo-check.gate.json",
+      "sha256": "cfa1a0100df7b8558fdcf14e3c13f6fe1e1a456529969857365c8898ae2f910c"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "150989a2f46012137b4b64db5a064c74daff35158535f1df54ab27238bb56ab2"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "1 evidence files recorded."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-54/tasks.json approved by forest at 2026-06-23T18:21:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-54/evidence/argo-repo-gates-verification.md",
+      "sha256": "126c15960b0f767aee0130fe295a1bff03ae616f3f8cdf922260d903cffd8ca0"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求删除 idl-repo 的 GitHub Actions 自动化，但不修改 protobuf 源契约。"
+  },
+  "decision": "批准 LEN-54 任务拆分进入执行和收尾。"
+}

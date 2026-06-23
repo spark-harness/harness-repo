@@ -1,9 +1,9 @@
 {
   "requirement_id": "LEN-54",
-  "status": "draft",
-  "approved_by": "",
-  "approved_at": "",
-  "decision": "",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-23T18:21:00+08:00",
+  "decision": "批准 LEN-54 任务拆分进入执行和收尾。",
   "tasks": [
     {
       "id": "T1",
@@ -13,7 +13,7 @@
         "requirement_items": ["R1", "R6", "R7"],
         "design_decisions": ["D1", "D5", "D6"]
       },
-      "affected_services": ["repo-gates"],
+      "affected_services": [],
       "acceptance": ["AC1", "AC8", "AC9"],
       "state": "done"
     },
@@ -25,7 +25,7 @@
         "requirement_items": ["R2", "R5"],
         "design_decisions": ["D2", "D3", "D4"]
       },
-      "affected_services": ["harness-gates", "pr-metadata", "delivery-readiness"],
+      "affected_services": [],
       "acceptance": ["AC2", "AC5", "AC10", "AC11", "AC12"],
       "state": "in_progress"
     },
@@ -37,7 +37,7 @@
         "requirement_items": ["R3", "R5"],
         "design_decisions": ["D3", "D4", "D5"]
       },
-      "affected_services": ["fides", "fides-bff", "contract-dependency-scan"],
+      "affected_services": ["fides", "fides-bff"],
       "acceptance": ["AC3", "AC6", "AC9", "AC10", "AC11", "AC12"],
       "state": "in_progress"
     },
@@ -49,7 +49,7 @@
         "requirement_items": ["R4", "R5"],
         "design_decisions": ["D4", "D5"]
       },
-      "affected_services": ["idl-contract-gate", "idl-release", "idl-sync"],
+      "affected_services": [],
       "acceptance": ["AC4", "AC7", "AC9", "AC10", "AC11", "AC12"],
       "state": "in_progress"
     },
@@ -61,7 +61,7 @@
         "requirement_items": ["R5", "R7"],
         "design_decisions": ["D2", "D3", "D4", "D5", "D7"]
       },
-      "affected_services": ["repo-gates", "branch-protection"],
+      "affected_services": [],
       "acceptance": ["AC5", "AC6", "AC7", "AC9", "AC10", "AC11", "AC12"],
       "state": "in_progress"
     }

@@ -1,11 +1,11 @@
 ---
 requirement_id: "LEN-54"
 analyst: "Codex"
-status: "draft"
+status: "approved"
 updated_at: "2026-06-23"
-approved_by: ""
-approved_at: ""
-decision: ""
+approved_by: "forest"
+approved_at: "2026-06-23T18:21:00+08:00"
+decision: "批准 LEN-54 服务仓库和影响面检查。"
 idl_impact: "no"
 idl_impact_reason: "本需求删除 idl-repo 的 GitHub Actions 自动化，但不修改 protobuf 源契约。"
 ---

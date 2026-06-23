@@ -1,3 +1,7 @@
+---
+current_stage: "5"
+---
+
 # LEN-54 Argo 仓库门禁硬切
 
 ## 状态

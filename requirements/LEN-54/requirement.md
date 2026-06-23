@@ -1,7 +1,7 @@
 ---
 requirement_id: "LEN-54"
 owner: "forest"
-status: "draft"
+status: "approved"
 created_at: "2026-06-23"
 related_branch: "chore/LEN-54-argo-repo-gates"
 target_branch: "master"
@@ -11,9 +11,9 @@ affected_repositories:
   - harness-repo
   - business-repo
   - idl-repo
-approved_by: ""
-approved_at: ""
-decision: ""
+approved_by: "forest"
+approved_at: "2026-06-23T18:21:00+08:00"
+decision: "批准 LEN-54 需求定义和影响分析，执行仓库门禁硬切到 Argo。"
 ---
 
 # Argo 仓库门禁硬切
