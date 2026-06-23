@@ -1,0 +1,69 @@
+{
+  "requirement_id": "LEN-54",
+  "status": "draft",
+  "approved_by": "",
+  "approved_at": "",
+  "decision": "",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "GitOps repo gate runtime",
+      "scope": "在 gitops-repo 中实现 repo gate WorkflowTemplate、IDL release WorkflowTemplate、GitHub EventSource、Sensor、Caddy webhook route 和 Janus runner image。",
+      "trace": {
+        "requirement_items": ["R1", "R6", "R7"],
+        "design_decisions": ["D1", "D5", "D6"]
+      },
+      "affected_services": ["repo-gates"],
+      "acceptance": ["AC1", "AC8", "AC9"],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "Harness repo hard cut",
+      "scope": "删除 harness-repo GitHub Actions 门禁 workflow，更新 Harness gate 和 Git workflow 文档，并让 branch protection 只要求 Argo status context。",
+      "trace": {
+        "requirement_items": ["R2", "R5"],
+        "design_decisions": ["D2", "D3", "D4"]
+      },
+      "affected_services": ["harness-gates", "pr-metadata", "delivery-readiness"],
+      "acceptance": ["AC2", "AC5", "AC10", "AC11", "AC12"],
+      "state": "in_progress"
+    },
+    {
+      "id": "T3",
+      "title": "Business repo hard cut",
+      "scope": "删除 business-repo GitHub Actions CI 和 contract scan workflow，让 Argo 执行 Fides、Fides BFF、contract scan、delivery readiness 和 PR metadata。",
+      "trace": {
+        "requirement_items": ["R3", "R5"],
+        "design_decisions": ["D3", "D4", "D5"]
+      },
+      "affected_services": ["fides", "fides-bff", "contract-dependency-scan"],
+      "acceptance": ["AC3", "AC6", "AC9", "AC10", "AC11", "AC12"],
+      "state": "in_progress"
+    },
+    {
+      "id": "T4",
+      "title": "IDL repo hard cut",
+      "scope": "删除 idl-repo GitHub Actions branch coherence、publish 和 sync workflow，让 Argo 执行 IDL PR gate、delivery readiness、PR metadata 和 push-triggered release/sync workflow。",
+      "trace": {
+        "requirement_items": ["R4", "R5"],
+        "design_decisions": ["D4", "D5"]
+      },
+      "affected_services": ["idl-contract-gate", "idl-release", "idl-sync"],
+      "acceptance": ["AC4", "AC7", "AC9", "AC10", "AC11", "AC12"],
+      "state": "in_progress"
+    },
+    {
+      "id": "T5",
+      "title": "Real PR E2E and merge",
+      "scope": "清理三仓临时 trigger commit，补齐 PR 描述，重新触发 Argo，确认所有必需 status 通过后按 GitHub branch protection 合并 PR，并记录 Jira evidence。",
+      "trace": {
+        "requirement_items": ["R5", "R7"],
+        "design_decisions": ["D2", "D3", "D4", "D5", "D7"]
+      },
+      "affected_services": ["repo-gates", "branch-protection"],
+      "acceptance": ["AC5", "AC6", "AC7", "AC9", "AC10", "AC11", "AC12"],
+      "state": "in_progress"
+    }
+  ]
+}
