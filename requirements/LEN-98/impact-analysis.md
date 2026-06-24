@@ -75,7 +75,7 @@ LEN-98 影响 IDL 生成配置、BFF HTTP 注册方式、FE adapter 依赖和新
 |---|---|
 | 私有 Go module 在 CI 中被 sumdb/proxy 拦截 | CI 设置 `GOPRIVATE=github.com/spark-harness/*` |
 | `idl-go-repo` formal tag 未进入主发布节奏 | 当前使用 `v0.2.2-len98.1` 验证 tag；合并后按正式发布规则晋级 |
-| OpenAPI v3 生成依赖本地插件可用性 | CI 使用 Janus runner 中的 `protoc-gen-openapi`，通过 stale check 防止手改漂移 |
+| OpenAPI v3 生成依赖本地插件可用性 | `buf.gen.openapi.yaml` 使用 Buf remote plugin `buf.build/community/google-gnostic-openapi`，避免依赖 runner 本地二进制 |
 | TS 生成顺序绕过 OpenAPI 仓 | GitOps workflow 固化 `sync-openapi -> checkout-ts-inputs -> generate-ts -> sync-ts` 顺序 |
 | generated client 和 FE 错误语义不一致 | FE infrastructure wrapper 保留裸 401/429、timeout 和 retry-after 映射测试 |
 

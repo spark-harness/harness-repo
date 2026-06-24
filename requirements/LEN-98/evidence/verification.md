@@ -20,7 +20,7 @@ Notes:
 
 - Generation templates are split into Go, Java, and OpenAPI.
 - `buf.gen.go.yaml` now generates Kratos HTTP binding without relying on preinstalled protoc plugins in Argo.
-- `buf.gen.openapi.yaml` generates OpenAPI v3 via local `protoc-gen-openapi`.
+- `buf.gen.openapi.yaml` generates OpenAPI v3 via Buf remote plugin `buf.build/community/google-gnostic-openapi`.
 - OpenAPI output is `idl-openapi-repo/vesta/lendora/fides-bff/v1/openapi.yaml`.
 
 ### fides-bff
@@ -74,6 +74,8 @@ Notes:
 - Workflow order is `checkout-idl -> sync-openapi -> checkout-ts-inputs -> generate-ts -> sync-ts -> sync-go -> sync-java -> publish-go -> publish-java`.
 - `generate-ts` uses fixed image `openapitools/openapi-generator-cli:v7.14.0`.
 - The fixed image was validated with its default `docker-entrypoint.sh` by passing `generate` as container args; shell command `openapi-generator-cli` is not used.
+- Manual workflow `idl-repo-release-len98-manual-fr8rj` initially failed in `sync-openapi` because the runner did not have local `protoc-gen-openapi`; the fix is `buf.build/community/google-gnostic-openapi`.
+- `vincent-k3s` namespace `argo` has secret `buf-token`; workflow steps that call `buf generate` inject `BUF_TOKEN` so Buf remote generation uses the authenticated bucket.
 - Server-side dry-run on `vincent-k3s` returned a non-fatal existing last-applied annotation ownership warning only.
 
 ### fides

@@ -20,13 +20,13 @@ No P0 or P1 findings remain.
 - Impact: CI without `GOPRIVATE` will fail at module verification through sumdb/proxy.
 - Required decision: CI must set `GOPRIVATE=github.com/spark-harness/*` for business-repo Go jobs that consume Spark private modules.
 
-### P2 Residual Risk: local protoc plugins are CI prerequisites
+### P2 Residual Risk: generator network access is a CI prerequisite
 
 - Source dimension: generated contract / delivery
 - File: `requirements/LEN-98/design.md`
-- Issue: IDL generation uses `protoc-gen-openapi`, remote Go/gRPC Buf plugins, and Kratos HTTP generation through `go run`.
-- Impact: CI agents missing `protoc-gen-openapi` or Go module access for Kratos HTTP generation will fail generation or stale checks.
-- Required decision: CI image or workflow must keep these generator dependencies pinned and available.
+- Issue: IDL generation uses Buf remote plugins and Kratos HTTP generation through `go run`.
+- Impact: CI agents without Buf registry access or Go module access for Kratos HTTP generation will fail generation or stale checks.
+- Required decision: CI image or workflow must keep these generator dependencies pinned and reachable.
 
 ## Checked Dimensions
 

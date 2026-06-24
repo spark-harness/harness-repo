@@ -23,5 +23,5 @@ Notes:
 
 - Buf generation templates are split by artifact family: Go, Java, and OpenAPI.
 - `buf.gen.go.yaml` uses remote Go/gRPC plugins and invokes the Kratos HTTP generator through `go run` so Argo does not depend on preinstalled protoc plugins.
-- `buf.gen.openapi.yaml` uses local `protoc-gen-openapi`.
+- `buf.gen.openapi.yaml` uses remote plugin `buf.build/community/google-gnostic-openapi` so Argo does not depend on a preinstalled `protoc-gen-openapi` binary.
 - TS SDK generation is not a Buf template; it runs after OpenAPI repo push through fixed image `openapitools/openapi-generator-cli:v7.14.0`.

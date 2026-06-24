@@ -87,4 +87,4 @@ Rollback 通过回退 `fides` client tag 和 `fides-bff` 服务版本完成，�
 ## Risks
 
 - 当前不再依赖本地 file dependency 或 local Go replace。
-- CI 必须能执行 `protoc-gen-openapi`、Kratos HTTP 生成器和固定 OpenAPI Generator 镜像，否则 OpenAPI / TS SDK / Go HTTP stale check 会失败。
+- CI 必须能访问 Buf remote plugins、Kratos HTTP Go module 和固定 OpenAPI Generator 镜像，否则 OpenAPI / TS SDK / Go HTTP stale check 会失败。

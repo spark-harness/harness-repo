@@ -15,11 +15,11 @@
     },
     {
       "path": "requirements/LEN-98/impact-analysis.md",
-      "sha256": "51f7c62321053e746b534a851ebbe76b6e731cca1267c35ff3f4a151695f631c"
+      "sha256": "2d498527ea2d9d5e26040e19715dcc3c84410065fa66e9f5193732c680ff7908"
     },
     {
       "path": "requirements/LEN-98/design.md",
-      "sha256": "a842a1f6c4eb62292402966af470836a825d01077e2d9f566d6497868926e937"
+      "sha256": "cbe6ff495203eb53683d025598b31896a50c95e10d37b9beae110b6d4c10646c"
     }
   ],
   "checklist": [
