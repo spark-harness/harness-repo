@@ -11,11 +11,11 @@
   "inputs": [
     {
       "path": "requirements/LEN-98/impact-analysis.md",
-      "sha256": "f615f543140fe9dca8811abb1a545faccabb136b2f4623ace77ec7049b7cfcb0"
+      "sha256": "51f7c62321053e746b534a851ebbe76b6e731cca1267c35ff3f4a151695f631c"
     },
     {
       "path": "requirements/LEN-98/design.md",
-      "sha256": "befde92f3ef72f40168c5ff1060e5126328f7404acd6fd3728b928d9b95362c8"
+      "sha256": "a842a1f6c4eb62292402966af470836a825d01077e2d9f566d6497868926e937"
     },
     {
       "path": "requirements/LEN-98/tasks.json",
@@ -45,7 +45,7 @@
     {
       "item": "私有依赖发布状态",
       "result": "PASS",
-      "evidence": "idl-go-repo v0.2.2-len98.1 and idl-ts-repo v0.1.0-len98.3 are pushed."
+      "evidence": "idl-go-repo v0.2.2-len98.1, idl-openapi-repo feature branch, and idl-ts-repo v0.1.0-len98.4 are pushed."
     }
   ],
   "blocking_issues": [],

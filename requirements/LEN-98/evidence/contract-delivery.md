@@ -27,8 +27,15 @@ Result: PASS in `business-repo/services/backend/fides-bff`.
 
 - Repository: `spark-harness/idl-ts-repo`
 - Branch: `feature/LEN-98-fides-bff-openapi-ts-client`
-- Tag: `v0.1.0-len98.3`
-- Commit: `5f2def1`
+- Package: `@spark-harness/idl-ts-client`
+- Tag: `v0.1.0-len98.4`
+- Commit: `9661620`
+
+Generation source:
+
+- Repository: `spark-harness/idl-openapi-repo`
+- Path: `vesta/lendora/fides-bff/v1/openapi.yaml`
+- Generator image: `openapitools/openapi-generator-cli:v7.14.0`
 
 Command:
 

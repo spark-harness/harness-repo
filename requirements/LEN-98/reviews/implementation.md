@@ -4,7 +4,7 @@
 
 - `idl-repo`: OpenAPI v3 generation, Kratos HTTP Go generation, stale check.
 - `idl-go-repo`: generated Go HTTP binding tag `v0.2.2-len98.1`.
-- `idl-ts-repo`: generated TypeScript client tag `v0.1.0-len98.3`.
+- `idl-ts-repo`: generated TypeScript client tag `v0.1.0-len98.4`.
 - `business-repo`: `fides-bff` generated route registration and `fides` generated client consumption.
 - `harness-repo`: LEN-98 lifecycle and evidence artifacts.
 
@@ -24,9 +24,9 @@ No P0 or P1 findings remain.
 
 - Source dimension: generated contract / delivery
 - File: `requirements/LEN-98/design.md`
-- Issue: IDL generation now uses local `protoc-gen-go`, `protoc-gen-go-grpc`, `protoc-gen-go-http`, and `protoc-gen-openapi`.
-- Impact: CI agents missing these plugins will fail generation or stale checks.
-- Required decision: CI image or workflow must install pinned plugin versions.
+- Issue: IDL generation uses `protoc-gen-openapi`, remote Go/gRPC Buf plugins, and Kratos HTTP generation through `go run`.
+- Impact: CI agents missing `protoc-gen-openapi` or Go module access for Kratos HTTP generation will fail generation or stale checks.
+- Required decision: CI image or workflow must keep these generator dependencies pinned and available.
 
 ## Checked Dimensions
 
@@ -43,6 +43,7 @@ No P0 or P1 findings remain.
 
 - `buf lint`
 - `buf generate --template buf.gen.go.yaml --path vesta/lendora/fides-bff/v1/auth.proto`
+- `buf generate --template buf.gen.java.yaml --path vesta/lendora/fides-bff/v1/auth.proto`
 - `buf generate --template buf.gen.openapi.yaml --path vesta/lendora/fides-bff/v1/auth.proto`
 - `scripts/check-openapi-v3.sh`
 - `go test ./...` in `idl-go-repo`

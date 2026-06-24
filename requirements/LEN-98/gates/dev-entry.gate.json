@@ -11,7 +11,7 @@
   "inputs": [
     {
       "path": "requirements/LEN-98/design.md",
-      "sha256": "befde92f3ef72f40168c5ff1060e5126328f7404acd6fd3728b928d9b95362c8"
+      "sha256": "a842a1f6c4eb62292402966af470836a825d01077e2d9f566d6497868926e937"
     },
     {
       "path": "requirements/LEN-98/tasks.json",

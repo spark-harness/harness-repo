@@ -9,6 +9,7 @@ Command:
 ```bash
 buf lint
 buf generate --template buf.gen.go.yaml --path vesta/lendora/fides-bff/v1/auth.proto
+buf generate --template buf.gen.java.yaml --path vesta/lendora/fides-bff/v1/auth.proto
 buf generate --template buf.gen.openapi.yaml --path vesta/lendora/fides-bff/v1/auth.proto
 scripts/check-openapi-v3.sh
 ```
@@ -17,9 +18,10 @@ Result: PASS.
 
 Notes:
 
-- `buf.gen.go.yaml` now generates Kratos HTTP binding via local `protoc-gen-go-http`.
+- Generation templates are split into Go, Java, and OpenAPI.
+- `buf.gen.go.yaml` now generates Kratos HTTP binding without relying on preinstalled protoc plugins in Argo.
 - `buf.gen.openapi.yaml` generates OpenAPI v3 via local `protoc-gen-openapi`.
-- OpenAPI output is `idl-repo/openapi/fides-bff/openapi.yaml`.
+- OpenAPI output is `idl-openapi-repo/vesta/lendora/fides-bff/v1/openapi.yaml`.
 
 ### fides-bff
 
@@ -42,19 +44,37 @@ Notes:
 Commands:
 
 ```bash
-pnpm install
 pnpm generate
 pnpm build
 git push origin feature/LEN-98-fides-bff-openapi-ts-client
-git push origin v0.1.0-len98.3
+git push -f origin v0.1.0-len98.4
 ```
 
 Result: PASS.
 
 Notes:
 
+- `pnpm generate` runs Docker image `openapitools/openapi-generator-cli:v7.14.0`.
 - Private remote `spark-harness/idl-ts-repo` was created.
-- `@spark-harness/fides-bff-client` is published as a Git tag dependency at `v0.1.0-len98.3`.
+- `@spark-harness/idl-ts-client` is published as a Git tag dependency at `v0.1.0-len98.4`.
+
+### gitops-repo
+
+Commands:
+
+```bash
+ruby -e "require 'yaml'; YAML.load_file('workflows/templates/github-idl-release-workflow-template.yaml')"
+GODEBUG=tlsmlkem=0 kubectl --kubeconfig ~/.kube/vincent-k3s.yaml --context vincent-k3s -n argo apply --server-side --dry-run=server -f workflows/templates/github-idl-release-workflow-template.yaml
+```
+
+Result: PASS.
+
+Notes:
+
+- Workflow order is `checkout-idl -> sync-openapi -> checkout-ts-inputs -> generate-ts -> sync-ts -> sync-go -> sync-java -> publish-go -> publish-java`.
+- `generate-ts` uses fixed image `openapitools/openapi-generator-cli:v7.14.0`.
+- The fixed image was validated with its default `docker-entrypoint.sh` by passing `generate` as container args; shell command `openapi-generator-cli` is not used.
+- Server-side dry-run on `vincent-k3s` returned a non-fatal existing last-applied annotation ownership warning only.
 
 ### fides
 
@@ -71,13 +91,14 @@ Result: PASS.
 
 Notes:
 
-- `pnpm test`: 12 test files passed, 1 skipped; 50 tests passed, 1 skipped.
+- `pnpm test`: 12 test files passed, 1 skipped; 51 tests passed, 1 skipped.
 - `pnpm lint:deps`: no dependency violations.
-- `pnpm build`: passed after removing `next/font/google` external Google Fonts dependency and using a system font stack.
+- `pnpm build`: passed.
 
 ## Release Dependency Closure
 
 - Created private remote repository `spark-harness/idl-ts-repo`.
-- Pushed TS client package and tag `v0.1.0-len98.3`.
+- Created private remote repository `spark-harness/idl-openapi-repo`.
+- Pushed TS client package and tag `v0.1.0-len98.4`.
 - Pushed `idl-go-repo` generated HTTP binding branch and tag `v0.2.2-len98.1`.
 - Replaced local file dependency and local Go replace with Git tags.

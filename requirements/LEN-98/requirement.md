@@ -10,6 +10,8 @@ contract_gate_mode: "auto"
 affected_repositories:
   - harness-repo
   - idl-repo
+  - idl-openapi-repo
+  - gitops-repo
   - business-repo
   - idl-ts-repo
 approved_by: "Forest"
@@ -27,9 +29,9 @@ decision: "批准 LEN-98 requirement 与 impact-analysis，允许进入设计和
 
 ## Goals
 
-- R1：`idl-repo` 能从 `vesta/lendora/fides-bff/v1/*.proto` 生成 `openapi/fides-bff/openapi.yaml`，格式为 OpenAPI v3 YAML。
+- R1：`idl-repo` 能从 `vesta/lendora/fides-bff/v1/*.proto` 生成 OpenAPI v3 YAML，并同步到独立 `idl-openapi-repo` 中跟随 proto 路径的目录。
 - R2：`idl-repo` 能生成 fides-bff Kratos HTTP registration 所需 Go 代码，BFF 不以手写 auth route 作为主契约入口。
-- R3：建立 `spark-harness/idl-ts-repo` 的本地仓结构和 `@spark-harness/fides-bff-client` 包，源契约来自 OpenAPI v3 YAML。
+- R3：建立 `spark-harness/idl-ts-repo` 的本地仓结构和 `@spark-harness/idl-ts-client` 包，源契约来自已推送的 `idl-openapi-repo`。
 - R4：`fides` 在基础设施 adapter 层消费 generated TS client；presentation、domain、application、adapters 层不得直接依赖生成物。
 - R5：保留统一错误信封、`Idempotency-Key`、trace header、冷却/锁定倒计时和裸 HTTP 错误兼容映射。
 - R6：生成链路和 stale check 可由 CI 执行，禁止手改 OpenAPI 或 client 后绕过检查。
@@ -50,7 +52,7 @@ Given：`auth.proto` 中 RPC 带 `google.api.http` 注解。
 
 When：执行 OpenAPI 生成命令。
 
-Then：`idl-repo/openapi/fides-bff/openapi.yaml` 包含三条 auth POST 路径，且为 OpenAPI v3。
+Then：`idl-openapi-repo/vesta/lendora/fides-bff/v1/openapi.yaml` 包含三条 auth POST 路径，且为 OpenAPI v3。
 
 ### Scenario 2：BFF 注册 generated HTTP service
 
@@ -62,7 +64,7 @@ Then：auth 路由由 `RegisterFidesBffAuthServiceHTTPServer` 注册，业务 se
 
 ### Scenario 3：FE 消费 TS client
 
-Given：`idl-ts-repo` 已生成 `@spark-harness/fides-bff-client`。
+Given：`idl-ts-repo` 已通过 OpenAPI Generator 生成 `@spark-harness/idl-ts-client`。
 
 When：`fides` real BFF adapter 发起发码、验码或刷新请求。
 
@@ -71,8 +73,8 @@ Then：adapter 包装 generated client，并继续输出 application 层定义�
 ## Business Rules
 
 - BR1：OpenAPI 只收录带 `google.api.http` 的业务 RPC；健康检查不纳入 auth OpenAPI。
-- BR2：OpenAPI 输出路径固定为 `idl-repo/openapi/fides-bff/openapi.yaml`。
-- BR3：TS client 仓固定为 `spark-harness/idl-ts-repo`，包名固定为 `@spark-harness/fides-bff-client`。
+- BR2：OpenAPI 输出仓固定为 `spark-harness/idl-openapi-repo`，路径固定为 `vesta/lendora/fides-bff/v1/openapi.yaml`。
+- BR3：TS client 仓固定为 `spark-harness/idl-ts-repo`，包名固定为 `@spark-harness/idl-ts-client`，同一 npm 包按服务路径导出生成 client。
 - BR4：`fides` 只能在 `src/infrastructure/**` 消费 generated client。
 - BR5：冷却、锁定、过期、未授权和系统错误映射必须保持 LEN-2 用户体验语义。
 - BR6：CI 必须能发现 OpenAPI 或 TS client 漂移。
@@ -80,10 +82,10 @@ Then：adapter 包装 generated client，并继续输出 application 层定义�
 ## Acceptance Criteria
 
 - AC1：`buf lint` 通过。
-- AC2：OpenAPI 生成命令能稳定生成 `openapi/fides-bff/openapi.yaml`，且 stale check 能发现漂移。
+- AC2：OpenAPI 生成命令能稳定生成 `idl-openapi-repo/vesta/lendora/fides-bff/v1/openapi.yaml`，且 stale check 能发现漂移。
 - AC3：Go 生成物包含 `auth_http.pb.go` 和 `RegisterFidesBffAuthServiceHTTPServer`。
 - AC4：`fides-bff` 使用 generated HTTP registration，`go test ./...` 通过。
-- AC5：`idl-ts-repo` 包含 `@spark-harness/fides-bff-client`，`pnpm build` 通过。
+- AC5：`idl-ts-repo` 包含 `@spark-harness/idl-ts-client`，`pnpm build` 通过。
 - AC6：`fides` adapter 层消费 generated client，`pnpm test`、`pnpm lint:deps` 和 build 通过。
 - AC7：`fides` presentation、domain、application、adapters 层不直接 import generated client。
 - AC8：记录远端 `spark-harness/idl-ts-repo` 创建状态和发布前剩余风险。
@@ -92,7 +94,7 @@ Then：adapter 包装 generated client，并继续输出 application 层定义�
 
 | Question | Owner | Deadline | Status |
 |---|---|---|---|
-| `spark-harness/idl-ts-repo` 远端仓创建权限和 token 由谁提供 | Platform | 合并前 | Closed：已创建私有仓并推送 `v0.1.0-len98.3` |
+| `spark-harness/idl-ts-repo` 远端仓创建权限和 token 由谁提供 | Platform | 合并前 | Closed：已创建私有仓并推送 `v0.1.0-len98.4` |
 | `fides-bff` release-bound 最终应消费哪个 formal `idl-go-repo` tag | Platform / BFF | 合并前 | Closed：当前验证 tag 为 `v0.2.2-len98.1` |
 
 ## Notes

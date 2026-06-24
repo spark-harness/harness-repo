@@ -17,6 +17,8 @@ LEN-98 影响 IDL 生成配置、BFF HTTP 注册方式、FE adapter 依赖和新
 |---|---|
 | harness-repo | 新增 LEN-98 lifecycle artifacts、证据和门禁输入 |
 | idl-repo | 新增 OpenAPI v3 生成配置、Kratos HTTP Go 生成配置、OpenAPI stale check |
+| idl-openapi-repo | 新增独立 OpenAPI 生成物仓，目录跟随 `idl-repo` proto 路径 |
+| gitops-repo | 发布 workflow 增加 OpenAPI sync、OpenAPI Generator TS 生成和 TS sync 顺序 |
 | business-repo | `fides-bff` 改用 generated HTTP registration；`fides` adapter 改用 TS client |
 | idl-ts-repo | 新增 TypeScript generated contract 仓与 fides-bff client 包 |
 
@@ -33,13 +35,14 @@ LEN-98 影响 IDL 生成配置、BFF HTTP 注册方式、FE adapter 依赖和新
   - `POST /api/v1/auth/otp:send`
   - `POST /api/v1/auth/otp:verify`
   - `POST /api/v1/auth/token:refresh`
-- OpenAPI：新增 `openapi/fides-bff/openapi.yaml`，从 proto HTTP annotation 派生。
-- TypeScript：新增 `@spark-harness/fides-bff-client`，由 FE infrastructure adapter 包装。
+- OpenAPI：新增 `idl-openapi-repo/vesta/lendora/fides-bff/v1/openapi.yaml`，从 proto HTTP annotation 派生。
+- TypeScript：新增 `@spark-harness/idl-ts-client`，由 FE infrastructure adapter 包装。
 
 ## Generated Contract Impact
 
 - Go：`idl-go-repo` 需要包含 `auth_http.pb.go`，BFF 才能调用 generated registration。
-- TS：`idl-ts-repo` 已创建私有远端，`fides` 通过 Git tag `v0.1.0-len98.3` 消费。
+- OpenAPI：`idl-openapi-repo` 已创建私有远端，发布 workflow 先推送同名分支。
+- TS：`idl-ts-repo` 已创建私有远端，`fides` 通过 Git tag `v0.1.0-len98.4` 消费。
 - Java：不受影响。
 
 ## Runtime, Data, Config
@@ -58,9 +61,10 @@ LEN-98 影响 IDL 生成配置、BFF HTTP 注册方式、FE adapter 依赖和新
 
 - Rollout 顺序：
   1. 合并/发布 `idl-repo` OpenAPI 与 Go HTTP generation。
-  2. 创建并发布 `idl-ts-repo` tag。
-  3. 更新 `fides-bff` 消费 formal `idl-go-repo` tag。
-  4. 更新 `fides` 消费 `idl-ts-repo` Git tag。
+  2. 发布 workflow 生成并推送 `idl-openapi-repo` 同名分支。
+  3. 发布 workflow clone 已推送的 `idl-openapi-repo`，用固定 OpenAPI Generator 镜像生成并推送 `idl-ts-repo`。
+  4. 更新 `fides-bff` 消费 formal `idl-go-repo` tag。
+  5. 更新 `fides` 消费 `idl-ts-repo` Git tag。
 - Rollback：
   - 可回退 `fides` adapter 到上一版本 generated client tag。
   - BFF route 语义保持同路径，生成注册失败时可回退到上一服务版本。
@@ -71,7 +75,8 @@ LEN-98 影响 IDL 生成配置、BFF HTTP 注册方式、FE adapter 依赖和新
 |---|---|
 | 私有 Go module 在 CI 中被 sumdb/proxy 拦截 | CI 设置 `GOPRIVATE=github.com/spark-harness/*` |
 | `idl-go-repo` formal tag 未进入主发布节奏 | 当前使用 `v0.2.2-len98.1` 验证 tag；合并后按正式发布规则晋级 |
-| OpenAPI v3 生成依赖本地插件可用性 | CI 安装并校验 `protoc-gen-openapi`，通过 stale check 防止手改漂移 |
+| OpenAPI v3 生成依赖本地插件可用性 | CI 使用 Janus runner 中的 `protoc-gen-openapi`，通过 stale check 防止手改漂移 |
+| TS 生成顺序绕过 OpenAPI 仓 | GitOps workflow 固化 `sync-openapi -> checkout-ts-inputs -> generate-ts -> sync-ts` 顺序 |
 | generated client 和 FE 错误语义不一致 | FE infrastructure wrapper 保留裸 401/429、timeout 和 retry-after 映射测试 |
 
 ## Context Gaps
