@@ -71,13 +71,17 @@ Result: PASS.
 
 Notes:
 
-- Workflow order is `checkout-idl -> sync-openapi -> checkout-ts-inputs -> generate-ts -> sync-ts -> sync-go -> sync-java -> publish-go -> publish-java`.
+- Workflow order is `checkout-idl -> [go-chain, java-chain, openapi-ts-chain]`.
+- `go-chain` runs `sync-go -> publish-go`.
+- `java-chain` runs `sync-java -> publish-java`.
+- `openapi-ts-chain` runs `sync-openapi -> checkout-ts-inputs -> generate-ts -> sync-ts`.
 - `generate-ts` uses fixed image `openapitools/openapi-generator-cli:v7.14.0`.
 - `sync-ts` uses fixed image `node:24-bookworm` and enables pnpm through Corepack before `pnpm install --frozen-lockfile` and `pnpm build`.
 - The fixed image was validated with its default `docker-entrypoint.sh` by passing `generate` as container args; shell command `openapi-generator-cli` is not used.
 - Manual workflow `idl-repo-release-len98-manual-fr8rj` initially failed in `sync-openapi` because the runner did not have local `protoc-gen-openapi`; the fix is `buf.build/community/google-gnostic-openapi`.
 - Manual workflow `idl-repo-release-len98-manual-vfkzb` verified `sync-openapi`, `checkout-ts-inputs`, and `generate-ts`; it then exposed that the previous `sync-ts` runner did not have `pnpm`, fixed by `node:24-bookworm` plus Corepack.
 - Manual workflow `idl-repo-release-len98-parallel-s79hd` succeeded with `sync-openapi`, `sync-go`, and `sync-java` running in parallel, followed by OpenAPI-dependent TS checkout, generation, and sync.
+- Manual workflow `idl-repo-release-len98-chain-glcgq` succeeded after the final chain split. `go-chain`, `java-chain`, and `openapi-ts-chain` all started at `2026-06-24T14:32:01Z` after `checkout-idl`; `checkout-ts-inputs` started at `2026-06-24T14:32:21Z` after `sync-openapi` succeeded at `2026-06-24T14:32:11Z`, without waiting for Go or Java.
 - `vincent-k3s` namespace `argo` has secret `buf-token`; workflow steps that call `buf generate` inject `BUF_TOKEN` so Buf remote generation uses the authenticated bucket.
 - Server-side dry-run on `vincent-k3s` returned a non-fatal existing last-applied annotation ownership warning only.
 
