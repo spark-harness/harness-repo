@@ -10,10 +10,7 @@ contract_gate_mode: "auto"
 affected_repositories:
   - harness-repo
   - idl-repo
-  - idl-openapi-repo
-  - gitops-repo
   - business-repo
-  - idl-ts-repo
 approved_by: "Forest"
 approved_at: "2026-06-24T10:24:33+08:00"
 decision: "批准 LEN-98 requirement 与 impact-analysis，允许进入设计和实现阶段。"
