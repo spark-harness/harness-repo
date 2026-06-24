@@ -77,6 +77,7 @@ Notes:
 - The fixed image was validated with its default `docker-entrypoint.sh` by passing `generate` as container args; shell command `openapi-generator-cli` is not used.
 - Manual workflow `idl-repo-release-len98-manual-fr8rj` initially failed in `sync-openapi` because the runner did not have local `protoc-gen-openapi`; the fix is `buf.build/community/google-gnostic-openapi`.
 - Manual workflow `idl-repo-release-len98-manual-vfkzb` verified `sync-openapi`, `checkout-ts-inputs`, and `generate-ts`; it then exposed that the previous `sync-ts` runner did not have `pnpm`, fixed by `node:24-bookworm` plus Corepack.
+- Manual workflow `idl-repo-release-len98-parallel-s79hd` succeeded with `sync-openapi`, `sync-go`, and `sync-java` running in parallel, followed by OpenAPI-dependent TS checkout, generation, and sync.
 - `vincent-k3s` namespace `argo` has secret `buf-token`; workflow steps that call `buf generate` inject `BUF_TOKEN` so Buf remote generation uses the authenticated bucket.
 - Server-side dry-run on `vincent-k3s` returned a non-fatal existing last-applied annotation ownership warning only.
 
