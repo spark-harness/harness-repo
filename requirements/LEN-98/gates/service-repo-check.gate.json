@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-98",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-24T11:34:41+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-98/impact-analysis.md",
+      "sha256": "f615f543140fe9dca8811abb1a545faccabb136b2f4623ace77ec7049b7cfcb0"
+    },
+    {
+      "path": "requirements/LEN-98/design.md",
+      "sha256": "befde92f3ef72f40168c5ff1060e5126328f7404acd6fd3728b928d9b95362c8"
+    },
+    {
+      "path": "requirements/LEN-98/tasks.json",
+      "sha256": "0d08daff1da38ab80cb5cfc01640207a82def243a532c2bba50621c1636c6f02"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "150989a2f46012137b4b64db5a064c74daff35158535f1df54ab27238bb56ab2"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "fides, fides-bff, applicant-api; generated repos idl-go-repo and idl-ts-repo handled by tags."
+    },
+    {
+      "item": "私有依赖发布状态",
+      "result": "PASS",
+      "evidence": "idl-go-repo v0.2.2-len98.1 and idl-ts-repo v0.1.0-len98.3 are pushed."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "LEN-98 adds OpenAPI v3, Kratos HTTP binding, idl-go and idl-ts generated contract consumption for fides-bff/fides."
+  },
+  "decision": "批准 LEN-98 服务仓库检查，允许进入合并准备。",
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-98-fides-bff-openapi-ts-client"
+    },
+    {
+      "name": "idl-repo",
+      "branch": "feature/LEN-98-fides-bff-openapi-ts-client"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-98-fides-bff-openapi-ts-client"
+    },
+    {
+      "name": "idl-go-repo",
+      "branch": "feature/LEN-98-fides-bff-openapi-ts-client"
+    },
+    {
+      "name": "idl-ts-repo",
+      "branch": "feature/LEN-98-fides-bff-openapi-ts-client"
+    }
+  ]
+}
