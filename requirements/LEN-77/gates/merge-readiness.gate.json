@@ -1,0 +1,86 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-77",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-23T23:52:01+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-77/requirement.md",
+      "sha256": "50fb271a52ca5fa0f3a88d8643e6b19641ef1dc9ffbe1843338729ba8006f61e"
+    },
+    {
+      "path": "requirements/LEN-77/impact-analysis.md",
+      "sha256": "70f7736d336bbb9d0d51cd697c766c1b38e4f0c02128433832d9dc2f3e2af4e7"
+    },
+    {
+      "path": "requirements/LEN-77/design.md",
+      "sha256": "6b617d7b6e9a790d76fe5f9a255c5c1c2c8d8803b3c7c3bb0d404352baebd3f7"
+    },
+    {
+      "path": "requirements/LEN-77/tasks.json",
+      "sha256": "9a763910a250a4b9f40354a90bbabeb8c2ff8171ebc1a9b438de73b723efd76c"
+    },
+    {
+      "path": "requirements/LEN-77/gates/requirement-review.gate.json",
+      "sha256": "502a507a41f380321e5186c2dc636c63d19a29a99ed9c344d97b3209e4e7f187"
+    },
+    {
+      "path": "requirements/LEN-77/gates/design-review.gate.json",
+      "sha256": "beddf1cbc085dc0cccda5ae80a3e06d2bb2afeb9bcf4ea1e979218f250d5c682"
+    },
+    {
+      "path": "requirements/LEN-77/gates/dev-entry.gate.json",
+      "sha256": "65767a49561dd31a1c314ee9693fe74792382a0fcda4b1976bd5afee9a3e3388"
+    },
+    {
+      "path": "requirements/LEN-77/gates/service-repo-check.gate.json",
+      "sha256": "ed6b6a78499d99316b3c13d0b0013fd2a8130cbc9474b67f2a1dd5b2b2511133"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "150989a2f46012137b4b64db5a064c74daff35158535f1df54ab27238bb56ab2"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "2 evidence files recorded."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-77/tasks.json approved by forest at 2026-06-23T21:35:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-77/evidence/implementation-checks.md",
+      "sha256": "f624225b57dc3e3b9b52cd0947bcea69a503b8ed7308da796eadc99ce9d794e2"
+    },
+    {
+      "path": "requirements/LEN-77/evidence/runtime-smoke-plan.md",
+      "sha256": "ae7d8ab746f7ff535ebb0aec8a47e538e42a5b83398fe38056f9a7948d458b3d"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "复用已存在 applicant-api protobuf 契约和生成契约，不修改 .proto。"
+  },
+  "decision": "批准 LEN-77 更新后的任务状态；T1-T7 已实现，运行时证据已在 vincent-k3s 补齐，剩余 DNS、迁移策略和 OTEL 加固作为后续技术债处理。"
+}

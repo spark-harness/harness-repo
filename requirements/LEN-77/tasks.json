@@ -1,0 +1,93 @@
+{
+  "requirement_id": "LEN-77",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-23T21:35:00+08:00",
+  "decision": "批准 LEN-77 更新后的任务状态；T1-T7 已实现，运行时证据已在 vincent-k3s 补齐，剩余 DNS、迁移策略和 OTEL 加固作为后续技术债处理。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "LEN-78 Lendora STA runtime GitOps",
+      "scope": "在 gitops-repo 创建 Lendora STA app-of-apps、独立 namespace、基础 labels、Argo CD Application 和回滚入口。",
+      "trace": {
+        "requirement_items": ["R1"],
+        "design_decisions": ["D1"]
+      },
+      "affected_services": [],
+      "acceptance": ["AC1", "AC2"],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "LEN-79 三服务生产镜像发布",
+      "scope": "为 applicant-api、fides-bff、fides 增加生产 Dockerfile 和 image release / digest promotion 配置，确保部署引用 immutable digest。",
+      "trace": {
+        "requirement_items": ["R2"],
+        "design_decisions": ["D2"]
+      },
+      "affected_services": ["applicant-api", "fides-bff", "fides"],
+      "acceptance": ["AC3", "AC4"],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "LEN-80 STA runtime dependencies",
+      "scope": "在 gitops-repo 部署 PostgreSQL、Redis、Consul 的独立 namespace、Secret 引用、PVC、ClusterIP、健康检查和资源限制。",
+      "trace": {
+        "requirement_items": ["R3"],
+        "design_decisions": ["D3"]
+      },
+      "affected_services": [],
+      "acceptance": ["AC5", "AC6"],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "LEN-81 applicant-api internal deployment",
+      "scope": "在 gitops-repo 配置 applicant-api 内网 Deployment、Service、ConfigMap、Secret 引用、迁移、健康检查和 NetworkPolicy。",
+      "trace": {
+        "requirement_items": ["R4"],
+        "design_decisions": ["D4"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": ["AC7", "AC11"],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "LEN-82 fides-bff public API boundary",
+      "scope": "在 gitops-repo 配置 fides-bff Deployment、Service、公网 API 路由、内网 applicant 配置、CORS、健康检查和 smoke 入口。",
+      "trace": {
+        "requirement_items": ["R5"],
+        "design_decisions": ["D5"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": ["AC8"],
+      "state": "done"
+    },
+    {
+      "id": "T6",
+      "title": "LEN-83 fides public frontend",
+      "scope": "在 business-repo / gitops-repo 配置 fides 前端生产镜像、公网 HTTPS 路由和真实 STA BFF base URL。",
+      "trace": {
+        "requirement_items": ["R6"],
+        "design_decisions": ["D6"]
+      },
+      "affected_services": ["fides"],
+      "acceptance": ["AC9", "AC10"],
+      "state": "done"
+    },
+    {
+      "id": "T7",
+      "title": "LEN-84 smoke, observability and rollback evidence",
+      "scope": "补齐 E2E smoke、公网不可达探测、日志 / 指标 / trace 检查、任一服务 digest 回滚演练和 Harness evidence。",
+      "trace": {
+        "requirement_items": ["R7"],
+        "design_decisions": ["D7"]
+      },
+      "affected_services": ["applicant-api", "fides-bff", "fides"],
+      "acceptance": ["AC10", "AC11", "AC12", "AC13", "AC14"],
+      "state": "done"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-77",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-23T20:03:04+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-77/requirement.md",
+      "sha256": "50fb271a52ca5fa0f3a88d8643e6b19641ef1dc9ffbe1843338729ba8006f61e"
+    },
+    {
+      "path": "requirements/LEN-77/impact-analysis.md",
+      "sha256": "70f7736d336bbb9d0d51cd697c766c1b38e4f0c02128433832d9dc2f3e2af4e7"
+    },
+    {
+      "path": "requirements/LEN-77/design.md",
+      "sha256": "6b617d7b6e9a790d76fe5f9a255c5c1c2c8d8803b3c7c3bb0d404352baebd3f7"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-77/design.md approved by forest at 2026-06-23T19:56:08+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "复用已存在 applicant-api protobuf 契约和生成契约，不修改 .proto。"
+  },
+  "decision": "批准 LEN-77 生产化部署设计，按当前范围进入任务拆分和实现。"
+}

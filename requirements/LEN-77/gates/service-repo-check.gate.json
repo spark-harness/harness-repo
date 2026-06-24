@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-77",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-23T23:52:01+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-77/impact-analysis.md",
+      "sha256": "70f7736d336bbb9d0d51cd697c766c1b38e4f0c02128433832d9dc2f3e2af4e7"
+    },
+    {
+      "path": "requirements/LEN-77/design.md",
+      "sha256": "6b617d7b6e9a790d76fe5f9a255c5c1c2c8d8803b3c7c3bb0d404352baebd3f7"
+    },
+    {
+      "path": "requirements/LEN-77/tasks.json",
+      "sha256": "9a763910a250a4b9f40354a90bbabeb8c2ff8171ebc1a9b438de73b723efd76c"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "150989a2f46012137b4b64db5a064c74daff35158535f1df54ab27238bb56ab2"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-77"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "7 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "applicant-api, fides, fides-bff"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-77/impact-analysis.md approved by forest at 2026-06-23T19:56:08+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-77-lendora-sta-runtime",
+      "commit": "5f13981"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-77-lendora-sta-runtime",
+      "commit": "356efe0"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "复用已存在 applicant-api protobuf 契约和生成契约，不修改 .proto。"
+  },
+  "decision": "批准 LEN-77 服务仓库检查，三仓同名分支已隔离，当前不修改 IDL。"
+}
