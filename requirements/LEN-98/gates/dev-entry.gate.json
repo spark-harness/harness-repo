@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-98",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-24T23:01:19+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-98/design.md",
+      "sha256": "cbe6ff495203eb53683d025598b31896a50c95e10d37b9beae110b6d4c10646c"
+    },
+    {
+      "path": "requirements/LEN-98/tasks.json",
+      "sha256": "0d08daff1da38ab80cb5cfc01640207a82def243a532c2bba50621c1636c6f02"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-98"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "6 tasks include status, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "tasks.json approved by Forest."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "LEN-98 adds OpenAPI v3, Kratos HTTP binding, idl-go and idl-ts generated contract consumption for fides-bff/fides."
+  },
+  "decision": "批准 LEN-98 tasks，允许按任务执行实现与验证。"
+}

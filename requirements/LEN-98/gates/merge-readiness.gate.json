@@ -1,0 +1,95 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-98",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-24T23:01:19+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-98/requirement.md",
+      "sha256": "b3fc9abc6a3a4e22edaf0b227f274ce52bb83d969099a15c597898f0800e4f09"
+    },
+    {
+      "path": "requirements/LEN-98/impact-analysis.md",
+      "sha256": "2d498527ea2d9d5e26040e19715dcc3c84410065fa66e9f5193732c680ff7908"
+    },
+    {
+      "path": "requirements/LEN-98/design.md",
+      "sha256": "cbe6ff495203eb53683d025598b31896a50c95e10d37b9beae110b6d4c10646c"
+    },
+    {
+      "path": "requirements/LEN-98/tasks.json",
+      "sha256": "0d08daff1da38ab80cb5cfc01640207a82def243a532c2bba50621c1636c6f02"
+    },
+    {
+      "path": "requirements/LEN-98/gates/requirement-review.gate.json",
+      "sha256": "25c06b34cb46bf4a3e58266009210a243bf615d239de7206c4cede0045580846"
+    },
+    {
+      "path": "requirements/LEN-98/gates/design-review.gate.json",
+      "sha256": "19bf91d867e99721c641ea61e3e66ee4cc1c680094b5ec62dc16e489291a1ee2"
+    },
+    {
+      "path": "requirements/LEN-98/gates/dev-entry.gate.json",
+      "sha256": "5ee72df92eecec0790162e2118be61017cb06d0bcd38b20c8a9a830fa1e9b2d2"
+    },
+    {
+      "path": "requirements/LEN-98/gates/service-repo-check.gate.json",
+      "sha256": "9eea91392dbea30280dc6a28b744236b69b29b004ec1476e57817cb30e845c0c"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "150989a2f46012137b4b64db5a064c74daff35158535f1df54ab27238bb56ab2"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-98/evidence/verification.md records IDL, BFF, TS client, and FE commands."
+    },
+    {
+      "item": "IDL 证据已记录",
+      "result": "PASS",
+      "evidence": "buf lint/generate/openapi stale check and generated repo tests recorded."
+    },
+    {
+      "item": "Code review 已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-98/reviews/implementation.md conclusion ready-for-gate."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "LEN-98 adds OpenAPI v3, Kratos HTTP binding, idl-go and idl-ts generated contract consumption for fides-bff/fides."
+  },
+  "decision": "批准 LEN-98 合并就绪，剩余 CI 环境前提已记录。",
+  "evidence": [
+    {
+      "path": "requirements/LEN-98/evidence/verification.md",
+      "sha256": "538edf23435600df6688368f79279f9d10810d4c00bbf6cb39876b365dc46db8"
+    },
+    {
+      "path": "requirements/LEN-98/evidence/buf-checks.md",
+      "sha256": "f1608956b9c683a765c531faa302112516067d638905f1b65008b091183079f9"
+    },
+    {
+      "path": "requirements/LEN-98/evidence/contract-delivery.md",
+      "sha256": "526343ecbcf9d23d80512656bc69049f279528c963e3485dbc83891466314abe"
+    }
+  ]
+}

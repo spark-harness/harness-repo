@@ -1,0 +1,81 @@
+{
+  "decision": "批准 LEN-98 tasks，允许按任务执行实现与验证。",
+  "approved_at": "2026-06-24T10:25:23+08:00",
+  "approved_by": "Forest",
+  "requirement_id": "LEN-98",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "Harness lifecycle artifacts",
+      "scope": "Create LEN-98 requirement, impact analysis, design, task plan, and evidence skeleton.",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R5", "R6"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5"]
+      },
+      "affected_services": ["fides", "fides-bff"],
+      "acceptance": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8"],
+      "status": "done"
+    },
+    {
+      "id": "T2",
+      "title": "IDL OpenAPI and Go HTTP generation",
+      "scope": "Add OpenAPI v3 generation, stale check, and Kratos HTTP Go generation for fides-bff auth proto.",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R6"],
+        "design_decisions": ["D1", "D2", "D5"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": ["AC1", "AC2", "AC3"],
+      "status": "done"
+    },
+    {
+      "id": "T3",
+      "title": "BFF generated HTTP registration",
+      "scope": "Change fides-bff auth service to implement generated HTTP interface and register generated routes.",
+      "trace": {
+        "requirement_items": ["R2", "R5"],
+        "design_decisions": ["D2"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": ["AC4"],
+      "status": "done"
+    },
+    {
+      "id": "T4",
+      "title": "TypeScript client repository",
+      "scope": "Create local idl-ts-repo structure and fides-bff client package for Git tag consumption.",
+      "trace": {
+        "requirement_items": ["R3", "R6"],
+        "design_decisions": ["D3", "D5"]
+      },
+      "affected_services": ["fides"],
+      "acceptance": ["AC5", "AC8"],
+      "status": "done"
+    },
+    {
+      "id": "T5",
+      "title": "FE generated client consumption",
+      "scope": "Update fides infrastructure adapter to wrap generated TS client while preserving application port and UX error mapping.",
+      "trace": {
+        "requirement_items": ["R4", "R5"],
+        "design_decisions": ["D4"]
+      },
+      "affected_services": ["fides"],
+      "acceptance": ["AC6", "AC7"],
+      "status": "done"
+    },
+    {
+      "id": "T6",
+      "title": "Release dependency closure",
+      "scope": "Create remote idl-ts-repo, publish TS tag, publish formal idl-go-repo tag with HTTP binding, and remove local file/replace dependencies.",
+      "trace": {
+        "requirement_items": ["R3", "R6"],
+        "design_decisions": ["D3", "D5"]
+      },
+      "affected_services": ["fides", "fides-bff"],
+      "acceptance": ["AC5", "AC6", "AC8"],
+      "status": "done"
+    }
+  ]
+}

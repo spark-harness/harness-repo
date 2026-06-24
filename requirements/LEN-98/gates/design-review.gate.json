@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-98",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-24T23:01:19+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-98/requirement.md",
+      "sha256": "b3fc9abc6a3a4e22edaf0b227f274ce52bb83d969099a15c597898f0800e4f09"
+    },
+    {
+      "path": "requirements/LEN-98/impact-analysis.md",
+      "sha256": "2d498527ea2d9d5e26040e19715dcc3c84410065fa66e9f5193732c680ff7908"
+    },
+    {
+      "path": "requirements/LEN-98/design.md",
+      "sha256": "cbe6ff495203eb53683d025598b31896a50c95e10d37b9beae110b6d4c10646c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "design.md approved by Forest."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "LEN-98 adds OpenAPI v3, Kratos HTTP binding, idl-go and idl-ts generated contract consumption for fides-bff/fides."
+  },
+  "decision": "批准 LEN-98 design，允许进入任务拆分和实现验证。"
+}
