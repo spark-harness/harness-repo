@@ -1,0 +1,82 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-115",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-25T22:34:06+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-115/requirement.md",
+      "sha256": "d034ef9af10f82de35f355be68f0925894427d51926af23ee6f7fefd9c550104"
+    },
+    {
+      "path": "requirements/LEN-115/impact-analysis.md",
+      "sha256": "6ca64ebe1ae8f626e46db8d09c7eff6f66b46229f001ca7ff2e87c3d7655cf60"
+    },
+    {
+      "path": "requirements/LEN-115/design.md",
+      "sha256": "bf4efb3b5cdd90683ebea78209e8870680328f9a261d98888c496b2e5b30d1ff"
+    },
+    {
+      "path": "requirements/LEN-115/tasks.json",
+      "sha256": "846ef04edc4a494cedf3758e67557676073830ccda6f3c8bf92032cfa5bc3216"
+    },
+    {
+      "path": "requirements/LEN-115/gates/requirement-review.gate.json",
+      "sha256": "2e84d49dfd3428747426490085e736fc3fdd8effec5137fa5425c405bf5dac59"
+    },
+    {
+      "path": "requirements/LEN-115/gates/design-review.gate.json",
+      "sha256": "2ddce44fec093ba3a6e33b996f1013e731623dce5b02a6a1622129c0545a448d"
+    },
+    {
+      "path": "requirements/LEN-115/gates/dev-entry.gate.json",
+      "sha256": "44f19d9ce6aa5d963c1fa2ec636a0bfc712615f315199fe0b4922b0dfd4c93a9"
+    },
+    {
+      "path": "requirements/LEN-115/gates/service-repo-check.gate.json",
+      "sha256": "d8f2224e76d5014c4a5772d1e52f2aa86b5b4857019dc5aebc9cc7ba902600b2"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "9da36fd1e15f81ad87aa619b53561059aa3b0804eeb4634d57084340ba79274b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "1 evidence files recorded."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-115/tasks.json approved by forest at 2026-06-25T22:33:09+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-115/evidence/local-verification.md",
+      "sha256": "88a0d1e39dd37809b57353abe0e92ad63b5997a6f939e080a5ad79dc29286a23"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只增强 fides-bff golangci-lint 配置，不修改 .proto、Buf 配置或生成契约。"
+  },
+  "decision": "用户已授权直接批准；批准 LEN-115 合并就绪，确认 requirement/design/dev/service gates 已通过，fides-bff lint 配置验证、golangci-lint run、make lint 和 diff check 均已通过。"
+}

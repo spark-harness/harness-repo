@@ -1,0 +1,91 @@
+{
+  "requirement_id": "LEN-115",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-25T22:33:09+08:00",
+  "decision": "用户已授权直接批准；批准 LEN-115 合并就绪，确认 requirement/design/dev/service gates 已通过，fides-bff lint 配置验证、golangci-lint run、make lint 和 diff check 均已通过。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "补齐 LEN-115 Harness 生命周期材料",
+      "scope": "创建 requirement、impact-analysis、design、tasks、gate 和 evidence 文件，记录 fides-bff Go lint 增强的范围、影响、设计、任务和验证。",
+      "trace": {
+        "requirement_items": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "AC8"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "D5"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "AC8"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "增强 fides-bff golangci-lint 配置",
+      "scope": "在 business-repo/apps/fides-bff/.golangci.yml 启用 depguard、loggercheck、sloglint，并按 biz、service、data、server 配置内部依赖方向规则。",
+      "trace": {
+        "requirement_items": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "D5"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "AC1",
+        "AC2",
+        "AC3",
+        "AC4"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "执行 lint 配置与服务 lint 验证",
+      "scope": "在 fides-bff 目录运行 golangci-lint config verify、golangci-lint run ./...、make lint，并记录验证证据。",
+      "trace": {
+        "requirement_items": [
+          "R5"
+        ],
+        "design_decisions": [
+          "D5"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "AC5",
+        "AC6",
+        "AC7"
+      ],
+      "state": "done"
+    }
+  ]
+}
