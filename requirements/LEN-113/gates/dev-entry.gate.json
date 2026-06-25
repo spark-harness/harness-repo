@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-113",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-25T21:47:16+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-113/design.md",
+      "sha256": "190ab7700065a482dd1301ed3de91f7d4457f4e7c019a931b4a6d6a7d2a850aa"
+    },
+    {
+      "path": "requirements/LEN-113/tasks.json",
+      "sha256": "6517f4ae29bc7cb24be02298daaa87c880a3a9b21f2c0323c01f3afa96e4e24d"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-113"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "5 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-113/tasks.json approved by Forest at 2026-06-25T21:35:08+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf、Buf 配置、生成契约仓或外部 API 契约。"
+  },
+  "decision": "批准 LEN-113 任务拆分，允许进入实现和证据补齐阶段。"
+}

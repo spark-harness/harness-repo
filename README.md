@@ -18,11 +18,10 @@ harness-repo/
 ├── .service-matrix/
 ├── .spark/
 ├── context/
-├── requirements/
-└── templates/
+└── requirements/
 ```
 
-`context/harness-framework/templates/` 保存需求生命周期文档模板。根目录 `templates/` 只保存服务脚手架等非文档模板。
+`context/harness-framework/templates/` 保存需求生命周期文档模板，是模板路径说明的事实源。
 
 ## 关联仓库
 
