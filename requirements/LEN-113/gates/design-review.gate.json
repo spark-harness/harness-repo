@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-113",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-25T21:35:23+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-113/requirement.md",
+      "sha256": "940c247aebda30ad716f58b21684fd1c137832e2680f01a91e571f1dbbb8deed"
+    },
+    {
+      "path": "requirements/LEN-113/impact-analysis.md",
+      "sha256": "fb2c13b33b0ae99090dd8be6d2370e2ff62298d54fbc310603f8302ae40767c2"
+    },
+    {
+      "path": "requirements/LEN-113/design.md",
+      "sha256": "aacbf41df3912e5ca1fcee9386232ac968967c604aa56d66610e90c76f80f3db"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-113/design.md approved by Forest at 2026-06-25T21:31:31+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf、Buf 配置、生成契约仓或外部 API 契约。"
+  },
+  "decision": "批准 LEN-113 设计，允许进入任务拆分阶段。"
+}

@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-113",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-25T21:41:37+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-113/impact-analysis.md",
+      "sha256": "fb2c13b33b0ae99090dd8be6d2370e2ff62298d54fbc310603f8302ae40767c2"
+    },
+    {
+      "path": "requirements/LEN-113/design.md",
+      "sha256": "aacbf41df3912e5ca1fcee9386232ac968967c604aa56d66610e90c76f80f3db"
+    },
+    {
+      "path": "requirements/LEN-113/tasks.json",
+      "sha256": "6517f4ae29bc7cb24be02298daaa87c880a3a9b21f2c0323c01f3afa96e4e24d"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "9da36fd1e15f81ad87aa619b53561059aa3b0804eeb4634d57084340ba79274b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-113"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "5 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "tasks.json 未声明业务服务；跳过服务矩阵路径校验。"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-113/impact-analysis.md approved by Forest at 2026-06-25T21:35:08+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "chore/LEN-113-governance-drift",
+      "commit": "6cb6901"
+    },
+    {
+      "name": "business-repo",
+      "branch": "chore/LEN-113-governance-drift",
+      "commit": "5910200"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf、Buf 配置、生成契约仓或外部 API 契约。"
+  },
+  "decision": "批准 LEN-113 服务仓库检查，确认本票不修改业务代码或 IDL。"
+}

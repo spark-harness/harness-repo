@@ -1,0 +1,90 @@
+{
+  "requirement_id": "LEN-113",
+  "status": "approved",
+  "approved_by": "Forest",
+  "approved_at": "2026-06-25T21:35:08+08:00",
+  "decision": "批准 LEN-113 任务拆分，允许进入实现和证据补齐阶段。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "补齐 Harness 生命周期产物",
+      "scope": "在 harness-repo 的 LEN-113 worktree 中补齐 requirement、impact-analysis、design、tasks 和相关 gate JSON；保持审批字段只由 janus requirement approve 写入。",
+      "trace": {
+        "requirement_items": ["AC1", "AC4"],
+        "design_decisions": ["D1", "D4"]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "requirements/LEN-113/requirement.md 存在并通过 requirement-review",
+        "requirements/LEN-113/impact-analysis.md 明确 idl_impact=no",
+        "requirements/LEN-113/design.md 存在并通过 design-review",
+        "requirements/LEN-113/tasks.json 通过 dev-entry 检查"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "修正 Harness 模板路径说明",
+      "scope": "修正 Harness README 和工作区 AGENTS 指令中仍指向不存在根 templates 目录的说明，统一指向 context/harness-framework/templates。",
+      "trace": {
+        "requirement_items": ["AC1", "BR1"],
+        "design_decisions": ["D1"]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "grep 检查不再发现 harness-repo/templates 或根 templates 目录口径残留",
+        "Harness PR 只包含文档和 lifecycle 相关变更"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "记录 business-repo 目录事实扫描",
+      "scope": "重新扫描 business-repo 主 checkout 和 LEN-113 worktree，确认 services/* 不存在是当前正确状态，服务路径以 apps/* 和服务矩阵为准；不创建 business-repo 代码 diff。",
+      "trace": {
+        "requirement_items": ["AC2", "BR2"],
+        "design_decisions": ["D2"]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "business-repo 主 checkout git status 已记录，若存在无关本地改动则不纳入本票",
+        "LEN-113 business-repo worktree git status 干净",
+        "目录扫描未发现 business-repo/services/*",
+        "服务矩阵路径仍指向 apps/fides-web、apps/fides-bff、apps/applicant-api"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "修正 Janus 治理仓库推断",
+      "scope": "在 janus delivery inference 中补齐当前治理相关仓库名称，并增加回归测试覆盖 learning-docs-repo 和 janus。",
+      "trace": {
+        "requirement_items": ["AC3", "BR3"],
+        "design_decisions": ["D3"]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "新增 Janus 回归测试覆盖治理仓库推断",
+        "go test ./... 通过",
+        "Janus PR CI 通过"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "收集交付证据并恢复 Draft PR",
+      "scope": "收集 grep、install.sh --check、business-repo 扫描、Janus go test 和 PR CI 证据；刷新 merge-readiness；在 dev-entry 和 service-repo-check 有效后将 Draft PR 恢复 Ready for review。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4"],
+        "design_decisions": ["D1", "D2", "D3", "D4"]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "evidence 目录记录所有验收命令和结果",
+        "merge-readiness gate 验证通过或明确阻塞项",
+        "harness-repo PR 和 janus PR 在 lifecycle gate 补齐后恢复 Ready for review"
+      ],
+      "state": "done"
+    }
+  ]
+}
