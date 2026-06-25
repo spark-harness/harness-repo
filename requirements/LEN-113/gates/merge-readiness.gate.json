@@ -5,7 +5,7 @@
   "gate_name": "合并就绪门禁",
   "stage": "5.1",
   "checked_by": "merge_readiness_checker",
-  "checked_at": "2026-06-25T21:47:16+08:00",
+  "checked_at": "2026-06-25T21:50:56+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -71,7 +71,7 @@
   "evidence": [
     {
       "path": "requirements/LEN-113/evidence/implementation-checks.md",
-      "sha256": "dd59969b58e8428bad9eb5c4c19b3ee4b19a822552173eb56ec445435ad0defe"
+      "sha256": "917157233821d031eccf8b8a2a6c8e33289a1145d7fcfb2d9f7bb9af47885570"
     }
   ],
   "idl_impact": {

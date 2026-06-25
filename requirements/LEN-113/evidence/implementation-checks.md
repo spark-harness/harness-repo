@@ -69,6 +69,21 @@ fides-bff -> {business-repo}/apps/fides-bff
 applicant-api -> {business-repo}/apps/applicant-api
 ```
 
+Peer branch check:
+
+```bash
+git -C .worktrees/LEN-113/business-repo ls-remote --exit-code --heads origin chore/LEN-113-governance-drift
+```
+
+Result:
+
+```text
+5910200e0c570f16d348aef58c099aaeab5fbcaa	refs/heads/chore/LEN-113-governance-drift
+business_remote_exit=0
+```
+
+The `business-repo` branch is intentionally a zero-diff peer branch so Argo delivery-readiness can clone the same head ref while keeping LEN-113 business changes evidence-only.
+
 ## Janus Verification
 
 Command:
@@ -97,5 +112,5 @@ GitHub PR CI for `spark-harness/janus#6` is green across listed build and test j
 
 ## Draft PR State
 
-- `spark-harness/harness-repo#21`: Draft, open. `spark/harness-delivery-readiness` still reflects the pre-lifecycle failure from the earlier premature PR.
-- `spark-harness/janus#6`: Draft, open, CI green.
+- `spark-harness/harness-repo#21`: ready for review after lifecycle evidence was restored.
+- `spark-harness/janus#6`: ready for review, CI green.
