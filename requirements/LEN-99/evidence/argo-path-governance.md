@@ -3,15 +3,17 @@
 ## Scope
 
 - Requirement: LEN-99
-- Verified at: `2026-06-25T11:56:05+08:00`
+- Verified at: `2026-06-25T14:18:08+08:00`
 - GitOps repo branch: `feature/LEN-99-business-monorepo-layout`
-- GitOps HEAD: `5839a73`
+- GitOps HEAD: `2beea0e`
 
 ## Result
 
 PASS for static Argo path governance updates.
 
 Live Argo Workflow and GitHub status results remain pending until the GitOps and business PRs are pushed and the cluster receives GitHub events.
+
+As of `2026-06-25T14:18:08+08:00`, the `gitops-repo` LEN-99 branch push completed, but GitHub API POST / GET calls intermittently fail with TLS / EOF errors from this host. Live Argo status evidence remains pending until the GitOps PR is created or verified through a stable GitHub API / browser session.
 
 ## Updated Gate Paths
 

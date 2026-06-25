@@ -3,12 +3,12 @@
 ## Scope
 
 - Requirement: LEN-99
-- Verified at: `2026-06-25T11:56:05+08:00`
+- Verified at: `2026-06-25T14:18:08+08:00`
 - Branch: `feature/LEN-99-business-monorepo-layout`
-- Harness HEAD: `4512f04`
-- Business HEAD: `862a923`
-- GitOps HEAD: `5839a73`
-- Janus HEAD: `64a36da`
+- Harness HEAD: `a8055a8`
+- Business HEAD: `eccb6c5`
+- GitOps HEAD: `2beea0e`
+- Janus HEAD: `e5c6388`
 - IDL HEAD used for matrix validation: `35b627a` detached read-only worktree
 
 ## Result
@@ -34,14 +34,26 @@ The vincent k3s rollout / smoke portion is not covered by this evidence and rema
 | YAML parse for `workflows/templates/github-repo-gate-workflow-template.yaml`, `workflows/ci/github-repo-gates-sensor.yaml`, and `workflows/ci/business-image-release-sensor.yaml` | `gitops-repo` | PASS |
 | `git diff --check` | `business-repo`, `harness-repo`, `gitops-repo` | PASS |
 | `go test ./...` | `janus` | PASS |
-| `go run ./cmd/janus delivery verify --workspace /Users/forest/Code/spark/.worktrees/LEN-99 --requirement LEN-99 --repo business-repo --base master --head feature/LEN-99-business-monorepo-layout` | `janus` | PASS; contract scan used formal-only mode through the new tooling path |
+| `go run ./cmd/janus delivery verify --workspace /Users/forest/Code/spark/.worktrees/LEN-99 --requirement LEN-99 --repo business-repo --base master --head feature/LEN-99-business-monorepo-layout` | `janus` | PRE-PUSH PASS; contract scan used formal-only mode through the new tooling path |
+| `go test ./...` | `janus` after T10 fixture filtering fix | PASS |
+
+## Delivery Push / PR Status
+
+| Repo | Commit | Remote branch | PR status |
+|---|---|---|---|
+| `business-repo` | `eccb6c5` | pushed; remote ref confirmed by GitHub REST | PR creation pending; GitHub API POST currently fails with TLS / EOF errors |
+| `harness-repo` | `a8055a8` | pushed; remote ref confirmed by GitHub REST | PR created: https://github.com/spark-harness/harness-repo/pull/20 |
+| `gitops-repo` | `2beea0e` | pushed; push completed successfully; later GitHub API ref query hit EOF | PR creation pending; GitHub API POST currently fails with TLS / EOF errors |
+| `janus` | `e5c6388` | pushed; remote ref confirmed by GitHub REST | PR creation pending; GitHub API POST currently fails with TLS / EOF errors |
+
+Post-commit release-bound `janus delivery verify` now correctly requires peer PR evidence for the four affected repos. `business-repo` delivery verify also requires a valid GitHub Packages lookup token or equivalent `JANUS_JAVA_ARTIFACT_VERSIONS` evidence for `com.spark.contract:spark-idl-java:0.2.1`.
 
 ## Notes
 
 - Test-generated `node_modules` and Maven `target/` directories were removed after verification.
 - `apps/applicant-api` Maven test emitted cached GitHub Packages 401 metadata warnings for the local `spark-spring-clean-architecture-starter` SNAPSHOT lookup, but build and all tests passed using the local dependency.
 - A detached read-only `idl-repo` sibling worktree was created under `.worktrees/LEN-99/idl-repo` only so service matrix validation could resolve existing proto paths.
-- Janus delivery verifier was updated to prefer `tooling/contract-dependency-scan/contract_dependency_scan.py` and retain legacy `scripts/contract_dependency_scan.py` fallback.
+- Janus delivery verifier was updated to prefer `tooling/contract-dependency-scan/contract_dependency_scan.py`, retain legacy `scripts/contract_dependency_scan.py` fallback, and ignore scanner fixture dependency files before release-bound formal evidence collection.
 
 ## Coverage
 
@@ -52,5 +64,5 @@ The vincent k3s rollout / smoke portion is not covered by this evidence and rema
 
 ## Out Of Scope For This Evidence
 
-- AC8-AC9 live delivery-readiness and Argo status results after PR push.
+- AC8-AC9 live delivery-readiness and Argo status results after all companion PRs exist and GitHub/Argo status contexts complete.
 - AC10-AC11 vincent k3s rollout, smoke, and applicant-api public exposure negative evidence.
