@@ -5,7 +5,7 @@
   "gate_name": "合并就绪门禁",
   "stage": "5.1",
   "checked_by": "merge_readiness_checker",
-  "checked_at": "2026-06-25T14:21:12+08:00",
+  "checked_at": "2026-06-25T16:50:01+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -23,7 +23,7 @@
     },
     {
       "path": "requirements/LEN-99/tasks.json",
-      "sha256": "f1a752edf17cf11fb05469a620b913599ab9325f7a851ec6ef4f1a1324be23b1"
+      "sha256": "b1ef547bb726a308eef10605ae4b36ccd95fac5332cbd630b1edddd3eb07cd5c"
     },
     {
       "path": "requirements/LEN-99/gates/requirement-review.gate.json",
@@ -35,11 +35,11 @@
     },
     {
       "path": "requirements/LEN-99/gates/dev-entry.gate.json",
-      "sha256": "196500a415ca1bedaf1e33abd4be49f577128bd1d9c8775bd3251995eb0cea7b"
+      "sha256": "2b8b96423f88d16c7a1b1a12b1c42603872a6cb2bd3ff88b82fc339634207146"
     },
     {
       "path": "requirements/LEN-99/gates/service-repo-check.gate.json",
-      "sha256": "090fc26ed9639fd8893e8bb6af7a5c64999932ffe09e88ca209be53fc3c4c2a5"
+      "sha256": "6e8fc2370c914a768f528eccada5cf1868c5537225e25555eeec5688bc1436a7"
     },
     {
       "path": ".service-matrix/dependencies.yaml",
@@ -55,7 +55,7 @@
     {
       "item": "实现证据已记录",
       "result": "PASS",
-      "evidence": "2 evidence files recorded."
+      "evidence": "3 evidence files recorded."
     },
     {
       "item": "人工批准记录合法",
@@ -71,16 +71,20 @@
   "evidence": [
     {
       "path": "requirements/LEN-99/evidence/argo-path-governance.md",
-      "sha256": "537cc5e0a562ad6fc9d2e2c56ae869064d5e91a78db9659a78ebac6f6630d6ee"
+      "sha256": "217fa0221b791c3b80bd685f701db78e380b952fd40d61adfa5e444d4cb7a607"
+    },
+    {
+      "path": "requirements/LEN-99/evidence/k3s-rollout-smoke.md",
+      "sha256": "5ff8e9e9883498d33d30b09bc58d0b449ef0e6cbc89ba1a7433e3e24a895cadb"
     },
     {
       "path": "requirements/LEN-99/evidence/local-verification.md",
-      "sha256": "11b60df0b239800fe76a4dc132e2992d83a8646672a2759f558d51d57887a14a"
+      "sha256": "bf931def10905a12f3c062ce77c4c504959b62f9615805892478a097b4e11bf7"
     }
   ],
   "idl_impact": {
     "impact": "no",
     "na_reason": "本需求只迁移 business-repo 目录、Harness 路径治理和验证证据，不修改 .proto、Buf 配置或生成契约。"
   },
-  "decision": "用户已授权批准所有门禁；批准 LEN-99 tasks.json 顶层门禁来源，适用于 dev-entry 与 merge-readiness：任务拆分完整，T1-T7 与 T10 已完成，T8 仍在刷新 delivery-readiness / CI / Argo 证据，T9 k3s rollout/smoke 保持待办。"
+  "decision": "用户已授权批准所有门禁；批准 LEN-99 tasks.json 顶层门禁来源，适用于 dev-entry 与 merge-readiness：任务拆分完整，T1-T10 已完成，delivery-readiness、CI / Argo 证据、vincent k3s rollout、public smoke、OTP 端到端 smoke 与 applicant-api 非公网暴露证据均已落档。"
 }

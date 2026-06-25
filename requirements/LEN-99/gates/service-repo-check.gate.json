@@ -5,7 +5,7 @@
   "gate_name": "服务仓库检查门禁",
   "stage": "4.3",
   "checked_by": "service_repo_checker",
-  "checked_at": "2026-06-25T13:43:00+08:00",
+  "checked_at": "2026-06-25T16:50:01+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -19,7 +19,7 @@
     },
     {
       "path": "requirements/LEN-99/tasks.json",
-      "sha256": "f1a752edf17cf11fb05469a620b913599ab9325f7a851ec6ef4f1a1324be23b1"
+      "sha256": "b1ef547bb726a308eef10605ae4b36ccd95fac5332cbd630b1edddd3eb07cd5c"
     },
     {
       "path": ".service-matrix/dependencies.yaml",
@@ -67,12 +67,12 @@
     {
       "name": "harness-repo",
       "branch": "feature/LEN-99-business-monorepo-layout",
-      "commit": "4512f04"
+      "commit": "6ec1bf2"
     },
     {
       "name": "business-repo",
       "branch": "feature/LEN-99-business-monorepo-layout",
-      "commit": "862a923"
+      "commit": "eccb6c5"
     }
   ],
   "idl_impact": {

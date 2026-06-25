@@ -5,7 +5,7 @@
   "gate_name": "Dev 进入门禁",
   "stage": "4.2",
   "checked_by": "dev_entry_checker",
-  "checked_at": "2026-06-25T13:42:47+08:00",
+  "checked_at": "2026-06-25T16:50:01+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -15,7 +15,7 @@
     },
     {
       "path": "requirements/LEN-99/tasks.json",
-      "sha256": "f1a752edf17cf11fb05469a620b913599ab9325f7a851ec6ef4f1a1324be23b1"
+      "sha256": "b1ef547bb726a308eef10605ae4b36ccd95fac5332cbd630b1edddd3eb07cd5c"
     }
   ],
   "checklist": [
@@ -49,5 +49,5 @@
     "impact": "no",
     "na_reason": "本需求只迁移 business-repo 目录、Harness 路径治理和验证证据，不修改 .proto、Buf 配置或生成契约。"
   },
-  "decision": "用户已授权批准所有门禁；批准 LEN-99 tasks.json 顶层门禁来源，适用于 dev-entry 与 merge-readiness：任务拆分完整，T1-T7 与 T10 已完成，T8 仍在刷新 delivery-readiness / CI / Argo 证据，T9 k3s rollout/smoke 保持待办。"
+  "decision": "用户已授权批准所有门禁；批准 LEN-99 tasks.json 顶层门禁来源，适用于 dev-entry 与 merge-readiness：任务拆分完整，T1-T10 已完成，delivery-readiness、CI / Argo 证据、vincent k3s rollout、public smoke、OTP 端到端 smoke 与 applicant-api 非公网暴露证据均已落档。"
 }

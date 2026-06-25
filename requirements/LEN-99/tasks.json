@@ -3,7 +3,7 @@
   "status": "approved",
   "approved_by": "forest",
   "approved_at": "2026-06-25T13:42:47+08:00",
-  "decision": "用户已授权批准所有门禁；批准 LEN-99 tasks.json 顶层门禁来源，适用于 dev-entry 与 merge-readiness：任务拆分完整，T1-T7 与 T10 已完成，T8 仍在刷新 delivery-readiness / CI / Argo 证据，T9 k3s rollout/smoke 保持待办。",
+  "decision": "用户已授权批准所有门禁；批准 LEN-99 tasks.json 顶层门禁来源，适用于 dev-entry 与 merge-readiness：任务拆分完整，T1-T10 已完成，delivery-readiness、CI / Argo 证据、vincent k3s rollout、public smoke、OTP 端到端 smoke 与 applicant-api 非公网暴露证据均已落档。",
   "tasks": [
     {
       "id": "T1",
@@ -208,7 +208,7 @@
         "AC8",
         "AC9"
       ],
-      "state": "in_progress"
+      "state": "done"
     },
     {
       "id": "T9",
@@ -235,7 +235,7 @@
         "AC10",
         "AC11"
       ],
-      "state": "todo"
+      "state": "done"
     }
   ]
 }

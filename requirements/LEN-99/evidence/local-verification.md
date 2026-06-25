@@ -7,7 +7,7 @@
 - Branch: `feature/LEN-99-business-monorepo-layout`
 - Harness HEAD: `a8055a8`
 - Business HEAD: `eccb6c5`
-- GitOps HEAD: `2beea0e`
+- GitOps HEAD: `5c8985f`
 - Janus HEAD: `e5c6388`
 - IDL HEAD used for matrix validation: `35b627a` detached read-only worktree
 
@@ -15,7 +15,7 @@
 
 PASS for local tooling, frontend, Go, Java, service matrix, YAML structure and whitespace checks.
 
-The vincent k3s rollout / smoke portion is not covered by this evidence and remains tracked by T9.
+The vincent k3s rollout / smoke portion is covered separately in `evidence/k3s-rollout-smoke.md`.
 
 ## Commands
 
@@ -44,7 +44,7 @@ The vincent k3s rollout / smoke portion is not covered by this evidence and rema
 |---|---|---|---|
 | `business-repo` | `eccb6c5` | pushed; remote ref confirmed by GitHub REST | PR created: https://github.com/spark-harness/business-repo/pull/21 |
 | `harness-repo` | `13bd1d8` | pushed; remote ref confirmed by GitHub REST | PR created: https://github.com/spark-harness/harness-repo/pull/20 |
-| `gitops-repo` | `2beea0e` | pushed; push completed successfully | PR created: https://github.com/spark-harness/gitops-repo/pull/8 |
+| `gitops-repo` | `5c8985f` | pushed; push completed successfully | PR created: https://github.com/spark-harness/gitops-repo/pull/8 |
 | `janus` | `e5c6388` | pushed; remote ref confirmed by GitHub REST | PR created: https://github.com/spark-harness/janus/pull/5 |
 
 Post-commit release-bound `janus delivery verify` now passes with explicit open PR evidence for the four affected repos. `business-repo` delivery verify also used `JANUS_JAVA_ARTIFACT_VERSIONS=0.2.1` as local artifact evidence for `com.spark.contract:spark-idl-java:0.2.1`; the formal tag `v0.2.1` is reachable from `idl-repo` master.
@@ -63,7 +63,7 @@ Post-commit release-bound `janus delivery verify` now passes with explicit open 
 - AC6: covered by GitOps path selector static validation in `argo-path-governance.md`.
 - AC7: covered by the command matrix above.
 
-## Out Of Scope For This Evidence
+## Additional Evidence Files
 
-- AC9 live Argo/GitHub status contexts after PR event processing.
-- AC10-AC11 vincent k3s rollout, smoke, and applicant-api public exposure negative evidence.
+- AC9 live Argo/GitHub status contexts after PR event processing: `evidence/argo-path-governance.md`.
+- AC10-AC11 vincent k3s rollout, smoke, and applicant-api public exposure negative evidence: `evidence/k3s-rollout-smoke.md`.
