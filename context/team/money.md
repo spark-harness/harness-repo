@@ -23,7 +23,7 @@
 团队公共库提供 `Money` 类型作为金额处理入口：
 
 ```text
-business-repo/packages/money
+business-repo/packages/java/money
 ```
 
 Java 服务应依赖公共库：

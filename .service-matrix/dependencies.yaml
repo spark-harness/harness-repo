@@ -26,7 +26,7 @@ modules:
 libraries:
   money:
     module: shared
-    repo_path: "{business-repo}/packages/money"
+    repo_path: "{business-repo}/packages/java/money"
     language: java
     artifact: "com.spark.common:spark-money"
     purpose: "统一金额、币种、舍入和最小货币单位转换"
@@ -34,12 +34,12 @@ libraries:
 services:
   fides:
     module: frontend
-    repo_path: "{business-repo}/services/frontend/fides"
+    repo_path: "{business-repo}/apps/fides-web"
     idl_required: false
 
   fides-bff:
     module: frontend
-    repo_path: "{business-repo}/services/backend/fides-bff"
+    repo_path: "{business-repo}/apps/fides-bff"
     idl_required: true
     idl_repo: "{idl-repo}"
     proto_path: "{idl-repo}/vesta/lendora/fides-bff/v1"
@@ -47,7 +47,7 @@ services:
 
   applicant-api:
     module: applicant
-    repo_path: "{business-repo}/services/backend/applicant-api"
+    repo_path: "{business-repo}/apps/applicant-api"
     idl_required: true
     idl_repo: "{idl-repo}"
     proto_path: "{idl-repo}/vesta/lendora/applicant/v1"

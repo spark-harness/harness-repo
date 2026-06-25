@@ -1,0 +1,90 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-99",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-25T16:50:01+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-99/requirement.md",
+      "sha256": "fb959048cd6c795a559f35260856d90e240e5c201d0c2eab6b6cb2bff1948106"
+    },
+    {
+      "path": "requirements/LEN-99/impact-analysis.md",
+      "sha256": "366a67fab5d9881c442deb368142a3bb6e034e090723dabdac02202adf214b0b"
+    },
+    {
+      "path": "requirements/LEN-99/design.md",
+      "sha256": "03a819221beb3ebe194ef5c96ee1d7cc745b73d65d9d5bfb9359120d5198ee2f"
+    },
+    {
+      "path": "requirements/LEN-99/tasks.json",
+      "sha256": "b1ef547bb726a308eef10605ae4b36ccd95fac5332cbd630b1edddd3eb07cd5c"
+    },
+    {
+      "path": "requirements/LEN-99/gates/requirement-review.gate.json",
+      "sha256": "19cbcf6986f7727b27e04a9f034fcfc33d285fbf0f7e941d3bed0521f57401a8"
+    },
+    {
+      "path": "requirements/LEN-99/gates/design-review.gate.json",
+      "sha256": "07f0920c759e945fe6ef86e90ed528e76d8c0c4d3b6755e3fb6da99348cadef2"
+    },
+    {
+      "path": "requirements/LEN-99/gates/dev-entry.gate.json",
+      "sha256": "2b8b96423f88d16c7a1b1a12b1c42603872a6cb2bd3ff88b82fc339634207146"
+    },
+    {
+      "path": "requirements/LEN-99/gates/service-repo-check.gate.json",
+      "sha256": "6e8fc2370c914a768f528eccada5cf1868c5537225e25555eeec5688bc1436a7"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "9da36fd1e15f81ad87aa619b53561059aa3b0804eeb4634d57084340ba79274b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "3 evidence files recorded."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-99/tasks.json approved by forest at 2026-06-25T13:42:47+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-99/evidence/argo-path-governance.md",
+      "sha256": "217fa0221b791c3b80bd685f701db78e380b952fd40d61adfa5e444d4cb7a607"
+    },
+    {
+      "path": "requirements/LEN-99/evidence/k3s-rollout-smoke.md",
+      "sha256": "5ff8e9e9883498d33d30b09bc58d0b449ef0e6cbc89ba1a7433e3e24a895cadb"
+    },
+    {
+      "path": "requirements/LEN-99/evidence/local-verification.md",
+      "sha256": "bf931def10905a12f3c062ce77c4c504959b62f9615805892478a097b4e11bf7"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只迁移 business-repo 目录、Harness 路径治理和验证证据，不修改 .proto、Buf 配置或生成契约。"
+  },
+  "decision": "用户已授权批准所有门禁；批准 LEN-99 tasks.json 顶层门禁来源，适用于 dev-entry 与 merge-readiness：任务拆分完整，T1-T10 已完成，delivery-readiness、CI / Argo 证据、vincent k3s rollout、public smoke、OTP 端到端 smoke 与 applicant-api 非公网暴露证据均已落档。"
+}

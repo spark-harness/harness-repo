@@ -1,0 +1,241 @@
+{
+  "requirement_id": "LEN-99",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-25T13:42:47+08:00",
+  "decision": "用户已授权批准所有门禁；批准 LEN-99 tasks.json 顶层门禁来源，适用于 dev-entry 与 merge-readiness：任务拆分完整，T1-T10 已完成，delivery-readiness、CI / Argo 证据、vincent k3s rollout、public smoke、OTP 端到端 smoke 与 applicant-api 非公网暴露证据均已落档。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "LEN-101 迁移可部署应用到 apps",
+      "scope": "在 business-repo worktree 中将 fides 前端迁移为 apps/fides-web，将 fides-bff 迁移为 apps/fides-bff，将 applicant-api 迁移为 apps/applicant-api；同步 Dockerfile、Go replace、Maven 路径、README 和本地运行路径。",
+      "trace": {
+        "requirement_items": [
+          "R1",
+          "AC1"
+        ],
+        "design_decisions": [
+          "D1"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff",
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC1"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "LEN-102 迁移共享库到 packages/go 与 packages/java",
+      "scope": "将 bffkit 迁移到 packages/go/bffkit，将 money 和 spring-starter 迁移到 packages/java；修正 fides-bff 和 applicant-api 对共享库的相对路径。",
+      "trace": {
+        "requirement_items": [
+          "R2",
+          "AC2"
+        ],
+        "design_decisions": [
+          "D2"
+        ]
+      },
+      "affected_services": [
+        "fides-bff",
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC2"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "LEN-103 迁移 contract dependency scan 到 tooling",
+      "scope": "将 contract dependency scan 脚本、测试和 fixtures 整理到 tooling/contract-dependency-scan；保持 changed-file scan、fixture 自测和配置读取可运行。",
+      "trace": {
+        "requirement_items": [
+          "R3",
+          "AC3"
+        ],
+        "design_decisions": [
+          "D3"
+        ]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "AC3"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "LEN-104 更新 business-repo README 三目录规则",
+      "scope": "更新 business-repo README，明确 apps、packages、tooling 的用途、边界、命名和示例；移除旧 services README 作为 active 事实源。",
+      "trace": {
+        "requirement_items": [
+          "R4",
+          "AC4"
+        ],
+        "design_decisions": [
+          "D4"
+        ]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "AC4"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "LEN-106 更新 Harness 服务矩阵到新路径",
+      "scope": "更新 harness-repo .service-matrix/dependencies.yaml 中 fides、fides-bff、applicant-api 和 money 的 repo_path，使其指向迁移后的 business-repo 路径。",
+      "trace": {
+        "requirement_items": [
+          "R5",
+          "AC5",
+          "AC8"
+        ],
+        "design_decisions": [
+          "D5"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff",
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC5",
+        "AC8"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T6",
+      "title": "LEN-107 更新 CI / Argo path-based gate 到新路径",
+      "scope": "定位当前 CI / Argo path selector 事实源，并将 TS、Go、Java、contract-scan gate 的路径匹配切换到 apps、packages 和 tooling 新路径；如果发现 gitops-repo 是必改仓，先隔离同名 worktree 再编辑。",
+      "trace": {
+        "requirement_items": [
+          "R5",
+          "AC6",
+          "AC9"
+        ],
+        "design_decisions": [
+          "D5"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff",
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC6",
+        "AC9"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T10",
+      "title": "LEN-108 修正 Janus delivery verifier 的 tooling scanner 路径",
+      "scope": "更新 janus delivery verifier，使 business-repo contract dependency scan 优先使用 tooling/contract-dependency-scan/contract_dependency_scan.py，并保留旧 scripts/contract_dependency_scan.py fallback；补测试证明新路径可通过 delivery verify。",
+      "trace": {
+        "requirement_items": [
+          "R5",
+          "R6",
+          "AC8"
+        ],
+        "design_decisions": [
+          "D3",
+          "D5",
+          "D6"
+        ]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "AC8"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T7",
+      "title": "LEN-110 执行迁移后本地验证矩阵",
+      "scope": "运行并记录 fides-web、fides-bff、applicant-api、packages 和 tooling 的本地验证命令；对凭据导致的阻塞记录原始错误和替代证据。",
+      "trace": {
+        "requirement_items": [
+          "R6",
+          "AC7"
+        ],
+        "design_decisions": [
+          "D6"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff",
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC7"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T8",
+      "title": "LEN-108 / LEN-111 刷新 delivery-readiness 与 CI / Argo 证据",
+      "scope": "刷新 LEN-99 迁移证据、delivery-readiness gate 输入和 CI / Argo gate 结果，证明新路径被正确识别并全绿。",
+      "trace": {
+        "requirement_items": [
+          "R5",
+          "R6",
+          "AC8",
+          "AC9"
+        ],
+        "design_decisions": [
+          "D5",
+          "D6"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff",
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC8",
+        "AC9"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T9",
+      "title": "LEN-112 vincent k3s rollout 与 smoke 回归",
+      "scope": "使用迁移后的构建上下文完成 fides、fides-bff、applicant-api 在 vincent k3s 的 rollout 和最小 smoke；记录 applicant-api 未新增公网暴露。",
+      "trace": {
+        "requirement_items": [
+          "R6",
+          "BR8",
+          "AC10",
+          "AC11"
+        ],
+        "design_decisions": [
+          "D6",
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff",
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC10",
+        "AC11"
+      ],
+      "state": "done"
+    }
+  ]
+}
