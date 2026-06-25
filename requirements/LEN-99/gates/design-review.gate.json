@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-99",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-25T13:41:53+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-99/requirement.md",
+      "sha256": "fb959048cd6c795a559f35260856d90e240e5c201d0c2eab6b6cb2bff1948106"
+    },
+    {
+      "path": "requirements/LEN-99/impact-analysis.md",
+      "sha256": "366a67fab5d9881c442deb368142a3bb6e034e090723dabdac02202adf214b0b"
+    },
+    {
+      "path": "requirements/LEN-99/design.md",
+      "sha256": "03a819221beb3ebe194ef5c96ee1d7cc745b73d65d9d5bfb9359120d5198ee2f"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-99/design.md approved by forest at 2026-06-25T13:41:47+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只迁移 business-repo 目录、Harness 路径治理和验证证据，不修改 .proto、Buf 配置或生成契约。"
+  },
+  "decision": "用户已授权批准所有门禁；批准 LEN-99 设计与影响分析一致，确认 apps/packages/tooling 路径治理、CI/Argo 和 Janus verifier 更新纳入范围。"
+}

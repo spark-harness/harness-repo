@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-99",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-25T13:42:47+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-99/design.md",
+      "sha256": "03a819221beb3ebe194ef5c96ee1d7cc745b73d65d9d5bfb9359120d5198ee2f"
+    },
+    {
+      "path": "requirements/LEN-99/tasks.json",
+      "sha256": "f1a752edf17cf11fb05469a620b913599ab9325f7a851ec6ef4f1a1324be23b1"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-99"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "10 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-99/tasks.json approved by forest at 2026-06-25T13:42:47+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只迁移 business-repo 目录、Harness 路径治理和验证证据，不修改 .proto、Buf 配置或生成契约。"
+  },
+  "decision": "用户已授权批准所有门禁；批准 LEN-99 tasks.json 顶层门禁来源，适用于 dev-entry 与 merge-readiness：任务拆分完整，T1-T7 与 T10 已完成，T8 仍在刷新 delivery-readiness / CI / Argo 证据，T9 k3s rollout/smoke 保持待办。"
+}

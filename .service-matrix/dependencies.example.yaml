@@ -22,7 +22,7 @@ modules:
 libraries:
   money:
     module: shared
-    repo_path: "{business-repo}/packages/money"
+    repo_path: "{business-repo}/packages/java/money"
     language: java
     artifact: "com.spark.common:spark-money"
     purpose: "统一金额、币种、舍入和最小货币单位转换"

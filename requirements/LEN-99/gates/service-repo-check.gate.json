@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-99",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-25T13:43:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-99/impact-analysis.md",
+      "sha256": "366a67fab5d9881c442deb368142a3bb6e034e090723dabdac02202adf214b0b"
+    },
+    {
+      "path": "requirements/LEN-99/design.md",
+      "sha256": "03a819221beb3ebe194ef5c96ee1d7cc745b73d65d9d5bfb9359120d5198ee2f"
+    },
+    {
+      "path": "requirements/LEN-99/tasks.json",
+      "sha256": "f1a752edf17cf11fb05469a620b913599ab9325f7a851ec6ef4f1a1324be23b1"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "9da36fd1e15f81ad87aa619b53561059aa3b0804eeb4634d57084340ba79274b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-99"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "10 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "applicant-api, fides, fides-bff"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-99/impact-analysis.md approved by forest at 2026-06-25T13:41:47+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-99-business-monorepo-layout",
+      "commit": "4512f04"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-99-business-monorepo-layout",
+      "commit": "862a923"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只迁移 business-repo 目录、Harness 路径治理和验证证据，不修改 .proto、Buf 配置或生成契约。"
+  },
+  "decision": "用户已授权批准所有门禁；批准 LEN-99 服务仓库检查，确认 harness-repo、business-repo、gitops-repo、janus 同名分支和 idl-repo 只读校验拓扑满足当前验证。"
+}
