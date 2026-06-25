@@ -5,7 +5,7 @@
   "gate_name": "设计门禁",
   "stage": "3.3",
   "checked_by": "design_reviewer",
-  "checked_at": "2026-06-25T21:35:23+08:00",
+  "checked_at": "2026-06-25T21:47:16+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -19,7 +19,7 @@
     },
     {
       "path": "requirements/LEN-113/design.md",
-      "sha256": "aacbf41df3912e5ca1fcee9386232ac968967c604aa56d66610e90c76f80f3db"
+      "sha256": "190ab7700065a482dd1301ed3de91f7d4457f4e7c019a931b4a6d6a7d2a850aa"
     }
   ],
   "checklist": [

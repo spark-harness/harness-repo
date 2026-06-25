@@ -5,7 +5,7 @@
   "gate_name": "合并就绪门禁",
   "stage": "5.1",
   "checked_by": "merge_readiness_checker",
-  "checked_at": "2026-06-25T21:41:37+08:00",
+  "checked_at": "2026-06-25T21:47:16+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -19,7 +19,7 @@
     },
     {
       "path": "requirements/LEN-113/design.md",
-      "sha256": "aacbf41df3912e5ca1fcee9386232ac968967c604aa56d66610e90c76f80f3db"
+      "sha256": "190ab7700065a482dd1301ed3de91f7d4457f4e7c019a931b4a6d6a7d2a850aa"
     },
     {
       "path": "requirements/LEN-113/tasks.json",
@@ -31,15 +31,15 @@
     },
     {
       "path": "requirements/LEN-113/gates/design-review.gate.json",
-      "sha256": "bdd3e54ca6b50a8bf7b055b36d83f2473f71df1d7e18754b53cd21eba8a9673b"
+      "sha256": "450989dbbd0c7e39640c358d5ad90bd1307bffc60603ddb84fb6b1372cdf31b1"
     },
     {
       "path": "requirements/LEN-113/gates/dev-entry.gate.json",
-      "sha256": "e58d7e5408c44fd1737ae691a93da2e46da7cd4ed1dc4a3a0117773aa7260622"
+      "sha256": "4d4a655b648662e4cd46a6bc150760cb0a062f33af2c6995fcf72387afaa872e"
     },
     {
       "path": "requirements/LEN-113/gates/service-repo-check.gate.json",
-      "sha256": "8cf088636b9a0ce770189df569f6d44fa62559069fd41e879289a6b2103ad3ff"
+      "sha256": "0957866803919d4f8b7fe492f887a4e997ee8175a9ac8b3a0e7f7acd5c78e28f"
     },
     {
       "path": ".service-matrix/dependencies.yaml",
@@ -71,7 +71,7 @@
   "evidence": [
     {
       "path": "requirements/LEN-113/evidence/implementation-checks.md",
-      "sha256": "17ebe3721a9d574f82c1f1f5ee55320b8fa6e4fe1539a8be7bb409721bdd5255"
+      "sha256": "dd59969b58e8428bad9eb5c4c19b3ee4b19a822552173eb56ec445435ad0defe"
     }
   ],
   "idl_impact": {
