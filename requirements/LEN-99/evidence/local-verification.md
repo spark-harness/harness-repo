@@ -36,17 +36,18 @@ The vincent k3s rollout / smoke portion is not covered by this evidence and rema
 | `go test ./...` | `janus` | PASS |
 | `go run ./cmd/janus delivery verify --workspace /Users/forest/Code/spark/.worktrees/LEN-99 --requirement LEN-99 --repo business-repo --base master --head feature/LEN-99-business-monorepo-layout` | `janus` | PRE-PUSH PASS; contract scan used formal-only mode through the new tooling path |
 | `go test ./...` | `janus` after T10 fixture filtering fix | PASS |
+| `JANUS_OPEN_RELEASE_PRS=... JANUS_JAVA_ARTIFACT_VERSIONS=0.2.1 env -u GITHUB_TOKEN go run ./cmd/janus delivery verify --workspace /Users/forest/Code/spark/.worktrees/LEN-99 --requirement LEN-99 --repo {harness-repo,business-repo,gitops-repo,janus} --base master --head feature/LEN-99-business-monorepo-layout` | `janus` | PASS for all four affected repos with open PR peer evidence |
 
 ## Delivery Push / PR Status
 
 | Repo | Commit | Remote branch | PR status |
 |---|---|---|---|
-| `business-repo` | `eccb6c5` | pushed; remote ref confirmed by GitHub REST | PR creation pending; GitHub API POST currently fails with TLS / EOF errors |
-| `harness-repo` | `a8055a8` | pushed; remote ref confirmed by GitHub REST | PR created: https://github.com/spark-harness/harness-repo/pull/20 |
-| `gitops-repo` | `2beea0e` | pushed; push completed successfully; later GitHub API ref query hit EOF | PR creation pending; GitHub API POST currently fails with TLS / EOF errors |
-| `janus` | `e5c6388` | pushed; remote ref confirmed by GitHub REST | PR creation pending; GitHub API POST currently fails with TLS / EOF errors |
+| `business-repo` | `eccb6c5` | pushed; remote ref confirmed by GitHub REST | PR created: https://github.com/spark-harness/business-repo/pull/21 |
+| `harness-repo` | `13bd1d8` | pushed; remote ref confirmed by GitHub REST | PR created: https://github.com/spark-harness/harness-repo/pull/20 |
+| `gitops-repo` | `2beea0e` | pushed; push completed successfully | PR created: https://github.com/spark-harness/gitops-repo/pull/8 |
+| `janus` | `e5c6388` | pushed; remote ref confirmed by GitHub REST | PR created: https://github.com/spark-harness/janus/pull/5 |
 
-Post-commit release-bound `janus delivery verify` now correctly requires peer PR evidence for the four affected repos. `business-repo` delivery verify also requires a valid GitHub Packages lookup token or equivalent `JANUS_JAVA_ARTIFACT_VERSIONS` evidence for `com.spark.contract:spark-idl-java:0.2.1`.
+Post-commit release-bound `janus delivery verify` now passes with explicit open PR evidence for the four affected repos. `business-repo` delivery verify also used `JANUS_JAVA_ARTIFACT_VERSIONS=0.2.1` as local artifact evidence for `com.spark.contract:spark-idl-java:0.2.1`; the formal tag `v0.2.1` is reachable from `idl-repo` master.
 
 ## Notes
 
@@ -64,5 +65,5 @@ Post-commit release-bound `janus delivery verify` now correctly requires peer PR
 
 ## Out Of Scope For This Evidence
 
-- AC8-AC9 live delivery-readiness and Argo status results after all companion PRs exist and GitHub/Argo status contexts complete.
+- AC9 live Argo/GitHub status contexts after PR event processing.
 - AC10-AC11 vincent k3s rollout, smoke, and applicant-api public exposure negative evidence.

@@ -13,7 +13,7 @@ PASS for static Argo path governance updates.
 
 Live Argo Workflow and GitHub status results remain pending until the GitOps and business PRs are pushed and the cluster receives GitHub events.
 
-As of `2026-06-25T14:18:08+08:00`, the `gitops-repo` LEN-99 branch push completed, but GitHub API POST / GET calls intermittently fail with TLS / EOF errors from this host. Live Argo status evidence remains pending until the GitOps PR is created or verified through a stable GitHub API / browser session.
+As of `2026-06-25T14:18:08+08:00`, the `gitops-repo` LEN-99 branch and PR are available at https://github.com/spark-harness/gitops-repo/pull/8. Live Argo status evidence remains pending until the cluster receives PR events and reports the new status contexts.
 
 ## Updated Gate Paths
 
@@ -44,6 +44,6 @@ As of `2026-06-25T14:18:08+08:00`, the `gitops-repo` LEN-99 branch push complete
 
 ## Residual Follow-Up
 
-- Push GitOps changes and confirm Argo creates `spark/applicant-api-ci` alongside existing business repo gates.
+- Confirm Argo creates `spark/applicant-api-ci` alongside existing business repo gates.
 - Confirm required GitHub status contexts include `spark/applicant-api-ci` before relying on the new Java gate for branch protection.
 - Confirm business image release workflows build from new Dockerfile directories after merge.

@@ -5,7 +5,7 @@
   "gate_name": "合并就绪门禁",
   "stage": "5.1",
   "checked_by": "merge_readiness_checker",
-  "checked_at": "2026-06-25T14:18:56+08:00",
+  "checked_at": "2026-06-25T14:21:12+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -71,11 +71,11 @@
   "evidence": [
     {
       "path": "requirements/LEN-99/evidence/argo-path-governance.md",
-      "sha256": "c24d8909e3d3f6e84a52f366e90a829aa45333688e1a2f7b0f236ac30019d07d"
+      "sha256": "537cc5e0a562ad6fc9d2e2c56ae869064d5e91a78db9659a78ebac6f6630d6ee"
     },
     {
       "path": "requirements/LEN-99/evidence/local-verification.md",
-      "sha256": "5abfb55f53e2be189c38873835d5f0a7d6ffdfae00428282faf870e9fa9247d3"
+      "sha256": "11b60df0b239800fe76a4dc132e2992d83a8646672a2759f558d51d57887a14a"
     }
   ],
   "idl_impact": {
