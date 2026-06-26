@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-116",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-27T00:22:50+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-116/impact-analysis.md",
+      "sha256": "778702b00d3804c23e6f9409cbf12f7c3d28fc677ec0fdad426b15ccb299ae76"
+    },
+    {
+      "path": "requirements/LEN-116/design.md",
+      "sha256": "a7466d5b1640ba65979bfa0e0411b23a2922b3a2448cdac29cc7cfe5ea8f5302"
+    },
+    {
+      "path": "requirements/LEN-116/tasks.json",
+      "sha256": "cba1a383da32ad1c8290723f48cdbd06d5784770971e398b1ffc276ee6e52691"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "9da36fd1e15f81ad87aa619b53561059aa3b0804eeb4634d57084340ba79274b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-116"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "4 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "applicant-api, fides, fides-bff"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-116/impact-analysis.md approved by forest at 2026-06-27T00:13:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "chore/LEN-116-pr-gate-hard-cut",
+      "commit": "253713e"
+    },
+    {
+      "name": "business-repo",
+      "branch": "chore/LEN-116-pr-gate-hard-cut",
+      "commit": "74db7c1"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只优化 business-repo PR gate、GitOps Argo workflow 和业务仓测试支撑，不修改 .proto、Buf 配置或生成契约。"
+  },
+  "decision": "批准 LEN-116 服务仓库检查，确认涉及 fides、fides-bff、applicant-api，IDL 仅复用既有契约且无 .proto 变更。"
+}

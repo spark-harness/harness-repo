@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-116",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-27T00:22:50+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-116/requirement.md",
+      "sha256": "6fbb3679f29225c7e93a8d7de458bb76bdd67b06fb4eb9d123c55f88bbba2ba4"
+    },
+    {
+      "path": "requirements/LEN-116/impact-analysis.md",
+      "sha256": "778702b00d3804c23e6f9409cbf12f7c3d28fc677ec0fdad426b15ccb299ae76"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-116/requirement.md approved by forest at 2026-06-27T00:10:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只优化 business-repo PR gate、GitOps Argo workflow 和业务仓测试支撑，不修改 .proto、Buf 配置或生成契约。"
+  },
+  "decision": "用户已授权硬切优化；批准 LEN-116 需求定义与影响分析，范围限定为 business-repo PR gate DAG、非 smoke gate 覆盖和测试支撑，不包含 LEN-117 镜像发布。"
+}

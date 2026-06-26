@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-116",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-27T00:22:50+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-116/requirement.md",
+      "sha256": "6fbb3679f29225c7e93a8d7de458bb76bdd67b06fb4eb9d123c55f88bbba2ba4"
+    },
+    {
+      "path": "requirements/LEN-116/impact-analysis.md",
+      "sha256": "778702b00d3804c23e6f9409cbf12f7c3d28fc677ec0fdad426b15ccb299ae76"
+    },
+    {
+      "path": "requirements/LEN-116/design.md",
+      "sha256": "a7466d5b1640ba65979bfa0e0411b23a2922b3a2448cdac29cc7cfe5ea8f5302"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-116/design.md approved by forest at 2026-06-27T00:11:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只优化 business-repo PR gate、GitOps Argo workflow 和业务仓测试支撑，不修改 .proto、Buf 配置或生成契约。"
+  },
+  "decision": "批准 LEN-116 设计，确认 GitOps DAG、fides/fides-bff/Java gate 支撑和 Redis trace 测试稳定性方案，不包含 LEN-117。"
+}

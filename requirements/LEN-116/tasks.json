@@ -1,0 +1,141 @@
+{
+  "requirement_id": "LEN-116",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-27T00:14:00+08:00",
+  "decision": "批准 LEN-116 merge-readiness，确认 gitops-repo#13 与 business-repo#24 已分别合并，Argo statuses 全绿，smoke 和 LEN-117 不在本范围。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "补齐 LEN-116 Harness 生命周期材料",
+      "scope": "创建 requirement、impact-analysis、design、tasks、gate 和 evidence 文件，记录 business-repo PR gate 硬切优化范围、影响、设计和验证。",
+      "trace": {
+        "requirement_items": [
+          "BR5",
+          "AC9"
+        ],
+        "design_decisions": [
+          "D6"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff",
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC9"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "优化 GitOps repo gate DAG",
+      "scope": "在 gitops-repo 中将 github-repo-gate 改为 DAG，扩展 fides-ci，拆分 fides-bff-ci，并保持 smoke 出 scope。",
+      "trace": {
+        "requirement_items": [
+          "R1",
+          "R2",
+          "R3",
+          "BR1",
+          "BR2",
+          "BR3",
+          "AC1",
+          "AC2",
+          "AC3",
+          "AC4",
+          "AC5"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff"
+      ],
+      "acceptance": [
+        "AC1",
+        "AC2",
+        "AC3",
+        "AC4",
+        "AC5"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "补齐 business-repo gate 支撑变更",
+      "scope": "在 business-repo 中配置化 Java quality project matrix，增加配置加载测试，并稳定 fides-web cooldown 与 applicant-api Redis trace 测试。",
+      "trace": {
+        "requirement_items": [
+          "R4",
+          "R5",
+          "BR4",
+          "AC6",
+          "AC7",
+          "AC8"
+        ],
+        "design_decisions": [
+          "D4",
+          "D5"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC6",
+        "AC7",
+        "AC8"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "验证并分开合并 LEN-116",
+      "scope": "运行本地验证、确认 Argo statuses，并将 LEN-116 的 business-repo 与 gitops-repo PR 分别合入 master。",
+      "trace": {
+        "requirement_items": [
+          "AC1",
+          "AC2",
+          "AC3",
+          "AC4",
+          "AC5",
+          "AC6",
+          "AC7",
+          "AC8",
+          "AC9"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "D5",
+          "D6"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff",
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC1",
+        "AC2",
+        "AC3",
+        "AC4",
+        "AC5",
+        "AC6",
+        "AC7",
+        "AC8",
+        "AC9"
+      ],
+      "state": "done"
+    }
+  ]
+}
