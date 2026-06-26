@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-114",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-26T08:49:52+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-114/design.md",
+      "sha256": "738118bea82db2b15c46c23a49a4d0ab081d1ed82434281a614c612103446616"
+    },
+    {
+      "path": "requirements/LEN-114/tasks.json",
+      "sha256": "a74eaeba900141dc957106647c71707a5c88bed0dce34c8da96a2b06b3cbdb27"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-114"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "5 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-114/tasks.json approved by forest at 2026-06-26T08:49:52+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只改 business-repo 手写 Java 项目质量门禁、GitOps Argo 工作流和 Janus runner 工具链，不修改 .proto、Buf 配置或生成契约。"
+  },
+  "decision": "用户已授权直接批准；批准 LEN-114 合并就绪，确认 Janus、GitOps、business-repo PR 已合并，live spark/java-ci workflow business-repo-java-ci-prwz2 已通过，且未添加 fallback 行为。"
+}

@@ -1,0 +1,177 @@
+{
+  "requirement_id": "LEN-114",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-26T08:49:52+08:00",
+  "decision": "用户已授权直接批准；批准 LEN-114 合并就绪，确认 Janus、GitOps、business-repo PR 已合并，live spark/java-ci workflow business-repo-java-ci-prwz2 已通过，且未添加 fallback 行为。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "补齐 LEN-114 Harness 生命周期材料",
+      "scope": "维护 requirement、impact-analysis、design、tasks、gate 和 evidence 文件，记录 Java CI 变更范围、设计、验证和合并状态。",
+      "trace": {
+        "requirement_items": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6",
+          "AC1",
+          "AC7",
+          "AC9"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "D7",
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC1",
+        "AC2",
+        "AC3",
+        "AC4",
+        "AC5",
+        "AC6",
+        "AC7",
+        "AC8",
+        "AC9"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "实现 business-repo Java quality 工具",
+      "scope": "新增 tooling/java-quality，定义 Java 项目、路径选择、依赖展开、DAG layer 输出和 Maven quality gate 入口。",
+      "trace": {
+        "requirement_items": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "BR1",
+          "BR2",
+          "BR3",
+          "BR4",
+          "BR5",
+          "BR7"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3",
+          "D5",
+          "D6",
+          "D7"
+        ]
+      },
+      "affected_services": [
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC1",
+        "AC2",
+        "AC3",
+        "AC4",
+        "AC5",
+        "AC6"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "接入 GitOps Java CI DAG",
+      "scope": "更新 github-repo-gate 工作流和 Sensor，使 business-repo Java gate 使用稳定 status spark/java-ci，并按 money、spring-starter、applicant-api 依赖关系执行。",
+      "trace": {
+        "requirement_items": [
+          "R6",
+          "BR5",
+          "BR6",
+          "AC7",
+          "AC8",
+          "AC9"
+        ],
+        "design_decisions": [
+          "D4",
+          "D6",
+          "D7",
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC7",
+        "AC8",
+        "AC9"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "修正 Janus runner 和 delivery verify 支撑能力",
+      "scope": "合入 Janus no-fallback contract scanner 要求，并将 Janus runner 更新为 JDK 21/Maven 3.9.11，保证 Java 21 项目可在 Argo gate 中编译。",
+      "trace": {
+        "requirement_items": [
+          "R2",
+          "R6",
+          "AC2",
+          "AC7",
+          "AC9"
+        ],
+        "design_decisions": [
+          "D5",
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC2",
+        "AC7",
+        "AC9"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "执行 CI 与合并验证",
+      "scope": "运行本地 Java quality 单测、GitOps kustomize、runner image smoke 和 live Argo spark/java-ci，并记录 business-repo、gitops-repo、janus 合并结果。",
+      "trace": {
+        "requirement_items": [
+          "AC1",
+          "AC2",
+          "AC7",
+          "AC9"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D4",
+          "D7",
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "applicant-api"
+      ],
+      "acceptance": [
+        "AC1",
+        "AC2",
+        "AC7",
+        "AC9"
+      ],
+      "state": "done"
+    }
+  ]
+}

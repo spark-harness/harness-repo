@@ -1,0 +1,82 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-114",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-26T08:49:52+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-114/requirement.md",
+      "sha256": "49f30d554c9268feb0cfa6f8b03a4b4864f80f30d333ef74d5884ce111f204c8"
+    },
+    {
+      "path": "requirements/LEN-114/impact-analysis.md",
+      "sha256": "56d3e4c803a4190f908fe62b912bf3b4af77345e56ee513227f72cb5b3559922"
+    },
+    {
+      "path": "requirements/LEN-114/design.md",
+      "sha256": "738118bea82db2b15c46c23a49a4d0ab081d1ed82434281a614c612103446616"
+    },
+    {
+      "path": "requirements/LEN-114/tasks.json",
+      "sha256": "a74eaeba900141dc957106647c71707a5c88bed0dce34c8da96a2b06b3cbdb27"
+    },
+    {
+      "path": "requirements/LEN-114/gates/requirement-review.gate.json",
+      "sha256": "c70fd45e1fcb2e7d1c0b82d6376905d24d254d47d3abc1fa3707c73b183ba275"
+    },
+    {
+      "path": "requirements/LEN-114/gates/design-review.gate.json",
+      "sha256": "e7f47a9704bf887a8e3ea42f30a33092dd2fd69562ed4176f50217b9e0603638"
+    },
+    {
+      "path": "requirements/LEN-114/gates/dev-entry.gate.json",
+      "sha256": "ee7946f410b9c86d33cc615fe5055a659371ec96f5ee00aec45b5c921c56bb9b"
+    },
+    {
+      "path": "requirements/LEN-114/gates/service-repo-check.gate.json",
+      "sha256": "b82d451ee5215b3590205108fef4ba64b0c873251b015625716ab1e44a5e2f2c"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "9da36fd1e15f81ad87aa619b53561059aa3b0804eeb4634d57084340ba79274b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "1 evidence files recorded."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-114/tasks.json approved by forest at 2026-06-26T08:49:52+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-114/evidence/local-verification.md",
+      "sha256": "1474bd06cabd6d411da65b1d496e039e2c1060c2d529ab8c1922cc0cbf63078a"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只改 business-repo 手写 Java 项目质量门禁、GitOps Argo 工作流和 Janus runner 工具链，不修改 .proto、Buf 配置或生成契约。"
+  },
+  "decision": "用户已授权直接批准；批准 LEN-114 合并就绪，确认 Janus、GitOps、business-repo PR 已合并，live spark/java-ci workflow business-repo-java-ci-prwz2 已通过，且未添加 fallback 行为。"
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-114",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-26T08:49:52+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-114/requirement.md",
+      "sha256": "49f30d554c9268feb0cfa6f8b03a4b4864f80f30d333ef74d5884ce111f204c8"
+    },
+    {
+      "path": "requirements/LEN-114/impact-analysis.md",
+      "sha256": "56d3e4c803a4190f908fe62b912bf3b4af77345e56ee513227f72cb5b3559922"
+    },
+    {
+      "path": "requirements/LEN-114/design.md",
+      "sha256": "738118bea82db2b15c46c23a49a4d0ab081d1ed82434281a614c612103446616"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-114/design.md approved by forest at 2026-06-26T08:33:05+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只改 business-repo 手写 Java 项目质量门禁、GitOps Argo 工作流和 Janus runner 工具链，不修改 .proto、Buf 配置或生成契约。"
+  },
+  "decision": "用户已授权直接批准；批准 LEN-114 设计，确认路径选择在 business tooling 中完成，GitOps 仅做薄路由，Argo DAG 汇总稳定 spark/java-ci，并使用共享 Maven repo 与 JDK 21 runner 支持 applicant-api。"
+}
