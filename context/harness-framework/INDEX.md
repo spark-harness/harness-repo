@@ -4,11 +4,14 @@
 
 ## 当前入口
 
+- `lifecycle.md`：需求生命周期简明入口。
 - `main-process-numbering.md`：五阶段流程、阶段门禁和合并就绪门禁。
+- `gates.md`：Harness gate 简明入口。
 - `gate-policy.md`：门禁状态和报告要求。
 - `gate-implementation.md`：门禁报告字段、Agent 输出、Skill 流程、阶段推进、CI / MR 阻塞和豁免规则。
 - `document-template-policy.md`：需求生命周期文档模板的真相源、使用阶段和维护规则。
 - `context-collection.md`：团队、框架、项目和服务上下文的最小收集顺序。
+- `templates/README.md`：模板目录和使用方式。
 
 ## 维护原则
 

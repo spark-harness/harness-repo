@@ -1,0 +1,115 @@
+{
+  "requirement_id": "LEN-126",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-27T00:32:11+08:00",
+  "decision": "用户明确授权允许编写各类所需文档直至 PR 通过；批准 LEN-126 合并就绪，确认已补齐第一版团队工程文档、生命周期文件、服务矩阵说明、项目上下文模板和本地验证证据，且未修改新人快速开始、.spark/skills、业务代码、IDL 或 CI 工作流行为。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "补齐团队工程规范入口和语言规范",
+      "scope": "更新 context/team/INDEX.md，新增 Java、TypeScript、Go 语言规范。",
+      "trace": {
+        "requirement_items": [
+          "AC1",
+          "AC2",
+          "AC8"
+        ],
+        "design_decisions": [
+          "更新 context/team/INDEX.md",
+          "新增 java.md、typescript.md、go.md"
+        ]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "语言规范可从 INDEX 找到",
+        "每份语言规范包含适用范围、不适用范围和最小执行规则"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "补齐交付和运行质量团队规范",
+      "scope": "新增或更新 ci-cd、observability、security、database、local-development 文档。",
+      "trace": {
+        "requirement_items": [
+          "AC3",
+          "AC4",
+          "AC8"
+        ],
+        "design_decisions": [
+          "新增 ci-cd.md",
+          "新增 observability.md、database.md、local-development.md，扩展 security.md"
+        ]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "文档能说明第一版最小检查项",
+        "不重复定义 testing、git、contract-versioning 已有完整规则"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "补齐服务矩阵和项目上下文入口",
+      "scope": "新增 .service-matrix/README.md，更新 context/project/INDEX.md，并提供服务上下文模板。",
+      "trace": {
+        "requirement_items": [
+          "AC5",
+          "AC7",
+          "AC8"
+        ],
+        "design_decisions": [
+          "新增 .service-matrix/README.md",
+          "更新 context/project/INDEX.md 并提供服务上下文模板"
+        ]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "服务矩阵字段含义和路由作用清楚",
+        "项目和服务例外的放置位置清楚"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "补齐 Harness 生命周期、门禁和模板入口",
+      "scope": "新增 lifecycle、gates 可读入口，并补充模板目录说明。",
+      "trace": {
+        "requirement_items": [
+          "AC6",
+          "AC8"
+        ],
+        "design_decisions": [
+          "新增 lifecycle.md、gates.md，补模板说明"
+        ]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "需求生命周期顺序、门禁作用和模板入口可快速理解"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "验证范围和文档质量",
+      "scope": "检查 diff、排除项、链接和格式。",
+      "trace": {
+        "requirement_items": [
+          "AC8",
+          "AC9"
+        ],
+        "design_decisions": [
+          "不修改 docs/learning-docs-repo 和 .spark/skills"
+        ]
+      },
+      "affected_services": [],
+      "acceptance": [
+        "未修改新人快速开始或 Agent skill",
+        "文档路径和索引一致",
+        "git diff 可评审"
+      ],
+      "state": "done"
+    }
+  ]
+}
