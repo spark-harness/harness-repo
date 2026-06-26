@@ -1,7 +1,7 @@
 ---
 requirement_id: "LEN-116"
 owner: "forest"
-status: "draft"
+status: "approved"
 created_at: "2026-06-26"
 related_branch: "chore/LEN-116-pr-gate-hard-cut"
 target_branch: "master"
@@ -11,6 +11,9 @@ affected_repositories:
   - harness-repo
   - business-repo
   - gitops-repo
+approved_by: "forest"
+approved_at: "2026-06-27T00:10:00+08:00"
+decision: "用户已授权硬切优化；批准 LEN-116 需求定义与影响分析，范围限定为 business-repo PR gate DAG、非 smoke gate 覆盖和测试支撑，不包含 LEN-117 镜像发布。"
 ---
 
 # business-repo PR 门禁硬切优化
