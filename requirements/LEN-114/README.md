@@ -1,8 +1,8 @@
 ---
 requirement_id: "LEN-114"
 owner: "forest"
-current_stage: "1"
-status: "draft"
+current_stage: "5"
+status: "approved"
 created_at: "2026-06-25"
 ---
 
@@ -17,6 +17,11 @@ Argo Workflow 在 checkout 后计算变更范围，选择受影响 Maven 项目�
 ## Lifecycle Artifacts
 
 - requirement.md
+- impact-analysis.md
+- design.md
+- tasks.json
+- gates/
+- evidence/
 
 ## Jira Trace
 
@@ -24,5 +29,6 @@ Argo Workflow 在 checkout 后计算变更范围，选择受影响 Maven 项目�
 
 ## Delivery Notes
 
-- 本目录当前只补齐 delivery readiness 所需的需求事实源。
-- 本目录不包含人工 approval、gate JSON 或设计门禁结果。
+- business-repo PR #23 已合并到 master。
+- gitops-repo PR #9、#10、#11 已合并到 master。
+- janus PR #7 已合并到 master。

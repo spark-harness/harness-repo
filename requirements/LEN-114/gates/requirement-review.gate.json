@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-114",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-26T08:49:52+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-114/requirement.md",
+      "sha256": "49f30d554c9268feb0cfa6f8b03a4b4864f80f30d333ef74d5884ce111f204c8"
+    },
+    {
+      "path": "requirements/LEN-114/impact-analysis.md",
+      "sha256": "56d3e4c803a4190f908fe62b912bf3b4af77345e56ee513227f72cb5b3559922"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-114/requirement.md approved by forest at 2026-06-26T08:33:05+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只改 business-repo 手写 Java 项目质量门禁、GitOps Argo 工作流和 Janus runner 工具链，不修改 .proto、Buf 配置或生成契约。"
+  },
+  "decision": "用户已授权直接批准；批准 LEN-114 需求定义与影响分析，确认范围限定为 business-repo 手写 Java 项目质量门禁、GitOps Argo Java CI DAG 和 Janus runner 工具链，不涉及 IDL、生成契约或运行时业务行为。"
+}

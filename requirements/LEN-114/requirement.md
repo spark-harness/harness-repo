@@ -1,7 +1,7 @@
 ---
 requirement_id: "LEN-114"
 owner: "forest"
-status: "draft"
+status: "approved"
 created_at: "2026-06-25"
 related_branch: "feature/LEN-114-java-ci"
 target_branch: "master"
@@ -11,6 +11,9 @@ affected_repositories:
   - harness-repo
   - business-repo
   - gitops-repo
+approved_by: "forest"
+approved_at: "2026-06-26T08:33:05+08:00"
+decision: "用户已授权直接批准；批准 LEN-114 需求定义与影响分析，确认范围限定为 business-repo 手写 Java 项目质量门禁、GitOps Argo Java CI DAG 和 Janus runner 工具链，不涉及 IDL、生成契约或运行时业务行为。"
 ---
 
 # business-repo Java 项目按变更范围并行执行质量门禁
