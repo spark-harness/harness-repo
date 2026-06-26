@@ -1,0 +1,82 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-126",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-27T00:32:19+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-126/requirement.md",
+      "sha256": "5d8ae627ae31d3f4ed67b33499ad61d076dd3ce6c4e930aed8ee9212b1a7cc3a"
+    },
+    {
+      "path": "requirements/LEN-126/impact-analysis.md",
+      "sha256": "13516d4eab07e4c56b8aa4a3a8ffb316e9001c48f9aa63227ebfac914c4e8176"
+    },
+    {
+      "path": "requirements/LEN-126/design.md",
+      "sha256": "376b46764b370fa6990ea90e1f62355b09b1c6468129d869e82c6db094448681"
+    },
+    {
+      "path": "requirements/LEN-126/tasks.json",
+      "sha256": "85b1ace542d86f1a0cdf17531f49ced6ee1b3e2655eb5a2efe6e4575eacd0650"
+    },
+    {
+      "path": "requirements/LEN-126/gates/requirement-review.gate.json",
+      "sha256": "d5218bc84443cee9c1eb85645ba558fe0b8fb4093ec9deda042def80eaf44bd6"
+    },
+    {
+      "path": "requirements/LEN-126/gates/design-review.gate.json",
+      "sha256": "c864ca1be66e996af0cbfcc32aca349d9a4e2a74cbd3ac0ab2e27ecd7b60ce5f"
+    },
+    {
+      "path": "requirements/LEN-126/gates/dev-entry.gate.json",
+      "sha256": "b475356e5696ce9f3f3b05575f294e96f11830193dbd393bd2b81906497f9239"
+    },
+    {
+      "path": "requirements/LEN-126/gates/service-repo-check.gate.json",
+      "sha256": "302aeae3cdafd17525ae6330ee17a0c4908af14f00c2510e4e6fdeaddf1de85d"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "9da36fd1e15f81ad87aa619b53561059aa3b0804eeb4634d57084340ba79274b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "1 evidence files recorded."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-126/tasks.json approved by forest at 2026-06-27T00:32:11+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-126/evidence/local-verification.md",
+      "sha256": "852825075db25aec021f45d4d150885cc82a320cb433d87c4475e51e6c9f4437"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 Harness 文档，不修改 protobuf IDL 或外部契约。"
+  },
+  "decision": "用户明确授权允许编写各类所需文档直至 PR 通过；批准 LEN-126 合并就绪，确认已补齐第一版团队工程文档、生命周期文件、服务矩阵说明、项目上下文模板和本地验证证据，且未修改新人快速开始、.spark/skills、业务代码、IDL 或 CI 工作流行为。"
+}

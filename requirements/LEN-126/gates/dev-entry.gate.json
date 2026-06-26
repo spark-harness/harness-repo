@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-126",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-27T00:32:19+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-126/design.md",
+      "sha256": "376b46764b370fa6990ea90e1f62355b09b1c6468129d869e82c6db094448681"
+    },
+    {
+      "path": "requirements/LEN-126/tasks.json",
+      "sha256": "85b1ace542d86f1a0cdf17531f49ced6ee1b3e2655eb5a2efe6e4575eacd0650"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-126"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "5 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-126/tasks.json approved by forest at 2026-06-27T00:32:11+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 Harness 文档，不修改 protobuf IDL 或外部契约。"
+  },
+  "decision": "用户明确授权允许编写各类所需文档直至 PR 通过；批准 LEN-126 合并就绪，确认已补齐第一版团队工程文档、生命周期文件、服务矩阵说明、项目上下文模板和本地验证证据，且未修改新人快速开始、.spark/skills、业务代码、IDL 或 CI 工作流行为。"
+}

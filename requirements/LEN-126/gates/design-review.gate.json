@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-126",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-27T00:31:29+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-126/requirement.md",
+      "sha256": "5d8ae627ae31d3f4ed67b33499ad61d076dd3ce6c4e930aed8ee9212b1a7cc3a"
+    },
+    {
+      "path": "requirements/LEN-126/impact-analysis.md",
+      "sha256": "13516d4eab07e4c56b8aa4a3a8ffb316e9001c48f9aa63227ebfac914c4e8176"
+    },
+    {
+      "path": "requirements/LEN-126/design.md",
+      "sha256": "376b46764b370fa6990ea90e1f62355b09b1c6468129d869e82c6db094448681"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-126/design.md approved by forest at 2026-06-27T00:31:10+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 Harness 文档，不修改 protobuf IDL 或外部契约。"
+  },
+  "decision": "用户明确授权允许编写各类所需文档直至 PR 通过；批准 LEN-126 第一版团队工程文档范围、设计和任务拆分，范围限定为 harness-repo 文档治理，不涉及业务代码、IDL、生成契约、学习文档新人快速开始或 .spark/skills。"
+}
