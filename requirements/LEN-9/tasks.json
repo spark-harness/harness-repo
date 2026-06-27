@@ -1,0 +1,76 @@
+{
+  "decision": "用户授权 Agent 批准所有文档；批准 LEN-9 dev-entry，按 Jira 范围新建 origination-api draft 能力，不修改 IDL，不交付 GitOps runtime 部署。",
+  "approved_at": "2026-06-28T04:04:10+08:00",
+  "approved_by": "forest",
+  "requirement_id": "LEN-9",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 生命周期和服务矩阵",
+      "scope": "创建 LEN-9 requirement、impact-analysis、design、tasks 和早期阶段门禁；在 service matrix 增加 origination-api。",
+      "trace": {
+        "requirement_items": ["AC9"],
+        "design_decisions": ["Affected Services", "Testing Strategy"]
+      },
+      "affected_services": ["origination-api"],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "dev-entry gate PASS",
+        "service-repo-check gate PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "新增 origination-api 用例测试",
+      "scope": "先写失败测试覆盖 create/get/patch、多 draft、quote 校验、幂等和越权。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7"],
+        "design_decisions": ["Application", "Testing Strategy"]
+      },
+      "affected_services": ["origination-api"],
+      "acceptance": [
+        "test-first 失败原因为 origination-api 行为未实现",
+        "测试覆盖 quote 不存在/过期/非本人/loan terms 不一致"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "实现 origination-api Java Spring 服务",
+      "scope": "新增 domain/application/adapter/infrastructure、Flyway migration、health/ready、quote gateway、幂等和配置。",
+      "trace": {
+        "requirement_items": ["BR1", "BR2", "BR3", "BR4", "BR5", "BR6", "BR7", "BR8", "BR9", "BR10", "AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8", "AC9"],
+        "design_decisions": ["Application Design", "Infrastructure", "Data / Config / Permission"]
+      },
+      "affected_services": ["origination-api"],
+      "acceptance": [
+        "POST/GET/PATCH 行为符合 contract",
+        "acceptedQuote snapshot 持久化",
+        "幂等重试不重复创建或重复变更",
+        "ready probe 反映 DB 状态",
+        "mvn test 通过"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "完成审查、证据和合并就绪门禁",
+      "scope": "记录测试证据、Java quality 项目图证据、代码审查报告，刷新 merge-readiness gate 并完成 PR/merge。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8", "AC9"],
+        "design_decisions": ["Testing Strategy", "Rollout And Rollback"]
+      },
+      "affected_services": ["origination-api"],
+      "acceptance": [
+        "local-verification evidence 存在",
+        "review report ready-for-gate",
+        "janus requirement verify 通过",
+        "PR merged to master"
+      ],
+      "state": "in_progress"
+    }
+  ]
+}

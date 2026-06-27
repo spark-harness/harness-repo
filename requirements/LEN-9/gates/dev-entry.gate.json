@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-9",
+  "gate_id": "dev-entry",
+  "gate_name": "开发进入门禁",
+  "stage": "4.2",
+  "checked_by": "task_planner",
+  "checked_at": "2026-06-27T20:27:13Z",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-9/requirement.md",
+      "sha256": "c6cffb8b21ba85c1523f384d46c1fd6e4d3caae1444d444010e90e989efd7056"
+    },
+    {
+      "path": "requirements/LEN-9/design.md",
+      "sha256": "c608fc974f95668641add2f5b4f13bc8b40865afa7e7d9fdf56292f0b2e13252"
+    },
+    {
+      "path": "requirements/LEN-9/tasks.json",
+      "sha256": "258126a5785b01ca1bb4ea64c29e4c70d2d15caa4e5398e96147376aeffb9be0"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "任务拆分完整",
+      "result": "PASS",
+      "evidence": "tasks.json separates lifecycle, test-first, implementation, and evidence/delivery work."
+    },
+    {
+      "item": "任务可追溯",
+      "result": "PASS",
+      "evidence": "Each task maps requirement_items and design_decisions."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-9/tasks.json approved by forest at 2026-06-28."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Agent 批准所有文档；批准 LEN-9 dev-entry，按 Jira 范围新建 origination-api draft 能力，不修改 IDL，不交付 GitOps runtime 部署。"
+}

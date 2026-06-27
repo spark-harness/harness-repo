@@ -1,0 +1,96 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-9",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-27T20:27:13Z",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-9/requirement.md",
+      "sha256": "c6cffb8b21ba85c1523f384d46c1fd6e4d3caae1444d444010e90e989efd7056"
+    },
+    {
+      "path": "requirements/LEN-9/impact-analysis.md",
+      "sha256": "050cd53487dc523e75f184401ec93e1148d3605d99db15dc1a42c7f556b1e124"
+    },
+    {
+      "path": "requirements/LEN-9/design.md",
+      "sha256": "c608fc974f95668641add2f5b4f13bc8b40865afa7e7d9fdf56292f0b2e13252"
+    },
+    {
+      "path": "requirements/LEN-9/tasks.json",
+      "sha256": "258126a5785b01ca1bb4ea64c29e4c70d2d15caa4e5398e96147376aeffb9be0"
+    },
+    {
+      "path": "requirements/LEN-9/gates/requirement-review.gate.json",
+      "sha256": "fd893bdfef53accb0e0dfbda25baa942fbbfcd5dacec77c555056767b2c84272"
+    },
+    {
+      "path": "requirements/LEN-9/gates/design-review.gate.json",
+      "sha256": "5352dc2e84346970a4fcac68b17e1d40083816ea79e6387439ef89c617e84116"
+    },
+    {
+      "path": "requirements/LEN-9/gates/dev-entry.gate.json",
+      "sha256": "11a8ed5005d28ddb5e3f423d654356c6b67c2de6223c1bd4543e9bf80d935b53"
+    },
+    {
+      "path": "requirements/LEN-9/gates/service-repo-check.gate.json",
+      "sha256": "5ca2712dc7393212ed3fc9e24256f39e01aa890f95750fc3e3003ee8b2242a78"
+    },
+    {
+      "path": "requirements/LEN-9/reviews/T4.md",
+      "sha256": "14f2f9632b81167542fc50ae2ec9079b42a4f285c8486acb71a809564249bfc9"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-9/evidence/local-verification.md records Maven tests, packaging, Java quality, and behavior coverage."
+    },
+    {
+      "item": "Code review 已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-9/reviews/T4.md conclusion ready-for-gate with no open P0/P1 findings."
+    },
+    {
+      "item": "IDL 无影响",
+      "result": "PASS",
+      "evidence": "impact-analysis.md declares idl_impact=no; no protobuf, Buf, or generated contract files changed."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-9/tasks.json approved by forest at 2026-06-28T04:04:10+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-9/evidence/local-verification.md",
+      "sha256": "1bec2fd555a01fae7e570a94ad92b2b57ba0abbd3c5a47ec35a390a2973a61f1"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Agent 批准所有文档；LEN-9 已完成本地实现、测试、Java quality、审查和合并就绪证据。Runtime deployment and live Kubernetes smoke are deferred to LEN-134."
+}

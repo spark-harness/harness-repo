@@ -1,0 +1,73 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-9",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-27T20:27:13Z",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-9/impact-analysis.md",
+      "sha256": "050cd53487dc523e75f184401ec93e1148d3605d99db15dc1a42c7f556b1e124"
+    },
+    {
+      "path": "requirements/LEN-9/design.md",
+      "sha256": "c608fc974f95668641add2f5b4f13bc8b40865afa7e7d9fdf56292f0b2e13252"
+    },
+    {
+      "path": "requirements/LEN-9/tasks.json",
+      "sha256": "258126a5785b01ca1bb4ea64c29e4c70d2d15caa4e5398e96147376aeffb9be0"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "服务矩阵包含 origination-api",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml maps origination-api to business-repo/apps/origination-api and quote-api downstream."
+    },
+    {
+      "item": "涉及仓库分支已隔离",
+      "result": "PASS",
+      "evidence": "harness-repo and business-repo use feature/LEN-9-origination-api-drafts linked worktrees under .worktrees/LEN-9."
+    },
+    {
+      "item": "IDL 无影响",
+      "result": "PASS",
+      "evidence": "impact-analysis.md idl_impact=no."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-9/impact-analysis.md approved by forest at 2026-06-28."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-9-origination-api-drafts",
+      "commit": "f977aa8"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-9-origination-api-drafts",
+      "commit": "ee10fca"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Agent 批准所有文档；批准 LEN-9 service-repo-check，按 Jira 范围新建 origination-api draft 能力，不修改 IDL，不交付 GitOps runtime 部署。"
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-9",
+  "gate_id": "design-review",
+  "gate_name": "设计评审门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-27T20:04:21Z",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-9/requirement.md",
+      "sha256": "c6cffb8b21ba85c1523f384d46c1fd6e4d3caae1444d444010e90e989efd7056"
+    },
+    {
+      "path": "requirements/LEN-9/impact-analysis.md",
+      "sha256": "050cd53487dc523e75f184401ec93e1148d3605d99db15dc1a42c7f556b1e124"
+    },
+    {
+      "path": "requirements/LEN-9/design.md",
+      "sha256": "c608fc974f95668641add2f5b4f13bc8b40865afa7e7d9fdf56292f0b2e13252"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖需求追溯",
+      "result": "PASS",
+      "evidence": "design.md maps BR/AC items to usecase, repository, quote gateway, idempotency, and tests."
+    },
+    {
+      "item": "接口、数据、权限和回滚边界明确",
+      "result": "PASS",
+      "evidence": "design.md defines POST/GET/PATCH contracts, DB tables, principal rules, and LEN-134 rollout boundary."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-9/design.md approved by forest at 2026-06-28."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Agent 批准所有文档；批准 LEN-9 design-review，按 Jira 范围新建 origination-api draft 能力，不修改 IDL，不交付 GitOps runtime 部署。"
+}
