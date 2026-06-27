@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-135",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-28T06:56:20+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-135/impact-analysis.md",
+      "sha256": "28721cb5dada69bd14f8a9d2b2525bea26171c756b81d0c8dcba1defc1c9cda4"
+    },
+    {
+      "path": "requirements/LEN-135/design.md",
+      "sha256": "58f200a59996fa6c93472a19eb75fb063f7d0440fcad0ed043b3e2e310361b64"
+    },
+    {
+      "path": "requirements/LEN-135/tasks.json",
+      "sha256": "3cb25d1d15017235ea940811dab2a7716d25aac14372ef7e5d8d5042115ec887"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-135"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "4 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "fides-bff, origination-api, quote-api"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-135/impact-analysis.md approved by forest at 2026-06-28T06:27:11+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-135-fides-bff-downstream-config",
+      "commit": "b665c86"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-135-fides-bff-downstream-config",
+      "commit": "a2d45d2"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 fides-bff lendora-sta GitOps runtime 配置和验证证据，不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Agent 批准所有文档；批准 LEN-135 service-repo-check 更新，fides-bff runtime Secret 引用不改变 IDL 或服务矩阵。"
+}
