@@ -1,0 +1,94 @@
+{
+  "decision": "用户授权 Agent 批准 LEN-22 tasks.json，并按 T2-T5 进入实现与验证。",
+  "approved_at": "2026-06-28T01:12:46+08:00",
+  "approved_by": "forest",
+  "requirement_id": "LEN-22",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 生命周期文档和门禁",
+      "scope": "维护 requirements/LEN-22 下的 requirement.md、impact-analysis.md、design.md、tasks.json 和阶段门禁。",
+      "trace": {
+        "requirement_items": ["AC7"],
+        "design_decisions": ["Testing Strategy", "Rollout And Rollback"]
+      },
+      "affected_services": ["fides-bff", "applicant-api"],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "dev-entry gate PASS",
+        "service-repo-check gate PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "实现 Go BFF principal 与 AuthFilter",
+      "scope": "在 packages/go/bffkit 增加 Principal、TokenValidator、AuthFilter、owner guard 和 gRPC metadata 传播。",
+      "trace": {
+        "requirement_items": ["BR1", "BR2", "BR3", "BR4", "BR6", "BR7", "BR8", "AC1", "AC2", "AC3", "AC4", "AC6", "AC7"],
+        "design_decisions": ["Go BFF Principal", "Ownership Guard", "gRPC Metadata Propagation"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "Go tests cover missing and invalid bearer token as 401",
+        "Go tests cover Principal context after valid token",
+        "Go tests cover external x-applicant-id cleanup",
+        "Go tests cover forbidden owner mismatch",
+        "Go tests cover outgoing x-applicant-id and traceparent metadata"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "实现 Java RequestPrincipalContext",
+      "scope": "在 packages/java/spring-starter 增加 RequestPrincipal、RequestPrincipalContext 和 gRPC ServerInterceptor。",
+      "trace": {
+        "requirement_items": ["BR4", "BR5", "BR7", "BR8", "AC5", "AC7"],
+        "design_decisions": ["Java RequestPrincipalContext", "gRPC Metadata Propagation"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": [
+        "Java tests cover metadata x-applicant-id to RequestPrincipalContext",
+        "Java tests cover missing x-applicant-id returns UNAUTHENTICATED",
+        "Java tests cover context cleanup after request"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "接入 fides-bff 受保护路由边界",
+      "scope": "在 fides-bff 保留 auth 匿名入口，并提供受保护路由组接入 AuthFilter 的测试证据。",
+      "trace": {
+        "requirement_items": ["BR1", "BR2", "BR3", "AC1", "AC2", "AC3", "AC7"],
+        "design_decisions": ["Go BFF Principal", "API / Contract Design"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "Auth OTP and refresh anonymous route tests remain passing",
+        "Protected test route proves AuthFilter blocks unauthenticated requests",
+        "Protected test route proves valid token reaches handler with Principal"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "完成验证、证据和合并就绪门禁",
+      "scope": "运行 Go/Java 测试，记录 evidence，刷新 merge-readiness gate，并报告 LEN-22 交付边界。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7"],
+        "design_decisions": ["Testing Strategy"]
+      },
+      "affected_services": ["fides-bff", "applicant-api"],
+      "acceptance": [
+        "bffkit go test passes",
+        "fides-bff go test passes",
+        "spring-starter mvn test passes",
+        "LEN-22 merge-readiness gate validates",
+        "最终报告区分已实现、已验证和未交付内容"
+      ],
+      "state": "done"
+    }
+  ]
+}
