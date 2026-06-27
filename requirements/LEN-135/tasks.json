@@ -1,0 +1,138 @@
+{
+  "requirement_id": "LEN-135",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-28T06:27:11+08:00",
+  "decision": "用户授权 Agent 批准所有文档；LEN-135 T2-T4 已完成，证据覆盖 GitOps render、runtime protected BFF smoke、DB 写入、Consul 发现和环境 WARN。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 生命周期和阶段门禁",
+      "scope": "创建 LEN-135 requirement、impact-analysis、design、tasks 和早期 gate，明确不修改业务代码、IDL 或前端。",
+      "trace": {
+        "requirement_items": [
+          "AC1",
+          "AC2",
+          "AC9"
+        ],
+        "design_decisions": [
+          "D7"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "dev-entry gate PASS",
+        "service-repo-check gate PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "配置 fides-bff quote/origination 下游",
+      "scope": "在 gitops-repo fides-bff ConfigMap 中增加 quote/origination Consul discovery、base_url 空值、3s timeout、auth token mode/TTL，并在 Deployment 中引用 runtime token Secret。",
+      "trace": {
+        "requirement_items": [
+          "BR1",
+          "BR2",
+          "BR3",
+          "BR4",
+          "BR5",
+          "BR10",
+          "AC1",
+          "AC3"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3",
+          "D7"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "fides-bff overlay kustomize render PASS",
+        "clusters/lendora-sta kustomize render PASS",
+        "rendered ConfigMap contains quote, origination and auth config",
+        "rendered Deployment references fides-bff-runtime token secret"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "刷新运行时并执行 BFF smoke",
+      "scope": "确认 fides-bff 镜像包含 LEN-133 facade，应用 ConfigMap，重启 fides-bff，并通过 BFF 受保护接口执行 pricing 和 loan application smoke。",
+      "trace": {
+        "requirement_items": [
+          "BR6",
+          "BR8",
+          "BR9",
+          "AC4",
+          "AC5",
+          "AC6",
+          "AC7",
+          "AC8",
+          "AC9"
+        ],
+        "design_decisions": [
+          "D4",
+          "D5",
+          "D6",
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "fides-bff",
+        "quote-api",
+        "origination-api"
+      ],
+      "acceptance": [
+        "fides-bff Pod Ready",
+        "health endpoint PASS",
+        "pricing quote smoke returns quoteId",
+        "loan application create/get/patch smoke PASS",
+        "Consul discovery PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "完成审查、证据和合并交付",
+      "scope": "记录 local verification、runtime smoke、review report 和 merge-readiness gate，创建 PR、合并并清理 worktree。",
+      "trace": {
+        "requirement_items": [
+          "AC1",
+          "AC2",
+          "AC3",
+          "AC4",
+          "AC5",
+          "AC6",
+          "AC7",
+          "AC8",
+          "AC9"
+        ],
+        "design_decisions": [
+          "Testing Strategy",
+          "Rollout And Rollback"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "local-verification evidence exists",
+        "runtime-smoke evidence exists",
+        "review report ready-for-gate",
+        "merge-readiness gate validates",
+        "janus requirement verify passes",
+        "PRs merged to master"
+      ],
+      "state": "done"
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-135",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-28T06:56:20+08:00",
+  "result": "WARN",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-135/requirement.md",
+      "sha256": "6ab69a3411b3688cd9572b90d0eec14a5e1a7d7bc7ed53f541b7a7cba2582852"
+    },
+    {
+      "path": "requirements/LEN-135/impact-analysis.md",
+      "sha256": "28721cb5dada69bd14f8a9d2b2525bea26171c756b81d0c8dcba1defc1c9cda4"
+    },
+    {
+      "path": "requirements/LEN-135/design.md",
+      "sha256": "58f200a59996fa6c93472a19eb75fb063f7d0440fcad0ed043b3e2e310361b64"
+    },
+    {
+      "path": "requirements/LEN-135/tasks.json",
+      "sha256": "3cb25d1d15017235ea940811dab2a7716d25aac14372ef7e5d8d5042115ec887"
+    },
+    {
+      "path": "requirements/LEN-135/gates/requirement-review.gate.json",
+      "sha256": "94ba1cdb3c06aa1b4bb19249959efc935a18566fdcc335546a6e185bc9a6774a"
+    },
+    {
+      "path": "requirements/LEN-135/gates/design-review.gate.json",
+      "sha256": "8411b7fbaaff6f976fb2ba273deeb35fd0b5520e3c30965c0c5411f5b92d1aa0"
+    },
+    {
+      "path": "requirements/LEN-135/gates/dev-entry.gate.json",
+      "sha256": "3b9d8f2aeced2847d0a511b23aaf9cc94c617483642844d4c176c2a3732b67a9"
+    },
+    {
+      "path": "requirements/LEN-135/gates/service-repo-check.gate.json",
+      "sha256": "ea41799f4e6e33a96674ff247629ac3df0889f4ecf762ab38037a8b2a0483d73"
+    },
+    {
+      "path": "requirements/LEN-135/evidence/local-verification.md",
+      "sha256": "189d912f83ac7152913029ea629b9db16b91ae9cb30fb78bf6441b383c5b5d54"
+    },
+    {
+      "path": "requirements/LEN-135/evidence/runtime-smoke.md",
+      "sha256": "1a8f8763c08f5fe3fb9f73fa29242781dffa9c9d4c0d5832f54598fc22148f8a"
+    },
+    {
+      "path": "requirements/LEN-135/reviews/T2-T4.md",
+      "sha256": "790e83302360650c90180efee3975ae26fe86a8bd167305830f0ab31f65a0b73"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check gate JSON are present and valid."
+    },
+    {
+      "item": "本地 GitOps 渲染验证已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-135/evidence/local-verification.md records fides-bff overlay render, cluster render, quote/origination discovery config, empty base_url, 3s timeout, and auth Secret reference."
+    },
+    {
+      "item": "运行时 protected BFF smoke 已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-135/evidence/runtime-smoke.md records /api/v1/health, pricing quote, loan create/get/patch, DB rows, Consul discovery, and trace evidence."
+    },
+    {
+      "item": "Code review 已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-135/reviews/T2-T4.md conclusion ready-for-gate with no open P0/P1 findings."
+    },
+    {
+      "item": "Argo CD Healthy/Synced 环境验证",
+      "result": "WARN",
+      "evidence": "vincent-k3s lacks argocd namespace and Argo CD Application/AppProject CRDs, so Healthy/Synced cannot be truthfully verified in the current cluster."
+    },
+    {
+      "item": "Postgres dependency runtime drift",
+      "result": "WARN",
+      "evidence": "runtime smoke found postgres Service selecting two historical backends; verification patched selector to postgres-0 and recorded follow-up."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [
+    {
+      "issue": "AC9 requires recording the current Argo CD gap; vincent-k3s currently has no Argo CD namespace or CRDs.",
+      "follow_up_action": "Complete or resume Argo CD bootstrap/drift-detection before claiming Healthy/Synced for lendora-sta Applications.",
+      "owner": "platform/gitops"
+    },
+    {
+      "issue": "lendora-sta-postgres Service initially selected both postgres-0 and a historical Deployment Pod with inconsistent databases.",
+      "follow_up_action": "Clean up or migrate the historical postgres backend and make the dependency GitOps target unambiguous in a dependency-layer ticket.",
+      "owner": "platform/gitops"
+    },
+    {
+      "issue": "fides-bff-runtime/token-secret was manually bootstrapped for STA smoke.",
+      "follow_up_action": "Replace manual STA secrets with the team secret-management pattern when that standard is introduced.",
+      "owner": "platform/security"
+    }
+  ],
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-135/evidence/local-verification.md",
+      "sha256": "189d912f83ac7152913029ea629b9db16b91ae9cb30fb78bf6441b383c5b5d54"
+    },
+    {
+      "path": "requirements/LEN-135/evidence/runtime-smoke.md",
+      "sha256": "1a8f8763c08f5fe3fb9f73fa29242781dffa9c9d4c0d5832f54598fc22148f8a"
+    },
+    {
+      "path": "requirements/LEN-135/reviews/T2-T4.md",
+      "sha256": "790e83302360650c90180efee3975ae26fe86a8bd167305830f0ab31f65a0b73"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "LEN-135 only changes fides-bff lendora-sta GitOps runtime config and Harness evidence; it does not modify protobuf IDL, generated contracts, Buf config, business code, or frontend code."
+  },
+  "decision": "LEN-135 is merge-ready with WARN: fides-bff quote/origination downstream config is rendered and functionally verified on vincent-k3s through protected BFF smoke, but Argo CD Healthy/Synced and Postgres dependency drift require separate environment follow-up."
+}
