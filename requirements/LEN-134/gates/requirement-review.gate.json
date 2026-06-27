@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-134",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-28T04:49:30+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-134/requirement.md",
+      "sha256": "5ace17a337d646d7b2c0edb6f0b4eadd421a254a5e931815ff423284738b9919"
+    },
+    {
+      "path": "requirements/LEN-134/impact-analysis.md",
+      "sha256": "b5f2c28a1553157cf4a31bf04d3df68c069858eae75b01c8963932ef462e8747"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在且范围清楚",
+      "result": "PASS",
+      "evidence": "requirement.md declares origination-api deployment, application DB, readiness, k8s/Consul discovery, and excludes BFF facade/downstream config/frontend work."
+    },
+    {
+      "item": "影响面分析覆盖关键运行时面",
+      "result": "PASS",
+      "evidence": "impact-analysis.md covers business-repo, gitops-repo, application DB, config, observability, rollout, and rollback."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-134/requirement.md approved by forest at 2026-06-28T04:47:07+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只新增 origination-api runtime 部署、镜像、application DB bootstrap 和服务发现配置，不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Agent 批准所有文档；批准 LEN-134 origination-api lendora-sta 部署需求和影响分析，范围限定为 origination-api 镜像、GitOps 部署、application DB、readiness、k8s/Consul 服务发现和 runtime smoke，不包含 BFF facade、下游配置或前端接入。"
+}

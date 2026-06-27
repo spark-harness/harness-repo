@@ -1,0 +1,170 @@
+{
+  "decision": "用户授权 Agent 批准所有文档；批准 LEN-134 tasks.json，进入 origination-api runtime、GitOps 部署和 runtime smoke 实现。",
+  "approved_at": "2026-06-28T04:48:48+08:00",
+  "approved_by": "forest",
+  "requirement_id": "LEN-134",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 生命周期和门禁",
+      "scope": "创建 LEN-134 requirement、impact-analysis、design、tasks 和阶段门禁，明确部署边界不包含 BFF facade、下游配置或前端接入。",
+      "trace": {
+        "requirement_items": [
+          "AC1",
+          "AC9"
+        ],
+        "design_decisions": [
+          "D6"
+        ]
+      },
+      "affected_services": [
+        "origination-api"
+      ],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "dev-entry gate PASS",
+        "service-repo-check gate PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "补齐 origination-api 镜像和 Consul runtime 能力",
+      "scope": "在 business-repo 增加 origination-api Dockerfile、Consul 注册配置和测试，不修改草稿业务逻辑。",
+      "trace": {
+        "requirement_items": [
+          "BR3",
+          "BR4",
+          "BR5",
+          "AC2",
+          "AC5",
+          "AC8"
+        ],
+        "design_decisions": [
+          "D3",
+          "D4",
+          "D5"
+        ]
+      },
+      "affected_services": [
+        "origination-api"
+      ],
+      "acceptance": [
+        "origination-api tests PASS",
+        "Dockerfile 可构建 origination-api 镜像",
+        "Consul 注册 request 使用 Service DNS 和 /ready health check"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "新增 origination-api lendora-sta GitOps 部署",
+      "scope": "在 gitops-repo 增加 origination-api base、lendora-sta overlay、namespace、Argo CD Application、application DB init、image release promotion 和 Secret 引用。",
+      "trace": {
+        "requirement_items": [
+          "BR1",
+          "BR2",
+          "BR3",
+          "BR6",
+          "BR7",
+          "BR8",
+          "BR9",
+          "AC1",
+          "AC2",
+          "AC3",
+          "AC4"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3",
+          "D6",
+          "D7",
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "origination-api"
+      ],
+      "acceptance": [
+        "origination-api overlay kustomize build PASS",
+        "lendora-sta dependencies overlay kustomize build PASS",
+        "clusters/lendora-sta kustomize build PASS",
+        "image release workflow includes origination-api build, scan, promotion and render validation"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "部署并执行 lendora-sta runtime smoke",
+      "scope": "构建/发布 origination-api 镜像，完成 Argo CD 同步或记录环境 WARN，验证 ready、draft 写入读取、DB 记录、k8s Service 和 Consul 发现。",
+      "trace": {
+        "requirement_items": [
+          "AC3",
+          "AC4",
+          "AC5",
+          "AC6",
+          "AC7",
+          "AC8",
+          "AC9"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D4",
+          "D5",
+          "D6",
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "origination-api"
+      ],
+      "acceptance": [
+        "Argo CD origination-api Application Healthy/Synced 或环境 WARN",
+        "Pod Ready",
+        "/ready READY",
+        "loan application create returns applicationId",
+        "loan application get returns same draft",
+        "application DB rows exist",
+        "Consul service discovery returns origination-api"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "完成审查、证据和合并交付",
+      "scope": "记录 runtime evidence、代码审查报告，刷新 merge-readiness gate，创建 PR、合并并清理 worktree。",
+      "trace": {
+        "requirement_items": [
+          "AC1",
+          "AC2",
+          "AC3",
+          "AC4",
+          "AC5",
+          "AC6",
+          "AC7",
+          "AC8",
+          "AC9"
+        ],
+        "design_decisions": [
+          "Testing Strategy",
+          "Rollout And Rollback"
+        ]
+      },
+      "affected_services": [
+        "origination-api"
+      ],
+      "acceptance": [
+        "local-verification evidence 存在",
+        "runtime-smoke evidence 存在",
+        "review report ready-for-gate",
+        "janus requirement verify 通过",
+        "PR merged to master"
+      ],
+      "state": "done"
+    }
+  ]
+}
