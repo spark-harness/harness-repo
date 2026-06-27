@@ -1,0 +1,163 @@
+{
+  "decision": "用户授权 Agent 批准所有文档；LEN-131 quote-api runtime、GitOps manifest、runtime smoke、review 和 evidence 已完成。vincent-k3s 缺少 Argo CD，AC3 以环境 WARN 记录，不伪造 Healthy/Synced。",
+  "approved_at": "2026-06-28T02:54:35+08:00",
+  "approved_by": "forest",
+  "requirement_id": "LEN-131",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 生命周期和门禁",
+      "scope": "创建 LEN-131 requirement、impact-analysis、design、tasks 和阶段门禁，明确部署边界不包含 BFF facade。",
+      "trace": {
+        "requirement_items": [
+          "AC1",
+          "AC8"
+        ],
+        "design_decisions": [
+          "D6"
+        ]
+      },
+      "affected_services": [
+        "quote-api"
+      ],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "dev-entry gate PASS",
+        "service-repo-check gate PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "补齐 quote-api 镜像和 Consul runtime 能力",
+      "scope": "在 business-repo 增加 quote-api Dockerfile、Consul 注册配置和测试，不修改 Quote 业务逻辑。",
+      "trace": {
+        "requirement_items": [
+          "BR3",
+          "BR4",
+          "BR5",
+          "AC2",
+          "AC5",
+          "AC7"
+        ],
+        "design_decisions": [
+          "D3",
+          "D4",
+          "D5"
+        ]
+      },
+      "affected_services": [
+        "quote-api"
+      ],
+      "acceptance": [
+        "quote-api tests PASS",
+        "Dockerfile 可构建 quote-api 镜像",
+        "Consul 注册 request 使用 Service DNS 和 /ready health check"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "新增 quote-api lendora-sta GitOps 部署",
+      "scope": "在 gitops-repo 增加 quote-api base、lendora-sta overlay、namespace、Argo CD Application、image release promotion 和 Secret 引用。",
+      "trace": {
+        "requirement_items": [
+          "BR1",
+          "BR2",
+          "BR3",
+          "BR6",
+          "BR7",
+          "BR8",
+          "AC1",
+          "AC2",
+          "AC3",
+          "AC4"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3",
+          "D6",
+          "D7"
+        ]
+      },
+      "affected_services": [
+        "quote-api"
+      ],
+      "acceptance": [
+        "quote-api overlay kustomize build PASS",
+        "clusters/lendora-sta kustomize build PASS",
+        "image release workflow includes quote-api build, scan, promotion and render validation"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "部署并执行 lendora-sta runtime smoke",
+      "scope": "构建/发布 quote-api 镜像，完成 Argo CD 同步，验证 ready、DB 写入、k8s Service 和 Consul 发现。",
+      "trace": {
+        "requirement_items": [
+          "AC3",
+          "AC4",
+          "AC5",
+          "AC6",
+          "AC7",
+          "AC8"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D4",
+          "D5",
+          "D6"
+        ]
+      },
+      "affected_services": [
+        "quote-api"
+      ],
+      "acceptance": [
+        "Argo CD quote-api Application Healthy/Synced",
+        "Pod Ready",
+        "/ready READY",
+        "pricing quote smoke returns quoteId",
+        "quote DB row exists",
+        "Consul service discovery returns quote-api"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "完成审查、证据和合并交付",
+      "scope": "记录 runtime evidence、代码审查报告，刷新 merge-readiness gate，创建 PR、合并并清理 worktree。",
+      "trace": {
+        "requirement_items": [
+          "AC1",
+          "AC2",
+          "AC3",
+          "AC4",
+          "AC5",
+          "AC6",
+          "AC7",
+          "AC8"
+        ],
+        "design_decisions": [
+          "Testing Strategy",
+          "Rollout And Rollback"
+        ]
+      },
+      "affected_services": [
+        "quote-api"
+      ],
+      "acceptance": [
+        "local-verification evidence 存在",
+        "runtime-smoke evidence 存在",
+        "review report ready-for-gate",
+        "janus requirement verify 通过",
+        "PR merged to master"
+      ],
+      "state": "done"
+    }
+  ]
+}
