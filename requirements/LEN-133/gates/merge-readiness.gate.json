@@ -1,0 +1,107 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-133",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-27T22:14:00Z",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-133/requirement.md",
+      "sha256": "35ec0b119cd9154a88bf3d6fce2724827e5fa0c3afe78c6dc7581c2cdd10ca32"
+    },
+    {
+      "path": "requirements/LEN-133/impact-analysis.md",
+      "sha256": "6627d0e8ca782b78651791d3b37f19fcd5b6417213e5f9effef83ab7288b37c8"
+    },
+    {
+      "path": "requirements/LEN-133/design.md",
+      "sha256": "f0d4bf0d03d5764a0769c125181b17ca3ea37d6b7ba44cf589393b8bb7a8d0f9"
+    },
+    {
+      "path": "requirements/LEN-133/tasks.json",
+      "sha256": "de9c401d468b66d2047539b27f0811f7fe251c0c02aeb2c90c8d5e1bb77c39b0"
+    },
+    {
+      "path": "requirements/LEN-133/gates/requirement-review.gate.json",
+      "sha256": "fe0ec31269d81ed2d3f6c38700174a10b23e45eb4e14d85bb8048f6f34ac2dab"
+    },
+    {
+      "path": "requirements/LEN-133/gates/design-review.gate.json",
+      "sha256": "013a3557dfbc889a70da842dd71dabfd79bf4cd779df62f7b327e8e781e10624"
+    },
+    {
+      "path": "requirements/LEN-133/gates/dev-entry.gate.json",
+      "sha256": "6bf2a24996527048a23d6a7c31287cc69fe59d91c32cd02cb129338cf02fa453"
+    },
+    {
+      "path": "requirements/LEN-133/gates/service-repo-check.gate.json",
+      "sha256": "4d9866c1a2717890e14dfbac7ddc267aec54f20823f78ab45ba1a09c3e7e22c8"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and valid."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-133/evidence/local-verification.md records test-first, go test, go vet, and go build results."
+    },
+    {
+      "item": "BFF smoke 已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-133/evidence/runtime-smoke.md records local BFF smoke through origination stub for create/get/patch, principal, trace, and idempotency propagation."
+    },
+    {
+      "item": "Code review 已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-133/reviews/T2-T4.md reports no open P0/P1/P2 issues."
+    },
+    {
+      "item": "IDL 文件未修改",
+      "result": "PASS",
+      "evidence": "LEN-133 uses existing fides-bff HTTP surface and origination-api HTTP contract. idl-repo is included only as a service-repo-check helper because fides-bff has an existing proto_path in the service matrix."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [
+    {
+      "issue": "Runtime cluster smoke for fides-bff -> origination-api is deferred.",
+      "follow_up_action": "LEN-135 configures fides-bff downstream origination address, service discovery and timeout, then runs runtime smoke.",
+      "owner": "core"
+    }
+  ],
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-133/evidence/local-verification.md",
+      "sha256": "f934b50c68e8870f6f2df66460fad7ee2c8b83569ddcc0662d04ec4d24ae4f90"
+    },
+    {
+      "path": "requirements/LEN-133/evidence/runtime-smoke.md",
+      "sha256": "fbdc75c53f35a9e504fb5cb9e728b1c1254c20f70fabbc52c16592e1d5d602e8"
+    },
+    {
+      "path": "requirements/LEN-133/reviews/T2-T4.md",
+      "sha256": "91c9ffca35bddbbb5806795fbd7cf95b1a0a283e7d6a88757aaf7d4ad38cc168"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf IDL、generated contracts 或 Buf 配置；idl-repo helper 仅用于服务矩阵路径解析。"
+  },
+  "decision": "用户授权 Agent 批准所有文档；LEN-133 已完成 fides-bff origination facade、本地测试、BFF smoke、审查和证据。GitOps runtime 下游配置仍由 LEN-135 交付。"
+}
+
