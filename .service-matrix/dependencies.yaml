@@ -19,6 +19,10 @@ modules:
     team: core
     name: "申请人域"
 
+  pricing:
+    team: core
+    name: "报价与试算"
+
   frontend:
     team: core
     name: "前端体验"
@@ -53,7 +57,16 @@ services:
     proto_path: "{idl-repo}/vesta/lendora/applicant/v1"
     buf_module: "local/lendora-applicant"
 
+  quote-api:
+    module: pricing
+    repo_path: "{business-repo}/apps/quote-api"
+    idl_required: false
+
 dependencies:
   applicant-api:
+    upstream:
+      - "fides-bff"
+
+  quote-api:
     upstream:
       - "fides-bff"

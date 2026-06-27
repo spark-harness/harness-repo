@@ -1,0 +1,91 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-10",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-28T01:55:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-10/requirement.md",
+      "sha256": "0a986cb1e0207cf9d78c225b6c3e237a2b0a21228b769f069b534a8fc7009f5a"
+    },
+    {
+      "path": "requirements/LEN-10/impact-analysis.md",
+      "sha256": "cb7c6a4cbabef895d47ba344731c7e193f2dc95916a61a6cc68946cd5459f2ba"
+    },
+    {
+      "path": "requirements/LEN-10/design.md",
+      "sha256": "026a3d657964696e6cc268638aad71811604fba2c23eb8664d445b4f8fd9e6a4"
+    },
+    {
+      "path": "requirements/LEN-10/tasks.json",
+      "sha256": "233c9ad75d9031cc3e92d19eb08f43eef9b92367d5651958bb224b37ce1ce19e"
+    },
+    {
+      "path": "requirements/LEN-10/gates/requirement-review.gate.json",
+      "sha256": "7bb0c3b710c8b840df7e66da8290bbea417b5a40233b4d82574686e8aa05cec0"
+    },
+    {
+      "path": "requirements/LEN-10/gates/design-review.gate.json",
+      "sha256": "914d576d5646551b3dd95b38ed8a7255b43fd1f791ed13cd028b7b6ce6f50f5d"
+    },
+    {
+      "path": "requirements/LEN-10/gates/dev-entry.gate.json",
+      "sha256": "12657f18b9e2406d07ffb6716febce159d8d81aab1149e2ff226ba77f136028a"
+    },
+    {
+      "path": "requirements/LEN-10/gates/service-repo-check.gate.json",
+      "sha256": "f858a39375cad89945e8538a003ef1a5b123ca16d5ea91896f956585474c9bd6"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "dad84bb6f3d825063a1d92eb09af2d1ad623a2842033ac4a94867638da502ead"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-10/evidence/local-verification.md records starter, quote-api, spotless, and Janus service-repo-check commands."
+    },
+    {
+      "item": "Code review 已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-10/reviews/T4.md conclusion ready-for-gate."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-10/tasks.json approved by forest at 2026-06-28T01:39:43+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-10/evidence/local-verification.md",
+      "sha256": "b09e3f4f022137337d504ad23bafdac366c63d74018f00c94cefceafff1e5e14"
+    },
+    {
+      "path": "requirements/LEN-10/reviews/T4.md",
+      "sha256": "1afec92c1d937deb8d348ae181543e4c2115dc12c0e61f020d4a6f53d4a0e93e"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求新建 quote-api HTTP/JDBC 服务，不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户已授权批准所有文档；批准 LEN-10 合并就绪。quote-api 本地实现、HTTP/JDBC 入口、principal context、Quote 持久化、ready DB probe、starter HTTP principal filter 与测试证据均已落档；部署和 runtime smoke 留给 LEN-131。"
+}
