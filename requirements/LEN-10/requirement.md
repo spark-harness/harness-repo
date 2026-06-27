@@ -10,6 +10,7 @@ contract_gate_mode: "auto"
 affected_repositories:
   - harness-repo
   - business-repo
+  - gitops-repo
 approved_by: "forest"
 approved_at: "2026-06-28T01:39:43+08:00"
 decision: "用户授权 Agent 批准 LEN-10 requirement.md 与 impact-analysis.md，并按 Jira 范围新建 quote-api。"
@@ -118,3 +119,4 @@ Then: 分别返回 `quote_not_found`、`forbidden` 或 `quote_expired`。
 
 - LEN-10 依赖 LEN-22 已合并的 principal context 能力。
 - LEN-131 才负责部署、quote DB runtime 和 Consul/k8s 可发现性。
+- 本 ticket 包含 `gitops-repo` 中 Java CI DAG 的最小支撑变更，只用于让 LEN-10 的 `quote-api` 被 PR Java gate 调度；不包含运行时部署。

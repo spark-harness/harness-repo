@@ -5,21 +5,21 @@
   "gate_name": "服务仓库检查门禁",
   "stage": "4.3",
   "checked_by": "service_repo_checker",
-  "checked_at": "2026-06-28T01:52:27+08:00",
+  "checked_at": "2026-06-28T02:12:33+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
     {
       "path": "requirements/LEN-10/impact-analysis.md",
-      "sha256": "cb7c6a4cbabef895d47ba344731c7e193f2dc95916a61a6cc68946cd5459f2ba"
+      "sha256": "4347ea0d10f5e1b826f47d49f036194437337c715c11398ddc4bbf7fd1623318"
     },
     {
       "path": "requirements/LEN-10/design.md",
-      "sha256": "026a3d657964696e6cc268638aad71811604fba2c23eb8664d445b4f8fd9e6a4"
+      "sha256": "5bd297d2c99187779151fe9225d8074aeb647eddeae77ce86f2e634b0e0ba137"
     },
     {
       "path": "requirements/LEN-10/tasks.json",
-      "sha256": "233c9ad75d9031cc3e92d19eb08f43eef9b92367d5651958bb224b37ce1ce19e"
+      "sha256": "91f163f203f470b670f8eb494874882e03b7814c93f8b60c6f327aa413aaf274"
     },
     {
       "path": ".service-matrix/dependencies.yaml",
@@ -67,12 +67,17 @@
     {
       "name": "harness-repo",
       "branch": "feature/LEN-10-quote-api-pricing-service",
-      "commit": "dd08eaa"
+      "commit": "1629d5f"
     },
     {
       "name": "business-repo",
       "branch": "feature/LEN-10-quote-api-pricing-service",
-      "commit": "7a51140"
+      "commit": "9c493b9"
+    },
+    {
+      "name": "gitops-repo",
+      "branch": "feature/LEN-10-quote-api-pricing-service",
+      "commit": "171b733"
     }
   ],
   "idl_impact": {

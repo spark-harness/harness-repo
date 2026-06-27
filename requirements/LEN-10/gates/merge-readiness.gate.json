@@ -5,41 +5,41 @@
   "gate_name": "合并就绪门禁",
   "stage": "5.1",
   "checked_by": "merge_readiness_checker",
-  "checked_at": "2026-06-28T01:55:00+08:00",
+  "checked_at": "2026-06-28T02:12:33+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
     {
       "path": "requirements/LEN-10/requirement.md",
-      "sha256": "0a986cb1e0207cf9d78c225b6c3e237a2b0a21228b769f069b534a8fc7009f5a"
+      "sha256": "530c3fa6bb497bbf6f7a3c5c8f4380446cc49da39486a9912e0ef2fb414e5bd3"
     },
     {
       "path": "requirements/LEN-10/impact-analysis.md",
-      "sha256": "cb7c6a4cbabef895d47ba344731c7e193f2dc95916a61a6cc68946cd5459f2ba"
+      "sha256": "4347ea0d10f5e1b826f47d49f036194437337c715c11398ddc4bbf7fd1623318"
     },
     {
       "path": "requirements/LEN-10/design.md",
-      "sha256": "026a3d657964696e6cc268638aad71811604fba2c23eb8664d445b4f8fd9e6a4"
+      "sha256": "5bd297d2c99187779151fe9225d8074aeb647eddeae77ce86f2e634b0e0ba137"
     },
     {
       "path": "requirements/LEN-10/tasks.json",
-      "sha256": "233c9ad75d9031cc3e92d19eb08f43eef9b92367d5651958bb224b37ce1ce19e"
+      "sha256": "91f163f203f470b670f8eb494874882e03b7814c93f8b60c6f327aa413aaf274"
     },
     {
       "path": "requirements/LEN-10/gates/requirement-review.gate.json",
-      "sha256": "7bb0c3b710c8b840df7e66da8290bbea417b5a40233b4d82574686e8aa05cec0"
+      "sha256": "b8d4912f856cecd7c8def96f939ff6c340ac60ee6f8a6887c5ee1c78a12bf144"
     },
     {
       "path": "requirements/LEN-10/gates/design-review.gate.json",
-      "sha256": "914d576d5646551b3dd95b38ed8a7255b43fd1f791ed13cd028b7b6ce6f50f5d"
+      "sha256": "65c5c8603127164fca7d151ad25afc5ac8b64e8ca64ad0d95d1d8cf149c50e23"
     },
     {
       "path": "requirements/LEN-10/gates/dev-entry.gate.json",
-      "sha256": "12657f18b9e2406d07ffb6716febce159d8d81aab1149e2ff226ba77f136028a"
+      "sha256": "042c1a2aa7dfe163a19459f69ac8093402ae25a506762cdac560ed343998e70b"
     },
     {
       "path": "requirements/LEN-10/gates/service-repo-check.gate.json",
-      "sha256": "f858a39375cad89945e8538a003ef1a5b123ca16d5ea91896f956585474c9bd6"
+      "sha256": "79406ba0bc592552996bb4ebb9582b39a5daa79a8d38dfe46e07a36d9e2ac1f7"
     },
     {
       "path": ".service-matrix/dependencies.yaml",
@@ -76,16 +76,16 @@
   "evidence": [
     {
       "path": "requirements/LEN-10/evidence/local-verification.md",
-      "sha256": "b09e3f4f022137337d504ad23bafdac366c63d74018f00c94cefceafff1e5e14"
+      "sha256": "1d26b46029a8c15ea306f96e36f00c4cefd0a0ba64b8a89d321276f91da42b93"
     },
     {
       "path": "requirements/LEN-10/reviews/T4.md",
-      "sha256": "1afec92c1d937deb8d348ae181543e4c2115dc12c0e61f020d4a6f53d4a0e93e"
+      "sha256": "f9d93a2c46b627284c0bcbd0e8813f45cb5605a8e7353c470695775ae7c521db"
     }
   ],
   "idl_impact": {
     "impact": "no",
     "na_reason": "本需求新建 quote-api HTTP/JDBC 服务，不修改 protobuf IDL、generated contracts 或 Buf 配置。"
   },
-  "decision": "用户已授权批准所有文档；批准 LEN-10 合并就绪。quote-api 本地实现、HTTP/JDBC 入口、principal context、Quote 持久化、ready DB probe、starter HTTP principal filter 与测试证据均已落档；部署和 runtime smoke 留给 LEN-131。"
+  "decision": "用户已授权批准所有文档；批准 LEN-10 合并就绪。quote-api 本地实现、HTTP/JDBC 入口、principal context、Quote 持久化、ready DB probe、starter HTTP principal filter、Java quality project graph 和 GitOps Java CI DAG 调度证据均已落档；部署和 runtime smoke 留给 LEN-131。"
 }

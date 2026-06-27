@@ -29,6 +29,7 @@ LEN-10 新增 `quote-api` Java Spring 服务和 quote 持久化模型，提供 p
 | quote-api | business-repo | 新建 Java Spring 服务、quote domain/application/adapter/infrastructure、migration 和测试 | no |
 | service matrix | harness-repo | 新增 quote-api 服务条目，供 Janus service-repo-check 解析 | no |
 | Harness LEN-10 lifecycle | harness-repo | 保存需求、影响分析、设计、任务、门禁和证据 | no |
+| Java CI gate DAG | gitops-repo | 将 quote-api 纳入 Argo `spark/java-ci` 调度，保证 LEN-10 PR 门禁覆盖新服务 | no |
 
 ## Upstream / Downstream Consumers
 
@@ -77,6 +78,7 @@ LEN-10 新增 `quote-api` Java Spring 服务和 quote 持久化模型，提供 p
 - Config:
   - 新增 `spark.quote.*` 配置组。
   - local 默认可使用 H2；STA/prod quote DB 配置由 LEN-131 提供。
+  - GitOps 只更新 PR Java CI gate DAG，不新增 runtime ConfigMap、Deployment、Service 或 Secret。
 - Permission:
   - applicantId 来自 LEN-22 `RequestPrincipalContext`。
   - 内部 Quote 校验必须做 applicantId 归属检查。
@@ -95,10 +97,12 @@ LEN-10 新增 `quote-api` Java Spring 服务和 quote 持久化模型，提供 p
 
 - Rollout:
   - LEN-10 合入代码和测试。
+  - LEN-10 合入 Java CI DAG 支撑，使后续 business-repo PR gate 能调度 quote-api。
   - LEN-131 部署 quote-api 和 quote DB。
   - LEN-132 接 BFF facade。
 - Rollback:
   - 回滚 quote-api 代码和 service matrix。
+  - 回滚 GitOps Java CI DAG 中的 quote-api 任务。
   - LEN-10 未部署时无 runtime rollback。
   - 若后续部署后回滚，由 LEN-131 回滚清单和 DB runtime。
 

@@ -32,6 +32,7 @@ quote-api 是 Pricing 子域独立服务。它负责计算和持久化 Quote，�
 |---|---|---|
 | quote-api | 新建 Java Spring Boot 应用 | 提供试算和 Quote 校验 |
 | service matrix | 新增 quote-api 条目 | Janus 和后续 tickets 能定位服务 |
+| Java CI gate DAG | 增加 quote-api 项目任务 | 确保 PR Java gate 调度新服务 |
 
 ## API / Contract Design
 
@@ -143,12 +144,16 @@ GET /internal/v1/pricing/quotes/{quoteId}
   - ready 检查 DB 不可用时失败。
 - Service:
   - `mvn test`。
+- CI support:
+  - business-repo Java quality project graph 必须识别 `quote-api`。
+  - GitOps Argo Java CI DAG 必须在 `spring-starter` 后调度 `quote-api`。
 
 ## Rollout And Rollback
 
 - LEN-10 只交付代码，不部署。
+- GitOps 仅交付 PR Java CI gate 调度支撑，不创建 runtime 资源。
 - LEN-131 负责 runtime deployment、quote DB 和 service discovery。
-- 回滚 LEN-10 只需回滚 `apps/quote-api` 和 service matrix 变更。
+- 回滚 LEN-10 只需回滚 `apps/quote-api`、Java CI 支撑和 service matrix 变更。
 
 ## Risks
 
