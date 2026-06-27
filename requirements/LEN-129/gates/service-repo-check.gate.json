@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-129",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-27T21:07:26+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-129/impact-analysis.md",
+      "sha256": "fb8812033b22c5e414e91f9ddbb65b272a423c3f41a80968bb14fcb3aeb25ccc"
+    },
+    {
+      "path": "requirements/LEN-129/design.md",
+      "sha256": "5f595886cc67b3d53bd5a5bae37b361f2f17f7cf10c7bf5d7ecd3d21e1ce88cf"
+    },
+    {
+      "path": "requirements/LEN-129/tasks.json",
+      "sha256": "ef730d4c7e28a4b80da5e6ca5b80a9e3bf20168c5db0b9701b186feb64916b62"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "9da36fd1e15f81ad87aa619b53561059aa3b0804eeb4634d57084340ba79274b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-129"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "5 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "fides-bff"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-129/impact-analysis.md approved by Forest at 2026-06-27T21:06:04+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-129-fides-bff-startup-config",
+      "commit": "8d1a388"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-129-fides-bff-startup-config",
+      "commit": "43d728e"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 fides-bff 启动期配置来源和文档，不修改 protobuf IDL、generated contracts 或 HTTP 契约。"
+  },
+  "decision": "批准 LEN-129 服务仓库检查，确认 fides-bff 分支与无 IDL 变更范围。"
+}
