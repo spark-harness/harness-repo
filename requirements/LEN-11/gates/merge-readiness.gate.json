@@ -1,0 +1,128 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-11",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-28T07:34:59+08:00",
+  "result": "WARN",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-11/requirement.md",
+      "sha256": "0078196783c1fc5a454b1679141033bc9e66c6c3da59bb2c6011da2f883c47e1"
+    },
+    {
+      "path": "requirements/LEN-11/impact-analysis.md",
+      "sha256": "ef4f41062247434ff370ef535995835c3a200cc236e17b488bdc92a4af5b40a5"
+    },
+    {
+      "path": "requirements/LEN-11/design.md",
+      "sha256": "af27294ed046001538475f5e0d7e68cac5b61460be52db46028d1992b629e6d2"
+    },
+    {
+      "path": "requirements/LEN-11/tasks.json",
+      "sha256": "95d2e0a92b3e2e04cfd1891798fabb43a93b43e48c97b2c0739ffef43ee4f8ab"
+    },
+    {
+      "path": "requirements/LEN-11/gates/requirement-review.gate.json",
+      "sha256": "082e32452ebe83a6dd48d2f88f4a861f5aff29cd1665d0f960ef4e335d3b6b1e"
+    },
+    {
+      "path": "requirements/LEN-11/gates/design-review.gate.json",
+      "sha256": "4d3c74d0be07a1a53b510923114cc1bb76bed34ed9700ed8067861c6b1fd8a6c"
+    },
+    {
+      "path": "requirements/LEN-11/gates/dev-entry.gate.json",
+      "sha256": "258cd6ede4af9008a5acbdf1d65952454cd8d08465aa22138e8e42786c4fad31"
+    },
+    {
+      "path": "requirements/LEN-11/gates/service-repo-check.gate.json",
+      "sha256": "a3b5a352bc9d5543106bd56576554711da9498e7c355043a4330ed0a848075e0"
+    },
+    {
+      "path": "requirements/LEN-11/evidence/local-verification.md",
+      "sha256": "67462069885570d55bb62bc2591fc2c5fd70af9f50900deb2e1670a387f54b84"
+    },
+    {
+      "path": "requirements/LEN-11/evidence/runtime-smoke.md",
+      "sha256": "4b480a1714634c10b9df6dc6d285632e8e4f86bd3b426fb7a8039a5fe43bcd3d"
+    },
+    {
+      "path": "requirements/LEN-11/reviews/T2-T4.md",
+      "sha256": "b6469e3c44d972ab5ecca5467f4d684e258ca0025fca9765848c731c360fa043"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check gate JSON are present and valid."
+    },
+    {
+      "item": "本地前端验证已通过",
+      "result": "PASS",
+      "evidence": "requirements/LEN-11/evidence/local-verification.md records targeted tests, full pnpm test, lint, lint:deps, and pnpm build passing."
+    },
+    {
+      "item": "UI 与流程行为已覆盖",
+      "result": "PASS",
+      "evidence": "Component tests and browser accessibility tree verify Step 2 loan request screen, pricing summary, Continue no navigation, and same-draft refill."
+    },
+    {
+      "item": "真实 BFF pricing/draft API 已验证",
+      "result": "PASS",
+      "evidence": "runtime-smoke records protected BFF pricing quote, loan application create, and patch returning successful responses on lendora-sta."
+    },
+    {
+      "item": "完整 OTP 到第二页部署 E2E",
+      "result": "WARN",
+      "evidence": "OTP verify currently returns applicant_unavailable from fides-bff even though applicant-api pod/service/readiness are healthy; this blocks full deployed E2E token acquisition."
+    },
+    {
+      "item": "Code review 已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-11/reviews/T2-T4.md is ready-for-gate; initial AC8 gap was fixed and retested."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [
+    {
+      "issue": "Full deployed OTP -> token -> loan request E2E is blocked by fides-bff returning applicant_unavailable during /api/v1/auth/otp:verify.",
+      "follow_up_action": "Investigate fides-bff applicant-api discovery or gRPC call path in a separate backend/runtime ticket before claiming AC10 full E2E pass.",
+      "owner": "frontend/backend-runtime"
+    },
+    {
+      "issue": "Chrome MCP screenshot readback failed in the local browser instance.",
+      "follow_up_action": "Use accessibility tree, component tests, or an alternate screenshot runner for visual evidence until readback is available.",
+      "owner": "frontend"
+    }
+  ],
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-11/evidence/local-verification.md",
+      "sha256": "67462069885570d55bb62bc2591fc2c5fd70af9f50900deb2e1670a387f54b84"
+    },
+    {
+      "path": "requirements/LEN-11/evidence/runtime-smoke.md",
+      "sha256": "4b480a1714634c10b9df6dc6d285632e8e4f86bd3b426fb7a8039a5fe43bcd3d"
+    },
+    {
+      "path": "requirements/LEN-11/reviews/T2-T4.md",
+      "sha256": "b6469e3c44d972ab5ecca5467f4d684e258ca0025fca9765848c731c360fa043"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "LEN-11 only changes fides-web frontend code and Harness evidence; it reuses existing fides-bff REST endpoints and does not modify protobuf IDL, generated contracts, Buf config, BFF backend code, or Java services."
+  },
+  "decision": "LEN-11 is merge-ready with WARN: frontend implementation, tests, dependency gate, build, UI smoke, and second-page protected BFF pricing/draft API smoke pass; complete deployed E2E remains blocked by existing fides-bff applicant_unavailable during OTP verify."
+}

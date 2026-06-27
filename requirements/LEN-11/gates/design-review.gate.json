@@ -1,0 +1,57 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-11",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-28T07:00:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-11/requirement.md",
+      "sha256": "0078196783c1fc5a454b1679141033bc9e66c6c3da59bb2c6011da2f883c47e1"
+    },
+    {
+      "path": "requirements/LEN-11/impact-analysis.md",
+      "sha256": "ef4f41062247434ff370ef535995835c3a200cc236e17b488bdc92a4af5b40a5"
+    },
+    {
+      "path": "requirements/LEN-11/design.md",
+      "sha256": "af27294ed046001538475f5e0d7e68cac5b61460be52db46028d1992b629e6d2"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖服务和接口",
+      "result": "PASS",
+      "evidence": "design defines fides-web layers and BFF REST endpoints."
+    },
+    {
+      "item": "数据、权限和安全边界明确",
+      "result": "PASS",
+      "evidence": "token memory-only; sessionStorage stores non-sensitive application pointer; BFF enforces principal."
+    },
+    {
+      "item": "测试策略可执行",
+      "result": "PASS",
+      "evidence": "component, gateway, store and runtime smoke verification commands are listed."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "design-review approved by forest via janus requirement approve."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 fides-web 前端实现和 Harness 证据，复用已交付 BFF REST facade，不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Agent 批准所有文档；批准 LEN-11 design-review，采用 fides-web clean architecture 分层实现。"
+}

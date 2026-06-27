@@ -1,0 +1,66 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-11",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-28T07:00:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-11/impact-analysis.md",
+      "sha256": "ef4f41062247434ff370ef535995835c3a200cc236e17b488bdc92a4af5b40a5"
+    },
+    {
+      "path": "requirements/LEN-11/design.md",
+      "sha256": "af27294ed046001538475f5e0d7e68cac5b61460be52db46028d1992b629e6d2"
+    },
+    {
+      "path": "requirements/LEN-11/tasks.json",
+      "sha256": "95d2e0a92b3e2e04cfd1891798fabb43a93b43e48c97b2c0739ffef43ee4f8ab"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "涉及服务存在于服务矩阵",
+      "result": "PASS",
+      "evidence": "fides and fides-bff entries exist in .service-matrix/dependencies.yaml."
+    },
+    {
+      "item": "仓库分支已隔离",
+      "result": "PASS",
+      "evidence": "harness-repo and business-repo use feature/LEN-11-loan-request-real-pricing-draft linked worktrees under .worktrees/LEN-11."
+    },
+    {
+      "item": "IDL 影响明确",
+      "result": "PASS",
+      "evidence": "No IDL or generated contract changes required."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-11-loan-request-real-pricing-draft"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-11-loan-request-real-pricing-draft"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 fides-web 前端实现和 Harness 证据，复用已交付 BFF REST facade，不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Agent 批准所有文档；批准 LEN-11 service-repo-check，fides-web 实现仓库已隔离。"
+}
