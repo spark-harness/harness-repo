@@ -1,0 +1,93 @@
+{
+  "requirement_id": "LEN-128",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-27T18:32:33+08:00",
+  "decision": "用户授权 Agent 批准 LEN-128 任务拆分并直接进入实现。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 生命周期文档和门禁",
+      "scope": "维护 requirements/LEN-128 下的 requirement.md、impact-analysis.md、design.md、tasks.json 和阶段门禁。",
+      "trace": {
+        "requirement_items": ["BR1", "BR2", "BR3", "BR4", "BR5", "BR6", "AC6"],
+        "design_decisions": ["Requirement Traceability", "Testing Strategy"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "dev-entry gate PASS",
+        "service-repo-check gate PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "为 applicant-api 增加配置优先级测试",
+      "scope": "在 business-repo/apps/applicant-api 增加默认配置、Consul 中心配置、canonical env 覆盖和 fail-fast 的自动化测试。",
+      "trace": {
+        "requirement_items": ["BR1", "BR4", "BR5", "BR6", "AC1", "AC2", "AC3", "AC5"],
+        "design_decisions": ["配置来源", "启动期校验", "Testing Strategy"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": [
+        "测试证明默认配置可绑定",
+        "测试证明 Consul YAML 覆盖默认配置",
+        "测试证明 canonical env 覆盖 Consul 配置",
+        "测试证明缺失关键配置 fail fast 且不泄露 secret"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "实现 applicant-api canonical 配置模型",
+      "scope": "调整 applicant-api Spring Boot 配置、Consul Config 接入、配置属性占位和 README / .env.example。",
+      "trace": {
+        "requirement_items": ["BR1", "BR2", "BR3", "BR4", "BR5", "BR6", "AC1", "AC2", "AC3", "AC4", "AC5"],
+        "design_decisions": ["配置来源", ".env 支持", "启动期校验", "Data / Config / Permission"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": [
+        "application 配置不再依赖 APPLICANT_* 短别名",
+        "README 说明默认配置、Consul 配置和 canonical env 覆盖规则",
+        ".env.example 只包含占位值且不包含真实 secret",
+        "mvn test 通过"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "迁移 applicant-api GitOps 配置注入",
+      "scope": "调整 gitops-repo/apps/applicant-api 的 ConfigMap / Secret env 命名和 Consul 非密配置表达，并验证清单可渲染。",
+      "trace": {
+        "requirement_items": ["BR2", "BR3", "BR4", "BR6", "AC3", "AC5", "AC6"],
+        "design_decisions": ["Data / Config / Permission", "Rollout And Rollback"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": [
+        "ConfigMap 只包含非密 canonical env",
+        "Secret env 使用 canonical env 注入 password、token secret 和敏感 OTLP header",
+        "不残留 APPLICANT_* 短别名作为部署契约",
+        "applicant-api overlay 渲染通过"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "完成审查、证据和合并就绪门禁",
+      "scope": "为完成的任务生成 review 报告，记录测试和 GitOps 渲染证据，刷新 merge-readiness gate。",
+      "trace": {
+        "requirement_items": ["AC6"],
+        "design_decisions": ["Testing Strategy", "Rollout And Rollback"]
+      },
+      "affected_services": ["applicant-api"],
+      "acceptance": [
+        "任务 review 报告不存在未关闭 P0/P1",
+        "merge-readiness gate PASS 或明确记录未完成阻塞项",
+        "最终状态区分已实现、已验证和未交付内容"
+      ],
+      "state": "done"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-128",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-27T19:17:35+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-128/requirement.md",
+      "sha256": "75a48cfa966f89fd297ccc196e8d86e13f44b483617d71074e1af1a020acb1c3"
+    },
+    {
+      "path": "requirements/LEN-128/impact-analysis.md",
+      "sha256": "71a805a8d70d20acb316da283895481edb75239bbb797e4b15a4bbe72edc0b58"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-128/requirement.md approved by forest at 2026-06-27T18:30:50+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只调整 applicant-api 运行时配置来源、配置校验、文档和 GitOps 注入方式，不修改 protobuf IDL、HTTP 外部契约或 generated contracts。"
+  },
+  "decision": "用户授权 Agent 批准 LEN-128 Requirement Brief、requirement.md 与 impact-analysis.md，并直接进入执行。"
+}
