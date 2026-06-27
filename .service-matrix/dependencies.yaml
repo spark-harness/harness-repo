@@ -62,6 +62,11 @@ services:
     repo_path: "{business-repo}/apps/quote-api"
     idl_required: false
 
+  origination-api:
+    module: applicant
+    repo_path: "{business-repo}/apps/origination-api"
+    idl_required: false
+
 dependencies:
   applicant-api:
     upstream:
@@ -70,3 +75,9 @@ dependencies:
   quote-api:
     upstream:
       - "fides-bff"
+
+  origination-api:
+    upstream:
+      - "fides-bff"
+    downstream:
+      - "quote-api"
