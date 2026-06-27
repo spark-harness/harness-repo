@@ -1,0 +1,82 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-128",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-27T19:17:35+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-128/requirement.md",
+      "sha256": "75a48cfa966f89fd297ccc196e8d86e13f44b483617d71074e1af1a020acb1c3"
+    },
+    {
+      "path": "requirements/LEN-128/impact-analysis.md",
+      "sha256": "71a805a8d70d20acb316da283895481edb75239bbb797e4b15a4bbe72edc0b58"
+    },
+    {
+      "path": "requirements/LEN-128/design.md",
+      "sha256": "5c37807b17b2318aa0e36878e4cc1a98c292d7608c60594c470f021b054ab737"
+    },
+    {
+      "path": "requirements/LEN-128/tasks.json",
+      "sha256": "4b918b55925baceace94fa832b102e5800df10e1f06407ba3dad59b7ae123443"
+    },
+    {
+      "path": "requirements/LEN-128/gates/requirement-review.gate.json",
+      "sha256": "17ac0744572cbb4d555f83587a74d5e77f6513624fb3436746b95bfc75a3b6f2"
+    },
+    {
+      "path": "requirements/LEN-128/gates/design-review.gate.json",
+      "sha256": "430b5ea5b5b8610b7cac29bff5f4ed14ae768da98f57319d2c2ee4939d263939"
+    },
+    {
+      "path": "requirements/LEN-128/gates/dev-entry.gate.json",
+      "sha256": "460af9b28bbe23f77f1aae603d4219df421b4d9b65760762f2cc04c2a677c684"
+    },
+    {
+      "path": "requirements/LEN-128/gates/service-repo-check.gate.json",
+      "sha256": "d3948dd3a1cdca673e6aed2487bb902c7f6a291399ddb42292d9344142936d32"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "9da36fd1e15f81ad87aa619b53561059aa3b0804eeb4634d57084340ba79274b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "1 evidence files recorded."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-128/tasks.json approved by forest at 2026-06-27T18:32:33+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-128/evidence/local-verification.md",
+      "sha256": "e35fd23abdd250401b1708b394c9c875207ab0d6df891eeb3584e9c55dffe4ea"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只调整 applicant-api 运行时配置来源、配置校验、文档和 GitOps 注入方式，不修改 protobuf IDL、HTTP 外部契约或 generated contracts。"
+  },
+  "decision": "用户授权 Agent 批准 LEN-128 任务拆分并直接进入实现。"
+}
