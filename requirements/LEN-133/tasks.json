@@ -1,0 +1,76 @@
+{
+  "decision": "用户授权 Agent 批准所有文档；批准 LEN-133 dev-entry，tasks.json 已完成 T1-T4，测试、实现、证据和 review 已记录。",
+  "approved_at": "2026-06-28T06:09:20+08:00",
+  "approved_by": "forest",
+  "requirement_id": "LEN-133",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 生命周期和阶段门禁",
+      "scope": "创建 LEN-133 README、requirement、impact-analysis、design、tasks 和早期阶段门禁。",
+      "trace": {
+        "requirement_items": ["AC10"],
+        "design_decisions": ["Testing Strategy", "Rollout And Rollback"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "dev-entry gate PASS",
+        "service-repo-check gate PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "新增 origination facade 测试",
+      "scope": "先写失败测试覆盖 token、create/get/patch、错误映射、x-applicant-id、trace 和 Idempotency-Key propagation。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8", "AC9", "AC10"],
+        "design_decisions": ["HTTP Handler", "Data Adapter", "Testing Strategy"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "test-first 失败原因为 origination facade 未实现",
+        "测试覆盖 downstream x-applicant-id、traceparent 和 Idempotency-Key"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "实现 fides-bff origination facade",
+      "scope": "新增 origination usecase、service/handler、origination-api HTTP client、config 和 DI wiring。",
+      "trace": {
+        "requirement_items": ["BR1", "BR2", "BR3", "BR4", "BR5", "BR6", "BR7", "BR8", "BR9", "BR10", "BR11", "BR12", "BR13", "AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8", "AC9", "AC10"],
+        "design_decisions": ["Application Design", "Data / Config / Permission", "Observability"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "loan application facade 受保护",
+        "成功请求调用 origination-api 并返回前端字段",
+        "下游请求传播 principal applicantId、trace headers 和 Idempotency-Key",
+        "错误映射符合需求"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "完成验证、审查、证据和交付",
+      "scope": "运行 Go 测试、本地 smoke、记录 evidence/review，刷新 merge-readiness gate，提交 PR 并合并。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8", "AC9", "AC10"],
+        "design_decisions": ["Testing Strategy", "Rollout And Rollback"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "local-verification evidence 存在",
+        "runtime/local smoke evidence 存在或记录 LEN-135 前置限制",
+        "review report ready-for-gate",
+        "janus requirement verify 通过",
+        "PR merged to master"
+      ],
+      "state": "done"
+    }
+  ]
+}
