@@ -1,0 +1,128 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-134",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-28T05:32:24+08:00",
+  "result": "WARN",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-134/requirement.md",
+      "sha256": "5ace17a337d646d7b2c0edb6f0b4eadd421a254a5e931815ff423284738b9919"
+    },
+    {
+      "path": "requirements/LEN-134/impact-analysis.md",
+      "sha256": "b5f2c28a1553157cf4a31bf04d3df68c069858eae75b01c8963932ef462e8747"
+    },
+    {
+      "path": "requirements/LEN-134/design.md",
+      "sha256": "cce8f7376032ab3fdb362fd90bbf160f81a55eb614b04addac64ad28b09b7471"
+    },
+    {
+      "path": "requirements/LEN-134/tasks.json",
+      "sha256": "8e1957234e54a6454905cca1743057240720b6371c94403d6f3a47a3627a295c"
+    },
+    {
+      "path": "requirements/LEN-134/gates/requirement-review.gate.json",
+      "sha256": "e46561b3a82f96bf212f89e1af828fa33b0e661a83f2e6c85bf82edd9b0b35f6"
+    },
+    {
+      "path": "requirements/LEN-134/gates/design-review.gate.json",
+      "sha256": "858b3fe04acf8ec8ba3feacd967b5bcf258bd2d3a6cb95d3b11c83af1b03c903"
+    },
+    {
+      "path": "requirements/LEN-134/gates/dev-entry.gate.json",
+      "sha256": "0b678d8a4bba2b646cebb0da333e4e10054af512eff07d8e4b2252a48bf9e812"
+    },
+    {
+      "path": "requirements/LEN-134/gates/service-repo-check.gate.json",
+      "sha256": "781bc95ec2e75bd9b15c64e0d901f7e690c44107fa5eec398feaedfbd9705d0f"
+    },
+    {
+      "path": "requirements/LEN-134/evidence/local-verification.md",
+      "sha256": "f25e92a03d2c0f8e8ccd466adc780fec7f8d34d49f2ba1a7b5ff176373c0cda3"
+    },
+    {
+      "path": "requirements/LEN-134/evidence/runtime-smoke.md",
+      "sha256": "d0a9da3c9ecb8a94c32a9b73934c752ba9aaea2b26a001dc2ddd11cf7b4a75e0"
+    },
+    {
+      "path": "requirements/LEN-134/reviews/T2-T5.md",
+      "sha256": "2524a44af39d1585e358033a81c3750042f8d7be307a06bbff4479a5e51d2b53"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check gate JSON are present and valid."
+    },
+    {
+      "item": "本地验证已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-134/evidence/local-verification.md records Maven tests, Java quality, kustomize render, YAML parse, image digests, and Argo CD environment check."
+    },
+    {
+      "item": "运行时 smoke 已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-134/evidence/runtime-smoke.md records rollout, /ready READY, quote create/internal get, draft create/get, DB rows, k8s Service, and Consul discovery."
+    },
+    {
+      "item": "Code review 已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-134/reviews/T2-T5.md conclusion ready-for-gate with no open P0/P1 findings."
+    },
+    {
+      "item": "Argo CD Healthy/Synced 环境验证",
+      "result": "WARN",
+      "evidence": "vincent-k3s lacks argocd namespace and Argo CD Application/AppProject CRDs, so AC3 cannot be truthfully verified in the current cluster."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [
+    {
+      "issue": "AC3 requires live Argo CD Healthy/Synced, but vincent-k3s currently has no Argo CD namespace or CRDs.",
+      "follow_up_action": "Complete or resume the Argo CD bootstrap/drift-detection ticket before claiming Healthy/Synced for lendora-sta Applications.",
+      "owner": "platform/gitops"
+    },
+    {
+      "issue": "origination-api runtime secrets were manually bootstrapped for STA smoke.",
+      "follow_up_action": "Replace manual STA secrets with the team secret-management pattern when that standard is introduced.",
+      "owner": "platform/security"
+    },
+    {
+      "issue": "LEN-134 includes a quote-api internal GET runtime fix because it blocked origination quote validation.",
+      "follow_up_action": "Call out the dependency-service fix in PR text and keep the regression test with the quote-api change.",
+      "owner": "core"
+    }
+  ],
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-134/evidence/local-verification.md",
+      "sha256": "f25e92a03d2c0f8e8ccd466adc780fec7f8d34d49f2ba1a7b5ff176373c0cda3"
+    },
+    {
+      "path": "requirements/LEN-134/evidence/runtime-smoke.md",
+      "sha256": "d0a9da3c9ecb8a94c32a9b73934c752ba9aaea2b26a001dc2ddd11cf7b4a75e0"
+    },
+    {
+      "path": "requirements/LEN-134/reviews/T2-T5.md",
+      "sha256": "2524a44af39d1585e358033a81c3750042f8d7be307a06bbff4479a5e51d2b53"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "LEN-134 only changes origination-api runtime, GitOps deployment, DB bootstrap, service discovery, and one quote-api HTTP binding regression fix; it does not modify protobuf IDL, generated contracts, or Buf config."
+  },
+  "decision": "LEN-134 is merge-ready with WARN: origination-api is deployed and functionally verified on vincent-k3s, but Argo CD Healthy/Synced cannot be verified because Argo CD is not installed in the current cluster."
+}
