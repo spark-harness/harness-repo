@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-11",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-28T07:00:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-11/requirement.md",
+      "sha256": "0078196783c1fc5a454b1679141033bc9e66c6c3da59bb2c6011da2f883c47e1"
+    },
+    {
+      "path": "requirements/LEN-11/impact-analysis.md",
+      "sha256": "ef4f41062247434ff370ef535995835c3a200cc236e17b488bdc92a4af5b40a5"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求目标和非目标明确",
+      "result": "PASS",
+      "evidence": "Goals/Non-Goals define fides-web second page scope and exclude backend/IDL changes."
+    },
+    {
+      "item": "场景和验收可测试",
+      "result": "PASS",
+      "evidence": "Scenarios and AC1-AC10 cover pricing, draft create/patch/get, no navigation, and runtime smoke."
+    },
+    {
+      "item": "影响分析覆盖关键面",
+      "result": "PASS",
+      "evidence": "impact-analysis covers services, API, data, config, permission, observability, rollout, rollback and risks."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirement-review approved by forest via janus requirement approve."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 fides-web 前端实现和 Harness 证据，复用已交付 BFF REST facade，不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Agent 批准所有文档；批准 LEN-11 requirement-review，进入设计和任务阶段。"
+}

@@ -1,0 +1,77 @@
+{
+  "decision": "用户授权 Agent 批准所有文档；批准 LEN-11 tasks，进入 fides-web 前端实现和验证。",
+  "approved_at": "2026-06-28T07:12:32+08:00",
+  "approved_by": "forest",
+  "requirement_id": "LEN-11",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 生命周期和阶段门禁",
+      "scope": "创建 LEN-11 requirement、impact-analysis、design、tasks 和早期 gate，明确不修改 IDL、BFF 或 Java 服务。",
+      "trace": {
+        "requirement_items": ["AC1", "AC9"],
+        "design_decisions": ["D1", "D6"]
+      },
+      "affected_services": ["fides"],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "dev-entry gate PASS",
+        "service-repo-check gate PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "新增 loan request 前端分层和失败测试",
+      "scope": "按 clean architecture 新增 application/adapters/infrastructure/presentation 测试，先锁定 pricing、create、patch、get 回填和停留当前页行为。",
+      "trace": {
+        "requirement_items": ["AC2", "AC3", "AC5", "AC6", "AC7", "AC8", "AC9"],
+        "design_decisions": ["D2", "D3", "D4", "D5", "D6", "D7"]
+      },
+      "affected_services": ["fides"],
+      "acceptance": [
+        "新增测试在生产代码前因缺失 loan request 实现失败",
+        "测试覆盖 Continue 成功后仍停留贷款请求屏",
+        "测试覆盖 request headers 和非敏感存储"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "实现贷款请求屏和 BFF API 接入",
+      "scope": "实现 LoanRequestScreen、controller、BFF gateway、draft pointer store 和 verified flow 切屏，UI 参照 code.html。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6", "D7"]
+      },
+      "affected_services": ["fides"],
+      "acceptance": [
+        "pnpm test PASS",
+        "pnpm lint PASS",
+        "pnpm lint:deps PASS",
+        "Loan request UI renders Step 2 and code.html-matching controls"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "完成前端运行时 smoke、证据和交付",
+      "scope": "启动本地或 STA 前端，验证真实 pricing 和 Continue 静默保存，记录 evidence、review、merge-readiness，创建 PR、合并并清理 worktree。",
+      "trace": {
+        "requirement_items": ["AC1", "AC3", "AC5", "AC6", "AC7", "AC8", "AC10"],
+        "design_decisions": ["Testing Strategy", "Rollout And Rollback"]
+      },
+      "affected_services": ["fides"],
+      "acceptance": [
+        "runtime smoke evidence exists",
+        "review report ready-for-gate",
+        "merge-readiness gate validates",
+        "janus requirement verify passes",
+        "PRs merged to master"
+      ],
+      "state": "done"
+    }
+  ]
+}
