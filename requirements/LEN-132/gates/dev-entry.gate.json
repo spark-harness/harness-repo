@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-132",
+  "gate_id": "dev-entry",
+  "gate_name": "开发进入门禁",
+  "stage": "4.2",
+  "checked_by": "task_planner",
+  "checked_at": "2026-06-27T19:46:45Z",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-132/requirement.md",
+      "sha256": "fd2bfe9de1be632fac1d8a1cadd53c7da93a2a4afff4c6b88f1981c6987dc9a3"
+    },
+    {
+      "path": "requirements/LEN-132/design.md",
+      "sha256": "8f1e7e976b57fe38cbf323c950c6f9bc429278f61baaab5fd887c9315df2c483"
+    },
+    {
+      "path": "requirements/LEN-132/tasks.json",
+      "sha256": "6d4aee11b02fbff9680df805069df1d2af77e913e60eee140c4fc694ad5e08cd"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "任务拆分完整",
+      "result": "PASS",
+      "evidence": "tasks.json separates lifecycle, test-first, implementation, and evidence/delivery work."
+    },
+    {
+      "item": "任务可追溯",
+      "result": "PASS",
+      "evidence": "Each task maps requirement_items and design_decisions."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-132/tasks.json approved by forest at 2026-06-28T03:34:39+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Agent 批准所有文档；批准 LEN-132 dev-entry，按 Jira 范围实现 fides-bff pricing facade，不修改 IDL，不交付 GitOps runtime 配置。"
+}
