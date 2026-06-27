@@ -1,0 +1,106 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-132",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-27T19:46:45Z",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-132/requirement.md",
+      "sha256": "fd2bfe9de1be632fac1d8a1cadd53c7da93a2a4afff4c6b88f1981c6987dc9a3"
+    },
+    {
+      "path": "requirements/LEN-132/impact-analysis.md",
+      "sha256": "024a036a717d523fa681bf0ec7f2ae48cfc00ce9c0ac4090ed2daa4bdc06905f"
+    },
+    {
+      "path": "requirements/LEN-132/design.md",
+      "sha256": "8f1e7e976b57fe38cbf323c950c6f9bc429278f61baaab5fd887c9315df2c483"
+    },
+    {
+      "path": "requirements/LEN-132/tasks.json",
+      "sha256": "6d4aee11b02fbff9680df805069df1d2af77e913e60eee140c4fc694ad5e08cd"
+    },
+    {
+      "path": "requirements/LEN-132/gates/requirement-review.gate.json",
+      "sha256": "6ceb952c4ed24ec3c60181aea7830da333c025b7382d31d59ec0991a13652067"
+    },
+    {
+      "path": "requirements/LEN-132/gates/design-review.gate.json",
+      "sha256": "584403815b5489202974c5d1bc74e65ed354027b7d9bce9753beb96532aed86e"
+    },
+    {
+      "path": "requirements/LEN-132/gates/dev-entry.gate.json",
+      "sha256": "30ab5c43f1ab930fc637928c3e98d4e8a21219780b922df3733ba2b26f93334c"
+    },
+    {
+      "path": "requirements/LEN-132/gates/service-repo-check.gate.json",
+      "sha256": "085cc58110ee20a5bba6ffa5e0b6896e3e8bd72a20e72ec3fc219adb1fb3c0f5"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "dad84bb6f3d825063a1d92eb09af2d1ad623a2842033ac4a94867638da502ead"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and valid."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-132/evidence/local-verification.md records test-first, go test, go vet, and go build results."
+    },
+    {
+      "item": "Runtime smoke 已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-132/evidence/runtime-smoke.md records BFF process smoke with local quote-api stub, response fields, principal applicantId propagation, and trace propagation."
+    },
+    {
+      "item": "Code review 已记录",
+      "result": "PASS",
+      "evidence": "requirements/LEN-132/reviews/T2-T4.md reports no open P0/P1/P2 issues."
+    },
+    {
+      "item": "IDL 无影响",
+      "result": "PASS",
+      "evidence": "impact-analysis.md idl_impact=no."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [
+    {
+      "issue": "Local make generate failed because the installed wire binary uses Go 1.25 source-processing packages against the Go 1.26 module.",
+      "follow_up_action": "Re-run make generate after upgrading or rebuilding wire with the repo Go version; wire_gen.go was manually synced and verified by go test ./..., go vet ./..., and go build ./cmd/fides-bff.",
+      "owner": "core"
+    }
+  ],
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-132/evidence/local-verification.md",
+      "sha256": "c80c58593540c9d1657b9d927a61fe6a58879a27e7d38f0be60e731849c24d92"
+    },
+    {
+      "path": "requirements/LEN-132/evidence/runtime-smoke.md",
+      "sha256": "52db159d9c038a95db78ecf590d2f7a36863d9dd3bbc0cd0fc021eedef5c83fc"
+    },
+    {
+      "path": "requirements/LEN-132/reviews/T2-T4.md",
+      "sha256": "724b8c22e511b20eb41fcadb157e67dc2e3bd7745d9cc2b965c9d83b33cd560d"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求在 fides-bff 增加 HTTP facade 和 quote-api HTTP adapter，不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Agent 批准所有文档；LEN-132 已完成 fides-bff pricing facade、本地测试、runtime smoke、审查和证据。GitOps runtime 下游配置仍由 LEN-135 交付。"
+}
