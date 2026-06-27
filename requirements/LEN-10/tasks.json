@@ -1,0 +1,76 @@
+{
+  "decision": "用户授权 Agent 批准 LEN-10 tasks.json，并进入 test-first 实现。",
+  "approved_at": "2026-06-28T01:39:43+08:00",
+  "approved_by": "forest",
+  "requirement_id": "LEN-10",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 生命周期和服务矩阵",
+      "scope": "创建 LEN-10 requirement、impact-analysis、design、tasks 和阶段门禁；在 service matrix 增加 quote-api。",
+      "trace": {
+        "requirement_items": ["AC7"],
+        "design_decisions": ["Affected Services", "Testing Strategy"]
+      },
+      "affected_services": ["quote-api"],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "dev-entry gate PASS",
+        "service-repo-check gate PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "新增 quote-api 领域和用例测试",
+      "scope": "先写失败测试覆盖 Quote 计算、区间校验、持久化、归属校验和过期校验。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5"],
+        "design_decisions": ["Domain", "Application", "Testing Strategy"]
+      },
+      "affected_services": ["quote-api"],
+      "acceptance": [
+        "test-first 失败原因为 quote-api 行为未实现",
+        "测试覆盖 BigDecimal 计算和越界不写库"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "实现 quote-api Java Spring 服务",
+      "scope": "新增 quote-api 应用入口、domain/application/adapter/infrastructure、Flyway migration、health/ready 和配置。",
+      "trace": {
+        "requirement_items": ["BR1", "BR2", "BR3", "BR4", "BR5", "BR6", "BR7", "BR8", "AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7"],
+        "design_decisions": ["Application Design", "Infrastructure", "Data / Config / Permission"]
+      },
+      "affected_services": ["quote-api"],
+      "acceptance": [
+        "CreateQuoteUseCase 计算并保存 Quote",
+        "GetQuoteUseCase 校验 quoteId、applicantId 和 validUntil",
+        "ready probe 反映 DB 状态",
+        "mvn test 通过"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "完成审查、证据和合并就绪门禁",
+      "scope": "记录测试证据、CI gate 支撑证据、代码审查报告，刷新 merge-readiness gate 并完成 PR/merge。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7"],
+        "design_decisions": ["Testing Strategy", "Rollout And Rollback"]
+      },
+      "affected_services": ["quote-api"],
+      "acceptance": [
+        "local-verification evidence 存在",
+        "quote-api 已纳入 business-repo Java quality project graph 和 GitOps Java CI DAG",
+        "review report ready-for-gate",
+        "janus requirement verify 通过",
+        "PR merged to master"
+      ],
+      "state": "done"
+    }
+  ]
+}

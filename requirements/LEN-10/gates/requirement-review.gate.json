@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-10",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-28T02:12:33+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-10/requirement.md",
+      "sha256": "530c3fa6bb497bbf6f7a3c5c8f4380446cc49da39486a9912e0ef2fb414e5bd3"
+    },
+    {
+      "path": "requirements/LEN-10/impact-analysis.md",
+      "sha256": "4347ea0d10f5e1b826f47d49f036194437337c715c11398ddc4bbf7fd1623318"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-10/requirement.md approved by forest at 2026-06-28T01:39:43+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求新建 quote-api HTTP/JDBC 服务，不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Agent 批准 LEN-10 requirement.md 与 impact-analysis.md，并按 Jira 范围新建 quote-api。"
+}
