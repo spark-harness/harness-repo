@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-130",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-27T19:19:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-130/requirement.md",
+      "sha256": "599d2dc508d63e44a7bd478c236c9d31684579c40bc8dc3d13380f64d4e29ea4"
+    },
+    {
+      "path": "requirements/LEN-130/impact-analysis.md",
+      "sha256": "95ff4c250788f4da80a065f0fdcd9cca6b113160109e5ec6eed35d7d49ff12e9"
+    },
+    {
+      "path": "requirements/LEN-130/design.md",
+      "sha256": "c6f313dc361d6e379de95926a15e0ca7d6a11a48e77d62a2f4b8ef467c1a9db5"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-130/design.md approved by forest at 2026-06-27T19:19:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "未声明 protobuf IDL 或外部契约影响。"
+  },
+  "decision": "用户明确授权：授权你批准所有文档；批准 LEN-130 fides 运行时配置中心和 .env 覆盖的需求、影响分析、设计和任务拆分，范围限定为 fides-web 运行时配置硬切、GitOps 部署配置更新、测试和文档，不涉及 fides-bff API、protobuf/IDL 或 NEXT_PUBLIC 兼容层。"
+}

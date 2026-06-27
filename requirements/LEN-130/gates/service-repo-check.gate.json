@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-130",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-27T19:27:36+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-130/impact-analysis.md",
+      "sha256": "95ff4c250788f4da80a065f0fdcd9cca6b113160109e5ec6eed35d7d49ff12e9"
+    },
+    {
+      "path": "requirements/LEN-130/design.md",
+      "sha256": "c6f313dc361d6e379de95926a15e0ca7d6a11a48e77d62a2f4b8ef467c1a9db5"
+    },
+    {
+      "path": "requirements/LEN-130/tasks.json",
+      "sha256": "f27562b8a28178e1cd3c6b99c0e4917413e387e1ad85d3033ced54c1a565e4f6"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "9da36fd1e15f81ad87aa619b53561059aa3b0804eeb4634d57084340ba79274b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-130"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "5 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "fides"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-130/impact-analysis.md approved by forest at 2026-06-27T19:19:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-130-fides-runtime-config",
+      "commit": "8d1a388"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-130-fides-runtime-config",
+      "commit": "43d728e"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "未声明 protobuf IDL 或外部契约影响。"
+  },
+  "decision": "用户明确授权：授权你批准所有文档；批准 LEN-130 fides 运行时配置中心和 .env 覆盖的需求、影响分析、设计和任务拆分，范围限定为 fides-web 运行时配置硬切、GitOps 部署配置更新、测试和文档，不涉及 fides-bff API、protobuf/IDL 或 NEXT_PUBLIC 兼容层。"
+}

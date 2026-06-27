@@ -1,0 +1,163 @@
+{
+  "requirement_id": "LEN-130",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-27T19:19:00+08:00",
+  "decision": "用户明确授权：授权你批准所有文档；批准 LEN-130 fides 运行时配置中心和 .env 覆盖的需求、影响分析、设计和任务拆分，范围限定为 fides-web 运行时配置硬切、GitOps 部署配置更新、测试和文档，不涉及 fides-bff API、protobuf/IDL 或 NEXT_PUBLIC 兼容层。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "补齐 LEN-130 生命周期文档和门禁",
+      "scope": "创建并审批 requirement、impact-analysis、design、tasks 和进入开发前 Janus gates。",
+      "trace": {
+        "requirement_items": [
+          "BR1",
+          "BR2",
+          "BR3",
+          "BR4",
+          "BR5",
+          "BR6",
+          "AC1",
+          "AC2",
+          "AC3",
+          "AC4",
+          "AC5",
+          "AC6",
+          "AC7"
+        ],
+        "design_decisions": [
+          "Runtime Config Model",
+          "Config Source And Precedence",
+          "Public Config Entry",
+          "Legacy Variable Validation"
+        ]
+      },
+      "affected_services": [
+        "fides"
+      ],
+      "acceptance": [
+        "生命周期文档存在且审批记录合法",
+        "requirement-review、design-review、dev-entry、service-repo-check gate 可校验"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "实现 fides runtime config loader 和 public config 白名单",
+      "scope": "在 fides-web 中实现默认值、Consul JSON、运行时 env/.env 覆盖、legacy env 检测和 public config 入口。",
+      "trace": {
+        "requirement_items": [
+          "BR2",
+          "BR3",
+          "BR4",
+          "BR5",
+          "BR6",
+          "AC2",
+          "AC3",
+          "AC6"
+        ],
+        "design_decisions": [
+          "Runtime Config Model",
+          "Config Source And Precedence",
+          "Public Config Entry",
+          "Legacy Variable Validation"
+        ]
+      },
+      "affected_services": [
+        "fides"
+      ],
+      "acceptance": [
+        "env/.env 覆盖 Consul 值",
+        "旧 NEXT_PUBLIC_* 检测明确失败",
+        "非白名单字段不会出现在 public config 中"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "改造 OTP 和 browser tracing 配置消费路径",
+      "scope": "让 OTP gateway 和 browser tracing 只从 public runtime config 获取浏览器配置。",
+      "trace": {
+        "requirement_items": [
+          "BR1",
+          "BR6",
+          "AC1",
+          "AC4",
+          "AC5"
+        ],
+        "design_decisions": [
+          "Public Config Entry",
+          "Runtime Config Model"
+        ]
+      },
+      "affected_services": [
+        "fides"
+      ],
+      "acceptance": [
+        "OTP adapter 支持 real/mock/disabled",
+        "tracing endpoint 为空时页面和请求正常",
+        "tracing endpoint/header 存在时按 runtime config 初始化"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "移除构建期配置依赖并更新 GitOps",
+      "scope": "更新 fides Dockerfile、README 和 gitops-repo/apps/fides 部署配置，移除旧 NEXT_PUBLIC_* 并配置运行时变量。",
+      "trace": {
+        "requirement_items": [
+          "BR1",
+          "BR2",
+          "BR3",
+          "AC1",
+          "AC3",
+          "AC7"
+        ],
+        "design_decisions": [
+          "Config Source And Precedence",
+          "Legacy Variable Validation"
+        ]
+      },
+      "affected_services": [
+        "fides"
+      ],
+      "acceptance": [
+        "next build 和 Docker build 不需要 OTP/BFF/tracing 环境差异变量",
+        "GitOps 不再注入旧 NEXT_PUBLIC_*",
+        "运行时配置 key 和 Consul 地址可从部署配置追溯"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "验证、审查和合并就绪证据",
+      "scope": "运行 fides 测试、依赖边界、lint/build、GitOps dry-run 或 kustomize build，并补充审查和证据。",
+      "trace": {
+        "requirement_items": [
+          "AC1",
+          "AC2",
+          "AC3",
+          "AC4",
+          "AC5",
+          "AC6",
+          "AC7"
+        ],
+        "design_decisions": [
+          "Runtime Config Model",
+          "Config Source And Precedence",
+          "Public Config Entry",
+          "Legacy Variable Validation"
+        ]
+      },
+      "affected_services": [
+        "fides"
+      ],
+      "acceptance": [
+        "测试和构建证据保存到 evidence",
+        "每个任务有审查报告",
+        "merge-readiness gate 可校验"
+      ],
+      "state": "done"
+    }
+  ]
+}

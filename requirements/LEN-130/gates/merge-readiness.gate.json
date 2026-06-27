@@ -1,0 +1,82 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-130",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-27T19:27:36+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-130/requirement.md",
+      "sha256": "599d2dc508d63e44a7bd478c236c9d31684579c40bc8dc3d13380f64d4e29ea4"
+    },
+    {
+      "path": "requirements/LEN-130/impact-analysis.md",
+      "sha256": "95ff4c250788f4da80a065f0fdcd9cca6b113160109e5ec6eed35d7d49ff12e9"
+    },
+    {
+      "path": "requirements/LEN-130/design.md",
+      "sha256": "c6f313dc361d6e379de95926a15e0ca7d6a11a48e77d62a2f4b8ef467c1a9db5"
+    },
+    {
+      "path": "requirements/LEN-130/tasks.json",
+      "sha256": "f27562b8a28178e1cd3c6b99c0e4917413e387e1ad85d3033ced54c1a565e4f6"
+    },
+    {
+      "path": "requirements/LEN-130/gates/requirement-review.gate.json",
+      "sha256": "c7517af8667814f6a9c09c51d40820da18a653fcb386ee7f80cc8d88615b7c50"
+    },
+    {
+      "path": "requirements/LEN-130/gates/design-review.gate.json",
+      "sha256": "a085d634a132bcfb1e91e256f7b55a4bb3b981d4ca99ebb82919e138973794f9"
+    },
+    {
+      "path": "requirements/LEN-130/gates/dev-entry.gate.json",
+      "sha256": "6c89f17118ee1bf5c2e00049abc1eb83011eea8851deea9ba052e559359bc839"
+    },
+    {
+      "path": "requirements/LEN-130/gates/service-repo-check.gate.json",
+      "sha256": "39d427554e7881a43417e5247b96be969a2df6e76cd7f21b46a55bfe43aa2bab"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "9da36fd1e15f81ad87aa619b53561059aa3b0804eeb4634d57084340ba79274b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "1 evidence files recorded."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-130/tasks.json approved by forest at 2026-06-27T19:19:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-130/evidence/local-verification.md",
+      "sha256": "cf41cb6688599ad93d29c058baf21f6fe898edff77011fd9493807e332b6c237"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "未声明 protobuf IDL 或外部契约影响。"
+  },
+  "decision": "用户明确授权：授权你批准所有文档；批准 LEN-130 fides 运行时配置中心和 .env 覆盖的需求、影响分析、设计和任务拆分，范围限定为 fides-web 运行时配置硬切、GitOps 部署配置更新、测试和文档，不涉及 fides-bff API、protobuf/IDL 或 NEXT_PUBLIC 兼容层。"
+}
