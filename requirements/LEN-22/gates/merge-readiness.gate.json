@@ -1,0 +1,96 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-22",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-28T01:27:43+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-22/requirement.md",
+      "sha256": "78c9620054113610fab9fd8ad5ec0ab582770f78aecd284250b41a445a54b13d"
+    },
+    {
+      "path": "requirements/LEN-22/impact-analysis.md",
+      "sha256": "c7696ff063e9c331876df90df70809305413e360923d9381a1a0f87a8f5f020a"
+    },
+    {
+      "path": "requirements/LEN-22/design.md",
+      "sha256": "2883ede7d158d12f539b8aef0ae3876d60516b4c8be98af365a7d18d3d68c0e6"
+    },
+    {
+      "path": "requirements/LEN-22/tasks.json",
+      "sha256": "fe680772066b0e3a32bb2034c722c9c73591128d2395969b9910994c5a824a0c"
+    },
+    {
+      "path": "requirements/LEN-22/gates/requirement-review.gate.json",
+      "sha256": "f53d1dc06b7e5c81738cddce5615f08db483d966c0d60ba2cc959c5d69d5551b"
+    },
+    {
+      "path": "requirements/LEN-22/gates/design-review.gate.json",
+      "sha256": "98d8ea24bcef6cc6b1a552c8be53f387bdc31bae7c06db6040a87226b478de60"
+    },
+    {
+      "path": "requirements/LEN-22/gates/dev-entry.gate.json",
+      "sha256": "bb310f463de51f306a5f27452dd7ef6180d6443a44c21a75f504f8dfcb112227"
+    },
+    {
+      "path": "requirements/LEN-22/gates/service-repo-check.gate.json",
+      "sha256": "4cd45530d86260ea164d599db4ffa7efd4e937b683dda508e87488d3ea664a73"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "9da36fd1e15f81ad87aa619b53561059aa3b0804eeb4634d57084340ba79274b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and PASS."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "local-verification.md records test-first failures and final Go/Java test passes."
+    },
+    {
+      "item": "代码审查已记录",
+      "result": "PASS",
+      "evidence": "reviews/T2-T5.md conclusion is ready-for-gate with no open P0/P1."
+    },
+    {
+      "item": "IDL 未变更",
+      "result": "PASS",
+      "evidence": "idl-repo helper worktree is clean; no proto files changed."
+    },
+    {
+      "item": "自动化测试通过",
+      "result": "PASS",
+      "evidence": "go test ./... for bffkit and fides-bff; mvn test for spring-starter."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-22/evidence/local-verification.md",
+      "sha256": "871bd30c8881fcf00e7c2b75eb80552f6e83c4f36dd877aeb38de350b45c24bd"
+    },
+    {
+      "path": "requirements/LEN-22/reviews/T2-T5.md",
+      "sha256": "0c32ba02d40a50afa54e74d631025928226a8e3483ff820d68f7c74712f59c5c"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只新增 BFF 和 Java 服务内部认证中间件、context 与 metadata 传播，不修改 protobuf IDL、HTTP 对外契约或 generated contracts。"
+  },
+  "decision": "LEN-22 token 校验、principal context、x-applicant-id 与 traceparent 传播已实现，通过测试、审查和本地 merge verification。"
+}
