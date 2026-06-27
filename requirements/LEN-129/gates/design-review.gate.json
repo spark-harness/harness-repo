@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-129",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-27T21:40:42+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-129/requirement.md",
+      "sha256": "417bebb65a246ad061f4d225ec9075fb0ddcd3d65e6da6553c9037557ccd35f2"
+    },
+    {
+      "path": "requirements/LEN-129/impact-analysis.md",
+      "sha256": "fb8812033b22c5e414e91f9ddbb65b272a423c3f41a80968bb14fcb3aeb25ccc"
+    },
+    {
+      "path": "requirements/LEN-129/design.md",
+      "sha256": "5f595886cc67b3d53bd5a5bae37b361f2f17f7cf10c7bf5d7ecd3d21e1ce88cf"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-129/design.md approved by Forest at 2026-06-27T21:05:01+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 fides-bff 启动期配置来源和文档，不修改 protobuf IDL、generated contracts 或 HTTP 契约。"
+  },
+  "decision": "批准 LEN-129 设计，允许进入开发阶段。"
+}

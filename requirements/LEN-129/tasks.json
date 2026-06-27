@@ -1,0 +1,170 @@
+{
+  "requirement_id": "LEN-129",
+  "status": "approved",
+  "approved_by": "Forest",
+  "approved_at": "2026-06-27T21:05:01+08:00",
+  "decision": "批准 LEN-129 任务拆分，允许进入实现和合并准备。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "建立 Harness 生命周期文档",
+      "scope": "在 harness-repo/requirements/LEN-129 下创建 README、requirement、impact-analysis、design 和 tasks。",
+      "trace": {
+        "requirement_items": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6",
+          "R7"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "D5",
+          "D6",
+          "D7"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "需求文档包含目标、非目标、业务规则、验收标准和 open questions。",
+        "影响分析声明无 IDL / generated contract / HTTP 契约影响。",
+        "设计和任务可追溯到 LEN-129 AC1-AC9。"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "补充启动配置加载测试",
+      "scope": "在 apps/fides-bff/cmd/fides-bff 增加配置加载相关单元测试，先覆盖当前缺失行为。",
+      "trace": {
+        "requirement_items": [
+          "AC1",
+          "AC2",
+          "AC3",
+          "AC4",
+          "AC5",
+          "AC6",
+          "AC7",
+          "AC8"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "D5",
+          "D6"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "测试覆盖 .env 缺失、加载和真实环境优先。",
+        "测试覆盖 allowlist 映射和无关环境变量忽略。",
+        "测试覆盖 Consul 启用成功、未启用、不可访问、KV 缺失和 YAML 无效。",
+        "测试覆盖敏感值不出现在错误文本中。"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "实现 fides-bff 启动期配置源",
+      "scope": "修改 apps/fides-bff 启动路径，接入 .env、allowlist 环境映射和 Consul KV YAML source。",
+      "trace": {
+        "requirement_items": [
+          "R1",
+          "R2",
+          "R3",
+          "R4",
+          "R5",
+          "R6"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "D5",
+          "D6"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "configs/config.yaml 仍是最低优先级默认配置。",
+        ".env 只设置不存在的进程环境变量。",
+        "只有 allowlist 内无前缀变量进入配置树。",
+        "Consul KV YAML 按最高优先级覆盖本地默认值和环境映射。",
+        "Consul bootstrap 值不从 Consul 自举读取。"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "补充本地和 STA 配置说明",
+      "scope": "新增 .env.example 并更新 apps/fides-bff README 配置章节。",
+      "trace": {
+        "requirement_items": [
+          "R7",
+          "AC9"
+        ],
+        "design_decisions": [
+          "D7"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        ".env.example 不包含真实 secret。",
+        "README 说明配置优先级、Consul KV 路径、bootstrap 来源、secret 边界和热更新不支持。"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "验证和审查 LEN-129",
+      "scope": "运行 fides-bff 聚焦测试、全量 Go 测试和必要 lint，记录未完成门禁和风险。",
+      "trace": {
+        "requirement_items": [
+          "AC1",
+          "AC2",
+          "AC3",
+          "AC4",
+          "AC5",
+          "AC6",
+          "AC7",
+          "AC8",
+          "AC9"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3",
+          "D4",
+          "D5",
+          "D6",
+          "D7"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "go test ./... 通过或记录明确阻塞。",
+        "相关文档和示例通过人工审查，不包含真实 secret。",
+        "最终状态区分已实现、已验证和未完成的 Janus / 人工审批门禁。"
+      ],
+      "state": "done"
+    }
+  ]
+}
