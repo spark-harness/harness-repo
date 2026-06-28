@@ -1,0 +1,57 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-5",
+  "gate_id": "design-review",
+  "gate_name": "设计评审门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-28T07:59:10+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-5/requirement.md",
+      "sha256": "9a2ceafba0dba9713c23a569cab6e2bd08f19db8ed7bd9a17a26f451f8355a88"
+    },
+    {
+      "path": "requirements/LEN-5/impact-analysis.md",
+      "sha256": "89143504f93ff0840f9696f2a917be341b15a169b1cffdf70c9121134c8b5139"
+    },
+    {
+      "path": "requirements/LEN-5/design.md",
+      "sha256": "8ea85319340b5a992be959f960f929623783563e01c8a174f4eb97f37382bccf"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖 AC1-AC5",
+      "result": "PASS",
+      "evidence": "Requirement Traceability maps AC1-AC5 to D1-D5."
+    },
+    {
+      "item": "验收编排边界清楚",
+      "result": "PASS",
+      "evidence": "Design states LEN-5 is acceptance orchestration and no runtime code change."
+    },
+    {
+      "item": "权限、数据和可观测性边界明确",
+      "result": "PASS",
+      "evidence": "Data / Config / Permission and Observability sections define synthetic applicant, protected BFF API, token secrecy and trace evidence."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "design-review approved by forest via janus requirement approve at 2026-06-28T07:58:10+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "LEN-5 does not modify protobuf IDL, generated contracts or Buf configuration."
+  },
+  "decision": "用户授权 Agent 批准所有文档；LEN-5 design-review PASS，允许进入任务和验收 evidence 阶段。"
+}
