@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-136",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-06-28T16:36:41+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-136/impact-analysis.md",
+      "sha256": "e4122d5956b3e33e24853f899fb180f3d846fda41cd3267c02429ef55f0197fb"
+    },
+    {
+      "path": "requirements/LEN-136/design.md",
+      "sha256": "b0f80ac27885405235a871a3daac146d9b40d8eaf59a4f037d6554cd90cdd6ba"
+    },
+    {
+      "path": "requirements/LEN-136/tasks.json",
+      "sha256": "c13bb2256058ea82977eaba07daae892528754f6f5b7f19f46f5c45fb9341108"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-136"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "6 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "applicant-api, fides, fides-bff, origination-api, quote-api"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-136/impact-analysis.md approved by forest at 2026-06-28T16:35:12+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-136-argocd-dev1-sta1",
+      "commit": "1284146"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-136-argocd-dev1-sta1",
+      "commit": "e2eaba1"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只调整 GitOps、Kubernetes runtime 配置和 Harness 文档，不修改 protobuf 或生成契约。"
+  },
+  "decision": "批准 LEN-136 service-repo-check；业务服务路径通过服务矩阵解析，基础设施和 Caddy 作为 GitOps 组件影响处理，不作为业务服务条目。"
+}

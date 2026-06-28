@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-136",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-28T16:35:12+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-136/design.md",
+      "sha256": "b0f80ac27885405235a871a3daac146d9b40d8eaf59a4f037d6554cd90cdd6ba"
+    },
+    {
+      "path": "requirements/LEN-136/tasks.json",
+      "sha256": "c13bb2256058ea82977eaba07daae892528754f6f5b7f19f46f5c45fb9341108"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-136"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "6 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-136/tasks.json approved by forest at 2026-06-28T16:35:12+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只调整 GitOps、Kubernetes runtime 配置和 Harness 文档，不修改 protobuf 或生成契约。"
+  },
+  "decision": "刷新批准 LEN-136 tasks；T2-T6 已完成，affected_services 仅保留服务矩阵业务服务，基础设施影响保留在 scope 与 impact 中。"
+}
