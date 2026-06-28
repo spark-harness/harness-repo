@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-136",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-06-28T16:36:41+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-136/requirement.md",
+      "sha256": "edb5ea87e834b282ecc4e5da868daa7012fd4a062313f7da5682f1ec0e5efcba"
+    },
+    {
+      "path": "requirements/LEN-136/impact-analysis.md",
+      "sha256": "e4122d5956b3e33e24853f899fb180f3d846fda41cd3267c02429ef55f0197fb"
+    },
+    {
+      "path": "requirements/LEN-136/design.md",
+      "sha256": "b0f80ac27885405235a871a3daac146d9b40d8eaf59a4f037d6554cd90cdd6ba"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "BLOCKED",
+      "evidence": "missing markers: ## API / Contract Impact"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-136/design.md approved by forest at 2026-06-28T16:35:12+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只调整 GitOps、Kubernetes runtime 配置和 Harness 文档，不修改 protobuf 或生成契约。"
+  },
+  "decision": "刷新批准 LEN-136 design；impact-analysis 输入哈希已更新，设计仍按 dev-1 / sta-1 双环境 GitOps 方案执行。"
+}

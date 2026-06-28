@@ -1,0 +1,82 @@
+{
+  "requirement_id": "LEN-136",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-28T16:35:12+08:00",
+  "decision": "刷新批准 LEN-136 tasks；T2-T6 已完成，affected_services 仅保留服务矩阵业务服务，基础设施影响保留在 scope 与 impact 中。",
+  "notes": "用户于 2026-06-28 在对话中批准 Requirement Brief，允许创建需求文档、隔离 worktree 并进入实现；正式 Harness 审批字段需由 janus requirement approve 写入。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "Harness lifecycle artifacts",
+      "scope": "创建 LEN-136 requirement、impact analysis、design 和 task plan，记录 dev-1 / sta-1、namespace、Consul、PostgreSQL、Redis、镜像、sync、域名和清理边界。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8"]
+      },
+      "affected_services": [],
+      "acceptance": ["AC1", "AC14"],
+      "status": "done"
+    },
+    {
+      "id": "T2",
+      "title": "Shared infrastructure GitOps",
+      "scope": "新增共享 PostgreSQL、Redis、Consul 的 GitOps 入口、namespace、Argo CD Application 和 overlay，支持环境化 database / role 与 Redis logical DB 使用。",
+      "trace": {
+        "requirement_items": ["R1", "R3", "R4"],
+        "design_decisions": ["D1", "D3", "D4"]
+      },
+      "affected_services": [],
+      "acceptance": ["AC1", "AC4", "AC5", "AC8", "AC9", "AC14"],
+      "status": "done"
+    },
+    {
+      "id": "T3",
+      "title": "dev-1 business environment GitOps",
+      "scope": "新增 dev-1 cluster 入口和五个业务服务 overlay，配置 lendora-dev-1 namespace、dev Consul KV / service name、dev database、Redis DB 1、自动 digest promotion 和自动 sync。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R4", "R5", "R6", "R7"],
+        "design_decisions": ["D1", "D2", "D4", "D5", "D6"]
+      },
+      "affected_services": ["fides", "fides-bff", "applicant-api", "quote-api", "origination-api"],
+      "acceptance": ["AC1", "AC2", "AC5", "AC6", "AC7", "AC8", "AC9", "AC10", "AC11", "AC14"],
+      "status": "done"
+    },
+    {
+      "id": "T4",
+      "title": "sta-1 business environment GitOps",
+      "scope": "新增 sta-1 cluster 入口和五个业务服务 overlay，配置 lendora-sta-1 namespace、sta Consul KV / service name、sta database、Redis DB 2、手工指定 digest 和手动 sync。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R4", "R5", "R6", "R7"],
+        "design_decisions": ["D1", "D2", "D4", "D5", "D6"]
+      },
+      "affected_services": ["fides", "fides-bff", "applicant-api", "quote-api", "origination-api"],
+      "acceptance": ["AC1", "AC3", "AC5", "AC6", "AC7", "AC8", "AC9", "AC10", "AC11", "AC14"],
+      "status": "done"
+    },
+    {
+      "id": "T5",
+      "title": "Caddy routes and legacy cleanup boundary",
+      "scope": "新增四个 dev-1 / sta-1 公开域名路由，记录旧 lendora-sta namespace、入口、PVC、Consul key 和 GitOps 表达的清理边界。",
+      "trace": {
+        "requirement_items": ["R7", "R8"],
+        "design_decisions": ["D6", "D7"]
+      },
+      "affected_services": ["fides", "fides-bff"],
+      "acceptance": ["AC11", "AC12", "AC13"],
+      "status": "done"
+    },
+    {
+      "id": "T6",
+      "title": "GitOps validation",
+      "scope": "运行新增 cluster 和 overlay 的 kustomize 渲染检查，并静态确认新环境不引用旧 lendora-sta DNS、KV 或 namespace。",
+      "trace": {
+        "requirement_items": ["R1", "R4", "R7"],
+        "design_decisions": ["D8"]
+      },
+      "affected_services": ["fides", "fides-bff", "applicant-api", "quote-api", "origination-api"],
+      "acceptance": ["AC5", "AC6", "AC7", "AC8", "AC9", "AC11", "AC14"],
+      "status": "done"
+    }
+  ]
+}

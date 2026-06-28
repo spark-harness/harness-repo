@@ -1,0 +1,86 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-136",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-28T18:11:35+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-136/requirement.md",
+      "sha256": "edb5ea87e834b282ecc4e5da868daa7012fd4a062313f7da5682f1ec0e5efcba"
+    },
+    {
+      "path": "requirements/LEN-136/impact-analysis.md",
+      "sha256": "e4122d5956b3e33e24853f899fb180f3d846fda41cd3267c02429ef55f0197fb"
+    },
+    {
+      "path": "requirements/LEN-136/design.md",
+      "sha256": "b0f80ac27885405235a871a3daac146d9b40d8eaf59a4f037d6554cd90cdd6ba"
+    },
+    {
+      "path": "requirements/LEN-136/tasks.json",
+      "sha256": "c13bb2256058ea82977eaba07daae892528754f6f5b7f19f46f5c45fb9341108"
+    },
+    {
+      "path": "requirements/LEN-136/gates/requirement-review.gate.json",
+      "sha256": "50b6ec2194fbd7ab6aaff9afa52216ca0ee5f97530e89353a1862ce892d7c406"
+    },
+    {
+      "path": "requirements/LEN-136/gates/design-review.gate.json",
+      "sha256": "b7cd226f10ead116e17d7b4ca96cbe6b2057154bd6399321d1e0f5ab74465bfb"
+    },
+    {
+      "path": "requirements/LEN-136/gates/dev-entry.gate.json",
+      "sha256": "b1efe55632a614ea124ad51bbf0e8c1e4051c2a81a0ad52b355306c0ee9c001a"
+    },
+    {
+      "path": "requirements/LEN-136/gates/service-repo-check.gate.json",
+      "sha256": "423493bc665594ce10c1a6b1e44194e47dc379ccacef194601d2a0e272e3af0d"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "2 evidence files recorded."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-136/tasks.json approved by forest at 2026-06-28T16:35:12+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-136/evidence/local-verification.md",
+      "sha256": "1046f2e4d0b310158d80b0e78123ec9bef8fe29765876dedc51e12f656731aa7"
+    },
+    {
+      "path": "requirements/LEN-136/evidence/runtime-smoke.md",
+      "sha256": "023127a50b73d24fcefa63ebfe0bc3b39fabb1544aad4116b94de575d8bb9671"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只调整 GitOps、Kubernetes runtime 配置和 Harness 文档，不修改 protobuf 或生成契约。"
+  },
+  "decision": "刷新批准 LEN-136 tasks；T2-T6 已完成，affected_services 仅保留服务矩阵业务服务，基础设施影响保留在 scope 与 impact 中。"
+}
