@@ -1,0 +1,76 @@
+{
+  "approved_at": "2026-06-28T07:58:20+08:00",
+  "approved_by": "forest",
+  "decision": "用户授权 Agent 批准所有文档；批准 LEN-5 tasks，进入 Story 验收 evidence 和门禁收口。",
+  "requirement_id": "LEN-5",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 LEN-5 Harness 生命周期材料",
+      "scope": "创建 LEN-5 README、requirement、impact-analysis、design、tasks 和早期 gate，明确本票只做 Story 验收收口。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6"]
+      },
+      "affected_services": ["fides", "fides-bff", "quote-api", "origination-api"],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "dev-entry gate PASS",
+        "service-repo-check gate PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "汇总前序 ticket 交付边界",
+      "scope": "读取 LEN-22、LEN-10、LEN-131、LEN-132、LEN-9、LEN-134、LEN-133、LEN-135、LEN-11 的 merge-readiness 和关键 evidence，形成 Story 验收前置矩阵。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6"]
+      },
+      "affected_services": ["fides", "fides-bff", "quote-api", "origination-api"],
+      "acceptance": [
+        "每个前序 ticket 的 gate 结论被记录",
+        "WARN 与 Story 验收影响被区分",
+        "不声称未验证的部署或 UI 状态"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "执行 LEN-5 live Story smoke",
+      "scope": "在 vincent-k3s / lendora-sta 验证 readiness、服务端试算、越界、旧报价失效、Continue 静默保存和同一草稿回填。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6"]
+      },
+      "affected_services": ["fides", "fides-bff", "quote-api", "origination-api"],
+      "acceptance": [
+        "runtime Story smoke evidence exists",
+        "AC1-AC5 每项都有 PASS/WARN/BLOCKED 结论",
+        "测试 token secret 不落仓",
+        "DB 写入和 trace 证据不包含敏感信息"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "完成审查、merge-readiness 和交付报告",
+      "scope": "生成 review、merge-readiness gate，运行 Janus validate/verify，报告 changed files、gate status、剩余 WARN 和交付边界。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5"],
+        "design_decisions": ["Testing Strategy", "Rollout And Rollback"]
+      },
+      "affected_services": ["fides", "fides-bff", "quote-api", "origination-api"],
+      "acceptance": [
+        "review report ready-for-gate or records blockers",
+        "merge-readiness gate validates",
+        "janus requirement verify passes or records exact blockers",
+        "LEN-5 Story 验收交付边界清楚"
+      ],
+      "state": "done"
+    }
+  ]
+}

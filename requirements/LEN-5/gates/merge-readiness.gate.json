@@ -1,0 +1,165 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-5",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-06-28T13:14:00+08:00",
+  "result": "WARN",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-5/requirement.md",
+      "sha256": "9a2ceafba0dba9713c23a569cab6e2bd08f19db8ed7bd9a17a26f451f8355a88"
+    },
+    {
+      "path": "requirements/LEN-5/impact-analysis.md",
+      "sha256": "89143504f93ff0840f9696f2a917be341b15a169b1cffdf70c9121134c8b5139"
+    },
+    {
+      "path": "requirements/LEN-5/design.md",
+      "sha256": "8ea85319340b5a992be959f960f929623783563e01c8a174f4eb97f37382bccf"
+    },
+    {
+      "path": "requirements/LEN-5/tasks.json",
+      "sha256": "2cd7476ae4250f2ecd6d22acdee128c0c1b1cb07bec84224d4274ce424bfd3bd"
+    },
+    {
+      "path": "requirements/LEN-5/gates/requirement-review.gate.json",
+      "sha256": "fb423d2f467d8d66b4da8e4dddaab2c7ba1f38c66affe98c646fda4fb7392b05"
+    },
+    {
+      "path": "requirements/LEN-5/gates/design-review.gate.json",
+      "sha256": "dba16c2a9a1b32bdd18ceb2cffbcdd5f3a4b90b0f44151c788f8236f7d41a071"
+    },
+    {
+      "path": "requirements/LEN-5/gates/dev-entry.gate.json",
+      "sha256": "9acab42d58ddff4591b6b96a8c40a5a746531b0879bda4bf5bbd9a9da3803c78"
+    },
+    {
+      "path": "requirements/LEN-5/gates/service-repo-check.gate.json",
+      "sha256": "87aabe3cd6856eccdd8f663b39f218b79985094675e66fd42aa1509a8d0ca3d1"
+    },
+    {
+      "path": "requirements/LEN-5/evidence/predecessor-matrix.md",
+      "sha256": "91d6c27df8f95644e5fae5355ced33ee6bc790c24fa9b9594c505acbbc7de44b"
+    },
+    {
+      "path": "requirements/LEN-5/evidence/runtime-story-smoke.md",
+      "sha256": "a37466fea5c4083df2fcbbd3059fc273403856a35c643d854a6cac8253cdce27"
+    },
+    {
+      "path": "requirements/LEN-5/reviews/T1-T4.md",
+      "sha256": "f7e11e35ba4f5bc27441cadbccb20f2d83a83cb54ac51ec53b0ac847dd038aee"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry and service-repo-check gate JSON are present and valid."
+    },
+    {
+      "item": "前序交付边界已汇总",
+      "result": "PASS",
+      "evidence": "predecessor-matrix records LEN-22, LEN-10, LEN-131, LEN-132, LEN-9, LEN-134, LEN-133, LEN-135 and LEN-11 merge gate status; current runtime closure resolves the earlier OTP warning."
+    },
+    {
+      "item": "公网部署可访问",
+      "result": "PASS",
+      "evidence": "https://api.fuzzytails.fun/api/runtime-config and /api/v1/health return HTTP 200; fides, fides-bff, applicant-api, quote-api and origination-api deployments are 1/1."
+    },
+    {
+      "item": "公网 OTP 登录",
+      "result": "PASS",
+      "evidence": "runtime-story-smoke records public OTP send/verify returning HTTP 200 and protected session:probe returning HTTP 200 with the expected applicant principal."
+    },
+    {
+      "item": "AC1 服务端试算",
+      "result": "PASS",
+      "evidence": "runtime-story-smoke records BFF pricing HTTP 200, quoteId quote_4e0cb029-fc3e-4a57-8e55-70afe7cfb1d9, monthly/apr/total values and quote DB row."
+    },
+    {
+      "item": "AC2 越界输入",
+      "result": "PASS",
+      "evidence": "runtime-story-smoke records amount 999999.00 returning HTTP 422 amount_out_of_range without quoteId."
+    },
+    {
+      "item": "AC3 旧报价失效",
+      "result": "PASS",
+      "evidence": "runtime-story-smoke records create attempt with mismatched loan terms and old quote returning HTTP 422 amount_out_of_range."
+    },
+    {
+      "item": "AC4 Continue 静默保存",
+      "result": "PASS",
+      "evidence": "runtime-story-smoke records create and patch returning HTTP 200, status draft and currentStep loan_request; Chrome click Continue returned navigationOccurred=false and BFF PATCH returned 200."
+    },
+    {
+      "item": "AC5 同一草稿回填",
+      "result": "PASS",
+      "evidence": "runtime-story-smoke records GET draft returning amount 75000.00, term 12, purpose home_improvement and matching application DB row."
+    },
+    {
+      "item": "服务发现和 DB 写入",
+      "result": "PASS",
+      "evidence": "runtime-story-smoke records readiness, Consul passing entries, quote DB count 20 and application DB count 8 after the public smoke."
+    },
+    {
+      "item": "审查已完成",
+      "result": "PASS",
+      "evidence": "reviews/T1-T4.md concludes ready-for-gate with no open P0/P1 findings."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [
+    {
+      "issue": "kubectl port-forward to the fides pod fails because the app does not listen on 127.0.0.1:3000 inside the pod.",
+      "follow_up_action": "Adjust fides container bind host if local pod port-forward access is required; public Caddy access and Kubernetes Service access are working.",
+      "owner": "frontend-runtime"
+    },
+    {
+      "issue": "Argo CD is not installed in the current vincent-k3s cluster.",
+      "follow_up_action": "Use runtime functional smoke as current evidence; verify Healthy/Synced when Argo CD is restored.",
+      "owner": "platform"
+    }
+  ],
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-5-story-acceptance",
+      "commit": "1284146"
+    },
+    {
+      "name": "gitops-repo",
+      "branch": "master",
+      "commit": "pending-local-digest-update"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "requirements/LEN-5/evidence/predecessor-matrix.md",
+      "sha256": "91d6c27df8f95644e5fae5355ced33ee6bc790c24fa9b9594c505acbbc7de44b"
+    },
+    {
+      "path": "requirements/LEN-5/evidence/runtime-story-smoke.md",
+      "sha256": "a37466fea5c4083df2fcbbd3059fc273403856a35c643d854a6cac8253cdce27"
+    },
+    {
+      "path": "requirements/LEN-5/reviews/T1-T4.md",
+      "sha256": "f7e11e35ba4f5bc27441cadbccb20f2d83a83cb54ac51ec53b0ac847dd038aee"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "LEN-5 only changes Harness Story acceptance documentation, evidence and gates. It does not modify protobuf IDL, generated contracts, Buf config or service source code."
+  },
+  "decision": "LEN-5 is merge-ready with WARN: AC1-AC5 pass through the public domain https://api.fuzzytails.fun and live vincent-k3s/lendora-sta services; fides local pod port-forward and Argo CD Healthy/Synced remain environment follow-ups."
+}

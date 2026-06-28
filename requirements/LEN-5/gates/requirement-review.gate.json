@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-5",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-28T07:59:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-5/requirement.md",
+      "sha256": "9a2ceafba0dba9713c23a569cab6e2bd08f19db8ed7bd9a17a26f451f8355a88"
+    },
+    {
+      "path": "requirements/LEN-5/impact-analysis.md",
+      "sha256": "89143504f93ff0840f9696f2a917be341b15a169b1cffdf70c9121134c8b5139"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求目标和非目标明确",
+      "result": "PASS",
+      "evidence": "requirement.md defines LEN-5 as Story acceptance closeout and excludes new business code, IDL, deployment and UI prototype changes."
+    },
+    {
+      "item": "场景和验收可测试",
+      "result": "PASS",
+      "evidence": "Scenarios and AC1-AC5 cover quote display, out-of-range rejection, stale quote invalidation, silent draft save and same-draft refill."
+    },
+    {
+      "item": "影响分析覆盖关键面",
+      "result": "PASS",
+      "evidence": "impact-analysis covers affected services, API/contract, data, config, permission, observability, rollout, rollback and risks."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirement-review approved by forest via janus requirement approve at 2026-06-28T07:58:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "LEN-5 只做 Story 验收收口和 evidence/gate 归档，不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Agent 批准所有文档；LEN-5 requirement-review PASS，允许进入设计和任务阶段。"
+}

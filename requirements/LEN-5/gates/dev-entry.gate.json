@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-5",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-06-28T07:59:20+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-5/design.md",
+      "sha256": "8ea85319340b5a992be959f960f929623783563e01c8a174f4eb97f37382bccf"
+    },
+    {
+      "path": "requirements/LEN-5/tasks.json",
+      "sha256": "2cd7476ae4250f2ecd6d22acdee128c0c1b1cb07bec84224d4274ce424bfd3bd"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "任务拆分完整",
+      "result": "PASS",
+      "evidence": "tasks.json defines lifecycle, predecessor matrix, live Story smoke and merge-readiness tasks."
+    },
+    {
+      "item": "任务可追溯",
+      "result": "PASS",
+      "evidence": "Each task maps AC1-AC5 to design decisions or testing strategy."
+    },
+    {
+      "item": "验收项可验证",
+      "result": "PASS",
+      "evidence": "T3 and T4 define runtime Story smoke evidence and Janus verification acceptance."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "dev-entry approved by forest via janus requirement approve at 2026-06-28T07:58:20+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "LEN-5 only changes Harness acceptance documentation and evidence."
+  },
+  "decision": "用户授权 Agent 批准所有文档；LEN-5 dev-entry PASS，允许执行 Story smoke 和证据收口。"
+}
