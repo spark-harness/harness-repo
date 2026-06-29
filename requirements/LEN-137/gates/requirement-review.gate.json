@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-137",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-06-28T22:37:07+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-137/requirement.md",
+      "sha256": "274bf2e6d2c5590f39b3128c89d144bf3d0192e607fb9df169cb8dcf7c0878d9"
+    },
+    {
+      "path": "requirements/LEN-137/impact-analysis.md",
+      "sha256": "3fda1cbaca5196544d0ea6e9c9f63072207df56c2a7efb6797aded3dbf68608f"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-137/requirement.md approved by forest at 2026-06-28T22:22:59+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "LEN-137 新增 applicant-api gRPC、origination-api gRPC 和 fides-bff HTTP facade 契约；前端通过 BFF HTTP 调用，BFF 通过 gRPC 调内部服务。"
+  },
+  "decision": "批准 LEN-137 requirement 和 impact-analysis；范围为 Step 3 身份信息填写、保存、回填、校验、currentStep 推进和 local 网页真实链路验证，不包含 dev-1 发布、公网验证或 GitOps digest 更新。"
+}
