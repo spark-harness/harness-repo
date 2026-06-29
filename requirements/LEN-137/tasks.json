@@ -1,0 +1,288 @@
+{
+  "requirement_id": "LEN-137",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-06-28T22:36:45+08:00",
+  "decision": "批准 LEN-137 tasks.json；允许按 T2-T8 执行 IDL、后端、BFF、前端、local E2E、审查和证据收口。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 LEN-137 Harness 生命周期材料",
+      "scope": "创建并维护 LEN-137 README、requirement、impact-analysis、design、tasks 和早期 gate，明确 local 验证边界和 dev-1/GitOps 非目标。",
+      "trace": {
+        "requirement_items": [
+          "BR13",
+          "AC10"
+        ],
+        "design_decisions": [
+          "D7"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff",
+        "applicant-api",
+        "origination-api"
+      ],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "tasks.json 映射 LEN-138 至 LEN-143 的实现和验证切片",
+        "LEN-143 dev-1 描述残留不扩大本需求 scope"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "LEN-138 IDL 身份信息与步骤推进契约",
+      "scope": "在 idl-repo 新增 applicant-api、origination-api 和 fides-bff 身份信息链路契约，包含 Nationality 枚举、identity profile 字段、AdvanceApplicationStep 和 BFF HTTP annotation。",
+      "trace": {
+        "requirement_items": [
+          "BR2",
+          "BR3",
+          "BR6",
+          "BR7",
+          "BR11",
+          "BR12",
+          "AC1",
+          "AC9",
+          "AC10"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D4",
+          "D5"
+        ]
+      },
+      "affected_services": [
+        "applicant-api",
+        "origination-api",
+        "fides-bff"
+      ],
+      "acceptance": [
+        "新增 proto 为 additive change，不修改既有 auth 或 loan request 语义",
+        "HKID body 和 check digit 在契约中分字段表达",
+        "DOB 使用 date string 语义",
+        "buf lint 通过",
+        "buf generate 或生成路径问题有明确证据",
+        "buf breaking baseline 通过或记录受控兼容结论"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "LEN-139 applicant-api 身份信息保存与回填",
+      "scope": "在 applicant-api 实现 identity profile domain/use case/repository/gRPC adapter，支持 upsert、get、empty profile 和字段权威校验。",
+      "trace": {
+        "requirement_items": [
+          "BR2",
+          "BR3",
+          "BR4",
+          "BR5",
+          "BR6",
+          "BR7",
+          "BR9",
+          "BR10",
+          "BR12",
+          "AC3",
+          "AC4",
+          "AC5",
+          "AC6",
+          "AC7",
+          "AC8"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3"
+        ]
+      },
+      "affected_services": [
+        "applicant-api"
+      ],
+      "acceptance": [
+        "HKID check digit、姓名、Nationality、DOB 年龄边界有单元测试",
+        "GET 未保存返回 empty profile，不抛 not_found",
+        "Upsert 同一 applicant 覆盖当前 profile 并更新 updated_at",
+        "持久化明文字段但测试、日志和证据不输出真实敏感原文",
+        "Java tests/quality 命令通过或记录精确阻塞"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "LEN-140 origination-api 推进 identity_information 步骤",
+      "scope": "在 origination-api 实现 AdvanceApplicationStep gRPC/use case/repository 更新，新增 identity_information step 并修复 current_step 读写映射。",
+      "trace": {
+        "requirement_items": [
+          "BR1",
+          "BR11",
+          "BR12",
+          "AC2",
+          "AC9",
+          "AC10"
+        ],
+        "design_decisions": [
+          "D1",
+          "D5"
+        ]
+      },
+      "affected_services": [
+        "origination-api"
+      ],
+      "acceptance": [
+        "缺少 applicationId 返回 application_required",
+        "application 不属于 principal applicant 时返回 forbidden",
+        "非 identity_information 目标步骤返回 invalid_step",
+        "repository 测试证明 current_step 写入并读回 identity_information",
+        "Java tests/quality 命令通过或记录精确阻塞"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "LEN-141 fides-bff 身份信息 HTTP facade",
+      "scope": "在 fides-bff 实现 GET/PUT /api/v1/me/identity-profile，受保护路由、applicant/origination gRPC client、保存顺序和统一错误映射。",
+      "trace": {
+        "requirement_items": [
+          "BR1",
+          "BR8",
+          "BR9",
+          "BR11",
+          "BR12",
+          "AC2",
+          "AC3",
+          "AC7",
+          "AC8",
+          "AC9",
+          "AC10"
+        ],
+        "design_decisions": [
+          "D1",
+          "D4",
+          "D5"
+        ]
+      },
+      "affected_services": [
+        "fides-bff"
+      ],
+      "acceptance": [
+        "BFF 从 principal 取 applicantId，不信任前端 applicantId",
+        "PUT 先保存 applicant identity profile，再推进 origination currentStep",
+        "GET empty profile 映射为空对象",
+        "401/400/403/422/502 错误映射符合设计",
+        "go test ./...、go vet/build/lint 通过或记录精确阻塞"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T6",
+      "title": "LEN-142 fides 身份信息页保存与回填",
+      "scope": "在 fides-web 实现 Step 3 identity profile domain/application/adapters/infrastructure/presentation，完成 UI、校验、保存、回填和缺少前置条件处理。",
+      "trace": {
+        "requirement_items": [
+          "BR1",
+          "BR2",
+          "BR3",
+          "BR4",
+          "BR5",
+          "BR6",
+          "BR7",
+          "BR8",
+          "BR9",
+          "BR12",
+          "AC1",
+          "AC2",
+          "AC3",
+          "AC4",
+          "AC5",
+          "AC6",
+          "AC7",
+          "AC8",
+          "AC10"
+        ],
+        "design_decisions": [
+          "D2",
+          "D4",
+          "D6"
+        ]
+      },
+      "affected_services": [
+        "fides"
+      ],
+      "acceptance": [
+        "HKID 主体和校验位在同一行分段输入",
+        "Nationality 选项从契约枚举映射",
+        "Continue 保存成功后停留 Step 3，不 toast，不跳转",
+        "刷新或重新打开 Step 3 完整回填",
+        "pnpm test、pnpm lint、pnpm lint:deps、pnpm build 通过或记录精确阻塞"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T7",
+      "title": "LEN-143 local 身份信息链路网页真实验证",
+      "scope": "在 local 环境启动 fides-web、fides-bff、applicant-api、origination-api 和依赖服务，执行 OTP -> Step 2 保存 -> Step 3 保存 -> 刷新回填 -> currentStep 验证。",
+      "trace": {
+        "requirement_items": [
+          "BR13",
+          "AC10"
+        ],
+        "design_decisions": [
+          "D7"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff",
+        "applicant-api",
+        "origination-api"
+      ],
+      "acceptance": [
+        "local 网页 URL 被记录",
+        "Step 3 保存请求结果被记录且不包含 token/HKID/手机号原文",
+        "刷新回填结果被记录",
+        "currentStep = identity_information 的验证范围被记录",
+        "明确不做 dev-1 发布、公网验证或 GitOps digest 更新"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T8",
+      "title": "审查、证据和 merge-readiness 收口",
+      "scope": "为已完成任务生成 review 报告，刷新 Janus gates，记录 IDL、服务测试、前端测试和 local E2E 证据，完成 merge-readiness 验证。",
+      "trace": {
+        "requirement_items": [
+          "AC1",
+          "AC2",
+          "AC3",
+          "AC4",
+          "AC5",
+          "AC6",
+          "AC7",
+          "AC8",
+          "AC9",
+          "AC10"
+        ],
+        "design_decisions": [
+          "Testing Strategy",
+          "Rollout And Rollback"
+        ]
+      },
+      "affected_services": [
+        "fides",
+        "fides-bff",
+        "applicant-api",
+        "origination-api"
+      ],
+      "acceptance": [
+        "每个完成任务有 review 报告且无未关闭 P0/P1",
+        "dev-entry 和 service-repo-check gate PASS",
+        "merge-readiness gate validate/verify 通过或记录精确阻塞",
+        "交付报告区分已实现、已验证、未合并或未推送"
+      ],
+      "state": "done"
+    }
+  ]
+}
