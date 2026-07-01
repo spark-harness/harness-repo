@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-145",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-07-01T22:44:08+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-145/requirement.md",
+      "sha256": "865f37145aad9713a0aa6d82eb8e53f0ca52dcb57ba68bdb1529df42077b28a6"
+    },
+    {
+      "path": "requirements/LEN-145/impact-analysis.md",
+      "sha256": "bc6dc4c32eed3d6a19c57bca35afed3b996e4b7ebfe885a4433606cd50b17e74"
+    },
+    {
+      "path": "requirements/LEN-145/design.md",
+      "sha256": "09dc7cbe42ae01f83c7e467b815dd1985e466aea2e4e743f3efff75dbfcb6612"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "BLOCKED",
+      "evidence": "missing markers: ## API / Contract Impact"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-145/design.md approved by forest at 2026-07-01T22:42:35+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "需求文档明确声明不涉及 protobuf IDL 或外部契约影响。"
+  },
+  "decision": "用户授权批准 LEN-145 设计文档，并继续任务拆分、实现、验证和 PR。"
+}
