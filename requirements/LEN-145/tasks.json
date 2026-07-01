@@ -1,0 +1,72 @@
+{
+  "decision": "用户授权批准 LEN-145 合并准备；本地测试、GitOps 渲染、diff check 和脱敏扫描已通过，运行时 trace smoke 作为部署后验证。",
+  "approved_at": "2026-07-01T22:45:07+08:00",
+  "approved_by": "forest",
+  "requirement_id": "LEN-145",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 追溯文档",
+      "scope": "创建 requirements/LEN-145 下的 requirement.md、impact-analysis.md、design.md 和 tasks.json。",
+      "trace": {
+        "requirement_items": ["BR1", "BR2", "BR3", "BR4", "BR5", "AC1", "AC2", "AC3", "AC4", "AC5"],
+        "design_decisions": ["Requirement Traceability", "Testing Strategy"]
+      },
+      "affected_services": ["quote-api", "origination-api"],
+      "acceptance": [
+        "文档不包含真实 Sentry 值",
+        "影响面覆盖 business-repo 与 gitops-repo"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "补齐 quote/origination Consul Config 与 OpenTelemetry 配置模型",
+      "scope": "修改两个服务 POM 和 application.yml，新增配置模型测试。",
+      "trace": {
+        "requirement_items": ["BR2", "BR3", "BR4", "AC1", "AC2", "AC5"],
+        "design_decisions": ["Consul Config", "OpenTelemetry"]
+      },
+      "affected_services": ["quote-api", "origination-api"],
+      "acceptance": [
+        "两个服务配置测试通过",
+        "本地默认不强依赖 Consul",
+        "标准 OTLP endpoint/header/sampler/resource attributes 可配置"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "调整 GitOps Consul seed 与环境配置",
+      "scope": "修改 quote/origination 的 ConfigMap、Deployment 和 dev/sta overlays，避免 GitOps 清空私密 OTLP 配置。",
+      "trace": {
+        "requirement_items": ["BR1", "BR4", "BR5", "AC3", "AC4", "AC5"],
+        "design_decisions": ["GitOps Consul Seed", "Data / Config / Permission"]
+      },
+      "affected_services": ["quote-api", "origination-api"],
+      "acceptance": [
+        "Kustomize dev-1 / sta-1 渲染通过",
+        "渲染结果没有真实 Sentry 值",
+        "Job 脚本保留已有 endpoint/header"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "验证服务测试和运行时配置",
+      "scope": "运行 quote-api / origination-api 测试、GitOps 渲染和必要的脱敏检查。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5"],
+        "design_decisions": ["Testing Strategy", "Rollout And Rollback"]
+      },
+      "affected_services": ["quote-api", "origination-api"],
+      "acceptance": [
+        "Maven 测试通过或失败原因明确",
+        "Kustomize build 通过",
+        "未提交真实 Sentry 值"
+      ],
+      "state": "done"
+    }
+  ]
+}

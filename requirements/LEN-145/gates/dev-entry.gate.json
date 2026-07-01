@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-145",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-07-01T22:45:35+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-145/design.md",
+      "sha256": "09dc7cbe42ae01f83c7e467b815dd1985e466aea2e4e743f3efff75dbfcb6612"
+    },
+    {
+      "path": "requirements/LEN-145/tasks.json",
+      "sha256": "f19b09de72a679bd862b620fcbb5d0ecd96f4403e4860528481fd566f450fbf9"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-145"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "4 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-145/tasks.json approved by forest at 2026-07-01T22:45:07+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "需求文档明确声明不涉及 protobuf IDL 或外部契约影响。"
+  },
+  "decision": "用户授权批准 LEN-145 合并准备；本地测试、GitOps 渲染、diff check 和脱敏扫描已通过，运行时 trace smoke 作为部署后验证。"
+}

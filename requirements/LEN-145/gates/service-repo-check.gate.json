@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-145",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-07-01T22:45:35+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-145/impact-analysis.md",
+      "sha256": "bc6dc4c32eed3d6a19c57bca35afed3b996e4b7ebfe885a4433606cd50b17e74"
+    },
+    {
+      "path": "requirements/LEN-145/design.md",
+      "sha256": "09dc7cbe42ae01f83c7e467b815dd1985e466aea2e4e743f3efff75dbfcb6612"
+    },
+    {
+      "path": "requirements/LEN-145/tasks.json",
+      "sha256": "f19b09de72a679bd862b620fcbb5d0ecd96f4403e4860528481fd566f450fbf9"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-145"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "4 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "origination-api, quote-api"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-145/impact-analysis.md approved by forest at 2026-07-01T22:43:54+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-145-consul-otel-config",
+      "commit": "73f14d9"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-145-consul-otel-config",
+      "commit": "f4e8fad"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "需求文档明确声明不涉及 protobuf IDL 或外部契约影响。"
+  },
+  "decision": "用户授权批准 LEN-145 服务仓库检查；本需求涉及 harness-repo、business-repo、gitops-repo，不涉及 IDL。"
+}
