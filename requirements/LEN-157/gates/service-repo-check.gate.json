@@ -5,7 +5,7 @@
   "gate_name": "服务仓库检查门禁",
   "stage": "4.3",
   "checked_by": "service_repo_checker",
-  "checked_at": "2026-07-03T02:17:53+08:00",
+  "checked_at": "2026-07-03T02:59:55+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -19,7 +19,7 @@
     },
     {
       "path": "requirements/LEN-157/tasks.json",
-      "sha256": "f7be2d9aca25df6d3d478da1c29ec669e23bcb8630150ae07a3e08acb2d5c67c"
+      "sha256": "53818a15e311d56cd174a7b5345b00335f6e4c44fb0f07ce9b21e60f9308c32b"
     },
     {
       "path": ".service-matrix/dependencies.yaml",
@@ -67,7 +67,7 @@
     {
       "name": "harness-repo",
       "branch": "feature/LEN-157-gitops-bff-tracing",
-      "commit": "93c50b1"
+      "commit": "aee6ff0"
     }
   ],
   "idl_impact": {

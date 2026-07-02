@@ -39,7 +39,7 @@
       },
       "affected_services": [],
       "acceptance": ["Argo Synced/Healthy", "runtime-config returns /api/v1", "trace evidence recorded"],
-      "state": "todo"
+      "state": "done"
     },
     {
       "id": "T4",
@@ -51,7 +51,7 @@
       },
       "affected_services": [],
       "acceptance": ["janus requirement verify passes", "PRs merged to master", "worktrees cleaned"],
-      "state": "todo"
+      "state": "done"
     }
   ]
 }
