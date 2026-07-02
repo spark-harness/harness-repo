@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-151",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-07-02T22:22:42+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-151/impact-analysis.md",
+      "sha256": "18063445855dc01bf8ee96721b72c4495c38dbb6758a72382236f46b725edabd"
+    },
+    {
+      "path": "requirements/LEN-151/design.md",
+      "sha256": "e89c47ffbeb45da0a25b27051944874821d26c3234cbfb2f6ed1ef820a8f6771"
+    },
+    {
+      "path": "requirements/LEN-151/tasks.json",
+      "sha256": "1e0d82fe4ac39200fe08dc25e21aaee532183fefe420b0581d48a671349c0d24"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-151"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "3 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "applicant-api, origination-api, quote-api"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-151/impact-analysis.md approved by forest at 2026-07-02T22:20:50+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-151-health-db-noise",
+      "commit": "5f9eeae"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-151-health-db-noise",
+      "commit": "373e0f7"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只调整 Java 服务健康检查配置和 readiness probe 装配，不修改 protobuf IDL、HTTP 契约或生成契约。"
+  },
+  "decision": "用户已授权 Codex 批准中间文件；批准 LEN-151 服务仓库检查，确认只影响 harness-repo 与 business-repo，同名分支已隔离，不涉及 IDL。"
+}

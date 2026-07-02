@@ -1,0 +1,54 @@
+{
+  "requirement_id": "LEN-151",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-07-02T22:19:57+08:00",
+  "decision": "用户已授权 Codex 批准中间文件；批准 LEN-151 tasks.json，允许按 T1-T3 完成测试、实现和证据收尾。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "建立健康检查 DB 噪音回归测试",
+      "scope": "为 applicant-api、quote-api、origination-api 增加或更新测试，证明 actuator DB health 被禁用且 JDBC health probe 不再装配。",
+      "trace": {
+        "requirement_items": ["BR2", "AC1", "AC4"],
+        "design_decisions": ["禁用 actuator DB health indicator", "移除自定义 JDBC runtime dependency probe"]
+      },
+      "affected_services": ["applicant-api", "quote-api", "origination-api"],
+      "acceptance": [
+        "新增或更新的测试在旧实现上失败。",
+        "测试覆盖 DB health 配置和 readiness probe 装配。"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "移除健康检查数据库主动探活",
+      "scope": "在三个 Java 服务中禁用 DB health indicator，删除 JDBC RuntimeDependencyProbe，保留业务 JDBC 路径。",
+      "trace": {
+        "requirement_items": ["BR1", "BR2", "BR3", "BR4", "AC2", "AC3", "AC4"],
+        "design_decisions": ["保留 /health 和 /ready", "不修改 repository / migration / tracing dependency"]
+      },
+      "affected_services": ["applicant-api", "quote-api", "origination-api"],
+      "acceptance": [
+        "生产代码中不存在 JDBC health probe 的 select 1 探活。",
+        "三个服务 Maven 测试通过。"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "记录本地验证、评审和合并门禁",
+      "scope": "补充 Harness evidence、review 和 gate JSON，记录测试命令、结果和 IDL 无影响结论。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4"],
+        "design_decisions": ["Testing Strategy", "Observability"]
+      },
+      "affected_services": ["applicant-api", "quote-api", "origination-api"],
+      "acceptance": [
+        "local-verification.md 记录三服务测试结果。",
+        "merge-readiness gate 可通过 Janus 校验。"
+      ],
+      "state": "done"
+    }
+  ]
+}

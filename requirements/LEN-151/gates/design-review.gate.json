@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-151",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-07-02T22:22:42+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-151/requirement.md",
+      "sha256": "872eb82d7887713923d589ee90cdc4a113205d535947e6947fde01a66a3d579e"
+    },
+    {
+      "path": "requirements/LEN-151/impact-analysis.md",
+      "sha256": "18063445855dc01bf8ee96721b72c4495c38dbb6758a72382236f46b725edabd"
+    },
+    {
+      "path": "requirements/LEN-151/design.md",
+      "sha256": "e89c47ffbeb45da0a25b27051944874821d26c3234cbfb2f6ed1ef820a8f6771"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-151/design.md approved by forest at 2026-07-02T22:19:57+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只调整 Java 服务健康检查配置和 readiness probe 装配，不修改 protobuf IDL、HTTP 契约或生成契约。"
+  },
+  "decision": "用户已授权 Codex 批准中间文件；批准 LEN-151 设计，采用禁用 actuator DB health 与删除 JDBC readiness probe 的最小方案。"
+}

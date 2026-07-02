@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-151",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-07-02T22:22:42+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-151/requirement.md",
+      "sha256": "872eb82d7887713923d589ee90cdc4a113205d535947e6947fde01a66a3d579e"
+    },
+    {
+      "path": "requirements/LEN-151/impact-analysis.md",
+      "sha256": "18063445855dc01bf8ee96721b72c4495c38dbb6758a72382236f46b725edabd"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-151/requirement.md approved by forest at 2026-07-02T22:19:57+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只调整 Java 服务健康检查配置和 readiness probe 装配，不修改 protobuf IDL、HTTP 契约或生成契约。"
+  },
+  "decision": "用户已授权 Codex 批准中间文件；批准 LEN-151 requirement 与 impact-analysis，按 Jira Story 范围移除 Java 健康检查 DB 探活噪音，不修改 IDL 或业务数据库路径。"
+}
