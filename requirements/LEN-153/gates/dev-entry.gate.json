@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-153",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-07-02T23:38:52+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-153/design.md",
+      "sha256": "edef4b9ecb535d6358559d89e2599f30d6b62470f67cda4cd9e9b11c2cf3b6c6"
+    },
+    {
+      "path": "requirements/LEN-153/tasks.json",
+      "sha256": "3d80ec07307aa0da9960a7563bc0631932ee9e7fdeda97ac35653ea575ea46c1"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-153"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "4 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-153/tasks.json approved by forest at 2026-07-02T00:02:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "新增 fides-bff pricing 与 loan-application protobuf RPC，并要求 Go HTTP binding、OpenAPI 与 TS SDK 输入面可生成。"
+  },
+  "decision": "批准 LEN-153 tasks：按 Harness artifacts、IDL proto、Buf/generation evidence、delivery gate 四个任务执行。"
+}

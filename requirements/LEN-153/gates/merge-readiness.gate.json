@@ -1,0 +1,87 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-153",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-07-02T23:42:04+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-153/requirement.md",
+      "sha256": "9db3a854d74326e22d533300ea5e4fff88d4262646783f9614a43fc21dfc7583"
+    },
+    {
+      "path": "requirements/LEN-153/impact-analysis.md",
+      "sha256": "a7f36d83b752545ac5d55eba31694552698379c76b69bdf6009b4b68542b388c"
+    },
+    {
+      "path": "requirements/LEN-153/design.md",
+      "sha256": "edef4b9ecb535d6358559d89e2599f30d6b62470f67cda4cd9e9b11c2cf3b6c6"
+    },
+    {
+      "path": "requirements/LEN-153/tasks.json",
+      "sha256": "3d80ec07307aa0da9960a7563bc0631932ee9e7fdeda97ac35653ea575ea46c1"
+    },
+    {
+      "path": "requirements/LEN-153/gates/requirement-review.gate.json",
+      "sha256": "683cd1406543cd328c9b85887fd4f2ca66c7f523d268c1e17499f15aee9bb5e9"
+    },
+    {
+      "path": "requirements/LEN-153/gates/design-review.gate.json",
+      "sha256": "53a94a7adc86f008b3c2a22981cdca3329f8a8b91921522abb5a835e37208110"
+    },
+    {
+      "path": "requirements/LEN-153/gates/dev-entry.gate.json",
+      "sha256": "1687f6fd2bcdf632555555f3f233d0977459e21f8a127faf49a6ebaaa5df2437"
+    },
+    {
+      "path": "requirements/LEN-153/gates/service-repo-check.gate.json",
+      "sha256": "e5dafab0cb199ef81b359304325a6150e61fa1d8203f4853c3ee6cd4f8a4a148"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "1 evidence files recorded."
+    },
+    {
+      "item": "IDL 证据已记录",
+      "result": "PASS",
+      "evidence": "Buf or contract evidence exists."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-153/tasks.json approved by forest at 2026-07-02T00:02:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-153/evidence/buf-checks.md",
+      "sha256": "dceb26a675953594c02d70b196f4843b3a8ff9aaef14bc5860481ca9229ef6d9"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "新增 fides-bff pricing 与 loan-application protobuf RPC，并要求 Go HTTP binding、OpenAPI 与 TS SDK 输入面可生成。"
+  },
+  "decision": "批准 LEN-153 tasks：按 Harness artifacts、IDL proto、Buf/generation evidence、delivery gate 四个任务执行。"
+}
