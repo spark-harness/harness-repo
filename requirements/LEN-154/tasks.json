@@ -1,0 +1,76 @@
+{
+  "requirement_id": "LEN-154",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-07-02T16:13:19Z",
+  "decision": "用户授权 Agent 批准所有需要的文件；批准 LEN-154 任务拆分，允许开始 BFF 测试优先实现。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "固化 Harness 生命周期和 formal Go 契约版本",
+      "scope": "完善 requirement、impact-analysis、design、tasks，并确认 `idl-go-repo v0.2.5` 可被 fides-bff 作为 release-bound formal dependency 消费。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "AC1", "AC2", "AC3"],
+        "design_decisions": ["D1", "D2", "D3"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "早期 lifecycle gate JSON 存在并通过 Janus validate。",
+        "`go list -m -versions github.com/spark-harness/idl-go-repo` 能解析 `v0.2.5`。",
+        "evidence 记录 `idl-repo v0.2.5` 和 `idl-go-repo v0.2.5` 的 commit。"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "用 generated HTTP binding characterization tests 锁定现有行为",
+      "scope": "调整或新增 fides-bff HTTP 层测试，先证明当前手工 route 在切换前无法满足 generated registration 预期或锁定需要保持的兼容行为。",
+      "trace": {
+        "requirement_items": ["R4", "R5", "R6", "AC4"],
+        "design_decisions": ["D4", "D5", "D6"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "测试覆盖 pricing、loan-application、identity-profile 的 HTTP path。",
+        "测试覆盖 protected path 鉴权继续生效。",
+        "测试覆盖写操作 `Idempotency-Key` 和 trace header 继续传递。",
+        "测试覆盖 loan application GET/PATCH application ID 解码。"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "切换 fides-bff 入站适配层到 generated interface",
+      "scope": "更新 `go.mod`、server registration 和 `internal/service` adapter，使 auth、identity-profile、pricing、loan-application 都通过 generated HTTP binding 注册。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R5", "AC1", "AC2", "AC3"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "`internal/server/http.go` 注册 generated auth、identity-profile、pricing、loan-application HTTP server。",
+        "已入 IDL 的业务路由不再通过手工 `v1.POST/GET/PATCH/PUT` 注册。",
+        "service adapter 使用 proto request/response 映射现有 biz command/result。",
+        "health 和 session probe 手工路由保留。"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "验证、审查和合并就绪证据",
+      "scope": "运行 fides-bff 测试、vet、build，记录 evidence，完成 review report 和 merge-readiness gate。",
+      "trace": {
+        "requirement_items": ["AC4", "AC5", "AC6"],
+        "design_decisions": ["D6"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "`make test` 通过。",
+        "`go vet ./...` 通过。",
+        "`make build` 通过。",
+        "`janus requirement verify --requirement LEN-154 --target merge --ticket-id LEN-154` 通过。"
+      ],
+      "state": "done"
+    }
+  ]
+}
