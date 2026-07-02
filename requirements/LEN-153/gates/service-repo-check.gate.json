@@ -5,13 +5,13 @@
   "gate_name": "服务仓库检查门禁",
   "stage": "4.3",
   "checked_by": "service_repo_checker",
-  "checked_at": "2026-07-02T23:38:42+08:00",
+  "checked_at": "2026-07-02T23:53:43+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
     {
       "path": "requirements/LEN-153/impact-analysis.md",
-      "sha256": "a7f36d83b752545ac5d55eba31694552698379c76b69bdf6009b4b68542b388c"
+      "sha256": "0093dfe027beb9b4d06a20d943fff07025f3f5cc1e98cf765b51d435de88d26f"
     },
     {
       "path": "requirements/LEN-153/design.md",
@@ -67,7 +67,7 @@
     {
       "name": "harness-repo",
       "branch": "feature/LEN-153-fides-bff-contracts",
-      "commit": "52251f8"
+      "commit": "c053539"
     },
     {
       "name": "business-repo",
@@ -77,7 +77,7 @@
     {
       "name": "idl-repo",
       "branch": "feature/LEN-153-fides-bff-contracts",
-      "commit": "3d764de"
+      "commit": "885357d"
     }
   ],
   "idl_impact": {

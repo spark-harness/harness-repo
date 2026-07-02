@@ -67,6 +67,14 @@ FidesBffLoanApplicationService
 
 Generated repositories were cloned under `/Users/forest/Code/spark/.worktrees/LEN-153` and checked out on `feature/LEN-153-fides-bff-contracts`.
 
+Generated repository PRs were merged to `master` before final source repo delivery:
+
+| Repository | PR | Result |
+|---|---|---|
+| `idl-go-repo` | `spark-harness/idl-go-repo#3` | merged |
+| `idl-openapi-repo` | `spark-harness/idl-openapi-repo#2` | merged |
+| `idl-ts-repo` | `spark-harness/idl-ts-repo#2` | merged |
+
 ### idl-go-repo
 
 Synced from `../.generated/idl-go` with `.git`, `go.mod`, `go.sum` and `README.md` excluded.

@@ -55,6 +55,16 @@ LEN-153 影响 fides-bff BFF-facing protobuf 契约、Go 生成物、OpenAPI 生
 - TypeScript: `idl-ts-repo` generates `typescript-fetch` SDK from `idl-openapi-repo/vesta/lendora/fides-bff/v1/openapi.yaml`.
 - Java: not required for BFF-facing FE contract unless the existing Buf Java pipeline is explicitly invoked by release workflow.
 
+Generated contract repositories changed as delivery artifacts:
+
+| Repository | Output | Merge Evidence |
+|---|---|---|
+| `idl-go-repo` | Go protobuf, gRPC and Kratos HTTP binding | PR merged before source repo delivery |
+| `idl-openapi-repo` | `vesta/lendora/fides-bff/v1/openapi.yaml` | PR merged before source repo delivery |
+| `idl-ts-repo` | `@spark-harness/idl-ts-client` source and dist output | PR merged before source repo delivery |
+
+They are not listed in `affected_repositories` front matter because the current Argo delivery-readiness workflow only checks source peer repos from the Spark workspace checkout set. Generated repo merge evidence is recorded in `evidence/buf-checks.md`.
+
 ## Data Impact
 
 - Database schema: none.

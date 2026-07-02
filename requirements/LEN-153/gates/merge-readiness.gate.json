@@ -5,17 +5,17 @@
   "gate_name": "合并就绪门禁",
   "stage": "5.1",
   "checked_by": "merge_readiness_checker",
-  "checked_at": "2026-07-02T23:42:04+08:00",
+  "checked_at": "2026-07-02T23:53:43+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
     {
       "path": "requirements/LEN-153/requirement.md",
-      "sha256": "9db3a854d74326e22d533300ea5e4fff88d4262646783f9614a43fc21dfc7583"
+      "sha256": "07e6bdf80284964720d66e18bb58820e289b5091669601e642de71836e1ac11b"
     },
     {
       "path": "requirements/LEN-153/impact-analysis.md",
-      "sha256": "a7f36d83b752545ac5d55eba31694552698379c76b69bdf6009b4b68542b388c"
+      "sha256": "0093dfe027beb9b4d06a20d943fff07025f3f5cc1e98cf765b51d435de88d26f"
     },
     {
       "path": "requirements/LEN-153/design.md",
@@ -27,19 +27,19 @@
     },
     {
       "path": "requirements/LEN-153/gates/requirement-review.gate.json",
-      "sha256": "683cd1406543cd328c9b85887fd4f2ca66c7f523d268c1e17499f15aee9bb5e9"
+      "sha256": "24f2b1ba30eaac0df9aa5b7eec4ceea5cb97bc005eba0143ecfe06fd1c612962"
     },
     {
       "path": "requirements/LEN-153/gates/design-review.gate.json",
-      "sha256": "53a94a7adc86f008b3c2a22981cdca3329f8a8b91921522abb5a835e37208110"
+      "sha256": "35111e079fc12d9776f04b4cdee787735410b968d5818d8e552dd9d5674d8a26"
     },
     {
       "path": "requirements/LEN-153/gates/dev-entry.gate.json",
-      "sha256": "1687f6fd2bcdf632555555f3f233d0977459e21f8a127faf49a6ebaaa5df2437"
+      "sha256": "863e651b40ec0379624e0886c0f8880d77e359d9794ee1cf7e2d2ed82a79c9ea"
     },
     {
       "path": "requirements/LEN-153/gates/service-repo-check.gate.json",
-      "sha256": "e5dafab0cb199ef81b359304325a6150e61fa1d8203f4853c3ee6cd4f8a4a148"
+      "sha256": "5768cd90b48e0e78c6e25e276072491cefa82c08b6363a2cac50fb7f3e7a0aac"
     },
     {
       "path": ".service-matrix/dependencies.yaml",
@@ -76,7 +76,7 @@
   "evidence": [
     {
       "path": "requirements/LEN-153/evidence/buf-checks.md",
-      "sha256": "dceb26a675953594c02d70b196f4843b3a8ff9aaef14bc5860481ca9229ef6d9"
+      "sha256": "188875a97c610e17594248a463c192b4dc814795dad63d55f57582e73f26bdfa"
     }
   ],
   "idl_impact": {

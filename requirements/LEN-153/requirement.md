@@ -10,9 +10,6 @@ contract_gate_mode: "auto"
 affected_repositories:
   - harness-repo
   - idl-repo
-  - idl-go-repo
-  - idl-openapi-repo
-  - idl-ts-repo
 approved_by: "forest"
 approved_at: "2026-07-02T00:00:00+08:00"
 decision: "用户已授权 Agent 批准所有需要的文件；批准 LEN-153 需求定义和影响分析，按 additive fides-bff pricing / loan-application IDL 范围进入设计与开发。"
