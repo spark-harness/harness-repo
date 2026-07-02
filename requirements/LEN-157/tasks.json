@@ -1,0 +1,57 @@
+{
+  "requirement_id": "LEN-157",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-07-03T02:17:53+08:00",
+  "decision": "用户授权 Agent 批准所有需要的文件；批准 LEN-157 tasks。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "固化 Harness 生命周期",
+      "scope": "创建 requirement、impact-analysis、design、tasks 和早期 gates。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R5", "R6", "R7"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6"]
+      },
+      "affected_services": [],
+      "acceptance": ["Janus gates validate"],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "更新 dev/sta GitOps runtime 配置",
+      "scope": "更新 fides public runtime config、server-only BFF URL 和 fides-bff OTEL bootstrap。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4"],
+        "design_decisions": ["D1", "D2", "D3", "D4"]
+      },
+      "affected_services": [],
+      "acceptance": ["kustomize render passes", "static config checks pass"],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "验证 Argo 与跨服务 trace",
+      "scope": "验证 live Deployment、Consul KV、runtime-config、Argo 状态和 Sentry trace。",
+      "trace": {
+        "requirement_items": ["AC5", "AC6", "AC7"],
+        "design_decisions": ["D5", "D6"]
+      },
+      "affected_services": [],
+      "acceptance": ["Argo Synced/Healthy", "runtime-config returns /api/v1", "trace evidence recorded"],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "合并就绪与交付",
+      "scope": "记录 evidence、review report、merge-readiness gate、PR、合并和 worktree 清理。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6"]
+      },
+      "affected_services": [],
+      "acceptance": ["janus requirement verify passes", "PRs merged to master", "worktrees cleaned"],
+      "state": "done"
+    }
+  ]
+}

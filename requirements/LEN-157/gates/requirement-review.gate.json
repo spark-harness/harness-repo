@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-157",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-07-03T02:18:05+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-157/requirement.md",
+      "sha256": "d221cc9ce7fd52cb6f17400f0194feb9a201f7fca4703275430ea479b3159a74"
+    },
+    {
+      "path": "requirements/LEN-157/impact-analysis.md",
+      "sha256": "5ed760e8082654e3d52fd7a5630743d91f558f7a4896c7b84b9c1935ac67fa29"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-157/requirement.md approved by forest at 2026-07-03T02:17:52+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "只修改 GitOps runtime 配置和 Harness 生命周期文件，不修改 protobuf。"
+  },
+  "decision": "用户授权 Agent 批准所有需要的文件；批准 LEN-157 requirement 与 impact-analysis。"
+}
