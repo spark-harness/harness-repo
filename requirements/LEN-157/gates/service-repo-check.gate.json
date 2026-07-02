@@ -1,0 +1,78 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-157",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-07-03T02:17:53+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-157/impact-analysis.md",
+      "sha256": "5ed760e8082654e3d52fd7a5630743d91f558f7a4896c7b84b9c1935ac67fa29"
+    },
+    {
+      "path": "requirements/LEN-157/design.md",
+      "sha256": "6cbd4530eaa30f4e402da467c1dd36c5f749e5b9506fad6eba487c8272e4906d"
+    },
+    {
+      "path": "requirements/LEN-157/tasks.json",
+      "sha256": "f7be2d9aca25df6d3d478da1c29ec669e23bcb8630150ae07a3e08acb2d5c67c"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-157"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "4 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "tasks.json 未声明业务服务；跳过服务矩阵路径校验。"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-157/impact-analysis.md approved by forest at 2026-07-03T02:17:53+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-157-gitops-bff-tracing",
+      "commit": "93c50b1"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "只修改 GitOps runtime 配置和 Harness 生命周期文件，不修改 protobuf。"
+  },
+  "decision": "用户授权 Agent 批准所有需要的文件；批准 LEN-157 service repo readiness；本票只改 GitOps，不纳入业务/IDL 仓 peer。"
+}
