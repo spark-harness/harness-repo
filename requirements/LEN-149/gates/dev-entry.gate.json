@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-149",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-07-02T13:54:53Z",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-149/design.md",
+      "sha256": "d501e0fe8d608f6dad6a5b8f831437a17a152201cb190a7ae25f0097ced68dc1"
+    },
+    {
+      "path": "requirements/LEN-149/tasks.json",
+      "sha256": "2d5cd0bfabd9726bd7c87126a6b0120282a5482ba4043c494d415d63580ca54e"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "python3 -m json.tool requirements/LEN-149/tasks.json passed."
+    },
+    {
+      "item": "每个任务有范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "T1-T3 include scope, acceptance, trace, affected_services, and state."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-149/tasks.json approved by forest at 2026-07-02T13:52:15Z."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 GitOps Argo WorkflowTemplate 和发布策略文档，不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Codex 批准 LEN-149 任务拆分；T1-T3 覆盖生命周期、GitOps 模板移除和验证审查。"
+}

@@ -1,0 +1,87 @@
+{
+  "requirement_id": "LEN-149",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-07-02T13:52:15Z",
+  "decision": "用户授权 Codex 批准 LEN-149 任务拆分；T1-T3 覆盖生命周期、GitOps 模板移除和验证审查。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "建立 LEN-149 生命周期追溯",
+      "scope": "创建 requirement、impact-analysis、design 和 tasks，明确本票只移除同步阻断式 Trivy 扫描，不设计替代安全扫描平台。",
+      "trace": {
+        "requirement_items": [
+          "BR5",
+          "BR6",
+          "AC5"
+        ],
+        "design_decisions": [
+          "D4"
+        ]
+      },
+      "affected_services": [
+        "business image release workflow"
+      ],
+      "acceptance": [
+        "需求、影响分析、设计和任务文件存在",
+        "affected_repositories 只包含 harness-repo 和 gitops-repo",
+        "IDL impact 明确为 no"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "移除 GitOps 发布模板中的 Trivy 阻断路径",
+      "scope": "修改 github-image-release WorkflowTemplate，删除 scan DAG tasks 和 scan-image template，并让 update-gitops-digests 依赖所有 build tasks。",
+      "trace": {
+        "requirement_items": [
+          "BR1",
+          "BR2",
+          "BR3",
+          "BR4",
+          "AC1",
+          "AC2",
+          "AC3",
+          "AC4"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D3"
+        ]
+      },
+      "affected_services": [
+        "business image release workflow"
+      ],
+      "acceptance": [
+        "active WorkflowTemplate 无 Trivy 引用",
+        "update-gitops-digests dependencies 覆盖所有 build tasks",
+        "YAML parse PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "记录验证证据和审查结论",
+      "scope": "运行结构化验证、diff 检查和代码审查，写入 local-verification 和 review 报告。",
+      "trace": {
+        "requirement_items": [
+          "AC5",
+          "AC6"
+        ],
+        "design_decisions": [
+          "D5"
+        ]
+      },
+      "affected_services": [
+        "business image release workflow"
+      ],
+      "acceptance": [
+        "local-verification 记录 exact commands",
+        "review 报告没有 P0/P1 open finding",
+        "merge-readiness gate validation PASS"
+      ],
+      "state": "done"
+    }
+  ]
+}
