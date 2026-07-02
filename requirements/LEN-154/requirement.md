@@ -10,7 +10,6 @@ contract_gate_mode: "auto"
 affected_repositories:
   - harness-repo
   - business-repo
-  - idl-repo
 approved_by: "forest"
 approved_at: "2026-07-02T16:13:19Z"
 decision: "用户授权 Agent 批准所有需要的文件；批准 LEN-154 requirement 和 impact-analysis，范围限定为 fides-bff 消费 LEN-153 已合并生成契约并切换 generated HTTP binding，不修改 proto、前端代理或 GitOps 配置。"
@@ -105,3 +104,4 @@ Then：路由保持现有行为，不强行纳入 IDL。
 
 - 用户已授权 Agent 批准所有需要的文件；本需求按授权推进生命周期文件和门禁。
 - `LEN-154` 只能在 `LEN-153` 已合并并清理 worktree 后开始；该条件已满足。
+- `idl-repo` 只作为 LEN-153 formal tag 和已发布生成契约的证据来源，不作为 LEN-154 affected repository 或 release-bound peer。
