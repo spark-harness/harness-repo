@@ -1,0 +1,82 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-151",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-07-02T22:22:53+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-151/requirement.md",
+      "sha256": "872eb82d7887713923d589ee90cdc4a113205d535947e6947fde01a66a3d579e"
+    },
+    {
+      "path": "requirements/LEN-151/impact-analysis.md",
+      "sha256": "18063445855dc01bf8ee96721b72c4495c38dbb6758a72382236f46b725edabd"
+    },
+    {
+      "path": "requirements/LEN-151/design.md",
+      "sha256": "e89c47ffbeb45da0a25b27051944874821d26c3234cbfb2f6ed1ef820a8f6771"
+    },
+    {
+      "path": "requirements/LEN-151/tasks.json",
+      "sha256": "1e0d82fe4ac39200fe08dc25e21aaee532183fefe420b0581d48a671349c0d24"
+    },
+    {
+      "path": "requirements/LEN-151/gates/requirement-review.gate.json",
+      "sha256": "2a169005eb59651de78dbcc3058009e470f434013ed480862bae414f99f69dde"
+    },
+    {
+      "path": "requirements/LEN-151/gates/design-review.gate.json",
+      "sha256": "b618fa5e6cd2b38ad2167d487942bc28827dccb05697a3f67793acbd7287a508"
+    },
+    {
+      "path": "requirements/LEN-151/gates/dev-entry.gate.json",
+      "sha256": "a231cdf3cb27cfed3bb5695acb834dfbc3e09d3fd202262eea6b1f63af150aa8"
+    },
+    {
+      "path": "requirements/LEN-151/gates/service-repo-check.gate.json",
+      "sha256": "213efd3fa8218a7463f803bdf18709f768e516e5768c2c31887194ff0e3f7e4c"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "1 evidence files recorded."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-151/tasks.json approved by forest at 2026-07-02T22:19:57+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-151/evidence/local-verification.md",
+      "sha256": "37ab58eeaa0dbbf49e83cd53bde706748cd9dc92d2021b827bb722b309e87d8e"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只调整 Java 服务健康检查配置和 readiness probe 装配，不修改 protobuf IDL、HTTP 契约或生成契约。"
+  },
+  "decision": "用户已授权 Codex 批准中间文件；批准 LEN-151 tasks.json，允许按 T1-T3 完成测试、实现和证据收尾。"
+}
