@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-155",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-07-03T01:11:10+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-155/requirement.md",
+      "sha256": "e4e81fe9ac4d8a370b23cc4cebbc40611c2aef05c7d2020d3b070f1021c8f126"
+    },
+    {
+      "path": "requirements/LEN-155/impact-analysis.md",
+      "sha256": "9a1a873097b62199f4f61588d648c4c4a26f5bbe79365dfc28be4278d8ee92a9"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-155/requirement.md approved by forest at 2026-07-02T17:05:12Z."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "复用 LEN-153 已合并并发布的 fides-bff OpenAPI / TS SDK 输出，不修改 proto。"
+  },
+  "decision": "用户授权 Agent 批准所有需要的文件；批准 LEN-155 impact-analysis，确认本票只修改 fides-web 与 TS SDK 依赖，不产生新的 IDL、数据或 GitOps 影响。"
+}
