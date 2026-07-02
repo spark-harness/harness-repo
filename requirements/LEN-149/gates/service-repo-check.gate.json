@@ -1,0 +1,73 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-149",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-07-02T13:54:53Z",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-149/impact-analysis.md",
+      "sha256": "212559b864dd7494f48d5c534fe421489776c9a06332bd4bf1a6058ce985c4d8"
+    },
+    {
+      "path": "requirements/LEN-149/design.md",
+      "sha256": "d501e0fe8d608f6dad6a5b8f831437a17a152201cb190a7ae25f0097ced68dc1"
+    },
+    {
+      "path": "requirements/LEN-149/tasks.json",
+      "sha256": "2d5cd0bfabd9726bd7c87126a6b0120282a5482ba4043c494d415d63580ca54e"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "涉及仓库分支已隔离",
+      "result": "PASS",
+      "evidence": "harness-repo and gitops-repo use chore/LEN-149-remove-trivy-blocking-scan linked worktrees."
+    },
+    {
+      "item": "IDL 无影响",
+      "result": "PASS",
+      "evidence": "impact-analysis.md idl_impact=no."
+    },
+    {
+      "item": "业务服务矩阵无新增服务要求",
+      "result": "PASS",
+      "evidence": "This requirement affects GitOps release workflow only; no service matrix service entry changes are required."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-149/impact-analysis.md approved by forest at 2026-07-02T13:52:15Z."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "chore/LEN-149-remove-trivy-blocking-scan",
+      "commit": "7bc4880"
+    },
+    {
+      "name": "gitops-repo",
+      "branch": "chore/LEN-149-remove-trivy-blocking-scan",
+      "commit": "e13182d"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 GitOps Argo WorkflowTemplate 和发布策略文档，不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Codex 批准 LEN-149 服务仓库检查；涉及 harness-repo 和 gitops-repo，IDL 无影响。"
+}

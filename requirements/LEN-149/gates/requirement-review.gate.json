@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-149",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-07-02T13:54:53Z",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-149/requirement.md",
+      "sha256": "69cc85a12890b0f982632fffbe80d339d0634bf9347bea6497aac146b152ce9c"
+    },
+    {
+      "path": "requirements/LEN-149/impact-analysis.md",
+      "sha256": "212559b864dd7494f48d5c534fe421489776c9a06332bd4bf1a6058ce985c4d8"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在且范围清楚",
+      "result": "PASS",
+      "evidence": "requirement.md declares removal of blocking Trivy scan from image release and excludes replacement security scanning design."
+    },
+    {
+      "item": "影响分析覆盖关键发布面",
+      "result": "PASS",
+      "evidence": "impact-analysis.md covers GitOps workflow, release policy docs, GitHub status behavior, rollout, rollback and security scanning risk."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-149/requirement.md approved by forest at 2026-07-02T13:52:15Z."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [],
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 GitOps Argo WorkflowTemplate 和发布策略文档，不修改 protobuf IDL、generated contracts 或 Buf 配置。"
+  },
+  "decision": "用户授权 Codex 批准 LEN-149 需求和影响分析；范围限定为移除发布链路中的同步阻断式 Trivy 扫描，不包含替代安全扫描平台。"
+}
