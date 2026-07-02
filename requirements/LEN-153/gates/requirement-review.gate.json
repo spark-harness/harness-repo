@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-153",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-07-02T23:53:43+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-153/requirement.md",
+      "sha256": "07e6bdf80284964720d66e18bb58820e289b5091669601e642de71836e1ac11b"
+    },
+    {
+      "path": "requirements/LEN-153/impact-analysis.md",
+      "sha256": "0093dfe027beb9b4d06a20d943fff07025f3f5cc1e98cf765b51d435de88d26f"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-153/requirement.md approved by forest at 2026-07-02T00:00:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "新增 fides-bff pricing 与 loan-application protobuf RPC，并要求 Go HTTP binding、OpenAPI 与 TS SDK 输入面可生成。"
+  },
+  "decision": "用户已授权 Agent 批准所有需要的文件；批准 LEN-153 需求定义和影响分析，按 additive fides-bff pricing / loan-application IDL 范围进入设计与开发。"
+}

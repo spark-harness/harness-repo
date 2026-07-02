@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-153",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-07-02T23:53:43+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-153/requirement.md",
+      "sha256": "07e6bdf80284964720d66e18bb58820e289b5091669601e642de71836e1ac11b"
+    },
+    {
+      "path": "requirements/LEN-153/impact-analysis.md",
+      "sha256": "0093dfe027beb9b4d06a20d943fff07025f3f5cc1e98cf765b51d435de88d26f"
+    },
+    {
+      "path": "requirements/LEN-153/design.md",
+      "sha256": "edef4b9ecb535d6358559d89e2599f30d6b62470f67cda4cd9e9b11c2cf3b6c6"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-153/design.md approved by forest at 2026-07-02T00:01:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "新增 fides-bff pricing 与 loan-application protobuf RPC，并要求 Go HTTP binding、OpenAPI 与 TS SDK 输入面可生成。"
+  },
+  "decision": "批准 LEN-153 design：新增 additive fides-bff pricing 与 loan-application 契约，使用 Buf v2 生成 Go HTTP binding 和 OpenAPI，不实现运行时代码。"
+}

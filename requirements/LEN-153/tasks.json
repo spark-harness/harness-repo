@@ -1,0 +1,75 @@
+{
+  "requirement_id": "LEN-153",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-07-02T00:02:00+08:00",
+  "decision": "批准 LEN-153 tasks：按 Harness artifacts、IDL proto、Buf/generation evidence、delivery gate 四个任务执行。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完善 LEN-153 Harness 生命周期文件",
+      "scope": "补齐 requirement、impact-analysis、design、tasks，并保持与 LEN-152/LEN-153 Jira 范围一致。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R5", "R6", "R7"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "生命周期文件存在且声明 affected_repositories 为 harness-repo、idl-repo",
+        "IDL impact 明确为 additive protobuf change",
+        "open questions 不阻塞 LEN-153 IDL 修改"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "新增 fides-bff pricing 与 loan-application proto",
+      "scope": "在 idl-repo 新增 BFF-facing pricing 和 loan-application 契约，保留 auth 与 identity-profile 兼容性。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "AC1", "AC2", "AC3", "AC4"],
+        "design_decisions": ["D1", "D2", "D3"]
+      },
+      "affected_services": ["fides-bff", "fides", "quote-api", "origination-api"],
+      "acceptance": [
+        "pricing proto 包含 CreateQuote RPC 和 POST /api/v1/pricing/quotes annotation",
+        "loan_application proto 包含 Create/Get/Update RPC 和对应 HTTP annotation",
+        "新增字段不修改已有 auth / identity-profile 字段编号或语义"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "验证 Buf 与生成输出",
+      "scope": "运行 lint、generate、breaking，并检查 Go HTTP binding、OpenAPI 和 TS SDK 输入面。",
+      "trace": {
+        "requirement_items": ["R5", "R6", "R7", "AC5", "AC6", "AC7", "AC8", "AC9"],
+        "design_decisions": ["D4", "D5", "D6"]
+      },
+      "affected_services": ["fides-bff", "fides"],
+      "acceptance": [
+        "buf lint、buf generate、buf breaking 结果写入 evidence/buf-checks.md",
+        "生成输出中存在 pricing 与 loan-application Go HTTP binding 证据",
+        "OpenAPI 输出中存在 pricing 与 loan-application paths",
+        "idl-ts-repo 生成并导出 FidesBffPricingServiceApi 与 FidesBffLoanApplicationServiceApi"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "完成 LEN-153 交付门禁与 PR",
+      "scope": "完成代码审查报告、Janus gate/verify、提交、推送、PR、合并和 worktree 清理。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8", "AC9"],
+        "design_decisions": ["D4", "D5", "D6"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "requirements/LEN-153/reviews 覆盖已完成任务",
+        "merge-readiness gate 记录 IDL 证据",
+        "harness-repo 与 idl-repo PR 合并到 master",
+        ".worktrees/LEN-153 被清理后才开始 LEN-154"
+      ],
+      "state": "todo"
+    }
+  ]
+}
