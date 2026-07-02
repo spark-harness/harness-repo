@@ -1,0 +1,82 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-156",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-07-03T01:39:28+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-156/requirement.md",
+      "sha256": "0bdbc8df2f701488209fe0b16a8f394f739e865b708035bbdcb7848a2eda063a"
+    },
+    {
+      "path": "requirements/LEN-156/impact-analysis.md",
+      "sha256": "7a36c2aaf194779dc36635b4c975b7a682d24fdee724c4916f956da2d01a67c7"
+    },
+    {
+      "path": "requirements/LEN-156/design.md",
+      "sha256": "275f93cd458b5026856889e75601b5618f7e93beb797ae3a687fe266d3629e99"
+    },
+    {
+      "path": "requirements/LEN-156/tasks.json",
+      "sha256": "dd2f05c2192df40734984372de8cc0a3f25949f1af72959b6989cd77f3716ea9"
+    },
+    {
+      "path": "requirements/LEN-156/gates/requirement-review.gate.json",
+      "sha256": "105435c6f750a2d8fcd7047bb65408100d7db6735aa7142fe435d02c9ed62fbd"
+    },
+    {
+      "path": "requirements/LEN-156/gates/design-review.gate.json",
+      "sha256": "db3c3ecfed7e6cbeede1112f777f73bdc25d5d9f5db6bfe26fe006cc7a7a8c8a"
+    },
+    {
+      "path": "requirements/LEN-156/gates/dev-entry.gate.json",
+      "sha256": "9e02753cb601ea8a9ae3d735e732ecc095bfb68dfc9b6d997dff26f63ba19009"
+    },
+    {
+      "path": "requirements/LEN-156/gates/service-repo-check.gate.json",
+      "sha256": "e103f300a4ee01e8c43010ab1b62cb513dfc1952733c72ac0b9c10fce4ef864e"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "1 evidence files recorded."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-156/tasks.json approved by forest at 2026-07-02T17:36:50Z."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-156/evidence/implementation.md",
+      "sha256": "63b8fd6c87c7c132dc2aec971c9f8b4ac8320588732aaa03c748101d01e0a3da"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "只修改 fides-web app proxy 和 tracing 配置，不修改 proto。"
+  },
+  "decision": "用户授权 Agent 批准所有需要的文件；批准 LEN-156 tasks。"
+}
