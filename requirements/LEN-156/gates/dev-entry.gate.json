@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-156",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-07-03T01:39:28+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-156/design.md",
+      "sha256": "275f93cd458b5026856889e75601b5618f7e93beb797ae3a687fe266d3629e99"
+    },
+    {
+      "path": "requirements/LEN-156/tasks.json",
+      "sha256": "dd2f05c2192df40734984372de8cc0a3f25949f1af72959b6989cd77f3716ea9"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-156"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "3 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-156/tasks.json approved by forest at 2026-07-02T17:36:50Z."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "只修改 fides-web app proxy 和 tracing 配置，不修改 proto。"
+  },
+  "decision": "用户授权 Agent 批准所有需要的文件；批准 LEN-156 tasks。"
+}
