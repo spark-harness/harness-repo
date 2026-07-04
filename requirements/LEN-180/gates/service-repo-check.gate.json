@@ -1,0 +1,88 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-180",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-07-05T02:49:54+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-180/impact-analysis.md",
+      "sha256": "0f41fef55764059f0005dff2c601692b45ea70bf09411a93b3ff250e53cb5503"
+    },
+    {
+      "path": "requirements/LEN-180/design.md",
+      "sha256": "6f62d8495098762a301aaf0f99fbf42cd8a3c87ad4f5607beedd7a193cb7a239"
+    },
+    {
+      "path": "requirements/LEN-180/tasks.json",
+      "sha256": "e524b3eb9e3ee496455067ce7e0dbb6e6295109792044e49f102ebbbad3da4ff"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "e5f77623485a4d7d5b5a4196791a3cb73107de5cd5a9531442425fb8ccbda53b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-180"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "4 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "origination-api"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-180/impact-analysis.md approved by forest at 2026-07-05T02:30:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-180-origination-api-grpc-hard-cut",
+      "commit": "f61eba9"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-180-origination-api-grpc-hard-cut",
+      "commit": "f8066fc"
+    },
+    {
+      "name": "idl-repo",
+      "branch": "feature/LEN-180-origination-api-grpc-hard-cut",
+      "commit": "dda784d"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "使用 origination protobuf gRPC 契约并生成 Java contract。"
+  },
+  "decision": "用户本轮明确要求完成 LEN-180 实现和证据。"
+}

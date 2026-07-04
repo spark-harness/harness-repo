@@ -1,0 +1,72 @@
+{
+  "requirement_id": "LEN-180",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-07-05T02:30:00+08:00",
+  "decision": "用户本轮明确要求完成 LEN-180 实现和证据。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "补齐 origination gRPC 契约",
+      "scope": "扩展 origination proto，运行 Buf lint/generate/breaking，生成 Java/Go contract。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "AC1", "AC2"],
+        "design_decisions": ["D1", "D2"]
+      },
+      "affected_services": ["origination-api"],
+      "acceptance": [
+        "buf lint/generate/breaking pass",
+        "OriginationLoanApplicationServiceGrpc generated",
+        "formal Java artifact 0.2.7 published"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "实现 origination-api 完整 gRPC 入站",
+      "scope": "新增完整 gRPC adapter，复用 Create/Get/Patch/Advance use case，业务 HTTP adapter 保留到 LEN-196。",
+      "trace": {
+        "requirement_items": ["R3", "R4", "R5", "R7", "AC3", "AC4", "AC7"],
+        "design_decisions": ["D3", "D4", "D5", "D7"]
+      },
+      "affected_services": ["origination-api"],
+      "acceptance": [
+        "OriginationLoanApplicationGrpcAdapterTest passes",
+        "origination-api full test passes",
+        "business HTTP adapter retained"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "补齐 origination-api gRPC 运行配置",
+      "scope": "更新服务矩阵，确认 application.yml、Consul metadata、Deployment、Service、NetworkPolicy 和 overlay 渲染。",
+      "trace": {
+        "requirement_items": ["R6", "AC5", "AC6"],
+        "design_decisions": ["D6"]
+      },
+      "affected_services": ["origination-api"],
+      "acceptance": [
+        "ConsulServiceRegistrationTest passes",
+        "dev-1/sta-1 kustomize contains grpc 9090"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "交付证据和合并顺序",
+      "scope": "记录 Buf、Java、业务测试、GitOps 渲染、formal-only 消费证据和 HTTP cleanup 边界。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6", "D7"]
+      },
+      "affected_services": ["origination-api"],
+      "acceptance": [
+        "evidence records commands and results",
+        "merge-readiness records SDK-before-business constraint",
+        "contract dependency scan records formal-only dependency"
+      ],
+      "state": "done"
+    }
+  ]
+}

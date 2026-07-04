@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-180",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-07-05T02:49:54+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-180/requirement.md",
+      "sha256": "20dfc61574eb3bab0da2cca951b7d6fccebdabea8875f67f08f62037aee29772"
+    },
+    {
+      "path": "requirements/LEN-180/impact-analysis.md",
+      "sha256": "0f41fef55764059f0005dff2c601692b45ea70bf09411a93b3ff250e53cb5503"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-180/requirement.md approved by forest at 2026-07-05T02:30:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "使用 origination protobuf gRPC 契约并生成 Java contract。"
+  },
+  "decision": "用户本轮明确要求在 LEN-180 worktree 实现 origination-api 服务端 gRPC loan application 能力、9090 运行时和 Harness 证据。"
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-180",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-07-05T02:49:54+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-180/requirement.md",
+      "sha256": "20dfc61574eb3bab0da2cca951b7d6fccebdabea8875f67f08f62037aee29772"
+    },
+    {
+      "path": "requirements/LEN-180/impact-analysis.md",
+      "sha256": "0f41fef55764059f0005dff2c601692b45ea70bf09411a93b3ff250e53cb5503"
+    },
+    {
+      "path": "requirements/LEN-180/design.md",
+      "sha256": "6f62d8495098762a301aaf0f99fbf42cd8a3c87ad4f5607beedd7a193cb7a239"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-180/design.md approved by forest at 2026-07-05T02:30:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "使用 origination protobuf gRPC 契约并生成 Java contract。"
+  },
+  "decision": "用户本轮明确要求完成 LEN-180 实现和证据。"
+}
