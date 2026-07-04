@@ -51,7 +51,7 @@
       },
       "affected_services": ["fides-bff", "fides", "quote-api", "origination-api", "applicant-api"],
       "acceptance": ["kustomize render passes", "Deployment uses runtime Secret envFrom", "Consul service discovery resources preserved"],
-      "state": "todo"
+      "state": "done"
     },
     {
       "id": "T5",
@@ -63,7 +63,7 @@
       },
       "affected_services": ["fides-bff", "fides", "quote-api", "origination-api", "applicant-api"],
       "acceptance": ["dev-1 Ready and smoke pass before sta-1", "sta-1 Ready and smoke pass", "Consul KV bootstrap removed only after all services verified"],
-      "state": "todo"
+      "state": "done"
     },
     {
       "id": "T6",
@@ -75,7 +75,7 @@
       },
       "affected_services": ["fides-bff", "fides", "quote-api", "origination-api", "applicant-api"],
       "acceptance": ["janus requirement verify passes", "PRs merged to master", "worktrees cleaned"],
-      "state": "todo"
+      "state": "done"
     }
   ]
 }
