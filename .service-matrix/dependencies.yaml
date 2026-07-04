@@ -60,7 +60,10 @@ services:
   quote-api:
     module: pricing
     repo_path: "{business-repo}/apps/quote-api"
-    idl_required: false
+    idl_required: true
+    idl_repo: "{idl-repo}"
+    proto_path: "{idl-repo}/vesta/lendora/quote/v1"
+    buf_module: "local/lendora-quote"
 
   origination-api:
     module: applicant

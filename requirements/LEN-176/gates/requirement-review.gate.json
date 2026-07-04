@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-176",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-07-05T01:33:34+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-176/requirement.md",
+      "sha256": "1ac8eacdbb06d93f3f7fce4ef91667faab9db8f9493300fed4ca21d5ec78fa40"
+    },
+    {
+      "path": "requirements/LEN-176/impact-analysis.md",
+      "sha256": "0eda3a56cc70e3f7c6e0f714272718a0b777fbea486df5a972de1a707b929ad0"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-176/requirement.md approved by forest at 2026-07-05T00:35:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "新增 quote-api protobuf gRPC 服务和 Java/Go 生成物。"
+  },
+  "decision": "用户在 /goal 中授权处理下列任务中的任何事项，包括批准文件；批准 LEN-176 requirement 与 impact-analysis。"
+}
