@@ -1,0 +1,88 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-176",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-07-05T01:33:34+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-176/impact-analysis.md",
+      "sha256": "0eda3a56cc70e3f7c6e0f714272718a0b777fbea486df5a972de1a707b929ad0"
+    },
+    {
+      "path": "requirements/LEN-176/design.md",
+      "sha256": "e089dad4281e711e049bc7d5cfcbda7ffe64a9b02435656e93f87d79fbbfd6c3"
+    },
+    {
+      "path": "requirements/LEN-176/tasks.json",
+      "sha256": "7bb5370060d40d9c95ee0be349ac3c77c2752ab11478af1df5c8e39fc9493e51"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "17a183e582bbfdcf9165b31411528577f80dfa12e849ee61af9775a8c59b8bd0"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-176"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "4 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "quote-api"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-176/impact-analysis.md approved by forest at 2026-07-05T00:35:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-176-quote-api-grpc-hard-cut",
+      "commit": "8103d19"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-176-quote-api-grpc-hard-cut",
+      "commit": "5618ec5"
+    },
+    {
+      "name": "idl-repo",
+      "branch": "feature/LEN-176-quote-api-grpc-hard-cut",
+      "commit": "37afc56"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "新增 quote-api protobuf gRPC 服务和 Java/Go 生成物。"
+  },
+  "decision": "用户在 /goal 中授权处理下列任务中的任何事项，包括批准文件；批准 LEN-176 service repo readiness 与 impact-analysis。"
+}

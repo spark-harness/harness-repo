@@ -1,0 +1,95 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-176",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-07-05T01:33:34+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-176/requirement.md",
+      "sha256": "1ac8eacdbb06d93f3f7fce4ef91667faab9db8f9493300fed4ca21d5ec78fa40"
+    },
+    {
+      "path": "requirements/LEN-176/impact-analysis.md",
+      "sha256": "0eda3a56cc70e3f7c6e0f714272718a0b777fbea486df5a972de1a707b929ad0"
+    },
+    {
+      "path": "requirements/LEN-176/design.md",
+      "sha256": "e089dad4281e711e049bc7d5cfcbda7ffe64a9b02435656e93f87d79fbbfd6c3"
+    },
+    {
+      "path": "requirements/LEN-176/tasks.json",
+      "sha256": "7bb5370060d40d9c95ee0be349ac3c77c2752ab11478af1df5c8e39fc9493e51"
+    },
+    {
+      "path": "requirements/LEN-176/gates/requirement-review.gate.json",
+      "sha256": "f06905003438cb6a1e6d3974b555e35f8ff1bcc399feb3d6aff96b404b6e80e0"
+    },
+    {
+      "path": "requirements/LEN-176/gates/design-review.gate.json",
+      "sha256": "b5a97f3d20ecc158a1da62cc5aaf0e533aeaa95219f25033fb30c9b048fb7d13"
+    },
+    {
+      "path": "requirements/LEN-176/gates/dev-entry.gate.json",
+      "sha256": "99332cc264ccb4aaf02aac203e78a076f6ac53cea9853b47a4b9e3b7a13dfaf8"
+    },
+    {
+      "path": "requirements/LEN-176/gates/service-repo-check.gate.json",
+      "sha256": "b4e7ed52e6e0a8af1543f9899fcf87d9467cf119ffdc2e8a34e7d17b1594782c"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "17a183e582bbfdcf9165b31411528577f80dfa12e849ee61af9775a8c59b8bd0"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "3 evidence files recorded."
+    },
+    {
+      "item": "IDL 证据已记录",
+      "result": "PASS",
+      "evidence": "Buf or contract evidence exists."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-176/tasks.json approved by forest at 2026-07-05T00:35:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-176/evidence/buf-checks.md",
+      "sha256": "93011425be74cc2f1e93e080304f3d0831e0f768adeab8d14a3eba6ad66d5b68"
+    },
+    {
+      "path": "requirements/LEN-176/evidence/contract-dependency-scan.md",
+      "sha256": "8afe30f285add34de2a17bf5d3d7b825d3a61f22707ad2bf2cd5a9612d0bf9e3"
+    },
+    {
+      "path": "requirements/LEN-176/evidence/local-verification.md",
+      "sha256": "14f61708f1af9639f113bdc287bbd6b7c37564882e87f22276fd4d5dedf3bc11"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "新增 quote-api protobuf gRPC 服务和 Java/Go 生成物。"
+  },
+  "decision": "用户在 /goal 中授权处理下列任务中的任何事项，包括批准文件；批准 LEN-176 tasks 进入开发。"
+}

@@ -1,0 +1,57 @@
+{
+  "requirement_id": "LEN-176",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-07-05T00:35:00+08:00",
+  "decision": "用户在 /goal 中授权处理下列任务中的任何事项，包括批准文件；批准 LEN-176 tasks 进入开发。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "建立 quote gRPC 契约",
+      "scope": "新增 quote proto，运行 Buf lint/generate/breaking，生成 Java/Go contract。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "AC1", "AC2"],
+        "design_decisions": ["D1", "D2"]
+      },
+      "affected_services": ["quote-api"],
+      "acceptance": ["buf lint/generate/breaking pass", "QuoteServiceGrpc generated"],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "实现 quote-api gRPC 入站",
+      "scope": "新增 QuoteGrpcAdapter，复用 CreateQuoteUseCase/GetQuoteUseCase，业务 HTTP adapter 保留到 LEN-196 最终清理。",
+      "trace": {
+        "requirement_items": ["R3", "R4", "R6", "AC3", "AC4", "AC7"],
+        "design_decisions": ["D3", "D4", "D6"]
+      },
+      "affected_services": ["quote-api"],
+      "acceptance": ["QuoteGrpcAdapterTest passes", "HealthHttpAdapterTest passes", "business HTTP adapter retained until caller hard cut"],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "补齐 quote-api gRPC 运行配置",
+      "scope": "更新 Consul metadata、Deployment、Service、NetworkPolicy 和 overlay 渲染。",
+      "trace": {
+        "requirement_items": ["R5", "AC5", "AC6"],
+        "design_decisions": ["D5"]
+      },
+      "affected_services": ["quote-api"],
+      "acceptance": ["ConsulServiceRegistrationTest passes", "dev-1/sta-1 kustomize contains grpc 9090"],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "交付证据和合并顺序",
+      "scope": "记录验证证据、代码审查、门禁和 IDL/SDK 先行合并约束。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6"]
+      },
+      "affected_services": ["quote-api"],
+      "acceptance": ["merge-readiness records SDK-before-business constraint", "merge-readiness records HTTP cleanup deferred to LEN-196"],
+      "state": "done"
+    }
+  ]
+}
