@@ -1,0 +1,82 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-188",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-07-05T04:19:24+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-188/requirement.md",
+      "sha256": "ea44d863bfb5cc9212a30bc3a6d82253504d27043b08fe55521e1c40b916ca5c"
+    },
+    {
+      "path": "requirements/LEN-188/impact-analysis.md",
+      "sha256": "e5f6bae1bd8c521246035e8034789e207151afb773b4d01562d832f60790cde0"
+    },
+    {
+      "path": "requirements/LEN-188/design.md",
+      "sha256": "ab5577acb9c0f53c9a7ca2ff352c56d54b2acc2e4ba80cba18a346d78e657dd7"
+    },
+    {
+      "path": "requirements/LEN-188/tasks.json",
+      "sha256": "f103df6af069acd5bca0f1e63344096cd0cd8e438bdedefb2deb7baa5e373675"
+    },
+    {
+      "path": "requirements/LEN-188/gates/requirement-review.gate.json",
+      "sha256": "a04c7ee1a0e79ef77e57bd96ca739f22d8e97c59c26e7a95375b0c8bb2dcc543"
+    },
+    {
+      "path": "requirements/LEN-188/gates/design-review.gate.json",
+      "sha256": "cce815aa944cd69b66fdb6d4585e7db1715f79c9ff77cdab33e9009d7f377ab6"
+    },
+    {
+      "path": "requirements/LEN-188/gates/dev-entry.gate.json",
+      "sha256": "2d9fe525cb75a470e408b69a7ea31dd42ee637af3d78ea4113a924664235505a"
+    },
+    {
+      "path": "requirements/LEN-188/gates/service-repo-check.gate.json",
+      "sha256": "f371b7bb696340709baac6686fffb2e0431d5c1a0029de351543bccedf7e48c7"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "e5f77623485a4d7d5b5a4196791a3cb73107de5cd5a9531442425fb8ccbda53b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "1 evidence files recorded."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-188/tasks.json approved by forest at 2026-07-05T03:55:15+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-188/evidence/local-verification.md",
+      "sha256": "14907053374812bef6271b2b54718a3b57e95e24adcee4cc23a96f42df9cc469"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "quote-api gRPC 服务端和 Go SDK v0.2.6 已由 LEN-176 完成；本需求只消费既有 QuoteService.CreateQuote。"
+  },
+  "decision": "用户本轮明确授权处理 LEN-188 的任何事项，包括批准 tasks 进入开发。"
+}

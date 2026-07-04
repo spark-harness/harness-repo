@@ -1,0 +1,57 @@
+{
+  "decision": "用户本轮明确授权处理 LEN-188 的任何事项，包括批准 tasks 进入开发。",
+  "approved_at": "2026-07-05T03:55:15+08:00",
+  "approved_by": "forest",
+  "requirement_id": "LEN-188",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "建立 BFF quote gRPC 测试",
+      "scope": "新增 QuoteClient gRPC 测试，覆盖 request、metadata、trace ID、错误映射和 Consul grpc_port。",
+      "trace": {
+        "requirement_items": ["R1", "R3", "AC1", "AC2"],
+        "design_decisions": ["D1", "D3"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": ["go test ./internal/data covers quote gRPC client"],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "实现 fides-bff 到 quote-api gRPC 硬切",
+      "scope": "替换 quote HTTP client，删除 HTTP DTO/raw body/trace header 覆盖和 quote.http config。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R4", "AC1", "AC3", "AC4"],
+        "design_decisions": ["D1", "D2", "D4"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": ["go test ./... passes", "rg finds no QUOTE_HTTP_* in fides-bff quote path"],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "清理 GitOps quote HTTP 配置",
+      "scope": "删除 fides-bff GitOps QUOTE_HTTP_*，加入 QUOTE_GRPC_*，渲染 dev-1/sta-1。",
+      "trace": {
+        "requirement_items": ["R5", "AC5", "AC6"],
+        "design_decisions": ["D5"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": ["kubectl kustomize dev-1/sta-1 succeeds", "rendered output contains QUOTE_GRPC_* and no QUOTE_HTTP_*"],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "证据、审查和门禁",
+      "scope": "记录 Go 测试、GitOps 渲染、配置清理和 trace 查询或阻塞根因，生成 gates 并运行 Janus verify。",
+      "trace": {
+        "requirement_items": ["AC7", "AC8"],
+        "design_decisions": ["D6"]
+      },
+      "affected_services": ["fides-bff", "quote-api"],
+      "acceptance": ["evidence records commands and results", "Janus gate validate and requirement verify run"],
+      "state": "done"
+    }
+  ]
+}
