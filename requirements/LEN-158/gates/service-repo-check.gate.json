@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-158",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-07-04T18:22:58+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-158/impact-analysis.md",
+      "sha256": "9afed9e5d6b026f3b97fa013a2b69d8b915a8e90bac330ab79e4b6fb6cc78031"
+    },
+    {
+      "path": "requirements/LEN-158/design.md",
+      "sha256": "ce67e4a75ac43f49db33566065c89528512bc60a7727920f976822a1478c6ca9"
+    },
+    {
+      "path": "requirements/LEN-158/tasks.json",
+      "sha256": "10696a13bfed014d1689400c275ba457c632d3b0197b75623888b633767fd797"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-158"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "6 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "applicant-api, fides, fides-bff, origination-api, quote-api"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-158/impact-analysis.md approved by forest at 2026-07-04T16:29:45+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-158-vault-vso-config-migration",
+      "commit": "fddec57"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-158-vault-vso-config-migration",
+      "commit": "c3ac591"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "未声明 protobuf IDL 或外部契约影响。"
+  },
+  "decision": "用户在 2026-07-04 授权 Agent 批准任务执行中所有请求；批准 LEN-158 service repo readiness，涉及 harness-repo、business-repo、idl-repo、gitops-repo；idl-repo 仅用于 fides-bff/applicant-api proto readiness。"
+}

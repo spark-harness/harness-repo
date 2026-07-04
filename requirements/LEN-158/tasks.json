@@ -1,0 +1,81 @@
+{
+  "requirement_id": "LEN-158",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-07-04T16:27:24+08:00",
+  "decision": "用户在 2026-07-04 授权 Agent 批准任务执行中所有请求；批准 LEN-158 tasks 进入开发。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "固化 Harness 生命周期",
+      "scope": "创建 LEN-158 requirement、impact-analysis、design、tasks 和早期 gates，覆盖 Jira Epic/Story/Sub-task 依赖图。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R5", "R6", "R7"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6", "D7"]
+      },
+      "affected_services": [],
+      "acceptance": ["requirement-review/design-review/dev-entry gates validate"],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "建立 VSO 和 Vault runtime 底座",
+      "scope": "实现 LEN-160 和 LEN-161：VSO/CRD/VaultConnection/VaultAuth、Vault path/policy/role、现有 Secret key 迁移清单。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "AC1", "AC2"],
+        "design_decisions": ["D1", "D2"]
+      },
+      "affected_services": ["applicant-api", "quote-api", "origination-api", "fides-bff", "fides"],
+      "acceptance": ["VSO controller Ready", "VaultAuth usable by VaultStaticSecret", "runtime paths and key sets documented without values"],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "并行改造业务配置读取",
+      "scope": "实现 LEN-163、LEN-166、LEN-169、LEN-170：BFF Kratos env、FE 强类型 env、Java 移除 Consul Config。",
+      "trace": {
+        "requirement_items": ["R3", "R4", "R5", "AC3", "AC4", "AC5"],
+        "design_decisions": ["D3", "D4", "D5"]
+      },
+      "affected_services": ["fides-bff", "fides", "quote-api", "origination-api", "applicant-api"],
+      "acceptance": ["BFF tests/build pass", "fides-web lint/test pass", "Java Maven tests pass", "no scattered process.env outside src/config/env.ts"],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "接入 GitOps VSO Secret",
+      "scope": "实现 LEN-164、LEN-167、LEN-171：VaultStaticSecret、Deployment envFrom、删除服务级 Consul KV config bootstrap。",
+      "trace": {
+        "requirement_items": ["R6", "AC6", "AC10"],
+        "design_decisions": ["D6"]
+      },
+      "affected_services": ["fides-bff", "fides", "quote-api", "origination-api", "applicant-api"],
+      "acceptance": ["kustomize render passes", "Deployment uses runtime Secret envFrom", "Consul service discovery resources preserved"],
+      "state": "todo"
+    },
+    {
+      "id": "T5",
+      "title": "串行验证 dev-1 和 sta-1",
+      "scope": "实现 LEN-173 和 LEN-174：dev-1 rollout/smoke/trace，sta-1 rollout/smoke/trace，最后清理 Consul KV bootstrap。",
+      "trace": {
+        "requirement_items": ["R7", "AC7", "AC8", "AC9", "AC10"],
+        "design_decisions": ["D7"]
+      },
+      "affected_services": ["fides-bff", "fides", "quote-api", "origination-api", "applicant-api"],
+      "acceptance": ["dev-1 Ready and smoke pass before sta-1", "sta-1 Ready and smoke pass", "Consul KV bootstrap removed only after all services verified"],
+      "state": "todo"
+    },
+    {
+      "id": "T6",
+      "title": "合并就绪和交付收尾",
+      "scope": "记录实现证据、代码审查、merge-readiness gate、PR、合并、Jira 状态和 worktree 清理。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8", "AC9", "AC10"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6", "D7"]
+      },
+      "affected_services": ["fides-bff", "fides", "quote-api", "origination-api", "applicant-api"],
+      "acceptance": ["janus requirement verify passes", "PRs merged to master", "worktrees cleaned"],
+      "state": "todo"
+    }
+  ]
+}
