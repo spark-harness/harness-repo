@@ -1,0 +1,95 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-180",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-07-05T02:49:54+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-180/requirement.md",
+      "sha256": "20dfc61574eb3bab0da2cca951b7d6fccebdabea8875f67f08f62037aee29772"
+    },
+    {
+      "path": "requirements/LEN-180/impact-analysis.md",
+      "sha256": "0f41fef55764059f0005dff2c601692b45ea70bf09411a93b3ff250e53cb5503"
+    },
+    {
+      "path": "requirements/LEN-180/design.md",
+      "sha256": "6f62d8495098762a301aaf0f99fbf42cd8a3c87ad4f5607beedd7a193cb7a239"
+    },
+    {
+      "path": "requirements/LEN-180/tasks.json",
+      "sha256": "e524b3eb9e3ee496455067ce7e0dbb6e6295109792044e49f102ebbbad3da4ff"
+    },
+    {
+      "path": "requirements/LEN-180/gates/requirement-review.gate.json",
+      "sha256": "677bf6b753c8b967660933a4f4d0d78aeb7a64642b6542622d8508572fbc0869"
+    },
+    {
+      "path": "requirements/LEN-180/gates/design-review.gate.json",
+      "sha256": "9c4201230b9e6a094b8ec36604f932ea8c513f2ddf449d838a698c1c4463788c"
+    },
+    {
+      "path": "requirements/LEN-180/gates/dev-entry.gate.json",
+      "sha256": "a2a398408ded9d0b017482c20f89cfe2d0ab8b33b053f92b0405d824400edb58"
+    },
+    {
+      "path": "requirements/LEN-180/gates/service-repo-check.gate.json",
+      "sha256": "48ea76982518ec3f68047599eb316ef51898e628de65141094f4cd59d7597f62"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "e5f77623485a4d7d5b5a4196791a3cb73107de5cd5a9531442425fb8ccbda53b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "3 evidence files recorded."
+    },
+    {
+      "item": "IDL 证据已记录",
+      "result": "PASS",
+      "evidence": "Buf or contract evidence exists."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-180/tasks.json approved by forest at 2026-07-05T02:30:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-180/evidence/buf-checks.md",
+      "sha256": "b06066d4f1167baa630c924f61d44dad9cca26c5d66d4663418046ec2fb532f4"
+    },
+    {
+      "path": "requirements/LEN-180/evidence/contract-dependency-scan.md",
+      "sha256": "b5b346cac0e706f513e7735d6267277bcbb314fbdbbc3d57ed5fdd47511d199c"
+    },
+    {
+      "path": "requirements/LEN-180/evidence/local-verification.md",
+      "sha256": "aec8cfc3e6c1496aabc51c931dbf6043ad4dc5f15e11ff3c6baf6edfa49a56b8"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "使用 origination protobuf gRPC 契约并生成 Java contract。"
+  },
+  "decision": "用户本轮明确要求完成 LEN-180 实现和证据。"
+}
