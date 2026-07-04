@@ -1,0 +1,120 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-158",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "spark-evidence-gate-completion",
+  "checked_at": "2026-07-04T19:46:18+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-158/requirement.md",
+      "sha256": "5c4f511cd8354ce8facea7e729d04703d68849429a6297dd1ca03f6b38e6bddb"
+    },
+    {
+      "path": "requirements/LEN-158/impact-analysis.md",
+      "sha256": "9afed9e5d6b026f3b97fa013a2b69d8b915a8e90bac330ab79e4b6fb6cc78031"
+    },
+    {
+      "path": "requirements/LEN-158/design.md",
+      "sha256": "ce67e4a75ac43f49db33566065c89528512bc60a7727920f976822a1478c6ca9"
+    },
+    {
+      "path": "requirements/LEN-158/tasks.json",
+      "sha256": "fb1ab16d61d0b0163a66ce67bc946e8410d42ec884359e5a4aa51ce55f2a73cc"
+    },
+    {
+      "path": "requirements/LEN-158/evidence/local-implementation.md",
+      "sha256": "fd5ed5c21fb0c080475babbe405963cd2b375551fb46c0e11f6327e28fc3a8af"
+    },
+    {
+      "path": "requirements/LEN-158/reviews/T2-T4.md",
+      "sha256": "34d642b88fcb1cb2a8b0910ec94830d0f403a0f02098ddee6d2b6ea438441c78"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "ebb9577852bb5edc5bb5d4ebbaf29bac0c2fb629b92cc1828c272889e1e7955c"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "早期阶段门禁均已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, service-repo-check are PASS."
+    },
+    {
+      "item": "任务状态完整",
+      "result": "PASS",
+      "evidence": "T1-T6 are marked done in tasks.json."
+    },
+    {
+      "item": "业务代码与 GitOps PR 已合并",
+      "result": "PASS",
+      "evidence": "business-repo PR #45 merged; gitops-repo PR #39, #40, #41 merged."
+    },
+    {
+      "item": "服务测试、构建和渲染证据完整",
+      "result": "PASS",
+      "evidence": "local-implementation.md records FE, BFF, Java, GitOps render, and CI evidence."
+    },
+    {
+      "item": "dev-1 环境切换通过",
+      "result": "PASS",
+      "evidence": "dev-1 Argo apps Synced/Healthy, VSO Secrets Ready, five deployments rolled out, smoke returned HTTP 200."
+    },
+    {
+      "item": "sta-1 环境切换通过",
+      "result": "PASS",
+      "evidence": "sta-1 Argo apps Synced/Healthy, VSO Secrets Ready, five deployments rolled out, smoke returned HTTP 200."
+    },
+    {
+      "item": "服务级 Consul KV bootstrap 已清理",
+      "result": "PASS",
+      "evidence": "dev-1 and sta-1 no longer contain service-level consul-config/runtime-config Jobs or ConfigMaps."
+    },
+    {
+      "item": "Consul 服务发现保留",
+      "result": "PASS",
+      "evidence": "Consul catalog still contains dev-1 and sta-1 service registrations; lendora-shared-consul was not removed."
+    },
+    {
+      "item": "IDL 影响",
+      "result": "PASS",
+      "evidence": "No protobuf IDL changes were made; idl impact is no."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "business-repo",
+      "branch": "master",
+      "commit": "d5b02f259cd5a46a0322917ff1f709f476a5b5da"
+    },
+    {
+      "name": "gitops-repo",
+      "branch": "master",
+      "commit": "a50ee66816c62ad9ee15f41b1feb52df2f4dc165"
+    },
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-158-vault-vso-config-migration",
+      "commit": "pending"
+    },
+    {
+      "name": "idl-repo",
+      "branch": "master",
+      "commit": "34c4f17"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf IDL、生成契约、HTTP 路由或外部事件契约。"
+  },
+  "decision": "LEN-158 已完成 Vault/VSO 底座、业务代码硬切、GitOps 合并、dev-1 与 sta-1 串行 rollout/smoke、服务级 Consul KV bootstrap 清理；允许合并 Harness 收尾 PR。"
+}

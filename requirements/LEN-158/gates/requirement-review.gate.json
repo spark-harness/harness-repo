@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-158",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-07-04T17:46:37+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-158/requirement.md",
+      "sha256": "5c4f511cd8354ce8facea7e729d04703d68849429a6297dd1ca03f6b38e6bddb"
+    },
+    {
+      "path": "requirements/LEN-158/impact-analysis.md",
+      "sha256": "9afed9e5d6b026f3b97fa013a2b69d8b915a8e90bac330ab79e4b6fb6cc78031"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-158/requirement.md approved by forest at 2026-07-04T16:29:45+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "未声明 protobuf IDL 或外部契约影响。"
+  },
+  "decision": "用户在 2026-07-04 授权 Agent 批准任务执行中所有请求；批准 LEN-158 requirement 与 impact-analysis，idl-repo 仅用于同分支 proto readiness，不修改 protobuf。"
+}
