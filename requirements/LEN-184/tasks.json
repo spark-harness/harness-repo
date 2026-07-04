@@ -1,0 +1,72 @@
+{
+  "decision": "用户本轮明确授权处理 LEN-184 的任何事项，包括批准 tasks 进入开发。",
+  "approved_at": "2026-07-05T03:32:57+08:00",
+  "approved_by": "forest",
+  "requirement_id": "LEN-184",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "建立 gRPC quote gateway 测试",
+      "scope": "新增 GrpcQuoteGateway in-process gRPC 测试，覆盖成功读取、身份 metadata 和 quote gRPC 错误映射；更新配置测试证明不再需要 HTTP base URL。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "AC1", "AC2", "AC3", "AC4"],
+        "design_decisions": ["D1", "D2"]
+      },
+      "affected_services": ["origination-api"],
+      "acceptance": [
+        "GrpcQuoteGatewayTest initially fails before production gateway exists",
+        "configuration model test rejects ORIGINATION_QUOTE_API_BASE_URL"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "实现 origination-api 到 quote-api gRPC 硬切",
+      "scope": "新增 GrpcQuoteGateway，装配 QuoteServiceBlockingStub 和 ManagedChannel，删除 HttpQuoteGateway 使用路径、HTTP client bean 和 HTTP quote 配置。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "AC1", "AC2", "AC3", "AC4"],
+        "design_decisions": ["D1", "D2", "D3"]
+      },
+      "affected_services": ["origination-api"],
+      "acceptance": [
+        "origination-api Maven tests pass",
+        "LoanApplicationHttpAdapter remains",
+        "rg finds no HttpQuoteGateway or ORIGINATION_QUOTE_API_BASE_URL in business origination-api"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "清理 GitOps quote HTTP 配置并确认 9090",
+      "scope": "删除 origination-api GitOps 中 quote HTTP base URL/timeout，渲染 dev-1 和 sta-1，确认 gRPC 9090 和 NetworkPolicy 保留。",
+      "trace": {
+        "requirement_items": ["R5", "R6", "AC5", "AC6"],
+        "design_decisions": ["D4", "D5"]
+      },
+      "affected_services": ["origination-api", "quote-api"],
+      "acceptance": [
+        "kustomize render dev-1/sta-1 succeeds",
+        "rendered origination-api contains no quote HTTP base URL",
+        "rendered policies include 9090 where required"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "证据、审查和门禁",
+      "scope": "记录 Maven、静态检查、GitOps 渲染、trace 查询或阻塞根因，生成 review/evidence/gates 并运行 Janus verify。",
+      "trace": {
+        "requirement_items": ["AC7", "AC8"],
+        "design_decisions": ["D6"]
+      },
+      "affected_services": ["origination-api", "quote-api"],
+      "acceptance": [
+        "evidence records commands and results",
+        "merge-readiness records no IDL change and no HTTP fallback",
+        "Janus gate validate and requirement verify run or failure root cause recorded"
+      ],
+      "state": "done"
+    }
+  ]
+}

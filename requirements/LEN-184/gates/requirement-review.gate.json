@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-184",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-07-05T04:19:23+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-184/requirement.md",
+      "sha256": "9e35342a4e9a8c080d3b2a5f56afe0716bbb34f0ce477e9c1ef1f0b51cae1297"
+    },
+    {
+      "path": "requirements/LEN-184/impact-analysis.md",
+      "sha256": "295af3eb93535b591e2b0841b8541eb9ec0f015d81d0c54609dce4736782ec47"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-184/requirement.md approved by forest at 2026-07-05T03:32:39+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "quote-api gRPC 服务端和 Java SDK 0.2.7 已由 LEN-176 完成；本需求只消费既有 QuoteService.GetQuote。"
+  },
+  "decision": "用户本轮明确授权处理 LEN-184 的任何事项，包括批准 requirement 与 impact-analysis。"
+}
