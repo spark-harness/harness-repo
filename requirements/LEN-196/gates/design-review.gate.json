@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-196",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-07-05T09:35:18+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-196/requirement.md",
+      "sha256": "9d6b3c4730343c384be3e6b34c3389642a51c09b11dfce96ad8fb2ddfe68530d"
+    },
+    {
+      "path": "requirements/LEN-196/impact-analysis.md",
+      "sha256": "1e20a3656694b2eccee4d3773b606262fb2ebf23f4fa7f1753fce5a420196893"
+    },
+    {
+      "path": "requirements/LEN-196/design.md",
+      "sha256": "daf2a200cfb3fec7b008233cd746b0a63ed97ad967c21980d5c29a33f2153dfe"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-196/design.md approved by forest at 2026-07-05T09:08:32+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf；只删除已被 gRPC 替代的业务 HTTP 暴露面和 GitOps 旧配置。"
+  },
+  "decision": "用户本轮明确授权批准 LEN-196 design；允许按 dev-1 先行、sta-1 后续、保留 health/readiness 和 lendora-shared-consul 的方案实施。"
+}

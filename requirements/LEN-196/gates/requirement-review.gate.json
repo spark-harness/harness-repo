@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-196",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-07-05T09:35:18+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-196/requirement.md",
+      "sha256": "9d6b3c4730343c384be3e6b34c3389642a51c09b11dfce96ad8fb2ddfe68530d"
+    },
+    {
+      "path": "requirements/LEN-196/impact-analysis.md",
+      "sha256": "1e20a3656694b2eccee4d3773b606262fb2ebf23f4fa7f1753fce5a420196893"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-196/requirement.md approved by forest at 2026-07-05T09:08:32+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf；只删除已被 gRPC 替代的业务 HTTP 暴露面和 GitOps 旧配置。"
+  },
+  "decision": "用户本轮明确授权处理 LEN-196 的任何事项；批准 requirement 与 impact-analysis，范围限定为 dev-1/sta-1 验证和内部业务 HTTP 包袱清理。"
+}

@@ -1,0 +1,82 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-196",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-07-05T10:23:29+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-196/requirement.md",
+      "sha256": "9d6b3c4730343c384be3e6b34c3389642a51c09b11dfce96ad8fb2ddfe68530d"
+    },
+    {
+      "path": "requirements/LEN-196/impact-analysis.md",
+      "sha256": "1e20a3656694b2eccee4d3773b606262fb2ebf23f4fa7f1753fce5a420196893"
+    },
+    {
+      "path": "requirements/LEN-196/design.md",
+      "sha256": "daf2a200cfb3fec7b008233cd746b0a63ed97ad967c21980d5c29a33f2153dfe"
+    },
+    {
+      "path": "requirements/LEN-196/tasks.json",
+      "sha256": "8a3e59df0cad275ee5b6763955937b46b6fa72302080ea8a3ad396c509a077d5"
+    },
+    {
+      "path": "requirements/LEN-196/gates/requirement-review.gate.json",
+      "sha256": "11cb0745781c3f6cbd838ade0b60647e50057dab85385768d0a318b36b363063"
+    },
+    {
+      "path": "requirements/LEN-196/gates/design-review.gate.json",
+      "sha256": "c06962ef02bd713ace316982e92cb1d79bed948e3e041d01cb0097b1b6e69c17"
+    },
+    {
+      "path": "requirements/LEN-196/gates/dev-entry.gate.json",
+      "sha256": "7a8b94e0d0ea0954ae93b0fc5c2390f623dc1896cba79dc79c4657314b5bd0e2"
+    },
+    {
+      "path": "requirements/LEN-196/gates/service-repo-check.gate.json",
+      "sha256": "30a3b249d5c490842e49f94a7d1e08932ba300a3bfb7404bcd70c0762e910e57"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "e5f77623485a4d7d5b5a4196791a3cb73107de5cd5a9531442425fb8ccbda53b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "1 evidence files recorded."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-196/tasks.json approved by forest at 2026-07-05T09:08:32+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-196/evidence/local-verification.md",
+      "sha256": "6c300000da2ab2988b65192368024f27d8a877a6480843eb60cad9c92dbf3578"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf；只删除已被 gRPC 替代的业务 HTTP 暴露面和 GitOps 旧配置。"
+  },
+  "decision": "用户本轮明确授权批准 LEN-196 tasks，允许进入业务仓和 GitOps 清理。"
+}
