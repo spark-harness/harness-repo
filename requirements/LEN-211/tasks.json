@@ -1,0 +1,89 @@
+{
+  "approved_at": "2026-07-05T17:54:44+08:00",
+  "approved_by": "forest",
+  "decision": "用户明确授权批准中间需要的文件；批准 LEN-211 tasks，允许进入 IDL、业务实现和验证。",
+  "requirement_id": "LEN-211",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 生命周期和早期门禁",
+      "scope": "创建 LEN-211 requirement、impact-analysis、design、tasks，并生成 requirement-review、design-review、dev-entry、service-repo-check gate。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R5", "R6", "R7"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5"]
+      },
+      "affected_services": ["applicant-api", "quote-api", "origination-api", "fides-bff"],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "dev-entry gate PASS",
+        "service-repo-check gate PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "硬切 quote trace_id 业务字段",
+      "scope": "删除 quote proto request trace_id、quote domain/command/repository traceId、quotes.trace_id schema、fides-bff request 字段。",
+      "trace": {
+        "requirement_items": ["R5", "AC7"],
+        "design_decisions": ["D4", "D5"]
+      },
+      "affected_services": ["quote-api", "fides-bff"],
+      "acceptance": [
+        "quote.proto reserves field 5 and name trace_id",
+        "business-repo no longer sends quote trace_id request field",
+        "quote-api tests pass"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "统一 Java OTel Logs 接入",
+      "scope": "在 spring-starter 增加统一 Logback / OTel Logs appender，三个 Java 服务启用 logs exporter 配置。",
+      "trace": {
+        "requirement_items": ["R2", "R3", "R4"],
+        "design_decisions": ["D2", "D3"]
+      },
+      "affected_services": ["applicant-api", "quote-api", "origination-api"],
+      "acceptance": [
+        "spring-starter tests pass",
+        "applicant-api observability config test passes",
+        "quote-api and origination-api config tests pass"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "强化 Java 日志入口约束",
+      "scope": "更新团队规范和 Java quality checkstyle，禁止业务代码导入非 SLF4J 日志 API。",
+      "trace": {
+        "requirement_items": ["R1", "R6"],
+        "design_decisions": ["D1"]
+      },
+      "affected_services": ["applicant-api", "quote-api", "origination-api"],
+      "acceptance": [
+        "java-quality tests pass",
+        "Checkstyle includes IllegalImport for Logback/JUL/Commons Logging/Log4j2"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "完成 evidence、review 和 merge-readiness",
+      "scope": "记录 Buf、Java、Go、quality 测试结果，完成 review 和 merge-readiness gate。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5"]
+      },
+      "affected_services": ["applicant-api", "quote-api", "origination-api", "fides-bff"],
+      "acceptance": [
+        "review report ready-for-gate or findings fixed",
+        "merge-readiness gate PASS",
+        "janus requirement verify --target merge PASS"
+      ],
+      "state": "done"
+    }
+  ]
+}

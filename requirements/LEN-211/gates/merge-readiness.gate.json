@@ -1,0 +1,91 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-211",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-07-05T18:13:58+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-211/requirement.md",
+      "sha256": "273d231e8022395aab28975a4bfda6f17d8760b7e67f8fbb6ffd2626071b753e"
+    },
+    {
+      "path": "requirements/LEN-211/impact-analysis.md",
+      "sha256": "fcbe8229a49350391d3b337f1f4f18682fb5348232810871dae8eb341eab64fc"
+    },
+    {
+      "path": "requirements/LEN-211/design.md",
+      "sha256": "b53816106a849404705fe9c7d6cfad2891e04ec2a75be485bb94d0a8d1cf37c4"
+    },
+    {
+      "path": "requirements/LEN-211/tasks.json",
+      "sha256": "2525aa85893060be868a09cb51140d044872bb211e8ec82f74a40310d48b839d"
+    },
+    {
+      "path": "requirements/LEN-211/gates/requirement-review.gate.json",
+      "sha256": "cf502be0f828f89125a5ed38a1381717dd067fd0811f9b88fed652b38503274f"
+    },
+    {
+      "path": "requirements/LEN-211/gates/design-review.gate.json",
+      "sha256": "bd4c43e6d4f846316b4aab5723b2303a97cc7f566f10d0e7c13ed807ea01c2cc"
+    },
+    {
+      "path": "requirements/LEN-211/gates/dev-entry.gate.json",
+      "sha256": "274f0e0ac42e79acf56de5dd3f2b9628b987f5f77cc01960f610de46d521c381"
+    },
+    {
+      "path": "requirements/LEN-211/gates/service-repo-check.gate.json",
+      "sha256": "cdf6a4a13cd8815b433a1c783a533f28c566f5cfdeba346945d84e566a032143"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "e5f77623485a4d7d5b5a4196791a3cb73107de5cd5a9531442425fb8ccbda53b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "2 evidence files recorded."
+    },
+    {
+      "item": "IDL 证据已记录",
+      "result": "PASS",
+      "evidence": "Buf or contract evidence exists."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-211/tasks.json approved by forest at 2026-07-05T17:54:44+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-211/evidence/buf-checks.md",
+      "sha256": "c4efa0e43bb69fc0359d72698778c3b2a88e23538a27c75b80a68aab2e614a0a"
+    },
+    {
+      "path": "requirements/LEN-211/evidence/local-verification.md",
+      "sha256": "4bb19d5407b72f9ced9810740b906a82282d3dedd51ef708311928556f9534f8"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "quote.proto 删除 CreateQuoteRequest.trace_id，并保留字段号和字段名 reserved。"
+  },
+  "decision": "用户明确授权批准中间需要的文件；批准 LEN-211 tasks，允许进入 IDL、业务实现和验证。"
+}

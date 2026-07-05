@@ -29,6 +29,7 @@ Tracing 规范定义：
 - 外部 HTTP、RPC、数据库、缓存、消息队列调用必须创建对应 client / producer / consumer span。
 - 日志必须能关联当前 `trace_id` 和 `span_id`。
 - 错误 span 必须携带稳定错误码。
+- `trace_id` 不属于业务契约、领域模型或持久化字段；同步链路必须通过 W3C TraceContext 传播。
 
 ## 同步与异步链路
 
