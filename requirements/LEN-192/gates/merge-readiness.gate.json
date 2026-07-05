@@ -5,7 +5,7 @@
   "gate_name": "合并就绪门禁",
   "stage": "5.1",
   "checked_by": "merge_readiness_checker",
-  "checked_at": "2026-07-05T08:12:00+08:00",
+  "checked_at": "2026-07-05T08:52:00+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -55,7 +55,7 @@
     {
       "item": "实现证据已记录",
       "result": "PASS",
-      "evidence": "local-verification evidence records Go tests, contract dependency scan, GitOps rendering, and hard-cut checks."
+      "evidence": "local-verification evidence records Go tests, contract dependency scan, GitOps rendering, image release, live dev-1/sta-1 config, and hard-cut smoke checks."
     },
     {
       "item": "代码审查已完成",
@@ -66,23 +66,22 @@
       "item": "人工批准记录合法",
       "result": "PASS",
       "evidence": "requirements/LEN-192/tasks.json approved by forest at 2026-07-05T05:41:18+08:00."
+    },
+    {
+      "item": "运行时切换已验证",
+      "result": "PASS",
+      "evidence": "dev-1 and sta-1 fides-bff Argo apps are Synced/Healthy on the promoted digest; both environments completed create/get/patch/advance smoke through public BFF HTTP while internal origination config uses Consul-discovered gRPC and contains no ORIGINATION_HTTP_* keys."
     }
   ],
   "blocking_issues": [],
-  "warnings": [
-    {
-      "issue": "live trace evidence pending deployment",
-      "follow_up_action": "After merge and image promotion, verify dev-1 then sta-1 loan application smoke and BFF-to-origination gRPC trace before closing Jira.",
-      "owner": "forest"
-    }
-  ],
+  "warnings": [],
   "waiver": {
     "required": false
   },
   "evidence": [
     {
       "path": "requirements/LEN-192/evidence/local-verification.md",
-      "sha256": "be371324d476a4f3f5fbc42c673618728e6fdab6c208743993b9e5625111b300"
+      "sha256": "c44cb3183b4c17596ff9e5b1b1a95753310086142efbf8e088b3e050a5cc933f"
     },
     {
       "path": "requirements/LEN-192/reviews/T1-T4-implementation.md",
@@ -93,5 +92,5 @@
     "impact": "no",
     "na_reason": "origination-api gRPC 服务端和 Go SDK 已由 LEN-180 完成；本需求只消费既有 origination gRPC 契约。"
   },
-  "decision": "用户本轮明确授权处理 LEN-192 的任何事项；T1-T4 implementation review passed after closing error-mapping findings."
+  "decision": "用户本轮明确授权处理 LEN-192 的任何事项；T1-T4 implementation review passed after closing error-mapping findings, and post-merge dev-1/sta-1 runtime smoke passed on the promoted fides-bff image."
 }
