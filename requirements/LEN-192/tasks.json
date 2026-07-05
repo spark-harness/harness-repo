@@ -1,0 +1,90 @@
+{
+  "decision": "用户本轮明确授权批准 LEN-192 tasks，允许进入开发。",
+  "approved_at": "2026-07-05T05:41:18+08:00",
+  "approved_by": "forest",
+  "requirement_id": "LEN-192",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 生命周期和早期门禁",
+      "scope": "创建 LEN-192 requirement、impact-analysis、design、tasks，并生成 requirement-review、design-review、dev-entry 和 service-repo-check gate。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R5", "R7", "R8"],
+        "design_decisions": ["D1", "D2", "D3", "D4"]
+      },
+      "affected_services": ["fides-bff", "origination-api"],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "dev-entry gate PASS",
+        "service-repo-check gate PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "用测试锁定 BFF origination gRPC 行为",
+      "scope": "新增或调整 fides-bff 测试，覆盖 create/get/patch/advance 的 gRPC request、metadata 和错误映射。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R6"],
+        "design_decisions": ["D1", "D4"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "测试在旧 HTTP 路径下暴露缺口或作为 characterization baseline",
+        "测试覆盖 applicant metadata",
+        "测试覆盖 not found、forbidden、validation、unavailable 错误映射"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "实现 fides-bff 到 origination-api 全量 gRPC",
+      "scope": "替换 origination HTTP client 和部分 draft gRPC client，删除 HTTP DTO、fallback、HTTP base URL 和手写 HTTP trace header 覆盖。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R5", "R6"],
+        "design_decisions": ["D1", "D2", "D4"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "go test ./... 通过",
+        "contract dependency scan 通过 formal-only",
+        "代码搜索不再出现 origination HTTP client/fallback/config"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "更新 GitOps fides-bff origination 配置",
+      "scope": "在 LEN-184/LEN-188 GitOps 合入后，删除 fides-bff 的 origination HTTP env，保留 gRPC 配置并验证 dev-1/sta-1 渲染。",
+      "trace": {
+        "requirement_items": ["R7"],
+        "design_decisions": ["D3"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "dev-1 渲染不包含 ORIGINATION_HTTP_BASE_URL",
+        "sta-1 渲染不包含 ORIGINATION_HTTP_BASE_URL",
+        "渲染保留 origination gRPC 配置"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "完成 evidence、review 和 merge-readiness",
+      "scope": "记录本地测试、contract scan、GitOps 渲染、代码 review、Janus gate 和 requirement verify 证据。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7", "AC8", "AC9"],
+        "design_decisions": ["D1", "D2", "D3", "D4"]
+      },
+      "affected_services": ["fides-bff", "origination-api"],
+      "acceptance": [
+        "review report ready-for-gate or findings fixed",
+        "merge-readiness gate PASS",
+        "janus requirement verify --target merge PASS"
+      ],
+      "state": "done"
+    }
+  ]
+}
