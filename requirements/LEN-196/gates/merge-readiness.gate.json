@@ -1,0 +1,93 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-196",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-07-05T09:42:03+08:00",
+  "result": "WARN",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-196/requirement.md",
+      "sha256": "9d6b3c4730343c384be3e6b34c3389642a51c09b11dfce96ad8fb2ddfe68530d"
+    },
+    {
+      "path": "requirements/LEN-196/impact-analysis.md",
+      "sha256": "1e20a3656694b2eccee4d3773b606262fb2ebf23f4fa7f1753fce5a420196893"
+    },
+    {
+      "path": "requirements/LEN-196/design.md",
+      "sha256": "daf2a200cfb3fec7b008233cd746b0a63ed97ad967c21980d5c29a33f2153dfe"
+    },
+    {
+      "path": "requirements/LEN-196/tasks.json",
+      "sha256": "982b3344ba6351987b3ff8e600b978fc0dcba70fb9002dbfd79c7b769881418f"
+    },
+    {
+      "path": "requirements/LEN-196/gates/requirement-review.gate.json",
+      "sha256": "11cb0745781c3f6cbd838ade0b60647e50057dab85385768d0a318b36b363063"
+    },
+    {
+      "path": "requirements/LEN-196/gates/design-review.gate.json",
+      "sha256": "c06962ef02bd713ace316982e92cb1d79bed948e3e041d01cb0097b1b6e69c17"
+    },
+    {
+      "path": "requirements/LEN-196/gates/dev-entry.gate.json",
+      "sha256": "4f468aa9aa6ec7b57e000b21d54a5af9bdb486104d4a89f63989957a0c76fe9e"
+    },
+    {
+      "path": "requirements/LEN-196/gates/service-repo-check.gate.json",
+      "sha256": "9a0b20d137f5d96581d942c921746a4616de9d32e3a5e0f87da333ed90f83057"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "e5f77623485a4d7d5b5a4196791a3cb73107de5cd5a9531442425fb8ccbda53b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "local-verification records T1-T3 tests, contract scan, negative scans, GitOps rendering, and review evidence."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-196/tasks.json approved by forest at 2026-07-05T09:08:32+08:00."
+    },
+    {
+      "item": "运行时 smoke 待部署后完成",
+      "result": "WARN",
+      "evidence": "T4 and T5 remain todo until business image release, GitOps promotion, dev-1 smoke, sta-1 smoke, and final runtime evidence refresh complete."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": [
+    {
+      "issue": "runtime smoke pending",
+      "follow_up_action": "After business and GitOps PRs merge, release images, validate dev-1 first, then sta-1, and refresh LEN-196 evidence plus merge-readiness.",
+      "owner": "forest"
+    }
+  ],
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-196/evidence/local-verification.md",
+      "sha256": "27ccb3d8106181c3e149807f6a7f58231d2566b0220a3aba44a5a62ae0dd37ef"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf；只删除已被 gRPC 替代的业务 HTTP 暴露面和 GitOps 旧配置。"
+  },
+  "decision": "T1-T3 are ready for PR gates; T4/T5 runtime smoke and final evidence remain pending after image release and GitOps promotion."
+}
