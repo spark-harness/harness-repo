@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-213",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-07-06T00:36:58+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-213/requirement.md",
+      "sha256": "f0a227be39272e5e730e4ba9039a44cb709ba02aa045fe8c8e466d1e06fbaec1"
+    },
+    {
+      "path": "requirements/LEN-213/impact-analysis.md",
+      "sha256": "2bd4dae9d3ebc86a9127f60d810a7625de6d5b4e7902a9487d0c6783e7e2b588"
+    },
+    {
+      "path": "requirements/LEN-213/design.md",
+      "sha256": "5e09453028b75221b97a40a9ef53c86f0c8ba7cc25e49c34cbc84da0ea8bc76b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-213/design.md approved by forest at 2026-07-06T00:00:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 fides-web 服务端日志与 lint/CI 防漂移，不新增或修改 protobuf IDL、HTTP 外部契约或生成契约。"
+  },
+  "decision": "用户明确授权批准中间的文件；批准 LEN-213 design，采用 fides-web 服务端 stdout JSON logger 与 lint 防漂移方案。"
+}
