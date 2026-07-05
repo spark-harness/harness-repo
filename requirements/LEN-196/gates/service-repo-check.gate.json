@@ -1,0 +1,83 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-196",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-07-05T09:35:18+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-196/impact-analysis.md",
+      "sha256": "1e20a3656694b2eccee4d3773b606262fb2ebf23f4fa7f1753fce5a420196893"
+    },
+    {
+      "path": "requirements/LEN-196/design.md",
+      "sha256": "daf2a200cfb3fec7b008233cd746b0a63ed97ad967c21980d5c29a33f2153dfe"
+    },
+    {
+      "path": "requirements/LEN-196/tasks.json",
+      "sha256": "982b3344ba6351987b3ff8e600b978fc0dcba70fb9002dbfd79c7b769881418f"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "e5f77623485a4d7d5b5a4196791a3cb73107de5cd5a9531442425fb8ccbda53b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-196"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "5 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "applicant-api, fides-bff, origination-api, quote-api"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-196/impact-analysis.md approved by forest at 2026-07-05T09:08:32+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-196-dev-sta-grpc-http-cleanup",
+      "commit": "4c35f3d"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-196-dev-sta-grpc-http-cleanup",
+      "commit": "171ad58"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf；只删除已被 gRPC 替代的业务 HTTP 暴露面和 GitOps 旧配置。"
+  },
+  "decision": "用户本轮明确授权批准 LEN-196 service repo readiness；确认 harness-repo、business-repo、gitops-repo、idl-repo worktree 已就位且不修改 IDL。"
+}

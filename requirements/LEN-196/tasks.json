@@ -1,0 +1,93 @@
+{
+  "approved_at": "2026-07-05T09:08:32+08:00",
+  "approved_by": "forest",
+  "decision": "用户本轮明确授权批准 LEN-196 tasks，允许进入业务仓和 GitOps 清理。",
+  "requirement_id": "LEN-196",
+  "status": "approved",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 生命周期和早期门禁",
+      "scope": "创建 LEN-196 requirement、impact-analysis、design、tasks，并生成 requirement-review、design-review、dev-entry 和 service-repo-check gate。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R5", "R6", "R7", "R8"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6"]
+      },
+      "affected_services": ["quote-api", "origination-api", "applicant-api", "fides-bff"],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "dev-entry gate PASS",
+        "service-repo-check gate PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "删除业务仓内部业务 HTTP adapter",
+      "scope": "删除 quote-api 和 origination-api 的业务 HTTP adapter、exception handler 和只覆盖这些 adapter 的测试，保留 health/readiness HTTP。",
+      "trace": {
+        "requirement_items": ["R3", "R4", "R7"],
+        "design_decisions": ["D3", "D6"]
+      },
+      "affected_services": ["quote-api", "origination-api"],
+      "acceptance": [
+        "quote-api 只保留 health/readiness HTTP adapter",
+        "origination-api 只保留 health/readiness HTTP adapter",
+        "Java tests pass"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "清理 GitOps 内部业务 HTTP 访问面",
+      "scope": "删除 quote-api、origination-api、applicant-api 旧 Consul KV bootstrap Job 和 fides-bff runtime-config Consul bootstrap，并把 dev-1 / sta-1 service-client NetworkPolicy 收敛到 gRPC。",
+      "trace": {
+        "requirement_items": ["R5", "R6", "R7"],
+        "design_decisions": ["D4", "D5", "D6"]
+      },
+      "affected_services": ["quote-api", "origination-api", "applicant-api", "fides-bff"],
+      "acceptance": [
+        "dev-1 渲染不包含旧 Consul KV bootstrap Job",
+        "sta-1 渲染不包含旧 Consul KV bootstrap Job",
+        "fides-bff runtime-config Consul bootstrap 被删除",
+        "业务 client namespace 只允许访问 gRPC 端口",
+        "Consul health/readiness 访问保留"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "按 dev-1 再 sta-1 完成整体 smoke",
+      "scope": "验证报价、申请、身份资料、步骤推进流程；记录业务 ID、Argo state、image digest、live config、NetworkPolicy 和 trace/log 证据。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R8"],
+        "design_decisions": ["D1", "D2", "D6"]
+      },
+      "affected_services": ["fides-bff", "applicant-api", "quote-api", "origination-api"],
+      "acceptance": [
+        "dev-1 smoke PASS",
+        "sta-1 smoke PASS",
+        "内部服务间 trace/log 证据显示 gRPC",
+        "允许的 HTTP 边界在 evidence 中列明"
+      ],
+      "state": "todo"
+    },
+    {
+      "id": "T5",
+      "title": "完成 evidence、review 和 merge-readiness",
+      "scope": "记录测试、GitOps 渲染、live smoke、扫描、review、Janus gate 和 requirement verify 证据。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6"]
+      },
+      "affected_services": ["fides-bff", "applicant-api", "quote-api", "origination-api"],
+      "acceptance": [
+        "review report ready-for-gate or findings fixed",
+        "merge-readiness gate PASS",
+        "janus requirement verify --target merge PASS"
+      ],
+      "state": "todo"
+    }
+  ]
+}
