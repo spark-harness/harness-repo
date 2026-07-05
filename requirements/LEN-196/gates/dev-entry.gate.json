@@ -5,7 +5,7 @@
   "gate_name": "Dev 进入门禁",
   "stage": "4.2",
   "checked_by": "dev_entry_checker",
-  "checked_at": "2026-07-05T09:35:18+08:00",
+  "checked_at": "2026-07-05T10:23:16+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -15,7 +15,7 @@
     },
     {
       "path": "requirements/LEN-196/tasks.json",
-      "sha256": "982b3344ba6351987b3ff8e600b978fc0dcba70fb9002dbfd79c7b769881418f"
+      "sha256": "8a3e59df0cad275ee5b6763955937b46b6fa72302080ea8a3ad396c509a077d5"
     }
   ],
   "checklist": [

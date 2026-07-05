@@ -71,7 +71,7 @@
         "内部服务间 trace/log 证据显示 gRPC",
         "允许的 HTTP 边界在 evidence 中列明"
       ],
-      "state": "todo"
+      "state": "done"
     },
     {
       "id": "T5",
@@ -87,7 +87,7 @@
         "merge-readiness gate PASS",
         "janus requirement verify --target merge PASS"
       ],
-      "state": "todo"
+      "state": "done"
     }
   ]
 }
