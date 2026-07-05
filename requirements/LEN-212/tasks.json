@@ -1,0 +1,74 @@
+{
+  "requirement_id": "LEN-212",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-07-06T00:18:47+08:00",
+  "decision": "用户授权 Agent 批准中间文件；批准 LEN-212 tasks，允许执行 IDL 生成配置迁移、bffkit/fides-bff Kratos v3 迁移、本地验证和交付。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 生命周期与阶段门禁",
+      "scope": "维护 LEN-212 requirement、impact-analysis、design、tasks、gate JSON 和 evidence 文件，确保范围、设计、任务和验证可追溯。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R5", "R6"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "requirement-review、design-review、dev-entry、service-repo-check 和 merge-readiness gates 可由 Janus validate/verify",
+        "证据文件记录本地测试、IDL 检查和依赖扫描结果"
+      ],
+      "state": "in_progress"
+    },
+    {
+      "id": "T2",
+      "title": "升级 Go HTTP 契约生成链路到 Kratos v3",
+      "scope": "更新 idl-repo 的 Go HTTP binding 生成配置，运行 buf lint/generate/breaking，并验证生成的 fides-bff HTTP binding 不再导入 Kratos v2。",
+      "trace": {
+        "requirement_items": ["R3", "AC4", "BR3"],
+        "design_decisions": ["D3"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "buf lint 通过",
+        "buf generate 通过",
+        "buf breaking --against .git#branch=master 通过或记录明确基线风险",
+        "生成输出中的 fides-bff HTTP binding 使用 github.com/go-kratos/kratos/v3"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "迁移 bffkit 和 fides-bff 到 Kratos v3",
+      "scope": "更新 business-repo 中 bffkit 与 fides-bff 的 Kratos imports、go.mod/go.sum、Consul registry 依赖、generated contract 依赖和必要 API 适配，保持外部行为不变。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R5", "AC1", "AC2", "AC3", "AC4"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "go test ./... 在 packages/go/bffkit 通过",
+        "go test ./...、go vet ./...、make lint、make build 在 apps/fides-bff 通过",
+        "fides-bff 依赖图不包含 github.com/go-kratos/kratos/v2",
+        "本地 health/smoke 验证通过"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "完成交付验证、PR 和 master 合并",
+      "scope": "记录本地验证、契约版本证据、dev/sta 验证计划或结果，提交并为各受影响仓库开 PR，检查 CI 后合并到 master。",
+      "trace": {
+        "requirement_items": ["R6", "AC2", "AC3", "AC4", "AC5", "BR5"],
+        "design_decisions": ["D6"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "PR 描述包含 ticket、仓库、变更、验证、门禁和风险",
+        "合并前 merge-readiness gate PASS",
+        "PR 合并到 master 后清理 LEN-212 worktree"
+      ],
+      "state": "in_progress"
+    }
+  ]
+}
