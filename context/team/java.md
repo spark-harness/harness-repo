@@ -15,7 +15,7 @@
 | 事务 | 事务放在 application service 或 use case 边界，不散落到 private helper |
 | 时间 | 业务时间通过 `Clock` 或等价注入，不在业务规则里直接 `now()` |
 | 金额 | 金额和币种遵守 `money.md`，禁止用浮点数表达金额 |
-| 日志 | 遵守 `logging.md`，错误日志必须带稳定错误码或错误类型 |
+| 日志 | 业务代码只使用 SLF4J API，遵守 `logging.md`，错误日志必须带稳定错误码或错误类型 |
 | 安全 | 不记录敏感字段，不把 token、secret、PII 放进异常消息 |
 
 ## 包和目录
@@ -38,6 +38,13 @@ config/         # 框架配置
 - API 层负责把内部错误映射为协议响应。
 - 捕获异常必须有处理动作：转换、补偿、重试、降级或记录后继续抛出。
 - 禁止吞异常后返回默认成功。
+
+## 日志入口
+
+- Java 业务代码只能导入 `org.slf4j.Logger` 和 `org.slf4j.LoggerFactory` 作为日志入口。
+- 运行时日志实现使用 Spring Boot 默认 Logback，由共享 starter 统一接入 OpenTelemetry Logs。
+- 业务代码不得导入 Log4j2、JUL、Commons Logging、Logback concrete logger 或厂商 SDK 作为日志入口。
+- trace/log 关联来自 OpenTelemetry Context，不通过业务请求字段、数据库列或手工透传字段表达。
 
 ## 外部契约
 

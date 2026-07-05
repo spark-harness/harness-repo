@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-211",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-07-05T17:59:47+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-211/requirement.md",
+      "sha256": "273d231e8022395aab28975a4bfda6f17d8760b7e67f8fbb6ffd2626071b753e"
+    },
+    {
+      "path": "requirements/LEN-211/impact-analysis.md",
+      "sha256": "fcbe8229a49350391d3b337f1f4f18682fb5348232810871dae8eb341eab64fc"
+    },
+    {
+      "path": "requirements/LEN-211/design.md",
+      "sha256": "b53816106a849404705fe9c7d6cfad2891e04ec2a75be485bb94d0a8d1cf37c4"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-211/design.md approved by forest at 2026-07-05T17:54:44+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "quote.proto 删除 CreateQuoteRequest.trace_id，并保留字段号和字段名 reserved。"
+  },
+  "decision": "用户明确授权批准中间需要的文件；批准 LEN-211 design，采用共享 starter 统一日志接入并硬切 quote trace_id 业务字段。"
+}

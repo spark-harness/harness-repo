@@ -1,0 +1,88 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-211",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-07-05T18:13:58+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-211/impact-analysis.md",
+      "sha256": "fcbe8229a49350391d3b337f1f4f18682fb5348232810871dae8eb341eab64fc"
+    },
+    {
+      "path": "requirements/LEN-211/design.md",
+      "sha256": "b53816106a849404705fe9c7d6cfad2891e04ec2a75be485bb94d0a8d1cf37c4"
+    },
+    {
+      "path": "requirements/LEN-211/tasks.json",
+      "sha256": "2525aa85893060be868a09cb51140d044872bb211e8ec82f74a40310d48b839d"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "e5f77623485a4d7d5b5a4196791a3cb73107de5cd5a9531442425fb8ccbda53b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-211"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "5 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "applicant-api, fides-bff, origination-api, quote-api"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-211/impact-analysis.md approved by forest at 2026-07-05T17:54:44+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-211-java-otel-logs",
+      "commit": "a971466"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-211-java-otel-logs",
+      "commit": "0a22338"
+    },
+    {
+      "name": "idl-repo",
+      "branch": "feature/LEN-211-java-otel-logs",
+      "commit": "b2bf12a"
+    }
+  ],
+  "idl_impact": {
+    "impact": "yes",
+    "na_reason": "quote.proto 删除 CreateQuoteRequest.trace_id，并保留字段号和字段名 reserved。"
+  },
+  "decision": "用户明确授权批准中间需要的文件；确认 LEN-211 影响 harness-repo、idl-repo、business-repo，服务为 fides-bff、applicant-api、quote-api、origination-api。"
+}

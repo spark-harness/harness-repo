@@ -24,6 +24,7 @@
 - 跨服务调用应保留请求标识或链路标识。
 - 错误日志应包含错误码或稳定错误类型。
 - 不记录明文密钥、令牌、身份证、银行卡等敏感信息。
+- Java 服务必须通过 SLF4J API 记录业务日志，由共享 Spring starter 统一使用 Logback 和 OpenTelemetry Logs 导出。
 
 ## 日志级别
 
@@ -51,6 +52,8 @@
 | `resource_id` | 业务对象 ID | No |
 | `error_code` | 稳定错误码 | 失败时必填 |
 | `latency_ms` | 耗时 | 外部调用必填 |
+
+`trace_id` 和 `span_id` 必须来自当前 OpenTelemetry Context。不得把 trace id 设计成业务契约字段、数据库字段、command 字段或手工透传字段。
 
 示例：
 
