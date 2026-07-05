@@ -1,0 +1,88 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-192",
+  "gate_id": "service-repo-check",
+  "gate_name": "服务仓库检查门禁",
+  "stage": "4.3",
+  "checked_by": "service_repo_checker",
+  "checked_at": "2026-07-05T08:12:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-192/impact-analysis.md",
+      "sha256": "ef2bc64e24ca2de66aaac064d5ac1c03c5e53846cb94c45d4cab28fdbacb9210"
+    },
+    {
+      "path": "requirements/LEN-192/design.md",
+      "sha256": "f7e6d2db9d772487946d158c01a0845b27bc40951d529f0f3a7416ca716c00c1"
+    },
+    {
+      "path": "requirements/LEN-192/tasks.json",
+      "sha256": "30ce0173bd16c29ee1fdfdc3f44fe5a537e78538d8fd523f444c0499cce7d97a"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "e5f77623485a4d7d5b5a4196791a3cb73107de5cd5a9531442425fb8ccbda53b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-192"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "5 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "服务矩阵可读取",
+      "result": "PASS",
+      "evidence": ".service-matrix/dependencies.yaml parsed successfully."
+    },
+    {
+      "item": "涉及服务存在且路径可解析",
+      "result": "PASS",
+      "evidence": "fides-bff, origination-api"
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-192/impact-analysis.md approved by forest at 2026-07-05T05:41:18+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "repos": [
+    {
+      "name": "harness-repo",
+      "branch": "feature/LEN-192-fides-bff-origination-grpc-hard-cut",
+      "commit": "worktree"
+    },
+    {
+      "name": "business-repo",
+      "branch": "feature/LEN-192-fides-bff-origination-grpc-hard-cut",
+      "commit": "worktree"
+    },
+    {
+      "name": "gitops-repo",
+      "branch": "feature/LEN-192-fides-bff-origination-grpc-hard-cut",
+      "commit": "worktree"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "origination-api gRPC 服务端和 Go SDK 已由 LEN-180 完成；本需求只消费既有 origination gRPC 契约。"
+  },
+  "decision": "用户本轮明确授权批准 LEN-192 impact-analysis 和服务仓库检查，确认 fides-bff、origination-api、business-repo、gitops-repo 和 idl-repo 拓扑。"
+}

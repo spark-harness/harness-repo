@@ -1,0 +1,52 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-192",
+  "gate_id": "design-review",
+  "gate_name": "设计门禁",
+  "stage": "3.3",
+  "checked_by": "design_reviewer",
+  "checked_at": "2026-07-05T08:12:00+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-192/requirement.md",
+      "sha256": "645f20c1692e0b61dc1a448c43f39eec1433850b83a17c5469e6b67bd5f64aaa"
+    },
+    {
+      "path": "requirements/LEN-192/impact-analysis.md",
+      "sha256": "ef2bc64e24ca2de66aaac064d5ac1c03c5e53846cb94c45d4cab28fdbacb9210"
+    },
+    {
+      "path": "requirements/LEN-192/design.md",
+      "sha256": "f7e6d2db9d772487946d158c01a0845b27bc40951d529f0f3a7416ca716c00c1"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "设计覆盖关键章节",
+      "result": "PASS",
+      "evidence": "design.md contains required sections."
+    },
+    {
+      "item": "影响面分析可追溯",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-192/design.md approved by forest at 2026-07-05T05:41:18+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "origination-api gRPC 服务端和 Go SDK 已由 LEN-180 完成；本需求只消费既有 origination gRPC 契约。"
+  },
+  "decision": "用户本轮明确授权批准 LEN-192 design，允许进入任务拆分和实现准备。"
+}
