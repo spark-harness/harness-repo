@@ -3,7 +3,7 @@ requirement_id: "LEN-213"
 owner: "forest"
 status: "approved"
 created_at: "2026-07-06"
-related_branch: "feature/LEN-213-fides-web-server-logs"
+related_branch: "feature/LEN-213-fides-web-otel-logs"
 target_branch: "master"
 release_branch: "master"
 contract_gate_mode: "auto"
@@ -27,7 +27,7 @@ decision: "用户明确授权批准中间的文件；批准 LEN-213 requirement 
 
 ## Goals
 
-- R1：`fides-web` 服务端日志以 JSON/KV 方式输出到 stdout。
+- R1：`fides-web` 服务端日志以 JSON/KV 方式输出到 stdout，并在启用 `OTEL_LOGS_EXPORTER=otlp` 时通过 server-side OTLP Logs exporter 双写。
 - R2：服务端日志字段包含 `service`、`operation`、`level`、`timestamp`，并尽量包含 `trace_id`、`span_id` 或 `request_id`。
 - R3：runtime config、BFF proxy、route handler 等服务端路径在成功、可诊断失败和异常路径输出稳定日志。
 - R4：日志字段保持低基数，只记录 route pattern、operation、status、latency、error_code 或 error_type、deployment environment 等排障字段。
@@ -44,7 +44,7 @@ decision: "用户明确授权批准中间的文件；批准 LEN-213 requirement 
 - 不改用户界面或业务流程。
 - 不引入业务审计日志。
 - 不替换日志后端平台。
-- 第一版不要求直接导出 OpenTelemetry Logs；本票验收以 stdout JSON 和平台采集兼容为准。
+- 不做浏览器端日志上报；server-side OTEL Logs exporter 只在 Next.js 服务端运行路径启用。
 
 ## User / Business Scenarios
 
@@ -54,7 +54,7 @@ Given：请求经过 `fides-web` Next.js 服务端 runtime。
 
 When：服务端处理 runtime config 或 BFF proxy 路径。
 
-Then：stdout 输出合法 JSON 日志，包含服务名、操作名、级别、时间戳和可关联的 trace 或 request 标识。
+Then：stdout 输出合法 JSON 日志，包含服务名、操作名、级别、时间戳和可关联的 trace 或 request 标识；启用 server-side OTLP logs exporter 时同一安全字段日志可进入日志后端。
 
 ### Scenario 2：可诊断失败不泄露敏感信息
 
@@ -86,8 +86,8 @@ Then：检查失败，并提示应使用统一服务端 logger。
 
 | AC | Given | When | Then |
 |---|---|---|---|
-| AC1 | `fides-web` 在本地或集群以服务端模式运行 | 请求经过 Next.js server/runtime 路径 | stdout 输出合法 JSON 日志，并包含 `service`、`operation`、`level`、`timestamp`、`request_id` 或 `trace_id` |
-| AC2 | 请求带有 trace context 或服务端创建了 trace context | `fides-web` 记录服务端访问或错误日志 | 日志可用同一个 `trace_id` 与对应 trace 查询结果关联；能取得当前 span 时包含 `span_id` |
+| AC1 | `fides-web` 在本地或集群以服务端模式运行 | 请求经过 Next.js server/runtime 路径 | stdout 输出合法 JSON 日志，并包含 `service`、`operation`、`level`、`timestamp`、`request_id` 或 `trace_id`；启用 `OTEL_LOGS_EXPORTER=otlp` 时同一日志进入 server-side OTLP Logs exporter |
+| AC2 | 请求带有 trace context 或服务端创建了 trace context | `fides-web` 记录服务端访问或错误日志 | stdout JSON 和 OTLP log record 使用同一个 `trace_id`；能取得当前 span 时包含 `span_id` |
 | AC3 | runtime config 或 BFF proxy 发生可诊断失败 | `fides-web` 记录 WARN 或 ERROR 日志 | 日志包含稳定 `error_code` 或 `error_type`，且不包含敏感原文 |
 | AC4 | 开发者在 fides-web 业务代码中新增 `console.*` 或绕过统一 logger | 执行 lint / CI | 检查失败并指出应使用统一服务端 logger |
 | AC5 | 开发者新增服务端日志字段 | 执行测试和 lint | 字段通过低基数、安全字段校验，不能记录手机号、OTP、token、Cookie、Authorization header 或请求/响应体 |
@@ -98,7 +98,7 @@ Then：检查失败，并提示应使用统一服务端 logger。
 
 | Question | Owner | Deadline | Status |
 |---|---|---|---|
-| 服务端 logs 是否需要在后续版本直接导出到 OTEL Logs backend | 工程 | 后续观测平台规划 | 不阻塞，本票第一版只要求 stdout JSON |
+| 服务端 logs 是否需要在后续版本直接导出到 OTEL Logs backend | 工程 | 2026-07-06 | 已明确：本次 follow-up 增加 server-side OTLP Logs exporter，不做浏览器端日志上报 |
 
 ## Notes
 
