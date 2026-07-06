@@ -5,7 +5,7 @@
   "gate_name": "服务仓库检查门禁",
   "stage": "4.3",
   "checked_by": "service_repo_checker",
-  "checked_at": "2026-07-06T01:12:40.771Z",
+  "checked_at": "2026-07-06T01:18:59.499Z",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
@@ -66,12 +66,12 @@
   "repos": [
     {
       "name": "harness-repo",
-      "branch": "feature/LEN-213-fides-web-server-logs",
+      "branch": "feature/LEN-213-fides-web-otel-logs",
       "commit": "b8835dc"
     },
     {
       "name": "business-repo",
-      "branch": "feature/LEN-213-fides-web-server-logs",
+      "branch": "feature/LEN-213-fides-web-otel-logs",
       "commit": "246d1f4"
     }
   ],
