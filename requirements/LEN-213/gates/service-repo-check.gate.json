@@ -5,21 +5,21 @@
   "gate_name": "服务仓库检查门禁",
   "stage": "4.3",
   "checked_by": "service_repo_checker",
-  "checked_at": "2026-07-06T00:38:30+08:00",
+  "checked_at": "2026-07-06T01:12:40.771Z",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
     {
       "path": "requirements/LEN-213/impact-analysis.md",
-      "sha256": "2bd4dae9d3ebc86a9127f60d810a7625de6d5b4e7902a9487d0c6783e7e2b588"
+      "sha256": "47c745ea2156a251f510bebde1b06ebcfe66f76b88849584fe2ff744ea75dfed"
     },
     {
       "path": "requirements/LEN-213/design.md",
-      "sha256": "5e09453028b75221b97a40a9ef53c86f0c8ba7cc25e49c34cbc84da0ea8bc76b"
+      "sha256": "f2457b6fa5b19f6b07f119ffb5333dcde299d59c7adf5604dee27f2de4d5e590"
     },
     {
       "path": "requirements/LEN-213/tasks.json",
-      "sha256": "a3e2c054626a7b2f89901870732205cddb583dd41cfbeaeeb25fffd8ff8ee0d4"
+      "sha256": "6511f3b4489b08d2a27689ba69d67862c9781b387562a667e5b1e52b324f8bc4"
     },
     {
       "path": ".service-matrix/dependencies.yaml",

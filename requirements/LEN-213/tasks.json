@@ -27,7 +27,8 @@
           "D4",
           "D5",
           "D6",
-          "D7"
+          "D7",
+          "D8"
         ]
       },
       "affected_services": [
@@ -150,7 +151,8 @@
           "D4",
           "D5",
           "D6",
-          "D7"
+          "D7",
+          "D8"
         ]
       },
       "affected_services": [
@@ -161,7 +163,43 @@
         "pnpm lint:deps passes",
         "pnpm test passes",
         "pnpm build passes",
-        "merge-readiness gate PASS"
+        "merge-readiness gate PASS",
+        "kubectl kustomize fides overlays passes"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T6",
+      "title": "增加 fides-web server-side OTEL Logs exporter 配置",
+      "scope": "新增 server-side OTLP Logs exporter 封装、标准 OTEL logs env 校验、stdout JSON 双写、public runtime config 隔离，并更新 GitOps fides VaultStaticSecret 为 raw env passthrough。",
+      "trace": {
+        "requirement_items": [
+          "R1",
+          "R2",
+          "R7",
+          "R8",
+          "AC1",
+          "AC2",
+          "AC6",
+          "AC7"
+        ],
+        "design_decisions": [
+          "D1",
+          "D2",
+          "D6",
+          "D7",
+          "D8"
+        ]
+      },
+      "affected_services": [
+        "fides"
+      ],
+      "acceptance": [
+        "server-otel-logs tests prove disabled and otlp exporter modes",
+        "public runtime config does not expose server OTEL logs endpoint or headers",
+        "fides ConfigMap sets OTEL_LOGS_EXPORTER and OTEL_SERVICE_NAME",
+        "fides VaultStaticSecret uses raw env passthrough without per-key transformation templates",
+        "dev-1 and sta-1 kustomize overlays render successfully"
       ],
       "state": "done"
     }

@@ -5,45 +5,49 @@
   "gate_name": "合并就绪门禁",
   "stage": "5.1",
   "checked_by": "merge_readiness_checker",
-  "checked_at": "2026-07-06T00:38:30+08:00",
+  "checked_at": "2026-07-06T01:12:40.771Z",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
     {
       "path": "requirements/LEN-213/requirement.md",
-      "sha256": "f0a227be39272e5e730e4ba9039a44cb709ba02aa045fe8c8e466d1e06fbaec1"
+      "sha256": "7b02acd1d98dc8ecbf248e643748960afa1039aa4cb17257aea1e46bedc5d335"
     },
     {
       "path": "requirements/LEN-213/impact-analysis.md",
-      "sha256": "2bd4dae9d3ebc86a9127f60d810a7625de6d5b4e7902a9487d0c6783e7e2b588"
+      "sha256": "47c745ea2156a251f510bebde1b06ebcfe66f76b88849584fe2ff744ea75dfed"
     },
     {
       "path": "requirements/LEN-213/design.md",
-      "sha256": "5e09453028b75221b97a40a9ef53c86f0c8ba7cc25e49c34cbc84da0ea8bc76b"
+      "sha256": "f2457b6fa5b19f6b07f119ffb5333dcde299d59c7adf5604dee27f2de4d5e590"
     },
     {
       "path": "requirements/LEN-213/tasks.json",
-      "sha256": "a3e2c054626a7b2f89901870732205cddb583dd41cfbeaeeb25fffd8ff8ee0d4"
+      "sha256": "6511f3b4489b08d2a27689ba69d67862c9781b387562a667e5b1e52b324f8bc4"
     },
     {
       "path": "requirements/LEN-213/gates/requirement-review.gate.json",
-      "sha256": "599683a9d5c06f47072e7be2601d3aae9f5ef2bf0543bdc2a1d707814bb3a3d7"
+      "sha256": "3df4eb923a1dfb141672b1f73851894393eb6276d72ced937496e2a5ccad3b2f"
     },
     {
       "path": "requirements/LEN-213/gates/design-review.gate.json",
-      "sha256": "1337b797f9b4ff4be790bd92f62699c835409fc30be06fe49f3dc9e6990432a1"
+      "sha256": "92b7d100534655aa474b721023b624d0c2e2393e81bc01812a3b2a2b31090a0e"
     },
     {
       "path": "requirements/LEN-213/gates/dev-entry.gate.json",
-      "sha256": "6ae87f03e7c20340a7790a86678be05ac692602fe80004056345d5d3fc285116"
+      "sha256": "4873d47105ea63b10524c2cd2cded1f0451dfa8f1c41466c299a466310fbc746"
     },
     {
       "path": "requirements/LEN-213/gates/service-repo-check.gate.json",
-      "sha256": "4bb2a9fbb38fb3b5ba0fb674485aa55877bd0515711d40eceab742b8037a7012"
+      "sha256": "5d01b958d96709c264aa60c505ce84a88f614dce7570f3678728cbaae3d09909"
     },
     {
       "path": ".service-matrix/dependencies.yaml",
       "sha256": "e5f77623485a4d7d5b5a4196791a3cb73107de5cd5a9531442425fb8ccbda53b"
+    },
+    {
+      "path": "requirements/LEN-213/reviews/T2-T5.md",
+      "sha256": "32b3195342797aafba3866b1ecd79321d9eb14955873c680e8c5cb8074c945eb"
     }
   ],
   "checklist": [
@@ -61,6 +65,11 @@
       "item": "人工批准记录合法",
       "result": "PASS",
       "evidence": "requirements/LEN-213/tasks.json approved by forest at 2026-07-06T00:00:00+08:00."
+    },
+    {
+      "item": "server-side OTEL Logs exporter follow-up 已验证",
+      "result": "PASS",
+      "evidence": "server-otel-logs targeted tests, full fides-web lint/test/build, and fides dev-1/sta-1 kustomize render passed."
     }
   ],
   "blocking_issues": [],
@@ -71,7 +80,7 @@
   "evidence": [
     {
       "path": "requirements/LEN-213/evidence/local-verification.md",
-      "sha256": "e13ff85e6f9527baa66ce3565969a747a26ef395736747217abf0f47b0ad83a3"
+      "sha256": "36a9cfafd9b7ffc24198117956d7bbc43ae2b9998ff033ed983d642771278854"
     }
   ],
   "idl_impact": {
