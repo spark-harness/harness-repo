@@ -5,17 +5,17 @@
   "gate_name": "需求评审门禁",
   "stage": "2.2",
   "checked_by": "requirement_reviewer",
-  "checked_at": "2026-07-06T19:08:18+08:00",
+  "checked_at": "2026-07-06T20:25:30+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
     {
       "path": "requirements/LEN-214/requirement.md",
-      "sha256": "a1d780117a56c4110100560606dc283e3f4b237fa9052d43d3a89c43d6b973ff"
+      "sha256": "86333df6d1c345853dc9dd922d9557e4484fe1be37721ab893a6a44b8f3b06c6"
     },
     {
       "path": "requirements/LEN-214/impact-analysis.md",
-      "sha256": "10967bcfb9df311b62b1fb2d1e25c1f88778e20420cfbadbf69d79bd1f1dd718"
+      "sha256": "abe4b73ae5d4aab53a38292ffe5930a2fc64b3a162d0667c5142a9135b31798f"
     }
   ],
   "checklist": [

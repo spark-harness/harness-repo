@@ -5,7 +5,7 @@ status: "approved"
 updated_at: "2026-07-06"
 approved_by: "forest"
 approved_at: "2026-07-06T00:00:00+08:00"
-decision: "用户明确授权批准中间文件；批准 LEN-214 service repo readiness，harness-repo、business-repo、idl-repo、gitops-repo 同名分支状态有效。"
+decision: "用户明确授权批准中间文件；批准 LEN-214 service repo readiness，harness-repo、business-repo、gitops-repo 同名分支状态有效；idl-repo 仅作为 no-change baseline，不列入 affected_repositories。"
 idl_impact: "no"
 idl_impact_reason: "本需求只修改 fides-bff 日志、运行配置、GitOps Secret 注入方式和 lint/CI 防漂移，不新增或修改 protobuf IDL、HTTP 外部契约或生成契约。"
 ---

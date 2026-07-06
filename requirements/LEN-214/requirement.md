@@ -10,7 +10,6 @@ contract_gate_mode: "auto"
 affected_repositories:
   - harness-repo
   - business-repo
-  - idl-repo
   - gitops-repo
 approved_by: "forest"
 approved_at: "2026-07-06T00:00:00+08:00"
