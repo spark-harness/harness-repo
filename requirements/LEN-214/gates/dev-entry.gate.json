@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-214",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-07-06T20:25:30+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-214/design.md",
+      "sha256": "3b02d1df7fb3de57af338d6cbb0a4b0c97598fb3013c4c22bec81c6bb873edec"
+    },
+    {
+      "path": "requirements/LEN-214/tasks.json",
+      "sha256": "a57bddabb81ab3baf8a2510924c76f1c95b5f0f11f68d973d9c00937d5232636"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-214"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "6 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-214/tasks.json approved by forest at 2026-07-06T00:00:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 fides-bff 日志、运行配置、GitOps Secret 注入方式和 lint/CI 防漂移，不新增或修改 protobuf IDL、HTTP 外部契约或生成契约。"
+  },
+  "decision": "用户明确授权批准中间文件；批准 LEN-214 tasks，T1-T6 已完成并通过本地验证。"
+}

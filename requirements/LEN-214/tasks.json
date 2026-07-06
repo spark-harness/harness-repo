@@ -1,0 +1,109 @@
+{
+  "requirement_id": "LEN-214",
+  "status": "approved",
+  "approved_by": "forest",
+  "approved_at": "2026-07-06T00:00:00+08:00",
+  "decision": "用户明确授权批准中间文件；批准 LEN-214 tasks，T1-T6 已完成并通过本地验证。",
+  "tasks": [
+    {
+      "id": "T1",
+      "title": "完成 Harness 生命周期和早期门禁",
+      "scope": "创建 LEN-214 requirement、impact-analysis、design、tasks，并生成 requirement-review、design-review、dev-entry、service-repo-check gate。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "R3", "R4", "R5", "R6", "R7"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6", "D7"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "requirement-review gate PASS",
+        "design-review gate PASS",
+        "dev-entry gate PASS",
+        "service-repo-check gate PASS"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T2",
+      "title": "强化 bffkit 请求日志与 trace/request 关联",
+      "scope": "更新 TraceFilter access log 字段、低基数 operation、span_id、deployment environment、error_code 和敏感输入排除测试。",
+      "trace": {
+        "requirement_items": ["R2", "R3", "R4", "AC2", "AC3", "AC4"],
+        "design_decisions": ["D2", "D3"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "TraceFilter access log includes trace_id/request_id/span_id when available",
+        "TraceFilter operation uses route pattern instead of raw path/query",
+        "TraceFilter tests prove sensitive headers/body/query are not emitted"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T3",
+      "title": "硬切 fides-bff 标准 OTEL 配置",
+      "scope": "将 configs、config loader、observability setup、README 和 .env.example 从 OBSERVABILITY_OTEL_* 迁移到标准 OTEL_*。",
+      "trace": {
+        "requirement_items": ["R1", "R5", "AC1", "AC5"],
+        "design_decisions": ["D1", "D4"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "config loader tests cover standard OTEL_* variables",
+        "observability setup disabled/exporter none/missing endpoint no-op behaviors are covered",
+        "repo no longer contains OBSERVABILITY_OTEL_* under apps/fides-bff"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T4",
+      "title": "强化 fides-bff lint 和 CI 防漂移",
+      "scope": "更新 .golangci.yml、Makefile 或 repo-local check，禁止 Kratos v2 import、裸输出、业务层 observability 依赖和统一 logger 绕过。",
+      "trace": {
+        "requirement_items": ["R4", "R7", "AC3", "AC4", "AC7"],
+        "design_decisions": ["D3", "D6"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "make lint runs the forbidden logging/import checks",
+        "checks reject github.com/go-kratos/kratos/v2 imports",
+        "checks reject fmt.Print/log.Print/direct stdout writes outside logger bootstrap"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T5",
+      "title": "更新 GitOps fides-bff OTEL 与 Vault raw env 注入",
+      "scope": "更新 fides-bff ConfigMap 标准 OTEL_* keys，dev-1/sta-1 VaultStaticSecret 改为 raw passthrough，Deployment 继续 envFrom。",
+      "trace": {
+        "requirement_items": ["R5", "R6", "AC5", "AC6"],
+        "design_decisions": ["D4", "D5", "D7"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "fides-bff ConfigMap uses standard OTEL_* keys and owns OTEL_TRACES_EXPORTER=otlp while Vault raw Secret owns endpoint/header keys",
+        "dev-1 and sta-1 VaultStaticSecret no longer use per-key transformation templates",
+        "dev-1 and sta-1 kustomize overlays render successfully"
+      ],
+      "state": "done"
+    },
+    {
+      "id": "T6",
+      "title": "完成本地验证、review、evidence 和 PR",
+      "scope": "运行 fides-bff/bffkit Go checks、IDL no-change baseline check、GitOps render checks、Janus verify，记录 review/evidence，测试通过后开 PR。",
+      "trace": {
+        "requirement_items": ["AC1", "AC2", "AC3", "AC4", "AC5", "AC6", "AC7"],
+        "design_decisions": ["D1", "D2", "D3", "D4", "D5", "D6", "D7"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "go test ./... -count=1 passes for bffkit",
+        "make lint, make test and make build pass for apps/fides-bff",
+        "idl-repo fides-bff proto path is present and unchanged",
+        "gitops fides-bff dev-1 and sta-1 overlays render",
+        "merge-readiness gate PASS",
+        "PR description records actual commands and outcomes"
+      ],
+      "state": "done"
+    }
+  ]
+}
