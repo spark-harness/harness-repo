@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-214",
+  "gate_id": "requirement-review",
+  "gate_name": "需求评审门禁",
+  "stage": "2.2",
+  "checked_by": "requirement_reviewer",
+  "checked_at": "2026-07-06T19:08:18+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-214/requirement.md",
+      "sha256": "a1d780117a56c4110100560606dc283e3f4b237fa9052d43d3a89c43d6b973ff"
+    },
+    {
+      "path": "requirements/LEN-214/impact-analysis.md",
+      "sha256": "10967bcfb9df311b62b1fb2d1e25c1f88778e20420cfbadbf69d79bd1f1dd718"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "需求文档存在",
+      "result": "PASS",
+      "evidence": "requirement.md contains required sections."
+    },
+    {
+      "item": "影响面分析存在",
+      "result": "PASS",
+      "evidence": "impact-analysis.md contains required sections."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-214/requirement.md approved by forest at 2026-07-06T00:00:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 fides-bff 日志、运行配置、GitOps Secret 注入方式和 lint/CI 防漂移，不新增或修改 protobuf IDL、HTTP 外部契约或生成契约。"
+  },
+  "decision": "用户明确授权批准中间文件；批准 LEN-214 requirement 与 impact-analysis，代码审查后修订风险与 rollout 策略并刷新门禁。"
+}

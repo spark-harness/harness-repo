@@ -1,0 +1,82 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-214",
+  "gate_id": "merge-readiness",
+  "gate_name": "合并就绪门禁",
+  "stage": "5.1",
+  "checked_by": "merge_readiness_checker",
+  "checked_at": "2026-07-06T19:08:18+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-214/requirement.md",
+      "sha256": "a1d780117a56c4110100560606dc283e3f4b237fa9052d43d3a89c43d6b973ff"
+    },
+    {
+      "path": "requirements/LEN-214/impact-analysis.md",
+      "sha256": "10967bcfb9df311b62b1fb2d1e25c1f88778e20420cfbadbf69d79bd1f1dd718"
+    },
+    {
+      "path": "requirements/LEN-214/design.md",
+      "sha256": "3b02d1df7fb3de57af338d6cbb0a4b0c97598fb3013c4c22bec81c6bb873edec"
+    },
+    {
+      "path": "requirements/LEN-214/tasks.json",
+      "sha256": "a57bddabb81ab3baf8a2510924c76f1c95b5f0f11f68d973d9c00937d5232636"
+    },
+    {
+      "path": "requirements/LEN-214/gates/requirement-review.gate.json",
+      "sha256": "87d0cb0dac14ebe78fb8fc9b66c04a5724a12f5d1a9e3384b18a2499769eb252"
+    },
+    {
+      "path": "requirements/LEN-214/gates/design-review.gate.json",
+      "sha256": "a2d32b7ab7b677780a96f9ec6088e9b60a9d702ddaf48e4857935c99e56dff2b"
+    },
+    {
+      "path": "requirements/LEN-214/gates/dev-entry.gate.json",
+      "sha256": "54dbc7acb02b7d205ae555fbcae259053a3debe30d51b1609b774519c95f5098"
+    },
+    {
+      "path": "requirements/LEN-214/gates/service-repo-check.gate.json",
+      "sha256": "900d8c5fc08096c0e286237c6740e23656f65e28c14c3c0d9b463463350ee62a"
+    },
+    {
+      "path": ".service-matrix/dependencies.yaml",
+      "sha256": "e5f77623485a4d7d5b5a4196791a3cb73107de5cd5a9531442425fb8ccbda53b"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "阶段门禁已通过",
+      "result": "PASS",
+      "evidence": "requirement-review, design-review, dev-entry, and service-repo-check are present and not BLOCKED."
+    },
+    {
+      "item": "实现证据已记录",
+      "result": "PASS",
+      "evidence": "1 evidence files recorded."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-214/tasks.json approved by forest at 2026-07-06T00:00:00+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "evidence": [
+    {
+      "path": "requirements/LEN-214/evidence/local-verification.md",
+      "sha256": "5815fee16602d8f46a4e1f3faa41b9167f33f47eaf6ea11dfad1e3bc1ef32481"
+    }
+  ],
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求只修改 fides-bff 日志、运行配置、GitOps Secret 注入方式和 lint/CI 防漂移，不新增或修改 protobuf IDL、HTTP 外部契约或生成契约。"
+  },
+  "decision": "用户明确授权批准中间文件；批准 LEN-214 tasks，T1-T6 已完成并通过本地验证。"
+}
