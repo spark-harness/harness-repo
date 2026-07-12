@@ -1,0 +1,65 @@
+{
+  "decision": "按用户给定 LEN-206 Story 与子任务验收实现；不写人工批准字段。",
+  "tasks": [
+    {
+      "id": "LEN-207",
+      "title": "硬切 fides-bff tracing 到官方 instrumentation",
+      "scope": "替换 BFF HTTP server span 创建为官方 OpenTelemetry HTTP instrumentation，并通过 Kratos v3 transport filter 接入；让 gRPC client span 交给 otelgrpc。",
+      "trace": {
+        "requirement_items": ["R1", "R2", "AC1", "AC2"],
+        "design_decisions": ["Go BFF"]
+      },
+      "affected_services": ["fides-bff"],
+      "acceptance": [
+        "TraceFilter 不再创建 span，官方 HTTP span 保留错误状态和稳定 error_code enrich",
+        "BFF gRPC clients 使用 otelgrpc.NewClientHandler",
+        "go test ./... 通过"
+      ],
+      "status": "done"
+    },
+    {
+      "id": "LEN-208",
+      "title": "硬切 Java gRPC tracing 到官方 OpenTelemetry instrumentation",
+      "scope": "删除 Java 自研 gRPC server tracing interceptor，使用官方 GrpcTelemetry server/client interceptors。",
+      "trace": {
+        "requirement_items": ["R3", "R4", "AC3", "AC4"],
+        "design_decisions": ["Java"]
+      },
+      "affected_services": ["origination-api", "quote-api"],
+      "acceptance": [
+        "Java starter 使用 GrpcTelemetry server interceptor",
+        "origination-api quote channel 使用 GrpcTelemetry client interceptor"
+      ],
+      "status": "implemented_blocked_verification"
+    },
+    {
+      "id": "LEN-209",
+      "title": "组件化 gRPC Principal metadata 传递",
+      "scope": "新增 Java Principal client interceptor，并让 BFF metadata helper 与 tracing 注入解耦。",
+      "trace": {
+        "requirement_items": ["R5", "AC5"],
+        "design_decisions": ["Go BFF", "Java"]
+      },
+      "affected_services": ["fides-bff", "origination-api", "quote-api"],
+      "acceptance": [
+        "x-applicant-id 从 authenticated context 派生",
+        "无 Principal 时不伪造 applicant metadata"
+      ],
+      "status": "done"
+    },
+    {
+      "id": "LEN-210",
+      "title": "本地直连服务验证 Sentry trace 拓扑到 quote-api",
+      "scope": "部署或直连环境可用后，用真实请求验证 quote child 出现在同一 trace。",
+      "trace": {
+        "requirement_items": ["R6", "AC6"],
+        "design_decisions": ["Testing Strategy"]
+      },
+      "affected_services": ["fides-bff", "origination-api", "quote-api"],
+      "acceptance": [
+        "Sentry trace 包含 fides-bff rpc、origination-api server/client、quote-api GetQuote child"
+      ],
+      "status": "blocked_runtime_verification"
+    }
+  ]
+}
