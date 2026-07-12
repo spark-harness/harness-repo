@@ -1,0 +1,53 @@
+{
+  "schema_version": "1",
+  "requirement_id": "LEN-206",
+  "gate_id": "dev-entry",
+  "gate_name": "Dev 进入门禁",
+  "stage": "4.2",
+  "checked_by": "dev_entry_checker",
+  "checked_at": "2026-07-12T17:04:27+08:00",
+  "result": "PASS",
+  "blocks_next_stage": false,
+  "inputs": [
+    {
+      "path": "requirements/LEN-206/design.md",
+      "sha256": "a070975419a211f6201560309b738cfb5e5cdb56eb20f8327717ca99ff597b4d"
+    },
+    {
+      "path": "requirements/LEN-206/tasks.json",
+      "sha256": "c15dc80bd52b5bf640a1d46f86b6d967a6365d18705be9ae266a410d816dcd10"
+    }
+  ],
+  "checklist": [
+    {
+      "item": "tasks.json 存在且格式合法",
+      "result": "PASS",
+      "evidence": "tasks.json parsed successfully."
+    },
+    {
+      "item": "tasks.json requirement_id 与需求目录一致",
+      "result": "PASS",
+      "evidence": "LEN-206"
+    },
+    {
+      "item": "每个任务有状态、范围、验收和追溯来源",
+      "result": "PASS",
+      "evidence": "4 tasks include state, scope, acceptance, and trace."
+    },
+    {
+      "item": "人工批准记录合法",
+      "result": "PASS",
+      "evidence": "requirements/LEN-206/tasks.json approved by forest at 2026-07-12T17:03:52+08:00."
+    }
+  ],
+  "blocking_issues": [],
+  "warnings": null,
+  "waiver": {
+    "required": false
+  },
+  "idl_impact": {
+    "impact": "no",
+    "na_reason": "本需求不修改 protobuf IDL、HTTP 外部契约或生成契约。"
+  },
+  "decision": "用户授权合并 LEN-206；本地 Go/Java 验证与代码审查已完成，LEN-210 真实 Sentry trace 拓扑验证作为部署后 residual follow-up。"
+}

@@ -1,5 +1,9 @@
 {
-  "decision": "按用户给定 LEN-206 Story 与子任务验收实现；不写人工批准字段。",
+  "requirement_id": "LEN-206",
+  "status": "approved",
+  "approved_at": "2026-07-12T17:03:52+08:00",
+  "approved_by": "forest",
+  "decision": "用户授权合并 LEN-206；本地 Go/Java 验证与代码审查已完成，LEN-210 真实 Sentry trace 拓扑验证作为部署后 residual follow-up。",
   "tasks": [
     {
       "id": "LEN-207",
@@ -30,7 +34,7 @@
         "Java starter 使用 GrpcTelemetry server interceptor",
         "origination-api quote channel 使用 GrpcTelemetry client interceptor"
       ],
-      "status": "implemented_blocked_verification"
+      "status": "done"
     },
     {
       "id": "LEN-209",
@@ -59,7 +63,7 @@
       "acceptance": [
         "Sentry trace 包含 fides-bff rpc、origination-api server/client、quote-api GetQuote child"
       ],
-      "status": "blocked_runtime_verification"
+      "status": "blocked"
     }
   ]
 }

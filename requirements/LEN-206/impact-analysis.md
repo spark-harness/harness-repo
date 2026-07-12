@@ -1,3 +1,12 @@
+---
+idl_impact: "no"
+idl_impact_reason: "本需求不修改 protobuf IDL、HTTP 外部契约或生成契约。"
+status: "approved"
+approved_by: "forest"
+approved_at: "2026-07-12T17:02:34+08:00"
+decision: "用户授权交付 LEN-206；确认 harness-repo 与 business-repo 同名 worktree 已完成实现、测试和 PR 交付，允许进入合并就绪验证。"
+---
+
 # LEN-206 Impact Analysis
 
 ## Summary
@@ -17,7 +26,7 @@
 
 服务矩阵已有 `fides-bff -> origination-api -> quote-api` 依赖，不新增服务。
 
-## Contract Impact
+## API / Contract Impact
 
 - Protobuf IDL：无变更。
 - HTTP contract：无变更。

@@ -15,6 +15,6 @@ fides http.client
 
 当前状态：
 
-- 需求、影响、设计和任务为实现追溯草案，未写人工批准字段。
+- 需求、影响、设计和任务已批准，进入实现交付和门禁验证。
 - 业务实现位于 `business-repo` 同名分支。
-- 本地 Go 验证已通过；Java 验证被 Maven Central 403 / GitHub Packages 401 依赖解析阻塞。
+- 本地 Go 与 Java 定向验证已通过；LEN-210 真实 Sentry trace 拓扑验证待部署后完成。

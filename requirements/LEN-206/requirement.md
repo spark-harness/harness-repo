@@ -1,18 +1,21 @@
 ---
 id: "LEN-206"
 title: "[OBS] 硬切 gRPC tracing 到官方中间件并统一 Principal metadata"
-status: "draft"
+status: "approved"
 related_branch: "feature/LEN-206-observability-grpc-tracing-principal"
 target_branch: "master"
 release_branch: "master"
 affected_repositories:
   - harness-repo
   - business-repo
+approved_by: "forest"
+approved_at: "2026-07-12T16:58:35+08:00"
+decision: "用户授权交付 LEN-206；批准 requirement 与 impact-analysis，允许进入设计和实现。"
 ---
 
 # gRPC tracing 与 Principal metadata 硬切
 
-## 背景
+## Background
 
 当前贷款申请链路必须在 Sentry trace 中形成完整 parent/child 拓扑：
 
@@ -24,7 +27,7 @@ fides http.client -> fides-bff http.server -> fides-bff rpc -> origination-api C
 
 它是什么：把 HTTP/gRPC span 创建、context 提取和注入硬切到官方中间件或 instrumentation；Principal metadata 作为独立组件传播。
 
-## 目标
+## Goals
 
 - R1：`fides-bff` HTTP server span 使用官方 OpenTelemetry HTTP instrumentation，并通过 Kratos v3 transport filter 接入。
 - R2：`fides-bff` 出站 gRPC client span 使用官方 OpenTelemetry gRPC instrumentation。
@@ -33,7 +36,7 @@ fides http.client -> fides-bff http.server -> fides-bff rpc -> origination-api C
 - R5：`x-applicant-id` Principal metadata 通过独立组件传递，不与 tracing 注入耦合。
 - R6：本地验证覆盖 BFF gRPC metadata、Java quote gateway metadata 和 trace context 传递。
 
-## 非目标
+## Non-Goals
 
 - 不修改 protobuf IDL。
 - 不修改 `fides-web` 浏览器 tracing。
@@ -74,7 +77,7 @@ Then：client span 与下游 `quote-api` server span 由官方 OpenTelemetry gRP
 - BR4：Principal metadata key 统一为 `x-applicant-id`。
 - BR5：无 Principal 时不得伪造 applicant metadata。
 
-## 验收标准
+## Acceptance Criteria
 
 - AC1：`fides-bff` 使用官方 OpenTelemetry HTTP instrumentation 处理 HTTP server tracing，并通过 Kratos v3 transport filter 接入。
 - AC2：`fides-bff` gRPC client 使用 `otelgrpc.NewClientHandler()`。

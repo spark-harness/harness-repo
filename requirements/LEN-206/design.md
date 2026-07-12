@@ -1,6 +1,13 @@
+---
+status: "approved"
+approved_by: "forest"
+approved_at: "2026-07-12T16:58:45+08:00"
+decision: "用户授权交付 LEN-206；批准当前 design，按官方 OpenTelemetry instrumentation 与独立 Principal metadata 组件实现。"
+---
+
 # LEN-206 Design
 
-## Traceability
+## Requirement Traceability
 
 | Requirement | Design |
 | --- | --- |
@@ -39,7 +46,7 @@
 - `OriginationConfiguration` 在 `quoteApiChannel` 上挂官方 tracing client interceptor 和 principal client interceptor。
 - `GrpcQuoteGateway` 只保留业务调用、响应转换和错误映射。
 
-## API / Contract
+## API / Contract Design
 
 无 IDL、HTTP 或错误码契约变更；既有 gRPC `x-trace-id` response metadata 保持兼容。
 
