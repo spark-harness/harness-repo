@@ -1,7 +1,7 @@
 {
   "requirement_id": "LEN-206",
   "status": "approved",
-  "approved_at": "2026-07-12T17:03:52+08:00",
+  "approved_at": "2026-07-12T17:13:40+08:00",
   "approved_by": "forest",
   "decision": "用户授权合并 LEN-206；本地 Go/Java 验证与代码审查已完成，LEN-210 真实 Sentry trace 拓扑验证作为部署后 residual follow-up。",
   "tasks": [

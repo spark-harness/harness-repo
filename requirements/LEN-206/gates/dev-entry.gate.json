@@ -5,17 +5,17 @@
   "gate_name": "Dev 进入门禁",
   "stage": "4.2",
   "checked_by": "dev_entry_checker",
-  "checked_at": "2026-07-12T17:04:27+08:00",
+  "checked_at": "2026-07-12T17:14:05+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
     {
       "path": "requirements/LEN-206/design.md",
-      "sha256": "a070975419a211f6201560309b738cfb5e5cdb56eb20f8327717ca99ff597b4d"
+      "sha256": "0b2df7965f6a7fd10bbb3e0045cda6acd9441f4522bfaaa7ca73e15280b7147e"
     },
     {
       "path": "requirements/LEN-206/tasks.json",
-      "sha256": "c15dc80bd52b5bf640a1d46f86b6d967a6365d18705be9ae266a410d816dcd10"
+      "sha256": "c1ed7682c5c113b4bd76693944a2c727fa67ce805944074391b15b3c50a39e7c"
     }
   ],
   "checklist": [
@@ -37,7 +37,7 @@
     {
       "item": "人工批准记录合法",
       "result": "PASS",
-      "evidence": "requirements/LEN-206/tasks.json approved by forest at 2026-07-12T17:03:52+08:00."
+      "evidence": "requirements/LEN-206/tasks.json approved by forest at 2026-07-12T17:13:40+08:00."
     }
   ],
   "blocking_issues": [],

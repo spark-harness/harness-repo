@@ -5,17 +5,17 @@
   "gate_name": "需求评审门禁",
   "stage": "2.2",
   "checked_by": "requirement_reviewer",
-  "checked_at": "2026-07-12T17:04:27+08:00",
+  "checked_at": "2026-07-12T17:14:05+08:00",
   "result": "PASS",
   "blocks_next_stage": false,
   "inputs": [
     {
       "path": "requirements/LEN-206/requirement.md",
-      "sha256": "eaa2c715ca8cef5180201f96edface89b46f3a8ca5cc27714d56c08dab4bb0aa"
+      "sha256": "ed39553890927a681b98573a9dfa956ed4cf0bfa6cb6141acd0cf50642d7f3c8"
     },
     {
       "path": "requirements/LEN-206/impact-analysis.md",
-      "sha256": "451962c9f16f9649eb2719fad6ce8e14eecf543126d512bd1e1b7f3f05a8bcb2"
+      "sha256": "a8347706db72b11e21b49a3036c4e8ee51c40604cd090823c1004d27abee0bb0"
     }
   ],
   "checklist": [
@@ -32,7 +32,7 @@
     {
       "item": "人工批准记录合法",
       "result": "PASS",
-      "evidence": "requirements/LEN-206/requirement.md approved by forest at 2026-07-12T16:58:35+08:00."
+      "evidence": "requirements/LEN-206/requirement.md approved by forest at 2026-07-12T17:12:14+08:00."
     }
   ],
   "blocking_issues": [],
@@ -44,5 +44,5 @@
     "impact": "no",
     "na_reason": "本需求不修改 protobuf IDL、HTTP 外部契约或生成契约。"
   },
-  "decision": "用户授权交付 LEN-206；批准 requirement 与 impact-analysis，允许进入设计和实现。"
+  "decision": "用户授权交付 LEN-206；批准需求与影响分析，允许进入设计和实现。"
 }

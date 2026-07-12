@@ -3,8 +3,8 @@ idl_impact: "no"
 idl_impact_reason: "本需求不修改 protobuf IDL、HTTP 外部契约或生成契约。"
 status: "approved"
 approved_by: "forest"
-approved_at: "2026-07-12T17:02:34+08:00"
-decision: "用户授权交付 LEN-206；确认 harness-repo 与 business-repo 同名 worktree 已完成实现、测试和 PR 交付，允许进入合并就绪验证。"
+approved_at: "2026-07-12T17:13:40+08:00"
+decision: "用户授权合并 LEN-206；确认 business-repo 同名 worktree 已完成实现、测试和 PR 交付，允许进入合并就绪验证。"
 ---
 
 # LEN-206 Impact Analysis
